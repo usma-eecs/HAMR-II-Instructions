@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAMR Beginner Builder Inventory</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --ink: #172033;
+      --muted: #5c6780;
+      --line: #d7deea;
+      --accent: #23395d;
+      --accent-2: #5a7ca8;
+      --soft: #eef3f9;
+      --ok-bg: #e8f5e9;
+      --ok-fg: #1f6b38;
+      --watch-bg: #fff4db;
+      --watch-fg: #8a5a00;
+      --shadow: 0 10px 28px rgba(23, 32, 51, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #e9eef6 0%, #f5f7fb 200px), var(--bg);
+      line-height: 1.45;
+    }
+    .page { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    .hero {
+      background: linear-gradient(135deg, rgba(35,57,93,0.98), rgba(90,124,168,0.96));
+      color: white; padding: 32px; border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 22px;
+    }
+    .hero h1 { margin: 0 0 10px 0; font-size: clamp(1.8rem, 2vw + 1rem, 2.8rem); letter-spacing: 0.02em; }
+    .hero p { margin: 8px 0 0 0; max-width: 1000px; color: rgba(255,255,255,0.92); font-size: 1rem; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(180px, 1fr)); gap: 16px; margin: 18px 0 24px 0; }
+    .stat { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; box-shadow: var(--shadow); }
+    .stat .label { color: var(--muted); font-size: 0.88rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat .value { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+    .stat .sub { margin-top: 6px; color: var(--muted); font-size: 0.9rem; }
+    .controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+    .search { flex: 1 1 320px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; color: var(--ink); font-size: 1rem; box-shadow: var(--shadow); }
+    .note { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; color: var(--muted); box-shadow: var(--shadow); }
+    .table-wrap { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 860px; }
+    thead th { position: sticky; top: 0; z-index: 2; background: #edf2f8; color: var(--accent); font-size: 0.9rem; text-align: left; border-bottom: 1px solid var(--line); padding: 14px 12px; white-space: nowrap; }
+    tbody td { border-top: 1px solid var(--line); padding: 12px; vertical-align: top; font-size: 0.94rem; background: white; }
+    tbody tr:hover td { background: #fbfcfe; }
+    .photo-cell { width: 170px; }
+    .photo { display: block; width: 128px; height: 80px; object-fit: cover; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); cursor: zoom-in; }
+    .photo:focus { outline: 3px solid rgba(90,124,168,0.35); outline-offset: 2px; }
+    .image-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(10, 16, 28, 0.82); z-index: 1000; }
+    .image-modal.open { display: flex; }
+    .image-modal-dialog { position: relative; max-width: min(1000px, 92vw); max-height: 92vh; }
+    .image-modal img { display: block; max-width: min(1000px, 92vw); max-height: 86vh; width: auto; height: auto; border-radius: 16px; border: 1px solid rgba(255,255,255,0.18); background: white; box-shadow: 0 20px 48px rgba(0,0,0,0.35); }
+    .image-modal-close { position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; border: 0; border-radius: 999px; background: white; color: var(--accent); font-size: 1.3rem; line-height: 1; cursor: pointer; box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
+    .image-modal-caption { margin-top: 10px; color: rgba(255,255,255,0.92); text-align: center; font-size: 0.95rem; }
+    .photo-hint { margin-top: 6px; color: var(--muted); font-size: 0.74rem; line-height: 1.3; word-break: break-word; max-width: 128px; }
+    .item-name { font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .item-meta { color: var(--muted); font-size: 0.88rem; }
+    .desc-cell { min-width: 360px; color: #273349; }
+    .muted { color: var(--muted); }
+    .center { text-align: center; white-space: nowrap; }
+    .stock-badge { display: inline-block; padding: 5px 9px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; }
+    .stock-badge.ok { background: var(--ok-bg); color: var(--ok-fg); }
+    .stock-badge.watch { background: var(--watch-bg); color: var(--watch-fg); }
+    .link-button { display: inline-block; text-decoration: none; color: white; background: var(--accent); border-radius: 10px; padding: 8px 10px; font-size: 0.88rem; white-space: nowrap; }
+    .link-button:hover { background: #1c2f4b; }
+    .footer { margin-top: 18px; color: var(--muted); font-size: 0.9rem; padding-bottom: 20px; }
+    code { background: #eef3f9; border: 1px solid var(--line); border-radius: 6px; padding: 0 5px; }
+    @media (max-width: 1000px) { .stats { grid-template-columns: repeat(2, minmax(180px, 1fr)); } }
+    @media (max-width: 640px) { .page { padding: 14px; } .hero { padding: 22px; border-radius: 16px; } .stats { grid-template-columns: 1fr; } }
+    @media print { body { background: white; } .page { max-width: none; padding: 0; } .hero, .stat, .table-wrap, .note, .search { box-shadow: none; } .controls { display: none; } a.link-button { color: var(--ink); background: transparent; border: 1px solid var(--line); } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>HAMR Beginner Builder Inventory Guide</h1>
+      <p>
+        Beginner-friendly inventory table built from the provided drone BOM. This version keeps only the columns useful to a first-time builder and removes the ring connector line. The picture cells are wired for drop-in local images, and each image can be clicked to enlarge.
+      </p>
+    </section>
+
+    <section class="stats" aria-label="inventory summary">
+      <div class="stat">
+        <div class="label">Unique BOM Lines</div>
+        <div class="value">16</div>
+        <div class="sub">After removing the ring connector row.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Parts Per System</div>
+        <div class="value">19</div>
+        <div class="sub">One full build, counting four motors.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Buildable Systems</div>
+        <div class="value">90</div>
+        <div class="sub">Limited by the lowest remaining build coverage line.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Current Bottleneck</div>
+        <div class="value" style="font-size:1.25rem;">Frame</div>
+        <div class="sub">Based on retained rows only.</div>
+      </div>
+    </section>
+
+    <div class="controls">
+      <input id="searchBox" class="search" type="search" placeholder="Search by item or description" aria-label="Search inventory table">
+      <div class="note">To add a photo, place a file in <code>assets/parts/</code> using the filename shown under the placeholder. Click any image to enlarge it. If the file is missing, the placeholder stays visible.</div>
+    </div>
+
+    <section class="table-wrap">
+      <div class="table-scroll">
+        <table id="inventoryTable">
+          <thead>
+            <tr>
+              <th>Picture</th>
+              <th>Item</th>
+              <th>Short Description</th>
+              <th>Per System</th>
+                            <th>Official Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+
+      <tr data-search="Cable Harness, FC to RPi MiniProto Custom Made Pre-made wiring harness that links the flight controller to the Raspberry Pi companion computer. It simplifies power and data connections and reduces wiring mistakes for first-time builders. 1 93">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/cable-harness-fc-to-rpi.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Cable%20Harness%2C%20FC%20to%20RPi%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Ecable-harness-fc-to-rpi.jpg%3C/text%3E%3C/svg%3E';" alt="Cable Harness, FC to RPi">
+          <div class="photo-hint">assets/parts/cable-harness-fc-to-rpi.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Cable Harness, FC to RPi</div>
+          <div class="item-meta">MiniProto · Custom Made</div>
+        </td>
+        <td class="desc-cell">Pre-made wiring harness that links the flight controller to the Raspberry Pi companion computer. It simplifies power and data connections and reduces wiring mistakes for first-time builders.</td>
+        <td class="center">1</td>
+        <td><span class='muted'>Custom / local item</span></td>
+      </tr>
+      <tr data-search="Camera Raspberry Pi Camera Module 2 8 MP camera module for live video, image capture, and onboard vision tasks. Connects to the Pi through the ribbon cable. 1 98">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/camera.webp" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Camera%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Ecamera.jpg%3C/text%3E%3C/svg%3E';" alt="Camera">
+          <div class="photo-hint">assets/parts/camera.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Camera</div>
+          <div class="item-meta">Raspberry Pi · Camera Module 2</div>
+        </td>
+        <td class="desc-cell">8 MP camera module for live video, image capture, and onboard vision tasks. Connects to the Pi through the ribbon cable.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://www.raspberrypi.com/products/camera-module-v2/' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="Computer, Single-Board Raspberry Pi Pi Zero 2 W Tiny Linux computer that acts as the companion computer for networking, video, and higher-level onboard tasks. 1 93">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/computer-single-board.webp" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Computer%2C%20Single-Board%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Ecomputer-single-board.jpg%3C/text%3E%3C/svg%3E';" alt="Computer, Single-Board">
+          <div class="photo-hint">assets/parts/computer-single-board.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Computer, Single-Board</div>
+          <div class="item-meta">Raspberry Pi · Pi Zero 2 W</div>
+        </td>
+        <td class="desc-cell">Tiny Linux computer that acts as the companion computer for networking, video, and higher-level onboard tasks.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="Connector, latch, 4-pin, header Molex CONN HEADER R/A 4POS 2.54MM Right-angle locking header used for a small, secure board-to-cable connection. Helpful where vibration resistance matters. 1 99">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/connector-latch-4-pin-header.png" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Connector%2C%20latch%2C%204-pin%2C%20header%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Econnector-latch-4-pin-header.jpg%3C/text%3E%3C/svg%3E';" alt="Connector, latch, 4-pin, header">
+          <div class="photo-hint">assets/parts/connector-latch-4-pin-header.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Connector, latch, 4-pin, header</div>
+          <div class="item-meta">Molex · CONN HEADER R/A 4POS 2.54MM</div>
+        </td>
+        <td class="desc-cell">Right-angle locking header used for a small, secure board-to-cable connection. Helpful where vibration resistance matters.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://www.molex.com/en-us/products/part-detail/705530038' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="Connectors, battery Palm Beach Bots XT60 Connector (Male) with Pigtail Main battery power lead. The XT60 connector carries battery power into the aircraft power system. 1 93">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/connectors-battery.webp" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Connectors%2C%20battery%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Econnectors-battery.jpg%3C/text%3E%3C/svg%3E';" alt="Connectors, battery">
+          <div class="photo-hint">assets/parts/connectors-battery.webp</div>
+        </td>
+        <td>
+          <div class="item-name">Connectors, battery</div>
+          <div class="item-meta">Palm Beach Bots · XT60 Connector (Male) with Pigtail</div>
+        </td>
+        <td class="desc-cell">Main battery power lead. The XT60 connector carries battery power into the aircraft power system.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://palmbeachbots.com/products/xt60-connector-male-with-pigtail' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="Switches, SIP C&amp;K SWITCH SLIDE DIP SPST 0.01A 20V Small slide DIP switch used for simple on/off or configuration selection on the electronics stack. 1 94">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/switches-sip.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Switches%2C%20SIP%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Eswitches-sip.jpg%3C/text%3E%3C/svg%3E';" alt="Switches, SIP">
+          <div class="photo-hint">assets/parts/switches-sip.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Switches, SIP</div>
+          <div class="item-meta">C&amp;K · SWITCH SLIDE DIP SPST 0.01A 20V</div>
+        </td>
+        <td class="desc-cell">Small slide DIP switch used for simple on/off or configuration selection on the electronics stack.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://www.digikey.com/en/products/detail/c-k/SPA04B/1920056' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="ESC ARK ARK 4IN1 ESC CONS Four-in-one electronic speed controller. It converts battery power into controlled three-phase output for the four brushless motors. 1 95">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/esc.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20ESC%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Eesc.jpg%3C/text%3E%3C/svg%3E';" alt="ESC">
+          <div class="photo-hint">assets/parts/esc.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">ESC</div>
+          <div class="item-meta">ARK · ARK 4IN1 ESC CONS</div>
+        </td>
+        <td class="desc-cell">Four-in-one electronic speed controller. It converts battery power into controlled three-phase output for the four brushless motors.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://arkelectron.com/product/ark-4in1-esc-cons/' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="Fastener Kit NSK Industries  Assorted screws, nuts, standoffs, and small hardware needed to mechanically assemble the airframe and payload mounts. 1 95">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/fastener-kit.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Fastener%20Kit%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Efastener-kit.jpg%3C/text%3E%3C/svg%3E';" alt="Fastener Kit">
+          <div class="photo-hint">assets/parts/fastener-kit.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Fastener Kit</div>
+          <div class="item-meta">NSK Industries</div>
+        </td>
+        <td class="desc-cell">Assorted screws, nuts, standoffs, and small hardware needed to mechanically assemble the airframe and payload mounts.</td>
+        <td class="center">1</td>
+        <td><span class='muted'>Custom / local item</span></td>
+      </tr>
+      <tr data-search="Flight Controller ARK ARK FPV Flight Controller Main autopilot board. It reads sensors, runs the control loops, and commands the ESC and other peripherals. 1 95">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/flight-controller.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Flight%20Controller%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Eflight-controller.jpg%3C/text%3E%3C/svg%3E';" alt="Flight Controller">
+          <div class="photo-hint">assets/parts/flight-controller.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Flight Controller</div>
+          <div class="item-meta">ARK · ARK FPV Flight Controller</div>
+        </td>
+        <td class="desc-cell">Main autopilot board. It reads sensors, runs the control loops, and commands the ESC and other peripherals.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://arkelectron.com/product/ark-fpv/' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="Frame Lumenier QAV-R 2C Frame Kit - 7&quot; Primary airframe structure. Holds the arms, electronics, and payload together and sets the physical layout of the aircraft. 1 90">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/frame.webp" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Frame%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Eframe.jpg%3C/text%3E%3C/svg%3E';" alt="Frame">
+          <div class="photo-hint">assets/parts/frame.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Frame</div>
+          <div class="item-meta">Lumenier · QAV-R 2C Frame Kit - 7&quot;</div>
+        </td>
+        <td class="desc-cell">Primary airframe structure. Holds the arms, electronics, and payload together and sets the physical layout of the aircraft.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://www.lumenier.com/products/lumenier-qav-r-2c-frame-kit-7' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="Propellers Gemfan LR 7035 2-Blade Propeller (Set of 4) - 5mm - White/Black The rotating blades that produce thrust. This set provides the lift and forward propulsion for one quadcopter. 1 95">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/propellers.webp" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Propellers%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Epropellers.jpg%3C/text%3E%3C/svg%3E';" alt="Propellers">
+          <div class="photo-hint">assets/parts/propellers.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Propellers</div>
+          <div class="item-meta">Gemfan · LR 7035 2-Blade Propeller (Set of 4) - 5mm - White/Black</div>
+        </td>
+        <td class="desc-cell">The rotating blades that produce thrust. This set provides the lift and forward propulsion for one quadcopter.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://www.getfpv.com/gemfan-lr-7035-2-blade-propeller-set-of-4-5mm-black.html' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="Mount, Raspberry Pi Makelab  Custom mechanical bracket that secures the Raspberry Pi to the airframe and keeps the computer from moving in flight. 1 98">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/mount-raspberry-pi.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Mount%2C%20Raspberry%20Pi%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Emount-raspberry-pi.jpg%3C/text%3E%3C/svg%3E';" alt="Mount, Raspberry Pi">
+          <div class="photo-hint">assets/parts/mount-raspberry-pi.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Mount, Raspberry Pi</div>
+          <div class="item-meta">Makelab</div>
+        </td>
+        <td class="desc-cell">Custom mechanical bracket that secures the Raspberry Pi to the airframe and keeps the computer from moving in flight.</td>
+        <td class="center">1</td>
+        <td><span class='muted'>Custom / local item</span></td>
+      </tr>
+      <tr data-search="Cabling, Camera Vilros Mini To Standard Camera Module Adapter Cable - (22-way, 0.5mm-pitch - 15-way, 1mm-pitch)- For Raspberry Pi 5 and Zero Adapter ribbon cable that connects the Raspberry Pi Zero camera connector to the standard Raspberry Pi camera module. 1 99">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/cabling-camera.webp" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Cabling%2C%20Camera%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Ecabling-camera.jpg%3C/text%3E%3C/svg%3E';" alt="Cabling, Camera">
+          <div class="photo-hint">assets/parts/cabling-camera.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Cabling, Camera</div>
+          <div class="item-meta">Vilros · Mini To Standard Camera Module Adapter Cable - (22-way, 0.5mm-pitch - 15-way, 1mm-pitch)- For Raspberry Pi 5 and Zero</div>
+        </td>
+        <td class="desc-cell">Adapter ribbon cable that connects the Raspberry Pi Zero camera connector to the standard Raspberry Pi camera module.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://vilros.com/products/mini-to-standard-camera-adapter-cable-22-way-0-5mm-pitch-15-way-1mm-pitch-for-raspberry-pi-5-and-zero' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="Mount, Camera/GPS Makelab  Custom mount that holds the camera and GPS module in the correct position on the aircraft. 1 99">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/mount-camera-gps.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Mount%2C%20Camera/GPS%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Emount-camera-gps.jpg%3C/text%3E%3C/svg%3E';" alt="Mount, Camera/GPS">
+          <div class="photo-hint">assets/parts/mount-camera-gps.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Mount, Camera/GPS</div>
+          <div class="item-meta">Makelab</div>
+        </td>
+        <td class="desc-cell">Custom mount that holds the camera and GPS module in the correct position on the aircraft.</td>
+        <td class="center">1</td>
+        <td><span class='muted'>Custom / local item</span></td>
+      </tr>
+      <tr data-search="Motors EMAX Pro Series 2808 Motor - 1350KV Brushless motors that spin the propellers. Four are required per quadcopter, one at the end of each arm. 4 95">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/motors.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Motors%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Emotors.jpg%3C/text%3E%3C/svg%3E';" alt="Motors">
+          <div class="photo-hint">assets/parts/motors.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">Motors</div>
+          <div class="item-meta">EMAX · Pro Series 2808 Motor - 1350KV</div>
+        </td>
+        <td class="desc-cell">Brushless motors that spin the propellers. Four are required per quadcopter, one at the end of each arm.</td>
+        <td class="center">4</td>
+        <td><a class='link-button' href='https://www.readymaderc.com/products/details/85864-emax-pro-series-2808-brushless-motor-1350kv' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+      <tr data-search="GPS + Compass ARK SAM GPS Navigation module that provides position, velocity, heading-related data, and magnetic field reference for the flight stack. 1 104">
+        <td class="photo-cell">
+          <img class="photo" tabindex="0" src="assets/parts/gps-compass.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20GPS%20%2B%20Compass%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Egps-compass.jpg%3C/text%3E%3C/svg%3E';" alt="GPS + Compass">
+          <div class="photo-hint">assets/parts/gps-compass.jpg</div>
+        </td>
+        <td>
+          <div class="item-name">GPS + Compass</div>
+          <div class="item-meta">ARK · SAM GPS</div>
+        </td>
+        <td class="desc-cell">Navigation module that provides position, velocity, heading-related data, and magnetic field reference for the flight stack.</td>
+        <td class="center">1</td>
+        <td><a class='link-button' href='https://arkelectron.com/product/ark-sam-gps' target='_blank' rel='noopener noreferrer'>Product page</a></td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <div id="imageModal" class="image-modal" aria-hidden="true" role="dialog" aria-label="Enlarged part image">
+      <div class="image-modal-dialog">
+        <button id="imageModalClose" class="image-modal-close" type="button" aria-label="Close enlarged image">×</button>
+        <img id="imageModalImg" src="" alt="">
+        <div id="imageModalCaption" class="image-modal-caption"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Image workflow: the HTML points each row to a relative file path such as <code>assets/parts/camera.jpg</code> or the exact filename shown beneath the placeholder. That means you can keep the HTML stable and just replace images in one folder later.
+    </div>
+  </main>
+
+    <script>
+    const searchBox = document.getElementById('searchBox');
+    const rows = Array.from(document.querySelectorAll('#inventoryTable tbody tr'));
+    const photos = Array.from(document.querySelectorAll('.photo'));
+    const imageModal = document.getElementById('imageModal');
+    const imageModalImg = document.getElementById('imageModalImg');
+    const imageModalCaption = document.getElementById('imageModalCaption');
+    const imageModalClose = document.getElementById('imageModalClose');
+
+    searchBox.addEventListener('input', () => {
+      const q = searchBox.value.trim().toLowerCase();
+      rows.forEach(row => {
+        const hay = row.dataset.search.toLowerCase();
+        row.style.display = hay.includes(q) ? '' : 'none';
+      });
+    });
+
+    function openImageModal(img) {
+      imageModalImg.src = img.currentSrc || img.src;
+      imageModalImg.alt = img.alt || 'Part image';
+      const row = img.closest('tr');
+      const itemName = row ? row.querySelector('.item-name')?.textContent?.trim() : '';
+      const hint = row ? row.querySelector('.photo-hint')?.textContent?.trim() : '';
+      imageModalCaption.textContent = itemName ? `${itemName} — ${hint}` : hint;
+      imageModal.classList.add('open');
+      imageModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      imageModalClose.focus();
+    }
+
+    function closeImageModal() {
+      imageModal.classList.remove('open');
+      imageModal.setAttribute('aria-hidden', 'true');
+      imageModalImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    photos.forEach(img => {
+      img.addEventListener('click', () => openImageModal(img));
+      img.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openImageModal(img);
+        }
+      });
+    });
+
+    imageModalClose.addEventListener('click', closeImageModal);
+    imageModal.addEventListener('click', event => {
+      if (event.target === imageModal) closeImageModal();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && imageModal.classList.contains('open')) {
+        closeImageModal();
+      }
+    });
+  </script>
+</body>
+</html>
