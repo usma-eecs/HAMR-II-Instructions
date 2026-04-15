@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,6 +71,13 @@
     .kit-table thead th { position: static; background: transparent; color: var(--muted); border-bottom: 1px solid var(--line); border-top: 0; padding: 8px; font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.04em; }
     .kit-table tbody td { background: transparent; padding: 8px; border-top: 1px solid var(--line); }
     .kit-table tbody tr:first-child td { border-top: 0; }
+    .kit-table tbody tr[data-preview-src] { cursor: help; }
+    .kit-table tbody tr[data-preview-src]:hover td { background: #f7f9fc; }
+    .hover-preview { position: fixed; left: 0; top: 0; width: 220px; display: none; pointer-events: none; z-index: 1200; background: rgba(255,255,255,0.98); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 36px rgba(23, 32, 51, 0.18); padding: 10px; }
+    .hover-preview.open { display: block; }
+    .hover-preview img { display: block; width: 100%; height: 140px; object-fit: contain; background: #f8fafc; border: 1px solid var(--line); border-radius: 10px; }
+    .hover-preview .title { margin-top: 8px; font-size: 0.84rem; font-weight: 700; color: var(--accent); }
+    .hover-preview .meta { margin-top: 3px; font-size: 0.78rem; color: var(--muted); line-height: 1.35; }
     .kit-caption { margin-top: 8px; color: var(--muted); font-size: 0.86rem; }
     .nowrap { white-space: nowrap; }
     .item-name { font-weight: 700; color: var(--ink); margin-bottom: 4px; }
@@ -94,7 +102,7 @@
     <section class="hero">
       <h1>HAMR II Builder Parts Guide</h1>
       <p>
-        Use this page while building the High Adapbility Multirotor II quadcopter. It shows what each part is, what it does, and how many go on one aircraft. Every image can be clicked to enlarge for easier part identification at the bench.
+        Use this page while building the High Agility Multirotor II quadcopter. It shows what each part is, what it does, and how many go on one aircraft. Every image can be clicked to enlarge for easier part identification at the bench.
       </p>
     </section>
 
@@ -352,7 +360,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr data-preview-src="assets/fastener-previews/93657A204.png" data-preview-title="Spacer · McMaster 93657A204" data-preview-meta="Raspberry Pi · M2.5 × 4 mm · Nylon, off-white">
                     <td>Raspberry Pi</td>
                     <td>Spacer</td>
                     <td>M2.5</td>
@@ -360,7 +368,7 @@
                     <td>Nylon, off-white</td>
                     <td class="center">4</td>
                   </tr>
-                  <tr>
+                  <tr data-preview-src="assets/fastener-previews/91292A012.png" data-preview-title="Screw · McMaster 91292A012" data-preview-meta="Raspberry Pi · M2.5 × 8 mm · Socket head">
                     <td>Raspberry Pi</td>
                     <td>Screw</td>
                     <td>M2.5</td>
@@ -368,7 +376,7 @@
                     <td>Socket head</td>
                     <td class="center">4</td>
                   </tr>
-                  <tr>
+                  <tr data-preview-src="assets/fastener-previews/91294A130.png" data-preview-title="Screw · McMaster 91294A130" data-preview-meta="Raspberry Pi · M3 × 10 mm · Flat head, countersink">
                     <td>Raspberry Pi</td>
                     <td>Screw</td>
                     <td>M3</td>
@@ -376,7 +384,7 @@
                     <td>Flat head, countersink</td>
                     <td class="center">4</td>
                   </tr>
-                  <tr>
+                  <tr data-preview-src="assets/fastener-previews/90576A102.png" data-preview-title="Locknut · McMaster 90576A102" data-preview-meta="FC/ESC Stack · M3 · Nylon-insert">
                     <td>FC/ESC Stack</td>
                     <td>Locknut</td>
                     <td>M3</td>
@@ -384,7 +392,7 @@
                     <td>Nylon-insert</td>
                     <td class="center">4</td>
                   </tr>
-                  <tr>
+                  <tr data-preview-src="assets/fastener-previews/90576A102.png" data-preview-title="Locknut · McMaster 90576A102" data-preview-meta="GPS + Camera · M3 · Nylon-insert">
                     <td>GPS + Camera</td>
                     <td>Locknut</td>
                     <td>M3</td>
@@ -392,7 +400,7 @@
                     <td>Nylon-insert</td>
                     <td class="center">4</td>
                   </tr>
-                  <tr>
+                  <tr data-preview-src="assets/fastener-previews/91292A114.png" data-preview-title="Screw · McMaster 91292A114" data-preview-meta="GPS + Camera · M3 × 12 mm · Socket head">
                     <td>GPS + Camera</td>
                     <td>Screw</td>
                     <td>M3</td>
@@ -400,7 +408,7 @@
                     <td>Socket head</td>
                     <td class="center">4</td>
                   </tr>
-                  <tr>
+                  <tr data-preview-src="assets/fastener-previews/91292A831.png" data-preview-title="Screw · McMaster 91292A831" data-preview-meta="GPS + Camera · M2 × 6 mm · Socket head">
                     <td>GPS + Camera</td>
                     <td>Screw</td>
                     <td>M2</td>
@@ -408,7 +416,7 @@
                     <td>Socket head</td>
                     <td class="center">4</td>
                   </tr>
-                  <tr>
+                  <tr data-preview-src="assets/fastener-previews/91292A114.png" data-preview-title="Screw · McMaster 91292A114" data-preview-meta="Superstructure · M3 × 12 mm · Socket head">
                     <td>Superstructure</td>
                     <td>Screw</td>
                     <td>M3</td>
@@ -416,7 +424,7 @@
                     <td>Socket head</td>
                     <td class="center">8</td>
                   </tr>
-                  <tr>
+                  <tr data-preview-src="assets/fastener-previews/95947A018.png" data-preview-title="Standoff · McMaster 95947A018" data-preview-meta="Superstructure · M3 × 25 mm · Aluminum, female/female">
                     <td>Superstructure</td>
                     <td>Standoff</td>
                     <td>M3</td>
@@ -446,6 +454,12 @@
       </div>
     </div>
 
+    <div id="rowHoverPreview" class="hover-preview" aria-hidden="true">
+      <img id="rowHoverPreviewImg" src="" alt="">
+      <div id="rowHoverPreviewTitle" class="title"></div>
+      <div id="rowHoverPreviewMeta" class="meta"></div>
+    </div>
+
     <div class="footer">
       Builder note: once photos are added to <code>assets/parts/</code>, the placeholders are replaced automatically. That lets you keep one stable guide while swapping in better part images later.
     </div>
@@ -459,6 +473,11 @@
     const imageModalImg = document.getElementById('imageModalImg');
     const imageModalCaption = document.getElementById('imageModalCaption');
     const imageModalClose = document.getElementById('imageModalClose');
+    const rowHoverPreview = document.getElementById('rowHoverPreview');
+    const rowHoverPreviewImg = document.getElementById('rowHoverPreviewImg');
+    const rowHoverPreviewTitle = document.getElementById('rowHoverPreviewTitle');
+    const rowHoverPreviewMeta = document.getElementById('rowHoverPreviewMeta');
+    const fastenerRows = Array.from(document.querySelectorAll('.kit-table tbody tr[data-preview-src]'));
 
     searchBox.addEventListener('input', () => {
       const q = searchBox.value.trim().toLowerCase();
@@ -466,9 +485,52 @@
         const hay = row.dataset.search.toLowerCase();
         row.style.display = hay.includes(q) ? '' : 'none';
       });
+      closeRowHoverPreview();
+    });
+
+
+    function positionHoverPreview(event) {
+      if (!rowHoverPreview.classList.contains('open')) return;
+      const pad = 18;
+      const rect = rowHoverPreview.getBoundingClientRect();
+      let left = event.clientX + pad;
+      let top = event.clientY + pad;
+      if (left + rect.width > window.innerWidth - 12) {
+        left = event.clientX - rect.width - pad;
+      }
+      if (top + rect.height > window.innerHeight - 12) {
+        top = window.innerHeight - rect.height - 12;
+      }
+      if (left < 12) left = 12;
+      if (top < 12) top = 12;
+      rowHoverPreview.style.left = `${left}px`;
+      rowHoverPreview.style.top = `${top}px`;
+    }
+
+    function openRowHoverPreview(row, event) {
+      rowHoverPreviewImg.src = row.dataset.previewSrc;
+      rowHoverPreviewImg.alt = row.dataset.previewTitle || 'Fastener preview';
+      rowHoverPreviewTitle.textContent = row.dataset.previewTitle || '';
+      rowHoverPreviewMeta.textContent = row.dataset.previewMeta || '';
+      rowHoverPreview.classList.add('open');
+      rowHoverPreview.setAttribute('aria-hidden', 'false');
+      positionHoverPreview(event);
+    }
+
+    function closeRowHoverPreview() {
+      rowHoverPreview.classList.remove('open');
+      rowHoverPreview.setAttribute('aria-hidden', 'true');
+      rowHoverPreviewImg.src = '';
+    }
+
+    fastenerRows.forEach(row => {
+      row.addEventListener('mouseenter', event => openRowHoverPreview(row, event));
+      row.addEventListener('mousemove', positionHoverPreview);
+      row.addEventListener('mouseleave', closeRowHoverPreview);
     });
 
     function openImageModal(img) {
+      closeRowHoverPreview();
       imageModalImg.src = img.currentSrc || img.src;
       imageModalImg.alt = img.alt || 'Part image';
       const row = img.closest('tr');
