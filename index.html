@@ -59,7 +59,19 @@
     .image-modal img { display: block; max-width: min(1000px, 92vw); max-height: 86vh; width: auto; height: auto; border-radius: 16px; border: 1px solid rgba(255,255,255,0.18); background: white; box-shadow: 0 20px 48px rgba(0,0,0,0.35); }
     .image-modal-close { position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; border: 0; border-radius: 999px; background: white; color: var(--accent); font-size: 1.3rem; line-height: 1; cursor: pointer; box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
     .image-modal-caption { margin-top: 10px; color: rgba(255,255,255,0.92); text-align: center; font-size: 0.95rem; }
-    .photo-hint { margin-top: 6px; color: var(--muted); font-size: 0.74rem; line-height: 1.3; word-break: break-word; max-width: 128px; display: none; }
+    .photo-hint { display: none; }
+    .kit-details { margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); overflow: hidden; }
+    .kit-details summary { cursor: pointer; padding: 10px 12px; font-weight: 700; color: var(--accent); list-style: none; }
+    .kit-details summary::-webkit-details-marker { display: none; }
+    .kit-details summary::after { content: 'Show'; float: right; color: var(--accent-2); font-weight: 400; }
+    .kit-details[open] summary::after { content: 'Hide'; }
+    .kit-details-body { padding: 0 12px 12px 12px; }
+    .kit-table { width: 100%; min-width: 0; border-collapse: collapse; margin-top: 2px; font-size: 0.85rem; }
+    .kit-table thead th { position: static; background: transparent; color: var(--muted); border-bottom: 1px solid var(--line); border-top: 0; padding: 8px; font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .kit-table tbody td { background: transparent; padding: 8px; border-top: 1px solid var(--line); }
+    .kit-table tbody tr:first-child td { border-top: 0; }
+    .kit-caption { margin-top: 8px; color: var(--muted); font-size: 0.86rem; }
+    .nowrap { white-space: nowrap; }
     .item-name { font-weight: 700; color: var(--ink); margin-bottom: 4px; }
     .item-meta { color: var(--muted); font-size: 0.88rem; }
     .desc-cell { min-width: 360px; color: #273349; }
@@ -209,7 +221,7 @@
         <td class="center">1</td>
         <td><a class='link-button' href='https://arkelectron.com/product/ark-4in1-esc-cons/' target='_blank' rel='noopener noreferrer'>Product page</a></td>
       </tr>
-      <tr data-search="Fastener Kit NSK Industries  Assorted screws, nuts, standoffs, and small hardware needed to mechanically assemble the airframe and payload mounts.">
+      <tr data-search="Fastener Kit NSK Industries assorted screws nuts standoffs hardware Raspberry Pi FC ESC stack GPS camera superstructure spacer socket head flat head countersink locknut nylon-insert aluminum female female M2.5 M3 M2 4 mm 6 mm 8 mm 10 mm 12 mm 25 mm">
         <td class="photo-cell">
           <img class="photo" tabindex="0" src="assets/parts/fastener-kit.jpg" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20320%20200%27%20role%3D%27img%27%20aria-label%3D%27Placeholder%20image%20for%20Fastener%20Kit%27%3E%20%20%3Crect%20width%3D%27320%27%20height%3D%27200%27%20fill%3D%27%23f3f4f6%27/%3E%20%20%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%27292%27%20height%3D%27172%27%20rx%3D%2712%27%20ry%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%277%207%27/%3E%20%20%3Ccircle%20cx%3D%2792%27%20cy%3D%2776%27%20r%3D%2718%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Cpath%20d%3D%27M54%20146l44-42%2025%2021%2030-33%2055%2054H54z%27%20fill%3D%27%23d1d5db%27/%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27140%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20Helvetica%2C%20sans-serif%27%20font-size%3D%2715%27%20fill%3D%27%23334155%27%3EDrop%20image%20file%20here%3A%3C/text%3E%20%20%3Ctext%20x%3D%27160%27%20y%3D%27162%27%20text-anchor%3D%27middle%27%20font-family%3D%27Courier%20New%2C%20monospace%27%20font-size%3D%2712%27%20fill%3D%27%23475569%27%3Efastener-kit.jpg%3C/text%3E%3C/svg%3E';" alt="Fastener Kit">
           <div class="photo-hint">assets/parts/fastener-kit.jpg</div>
@@ -218,7 +230,101 @@
           <div class="item-name">Fastener Kit</div>
           <div class="item-meta">NSK Industries</div>
         </td>
-        <td class="desc-cell">Assorted screws, nuts, standoffs, and small hardware needed to mechanically assemble the airframe and payload mounts.</td>
+        <td class="desc-cell">
+          Assorted screws, nuts, standoffs, and small hardware used across the build. Open the list below when you reach each subassembly step.
+          <details class="kit-details">
+            <summary>Fastener kit contents by build step</summary>
+            <div class="kit-details-body">
+              <div class="kit-caption">One kit contains 40 total pieces.</div>
+              <table class="kit-table" aria-label="Fastener kit contents">
+                <thead>
+                  <tr>
+                    <th>Assembly Step</th>
+                    <th>Part</th>
+                    <th>Size</th>
+                    <th>Length</th>
+                    <th>Characteristics</th>
+                    <th class="nowrap">Per Kit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1 Raspberry Pi</td>
+                    <td>Spacer</td>
+                    <td>M2.5</td>
+                    <td>4 mm</td>
+                    <td>Nylon, off-white</td>
+                    <td class="center">4</td>
+                  </tr>
+                  <tr>
+                    <td>1 Raspberry Pi</td>
+                    <td>Screw</td>
+                    <td>M2.5</td>
+                    <td>8 mm</td>
+                    <td>Socket head</td>
+                    <td class="center">4</td>
+                  </tr>
+                  <tr>
+                    <td>1 Raspberry Pi</td>
+                    <td>Screw</td>
+                    <td>M3</td>
+                    <td>10 mm</td>
+                    <td>Flat head, countersink</td>
+                    <td class="center">4</td>
+                  </tr>
+                  <tr>
+                    <td>2 FC/ESC Stack</td>
+                    <td>Locknut</td>
+                    <td>M3</td>
+                    <td>—</td>
+                    <td>Nylon-insert</td>
+                    <td class="center">4</td>
+                  </tr>
+                  <tr>
+                    <td>3 GPS + Camera</td>
+                    <td>Locknut</td>
+                    <td>M3</td>
+                    <td>—</td>
+                    <td>Nylon-insert</td>
+                    <td class="center">4</td>
+                  </tr>
+                  <tr>
+                    <td>3 GPS + Camera</td>
+                    <td>Screw</td>
+                    <td>M3</td>
+                    <td>12 mm</td>
+                    <td>Socket head</td>
+                    <td class="center">4</td>
+                  </tr>
+                  <tr>
+                    <td>3 GPS + Camera</td>
+                    <td>Screw</td>
+                    <td>M2</td>
+                    <td>6 mm</td>
+                    <td>Socket head</td>
+                    <td class="center">4</td>
+                  </tr>
+                  <tr>
+                    <td>4 Superstructure</td>
+                    <td>Screw</td>
+                    <td>M3</td>
+                    <td>12 mm</td>
+                    <td>Socket head</td>
+                    <td class="center">8</td>
+                  </tr>
+                  <tr>
+                    <td>4 Superstructure</td>
+                    <td>Standoff</td>
+                    <td>M3</td>
+                    <td>25 mm</td>
+                    <td>Aluminum, female/female</td>
+                    <td class="center">4</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </td>
         <td class="center">1</td>
         <td><span class='muted'>Provided in kit</span></td>
       </tr>
