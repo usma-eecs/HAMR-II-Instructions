@@ -197,10 +197,11 @@ a { color: var(--accent); }
 </style>
 
 </head>
-<body>
+<body data-page="task5-stack.html">
 <main class="page">
 <section class="hero"><h1>Task 5: Install the ESC and flight controller stack</h1><p>Build the ARK ESC / ARK FPV flight-controller stack on the lower frame, attach the battery lead, and connect the motors to the ESC.</p></section>
-<nav class="topnav" aria-label="Page navigation"><a href="index.html">Home</a><a href="task4-install-motors.html" class="secondary">← Task 4: Install the motors</a><a href="task6-top-plate-and-base.html" class="secondary">Task 6: Install the vehicle top plate and sensor-suite base plate →</a><a href="step-template.html" class="secondary">Step template</a><a href="full-manual.html" class="secondary">All tasks on one page</a></nav>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
 <section class="section annotate-terms" id="task5">
 <div class="task-header">
 <div>
@@ -233,7 +234,7 @@ a { color: var(--accent); }
 <h3>Common errors</h3>
 <ul class="error-list"><li>Using the wrong tool size on the stack screws. These are M3 screws with a 2.0 mm Allen drive.</li><li>Reversing the battery lead polarity.</li><li>Installing the ESC backward so the battery lead exits the wrong end of the frame.</li><li>Fully tightening one stack nut before the other three are started.</li><li>Overcompressing the rubber isolators and defeating vibration isolation.</li></ul>
 </section>
-<div class="footer">HAMR II Build Manual · Multi-page HTML edition · Hover dotted-underlined terms for a part/tool/fastener preview.</div>
+<div class="footer" data-site-footer></div>
 </main>
 <script src="assets/js/common.js"></script>
 </body>

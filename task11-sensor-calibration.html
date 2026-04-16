@@ -197,10 +197,11 @@ a { color: var(--accent); }
 </style>
 
 </head>
-<body>
+<body data-page="task11-sensor-calibration.html">
 <main class="page">
 <section class="hero"><h1>Task 11: Sensor calibration</h1><p>Run accelerometer and compass calibration, then enter the measured total battery voltage.</p></section>
-<nav class="topnav" aria-label="Page navigation"><a href="index.html">Home</a><a href="task10-preset-parameters.html" class="secondary">← Task 10: Load preset parameters</a><a href="task12-mount-propellers.html" class="secondary">Task 12: Mount the propellers →</a><a href="step-template.html" class="secondary">Step template</a><a href="full-manual.html" class="secondary">All tasks on one page</a></nav>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
 <section class="section annotate-terms" id="task11">
 <div class="task-header">
 <div>
@@ -231,7 +232,7 @@ a { color: var(--accent); }
 <h3>Common errors</h3>
 <ul class="error-list"><li>Calibrating on a non-level or soft surface.</li><li>Moving the aircraft before Mission Planner confirms each calibration pose.</li><li>Rotating too quickly during compass calibration.</li><li>Performing compass calibration near large metal objects or power supplies.</li><li>Entering a single-cell voltage instead of the total ALL voltage.</li><li>Leaving the battery connected after calibration.</li></ul>
 </section>
-<div class="footer">HAMR II Build Manual · Multi-page HTML edition · Hover dotted-underlined terms for a part/tool/fastener preview.</div>
+<div class="footer" data-site-footer></div>
 </main>
 <script src="assets/js/common.js"></script>
 </body>

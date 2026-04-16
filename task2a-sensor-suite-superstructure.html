@@ -197,10 +197,11 @@ a { color: var(--accent); }
 </style>
 
 </head>
-<body>
+<body data-page="task2a-sensor-suite-superstructure.html">
 <main class="page">
 <section class="hero"><h1>Task 2A: Build the sensor suite superstructure</h1><p>Install the camera, cable, GPS module, and standoffs on the sensor suite superstructure before it is mated to the base plate.</p></section>
-<nav class="topnav" aria-label="Page navigation"><a href="index.html">Home</a><a href="task1-solder-raspberry-pi.html" class="secondary">← Task 1: Solder Raspberry Pi</a><a href="task3b-lower-frame.html" class="secondary">Task 3B: Assemble the lower frame →</a><a href="step-template.html" class="secondary">Step template</a><a href="full-manual.html" class="secondary">All tasks on one page</a></nav>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
 <section class="section annotate-terms" id="task2">
 <div class="task-header">
 <div>
@@ -221,7 +222,7 @@ a { color: var(--accent); }
 </div>
 </div>
 
-<div class="figure-grid-2"><div class="figure-card"><img alt="ARK SAM GPS module" src="assets/parts/gps-compass.jpg"/><div class="figure-caption">Reference view of the ARK SAM GPS module.</div></div><div class="figure-card"><img alt="Sensor suite superstructure plate" src="assets/img/superstructure_plate.jpg"/><div class="figure-caption">Sensor suite superstructure before the camera and GPS hardware are installed.</div></div></div>
+<div class="figure-grid-2"><div class="figure-card"><img alt="ARK SAM GPS module" src="assets/parts/gps-compass.jpg"/><div class="figure-caption">Reference view of the ARK SAM GPS module.</div></div><div class="figure-card"><img alt="Sensor suite superstructure plate" src="assets/parts/mount-camera-gps.png"/><div class="figure-caption">Sensor suite superstructure before the camera and GPS hardware are installed.</div></div></div>
 <div class="parts-tools">
 <div class="info-card"><h4>Parts required</h4><ul><li>Sensor suite superstructure</li><li>Raspberry Pi Camera Module 2</li><li>Mini-to-standard camera adapter cable</li><li>ARK SAM GPS module</li><li>6-wire GPS cable</li><li>Camera/GPS hardware kit</li></ul></div>
 <div class="info-card"><h4>Tools required</h4><ul><li>1.5 mm Allen key</li><li>2.5 mm Allen key</li><li>5.5 mm nut driver</li><li>Fine-tip pliers / needle-nose pliers</li></ul></div>
@@ -233,7 +234,7 @@ a { color: var(--accent); }
 <h3>Common errors</h3>
 <ul class="error-list"><li>Using the wrong Allen key size for the camera screws. The M2 camera screws use a 1.5 mm Allen key.</li><li>Overtightening the camera screws into the brass inserts.</li><li>Installing the camera cable backwards. The metal contacts must face away from the black retainers on both ends.</li><li>Installing the GPS module rotated or reversed relative to the reference orientation.</li><li>Fully tightening one GPS nut before the others are started, which twists the assembly or misaligns the board.</li></ul>
 </section>
-<div class="footer">HAMR II Build Manual · Multi-page HTML edition · Hover dotted-underlined terms for a part/tool/fastener preview.</div>
+<div class="footer" data-site-footer></div>
 </main>
 <script src="assets/js/common.js"></script>
 </body>

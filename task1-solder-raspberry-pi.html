@@ -197,10 +197,11 @@ a { color: var(--accent); }
 </style>
 
 </head>
-<body>
+<body data-page="task1-solder-raspberry-pi.html">
 <main class="page">
 <section class="hero"><h1>Task 1: Solder Raspberry Pi</h1><p>Install the latch-style 4-pin header and the SIP switch on the Raspberry Pi Zero 2 W before anything is mounted to the airframe.</p></section>
-<nav class="topnav" aria-label="Page navigation"><a href="index.html">Home</a><a href="task2a-sensor-suite-superstructure.html" class="secondary">Task 2A: Build the sensor suite superstructure →</a><a href="step-template.html" class="secondary">Step template</a><a href="full-manual.html" class="secondary">All tasks on one page</a></nav>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
 <section class="section annotate-terms" id="task1">
 <div class="task-header">
 <div>
@@ -232,7 +233,7 @@ a { color: var(--accent); }
 <h3>Common errors</h3>
 <ul class="error-list"><li>Not using eye protection or the ventilation fan.</li><li>Applying too much solder and shorting adjacent pins or pads.</li><li>Clamping the Raspberry Pi on top of components instead of at the board edges.</li><li>Creating cold solder joints that look dull, lumpy, or only partially bonded to the pad.</li><li>Holding the iron too long and lifting pads or overheating the board.</li></ul>
 </section>
-<div class="footer">HAMR II Build Manual · Multi-page HTML edition · Hover dotted-underlined terms for a part/tool/fastener preview.</div>
+<div class="footer" data-site-footer></div>
 </main>
 <script src="assets/js/common.js"></script>
 </body>

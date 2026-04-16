@@ -103,7 +103,7 @@
     @media print { body { background: white; } .page { max-width: none; padding: 0; } .hero, .stat, .table-wrap, .note, .search { box-shadow: none; } .controls { display: none; } a.link-button { color: var(--ink); background: transparent; border: 1px solid var(--line); } }
   </style>
 </head>
-<body>
+<body data-page="parts-guide.html">
   <main class="page">
     <section class="hero">
       <h1>HAMR II Builder Parts Guide</h1>
@@ -111,7 +111,7 @@
         Use this page while building the High Agility Multirotor II quadcopter. It shows what each part is, what it does, and how many go on one aircraft. Every image can be clicked to enlarge for easier part identification at the bench.
       </p>
     </section>
-
+    <nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
     <section class="stats" aria-label="build summary">
       <div class="stat">
         <div class="label">Parts Per System</div>
@@ -483,10 +483,7 @@
       <div id="rowHoverPreviewMeta" class="meta"></div>
     </div>
 
-    <div class="footer center">
-      Arthur Chu · MITLL © 2026 USMA EECS RRC
-      <!--Builder note: once photos are added to <code>assets/parts/</code>, the placeholders are replaced automatically. That lets you keep one stable guide while swapping in better part images later.-->
-    </div>
+    <div class="footer" data-site-footer></div>
   </main>
 
     <script src="assets/js/common.js"></script>

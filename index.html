@@ -197,10 +197,10 @@ a { color: var(--accent); }
 </style>
 
 </head>
-<body>
+<body data-page="index.html">
 <main class="page">
 <section class="hero"><h1>HAMR II Build Manual</h1><p>Cadet-facing build instructions for the High Agility Multirotor II sUAS. This edition uses the same visual language as the finalized builder site, but splits the manual into manageable task pages.</p></section>
-<nav class="topnav" aria-label="Page navigation"><a href="index.html">Home</a><a href="#jump-ahead">Task index</a><a href="step-template.html" class="secondary">Step template</a><a href="full-manual.html" class="secondary">All tasks on one page</a><button class="buttonish secondary" type="button" data-reset-progress>Reset local progress</button></nav>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
 
 <section class="stats" aria-label="manual summary">
   <div class="stat"><div class="label">Manual layout</div><div class="value">One task per page</div><div class="sub">Each build task opens on its own page so cadets can stay on the step they are actually doing.</div></div>
@@ -406,7 +406,7 @@ a { color: var(--accent); }
   </div>
 </section>
 
-<div class="footer">HAMR II Build Manual · Multi-page HTML edition · Hover dotted-underlined terms for a part/tool/fastener preview.</div>
+<div class="footer" data-site-footer></div>
 </main>
 <script src="assets/js/common.js"></script>
 </body>

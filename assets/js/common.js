@@ -478,8 +478,218 @@ const GLOSSARY = {
   //  ]
   }
 };
+
+const TEAM_ROSTER = [
+  "Dominic Larkin, USMA EECS RRC, Oversight",
+  "Arthur Chu, MIT Lincoln Laboratory, Project Manager",
+  "Armaun Zargari, ORAU Fellow, Design Lead",
+  "Jacob Drone, CL 2028, Cadet-in-charge",
+  "Parker Brown, CL 2028, Assistant Cadet-in-charge",
+  "Raj Fanaswala, CL 2028, Assistant Cadet-in-charge",
+  "Maya Medrano, CL 2028",
+  "Radhati Srisukwattananan, CL 2028",
+  "Xavier Guild, CL 2029",
+  "Maxwell Sheng, CL 2029",
+  "Max Wasserman, CL 2029"
+];
+
+const TASK_SEQUENCE = [
+  "task1","task2","task3","task4","task5","task6","task7","task8","task9","task10","task11","task12","final-checks"
+];
+
+function currentFilename() {
+  const path = decodeURIComponent(window.location.pathname || "");
+  return path.split("/").pop() || "index.html";
+}
+
+function getCurrentTaskMeta() {
+  const filename = currentFilename();
+  return Object.values(TASK_META).find(task => `${task.slug}.html` === filename) || null;
+}
+
+function getTaskNeighbors(taskId) {
+  const idx = TASK_SEQUENCE.indexOf(taskId);
+  if (idx === -1) return { prev: null, next: null };
+  const prevId = TASK_SEQUENCE[idx - 1] || null;
+  const nextId = TASK_SEQUENCE[idx + 1] || null;
+  return {
+    prev: prevId ? TASK_META[prevId] : null,
+    next: nextId ? TASK_META[nextId] : null
+  };
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
+}
+
+function ensureSharedUiStyles() {
+  if (document.getElementById("hamr-shared-ui-styles")) return;
+  const style = document.createElement("style");
+  style.id = "hamr-shared-ui-styles";
+  style.textContent = `
+    .topnav .nav-current,
+    .topnav a[aria-current="page"] {
+      background: var(--paper);
+      color: var(--accent);
+      border: 1px solid var(--line);
+      font-weight: 700;
+    }
+    .task-strip {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin: 0 0 18px 0;
+      box-shadow: var(--shadow);
+    }
+    .task-strip .label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .task-strip .main {
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .task-strip .sub {
+      color: var(--muted);
+      font-size: 0.92rem;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .task-strip .sub a {
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .footer {
+      margin: 18px 0 40px 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+    .team-hover {
+      position: relative;
+      display: inline-block;
+      color: var(--accent);
+      text-decoration-line: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+      cursor: help;
+      outline: none;
+    }
+    .team-hover:focus-visible {
+      box-shadow: 0 0 0 3px rgba(90,124,168,0.35);
+      border-radius: 4px;
+    }
+    .team-roster {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      transform: translateX(-50%);
+      display: none;
+      width: min(440px, 88vw);
+      background: rgba(255,255,255,0.98);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 18px 36px rgba(23, 32, 51, 0.18);
+      padding: 12px 14px;
+      text-align: left;
+      color: var(--ink);
+      z-index: 40;
+    }
+    .team-hover:hover .team-roster,
+    .team-hover:focus .team-roster,
+    .team-hover:focus-within .team-roster {
+      display: block;
+    }
+    .team-roster-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    .team-roster-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.87rem;
+      line-height: 1.45;
+    }
+    .team-roster-list li + li {
+      margin-top: 4px;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function renderSiteNav() {
+  const nav = document.querySelector('[data-site-nav]');
+  if (!nav) return;
+  const filename = currentFilename();
+  const currentTask = getCurrentTaskMeta();
+  const progressReset = '<button class="buttonish secondary" type="button" data-reset-progress>Reset local progress</button>';
+  const links = [];
+
+  links.push(`<a href="index.html"${filename === "index.html" ? ' aria-current="page" class="nav-current"' : ""}>Home</a>`);
+
+  if (filename === "index.html") {
+    links.push('<a href="#jump-ahead" class="secondary">Task index</a>');
+  }
+
+  if (currentTask) {
+    const { prev, next } = getTaskNeighbors(currentTask.id);
+    if (prev) links.push(`<a href="${prev.slug}.html" class="secondary">← ${escapeHtml(prev.title)}</a>`);
+    links.push(`<a href="${currentTask.slug}.html" aria-current="page" class="secondary nav-current">${escapeHtml(currentTask.title)}</a>`);
+    if (next) links.push(`<a href="${next.slug}.html" class="secondary">${escapeHtml(next.title)} →</a>`);
+  }
+
+  links.push(`<a href="parts-guide.html" class="secondary${filename === "parts-guide.html" ? ' nav-current' : ''}"${filename === "parts-guide.html" ? ' aria-current="page"' : ''}>Parts Guide</a>`);
+  links.push(progressReset);
+  nav.innerHTML = links.join("");
+}
+
+function renderTaskStrip() {
+  const host = document.querySelector('[data-task-strip]');
+  const task = getCurrentTaskMeta();
+  if (!host || !task) return;
+  const progress = getProgress();
+  const done = !!progress[task.id];
+  const ready = blockersDone(task.id, progress);
+  const { next } = getTaskNeighbors(task.id);
+  const blockerLinks = (task.blockers || []).map(id => {
+    const meta = TASK_META[id];
+    return meta ? `<a href="${meta.slug}.html">${escapeHtml(meta.title)}</a>` : '';
+  }).filter(Boolean).join(' · ');
+
+  let main = `<strong>You are here:</strong> ${escapeHtml(task.title)}`;
+  let sub = '';
+  if (!ready && blockerLinks) {
+    sub = `<span>Before you start, finish: ${blockerLinks}</span>`;
+  } else if (done && next) {
+    sub = `<span>This task is marked complete on this device.</span><span>Next up: <a href="${next.slug}.html">${escapeHtml(next.title)}</a></span>`;
+  } else if (done) {
+    sub = `<span>This task is marked complete on this device.</span><span>Next up: <a href="flight-day-handoff-checklist.html">Flight-day handoff checklist</a></span>`;
+  } else if (next) {
+    sub = `<span>When you finish this page, continue to <a href="${next.slug}.html">${escapeHtml(next.title)}</a>.</span>`;
+  } else {
+    sub = `<span>When you finish this page, continue to <a href="flight-day-handoff-checklist.html">Flight-day handoff checklist</a>.</span>`;
+  }
+
+  host.innerHTML = `<div class="task-strip"><div class="label">Build flow</div><div class="main">${main}</div><div class="sub">${sub}</div></div>`;
+}
+
+function renderFooter() {
+  const footer = document.querySelector('[data-site-footer]');
+  if (!footer) return;
+  const list = TEAM_ROSTER.map(name => `<li>${escapeHtml(name)}</li>`).join('');
+  footer.innerHTML = `<span class="team-hover" tabindex="0">HAMR II Dev Team<span class="team-roster" role="tooltip"><div class="team-roster-title">HAMR II Dev Team</div><ul class="team-roster-list">${list}</ul></span></span> © 2026 USMA EECS RRC`;
+}
+
 const TASK_META = {"task1": {"id": "task1", "title": "Task 1: Solder Raspberry Pi", "slug": "task1-solder-raspberry-pi", "day": "Day 1", "blockers": [], "summary": "Install the latch-style 4-pin header and the SIP switch on the Raspberry Pi Zero 2 W before anything is mounted to the airframe.", "role": null}, "task2": {"id": "task2", "title": "Task 2A: Build the sensor suite superstructure", "slug": "task2a-sensor-suite-superstructure", "day": "Day 2–3", "blockers": [], "summary": "Install the camera, cable, GPS module, and standoffs on the sensor suite superstructure before it is mated to the base plate.", "role": "Cadet A"}, "task3": {"id": "task3", "title": "Task 3B: Assemble the lower frame", "slug": "task3b-lower-frame", "day": "Day 2–3", "blockers": [], "summary": "Cadet B builds the lower airframe using the Lumenier frame kit while keeping the FC/ESC stack screws aside for later.", "role": "Cadet B"}, "task4": {"id": "task4", "title": "Task 4: Install the motors", "slug": "task4-install-motors", "day": "Day 2–3", "blockers": ["task3"], "summary": "Mount all four motors to the arms using the short motor screws from the EMAX motor kits.", "role": "Cadet B"}, "task5": {"id": "task5", "title": "Task 5: Install the ESC and flight controller stack", "slug": "task5-stack", "day": "Day 3–4", "blockers": ["task3", "task4"], "summary": "Build the ARK ESC / ARK FPV flight-controller stack on the lower frame, attach the battery lead, and connect the motors to the ESC.", "role": "Cadet B"}, "task6": {"id": "task6", "title": "Task 6: Install the vehicle top plate and sensor-suite base plate", "slug": "task6-top-plate-and-base", "day": "Day 4", "blockers": ["task5"], "summary": "Merge the Cadet B lower frame with the top plate and the 3-D printed sensor-suite base plate.", "role": null}, "task7": {"id": "task7", "title": "Task 7: Install the Raspberry Pi", "slug": "task7-install-rpi", "day": "Day 4", "blockers": ["task1", "task6"], "summary": "Mount the Raspberry Pi on the sensor-suite base plate before the superstructure is attached.", "role": null}, "task8": {"id": "task8", "title": "Task 8: Install the sensor suite and connect the wiring", "slug": "task8-sensor-suite-and-wiring", "day": "Day 4", "blockers": ["task2", "task7"], "summary": "Mate the superstructure to the base plate, connect the camera cable, route the GPS lead, and connect the custom FC-to-RPi harness.", "role": null}, "task9": {"id": "task9", "title": "Task 9: Software setup and motor test", "slug": "task9-software-and-motor-test", "day": "Day 5", "blockers": ["task8"], "summary": "Connect Mission Planner, set the frame type, and verify motor order and direction before propellers ever go on.", "role": null}, "task10": {"id": "task10", "title": "Task 10: Load preset parameters", "slug": "task10-preset-parameters", "day": "Day 5", "blockers": ["task9"], "summary": "Load the current faculty-issued preset parameter file after the aircraft is fully wired.", "role": null}, "task11": {"id": "task11", "title": "Task 11: Sensor calibration", "slug": "task11-sensor-calibration", "day": "Day 5", "blockers": ["task10"], "summary": "Run accelerometer and compass calibration, then enter the measured total battery voltage.", "role": null}, "task12": {"id": "task12", "title": "Task 12: Mount the propellers", "slug": "task12-mount-propellers", "day": "Day 5–6", "blockers": ["task11"], "summary": "Install the correct CW and CCW propellers only after motor test and software setup are complete.", "role": null}, "final-checks": {"id": "final-checks", "title": "Flight-day handoff checklist", "slug": "flight-day-handoff-checklist", "day": "Day 6", "blockers": ["task12"], "summary": "The workflow chart ends with Flight Day. Before an aircraft is handed off for its first prop-on run or flight event, confirm the items below.", "role": null}};
-const PROGRESS_KEY = "hamr_manual_progress_v3";
 
 function getProgress() {
   try {
@@ -675,6 +885,10 @@ function initTaskProgress() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  ensureSharedUiStyles();
+  renderSiteNav();
+  renderTaskStrip();
+  renderFooter();
   document.querySelectorAll(".annotate-terms").forEach(annotateTerms);
   initTermPreview();
   initTaskProgress();

@@ -197,10 +197,11 @@ a { color: var(--accent); }
 </style>
 
 </head>
-<body>
+<body data-page="task9-software-and-motor-test.html">
 <main class="page">
 <section class="hero"><h1>Task 9: Software setup and motor test</h1><p>Connect Mission Planner, set the frame type, and verify motor order and direction before propellers ever go on.</p></section>
-<nav class="topnav" aria-label="Page navigation"><a href="index.html">Home</a><a href="task8-sensor-suite-and-wiring.html" class="secondary">← Task 8: Install the sensor suite and connect the wiring</a><a href="task10-preset-parameters.html" class="secondary">Task 10: Load preset parameters →</a><a href="step-template.html" class="secondary">Step template</a><a href="full-manual.html" class="secondary">All tasks on one page</a></nav>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
 <section class="section annotate-terms" id="task9">
 <div class="task-header">
 <div>
@@ -232,7 +233,7 @@ a { color: var(--accent); }
 <h3>Common errors</h3>
 <ul class="error-list"><li>Testing with propellers installed.</li><li>Connecting the LiPo before you are ready for Motor Test.</li><li>Using the wrong COM port or baud rate and assuming the FC is bad.</li><li>Forgetting to reboot after changing FRAME parameters.</li><li>Testing multiple motors at once instead of one at a time.</li><li>Ignoring abnormal startup behavior such as stuttering or scraping.</li></ul>
 </section>
-<div class="footer">HAMR II Build Manual · Multi-page HTML edition · Hover dotted-underlined terms for a part/tool/fastener preview.</div>
+<div class="footer" data-site-footer></div>
 </main>
 <script src="assets/js/common.js"></script>
 </body>
