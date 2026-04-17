@@ -444,11 +444,12 @@ const GLOSSARY = {
   "lipoTester": {
     "title": "LiPo battery tester",
     "subtitle": "Reads total battery voltage",
+    "img": "assets/img/lipo-tester.webp",
     "placeholder": "LiPo battery tester",
     "aliases": [
       "LiPo battery tester",
       "battery tester"
-    ]
+    ],
   //},
   //"solderingiron": {
   //  "title": "Soldering iron",
@@ -491,6 +492,27 @@ const GLOSSARY = {
   //  "aliases": [
   //    "eye protection"
   //  ]
+  "gpscable": {
+    "title": "GPS/compass cable",
+    "subtitle": "6-wire GPS/compass cable",
+    "img": "assets/img/gps-cable.png",
+    "placeholder": "GPS/compass cable",
+    "aliases": [
+      "GPS/compass cable",
+      "6-wire GPS cable",
+      "GPS cable"
+    ],
+    "damper": {
+      "title": "Vibration damper",
+      "subtitle": "Vibration dampening for flight Controller and ESC",
+      "img": "assets/img/damper.png",
+      "aliases": [
+        "vibration damper",
+        "damper",
+        "rubber damper"
+      ]
+    }
+  }
   }
 };
 
@@ -648,7 +670,7 @@ function renderSiteNav() {
   if (!nav) return;
   const filename = currentFilename();
   const currentTask = getCurrentTaskMeta();
-  const progressReset = '<button class="buttonish secondary" type="button" data-reset-progress>Reset local progress</button>';
+  const progressReset = '<button class="buttonish secondary" type="button" data-reset-progress>Reset progress</button>';
   const links = [];
 
   links.push(`<a href="index.html"${filename === "index.html" ? ' aria-current="page" class="nav-current"' : ""}>Home</a>`);
