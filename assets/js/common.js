@@ -4,8 +4,8 @@ const GLOSSARY = {
     "subtitle": "Companion computer",
     "img": "assets/parts/computer-single-board.webp",
     "aliases": [
-      "Raspberry Pi Zero 2 W",
-      "Raspberry Pi",
+      "Raspberry Pi Zero",
+      //"Raspberry Pi",
       "RPi0"
     ]
   },
@@ -41,6 +41,7 @@ const GLOSSARY = {
     "placeholder": "Camera module",
     "aliases": [
       "Raspberry Pi Camera Module",
+      "Raspberry Pi camera module",
       "camera module"
     ]
   },
@@ -55,7 +56,8 @@ const GLOSSARY = {
       "22-pin ribbon cable",
       "1.5 inch camera module adapter cable",
       "CSI ribbon cable",
-      "camera adapter cable"
+      "camera adapter cable",
+      "camera ribbon cable"
     ]
   },
   "gps": {
@@ -76,7 +78,10 @@ const GLOSSARY = {
     "img": "assets/parts/mount-camera-gps.png",
     "aliases": [
       "sensor suite superstructure",
-      "superstructure"
+      "superstructure",
+      "camera/GPS mount",
+      "camera GPS mount",
+      "mount"
     ]
   },
   "baseplate": {
@@ -135,7 +140,7 @@ const GLOSSARY = {
   "motor": {
     "title": "EMAX Pro Series 2808 motor",
     "subtitle": "Brushless motor",
-    "img": "assets/parts/motors.png",
+    "img": "assets/parts/motors.jpg",
     "aliases": [
       "EMAX Pro Series 2808 motor",
       "motor",
@@ -165,7 +170,7 @@ const GLOSSARY = {
     "title": "Custom FC-to-RPi harness",
     "subtitle": "TELEM connection harness",
     "placeholder": "FC-to-RPi harness",
-    "img": "assets/parts/cable-harness-fc-rpi.jpg",
+    "img": "assets/parts/cable-harness-fc-to-rpi.png",
     "aliases": [
       "custom FC-to-RPi harness",
       "FC-to-RPi harness",
@@ -248,6 +253,16 @@ const GLOSSARY = {
       "M2.5 × 4 mm nylon spacer",
       "M2.5 nylon spacer",
       "nylon spacer"
+    ]
+  },
+  "nskkit": {
+    "title": "Fastener Kit",
+    "subtitle": "Nuts, screws, standoffs, and spacers",
+    "img": "assets/parts/fastener-kit.png",
+    "aliases": [
+      "Fastener Kit",
+      "fastener kit",
+      "USMAKIT-01"
     ]
   },
   "m2x6": {
@@ -410,6 +425,7 @@ const GLOSSARY = {
   "pliers": {
     "title": "Pliers",
     "subtitle": "Light holding / pull-through tool",
+    "img": "assets/img/pliers.jpg",
     "placeholder": "Pliers",
     "aliases": [
       "pliers",
@@ -493,7 +509,7 @@ const TEAM_ROSTER = [
 ];
 
 const TASK_SEQUENCE = [
-  "task1","task2","task3","task4","task5","task6","task7","task8","task9","task10","task11","task12","final-checks"
+  "task1","task2","task3","task4","task5"
 ];
 
 function currentFilename() {
@@ -671,11 +687,11 @@ function renderTaskStrip() {
   } else if (done && next) {
     sub = `<span>This task is marked complete on this device.</span><span>Next up: <a href="${next.slug}.html">${escapeHtml(next.title)}</a></span>`;
   } else if (done) {
-    sub = `<span>This task is marked complete on this device.</span><span>Next up: <a href="flight-day-handoff-checklist.html">Flight-day handoff checklist</a></span>`;
+    sub = `<span>This task is marked complete on this device.</span><span>Later tasks are intentionally hidden while the manual is being revised.</span>`;
   } else if (next) {
     sub = `<span>When you finish this page, continue to <a href="${next.slug}.html">${escapeHtml(next.title)}</a>.</span>`;
   } else {
-    sub = `<span>When you finish this page, continue to <a href="flight-day-handoff-checklist.html">Flight-day handoff checklist</a>.</span>`;
+    sub = `<span>This is the last published task in the current draft.</span>`;
   }
 
   host.innerHTML = `<div class="task-strip"><div class="label">Build flow</div><div class="main">${main}</div><div class="sub">${sub}</div></div>`;
@@ -688,7 +704,13 @@ function renderFooter() {
   footer.innerHTML = `<span class="team-hover" tabindex="0">HAMR II Dev Team<span class="team-roster" role="tooltip"><div class="team-roster-title">HAMR II Dev Team</div><ul class="team-roster-list">${list}</ul></span></span> © 2026 USMA EECS RRC`;
 }
 
-const TASK_META = {"task1": {"id": "task1", "title": "Task 1: Solder Raspberry Pi", "slug": "task1-solder-raspberry-pi", "day": "Day 1", "blockers": [], "summary": "Install the latch-style 4-pin header and the SIP switch on the Raspberry Pi Zero 2 W before anything is mounted to the airframe.", "role": null}, "task2": {"id": "task2", "title": "Task 2A: Build the sensor suite superstructure", "slug": "task2a-sensor-suite-superstructure", "day": "Day 2–3", "blockers": [], "summary": "Install the camera, cable, GPS module, and standoffs on the sensor suite superstructure before it is mated to the base plate.", "role": "Cadet A"}, "task3": {"id": "task3", "title": "Task 3B: Assemble the lower frame", "slug": "task3b-lower-frame", "day": "Day 2–3", "blockers": [], "summary": "Cadet B builds the lower airframe using the Lumenier frame kit while keeping the FC/ESC stack screws aside for later.", "role": "Cadet B"}, "task4": {"id": "task4", "title": "Task 4: Install the motors", "slug": "task4-install-motors", "day": "Day 2–3", "blockers": ["task3"], "summary": "Mount all four motors to the arms using the short motor screws from the EMAX motor kits.", "role": "Cadet B"}, "task5": {"id": "task5", "title": "Task 5: Install the ESC and flight controller stack", "slug": "task5-stack", "day": "Day 3–4", "blockers": ["task3", "task4"], "summary": "Build the ARK ESC / ARK FPV flight-controller stack on the lower frame, attach the battery lead, and connect the motors to the ESC.", "role": "Cadet B"}, "task6": {"id": "task6", "title": "Task 6: Install the vehicle top plate and sensor-suite base plate", "slug": "task6-top-plate-and-base", "day": "Day 4", "blockers": ["task5"], "summary": "Merge the Cadet B lower frame with the top plate and the 3-D printed sensor-suite base plate.", "role": null}, "task7": {"id": "task7", "title": "Task 7: Install the Raspberry Pi", "slug": "task7-install-rpi", "day": "Day 4", "blockers": ["task1", "task6"], "summary": "Mount the Raspberry Pi on the sensor-suite base plate before the superstructure is attached.", "role": null}, "task8": {"id": "task8", "title": "Task 8: Install the sensor suite and connect the wiring", "slug": "task8-sensor-suite-and-wiring", "day": "Day 4", "blockers": ["task2", "task7"], "summary": "Mate the superstructure to the base plate, connect the camera cable, route the GPS lead, and connect the custom FC-to-RPi harness.", "role": null}, "task9": {"id": "task9", "title": "Task 9: Software setup and motor test", "slug": "task9-software-and-motor-test", "day": "Day 5", "blockers": ["task8"], "summary": "Connect Mission Planner, set the frame type, and verify motor order and direction before propellers ever go on.", "role": null}, "task10": {"id": "task10", "title": "Task 10: Load preset parameters", "slug": "task10-preset-parameters", "day": "Day 5", "blockers": ["task9"], "summary": "Load the current faculty-issued preset parameter file after the aircraft is fully wired.", "role": null}, "task11": {"id": "task11", "title": "Task 11: Sensor calibration", "slug": "task11-sensor-calibration", "day": "Day 5", "blockers": ["task10"], "summary": "Run accelerometer and compass calibration, then enter the measured total battery voltage.", "role": null}, "task12": {"id": "task12", "title": "Task 12: Mount the propellers", "slug": "task12-mount-propellers", "day": "Day 5–6", "blockers": ["task11"], "summary": "Install the correct CW and CCW propellers only after motor test and software setup are complete.", "role": null}, "final-checks": {"id": "final-checks", "title": "Flight-day handoff checklist", "slug": "flight-day-handoff-checklist", "day": "Day 6", "blockers": ["task12"], "summary": "The workflow chart ends with Flight Day. Before an aircraft is handed off for its first prop-on run or flight event, confirm the items below.", "role": null}};
+const TASK_META = {
+  "task1": {"id": "task1", "title": "Task 1: Prepare the Raspberry Pi", "slug": "task1-solder-raspberry-pi", "day": "Day 1", "blockers": [], "summary": "Install the 4-pin latch header and SIP switch on the Raspberry Pi Zero 2 W.", "role": null},
+  "task2": {"id": "task2", "title": "Task 2: Install GPS/Compass", "slug": "task2a-sensor-suite-superstructure", "day": "Day 2", "blockers": [], "summary": "Mount the ARK SAM GPS module to the camera/GPS mount and connect the 6-wire GPS/compass cable.", "role": null},
+  "task3": {"id": "task3", "title": "Task 3: Install Camera", "slug": "task3b-lower-frame", "day": "Day 2", "blockers": [], "summary": "Clear the printed mounting holes, install the Raspberry Pi camera, and secure the camera ribbon cable.", "role": null},
+  "task4": {"id": "task4", "title": "Task 4: Assemble the lower frame", "slug": "task4-install-motors", "day": "Day 2–3", "blockers": [], "summary": "Assemble the hub, arms, bottom plate, and lower deck using the short frame screws.", "role": null},
+  "task5": {"id": "task5", "title": "Task 5: Install the motors", "slug": "task5-stack", "day": "Day 3", "blockers": ["task4"], "summary": "Confirm the lower frame orientation, then mount all four motors using the short motor screws.", "role": null}
+};
 
 function getProgress() {
   try {

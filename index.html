@@ -9,213 +9,84 @@
 </head>
 <body data-page="index.html">
 <main class="page">
-<section class="hero"><h1>HAMR II Build Manual</h1><p>Cadet-facing build instructions for the High Agility Multirotor II sUAS. This edition uses the same visual language as the finalized builder site, but splits the manual into manageable task pages.</p></section>
+<section class="hero"><h1>HAMR II Build Manual</h1><p>Bench instructions for the HAMR II build. This draft publishes Tasks 1–5 only. Later tasks are hidden until their content is revised.</p></section>
 <nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
 
-<section class="stats" aria-label="manual summary">
-  <div class="stat"><div class="label">Manual layout</div><div class="value">One task per page</div><div class="sub">Each build task opens on its own page so cadets can stay on the step they are actually doing.</div></div>
-  <div class="stat"><div class="label">Hover reference</div><div class="value">Dotted underline</div><div class="sub">Hover or focus any dotted-underlined part, tool, or fastener name to see a preview image. Placeholders are used where a dedicated photo is not yet available.</div></div>
-  <div class="stat"><div class="label">Issued item</div><div class="value">microSD card</div><div class="sub">The prepared microSD card is an issued tool item. Issue it only when needed and recover it at the end of the lesson.</div></div>
-</section>
-
 <section class="section annotate-terms" id="overview">
-  <h2>Overview</h2>
+  <h2>Before you start</h2>
   <div class="two-col">
     <div>
-      <p>Use this manual at the bench while building the aircraft. This edition is split into one task per page, shows blockers so cadets can see what can be done early, and adds hover previews for each dotted-underlined part, tool, and fastener mention.</p>
-      <div class="ok-box"><strong>How to use this manual</strong><br>Open the task page you are working on. If a task is blocked, complete its blockers first. You can mark tasks complete on your device to make the index easier to scan.</div>
-      <div class="callout"><strong>Issued item policy</strong><br>The microSD card is a tool, not a permanent kit item. Issue it only when the task calls for it, and recover it at the end of the lesson unless faculty directs otherwise.</div>
+      <p>Use this manual at the bench while building the aircraft. Open only the task you are actively working on, and stop whenever a page tells you to seek instructor verification.</p>
+      <div class="ok-box"><strong>What is in this draft</strong><br>Tasks 1 through 5 are ready for use. The remaining tasks are intentionally hidden while they are being rewritten.</div>
       <h3>Bench rules</h3>
       <ul class="checklist">
-        <li>Keep propellers off until the dedicated propeller task.</li>
-        <li>Do not connect the 4S LiPo battery unless the current step explicitly says to do so.</li>
+        <li>Keep propellers off until the dedicated propeller task is published and assigned.</li>
+        <li>Do not connect the 4S LiPo battery unless the current step explicitly tells you to do so.</li>
         <li>Start all screws by hand before tightening any one screw fully.</li>
-        <li>When in doubt about wiring, stop and ask for verification instead of forcing a connection.</li>
-        <li>Hover any dotted-underlined term to identify the exact hardware before you pick it up.</li>
+        <li>When a part orientation is unclear, stop and compare it against the figure on the page before proceeding.</li>
+        <li>Maintain positive control of issued tools, loose fasteners, and any bag that must be reused later.</li>
       </ul>
     </div>
     <div>
       <div class="figure-card">
-        <img src="assets/img/workflow.png" alt="Planned two-cadet workflow by day">
-        <div class="figure-caption">Planned two-cadet workflow. “S4” means the sensor suite superstructure.</div>
+        <img src="assets/img/workflow.png" alt="Workflow overview for the HAMR II build">
+        <div class="figure-caption">Overall build flow. Only the published tasks below are currently active in this draft.</div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="jump-ahead">
-  <h2>Task index</h2>
-  <p class="muted">Tasks with no blockers can be started immediately. Tasks marked blocked depend on one or more earlier tasks.</p>
+  <h2>Published task index</h2>
+  <p class="muted">Open the next task only after you have completed its blockers.</p>
   <div class="card-grid">
-    
     <article class="task-card" data-task-card="task1">
       <div class="kicker">Day 1</div>
       <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 1: Solder Raspberry Pi</h3>
-      <p class="sub">Install the latch-style 4-pin header and the SIP switch on the Raspberry Pi Zero 2 W before anything is mounted to the airframe.</p>
+      <h3>Task 1: Prepare the Raspberry Pi</h3>
+      <p class="sub">Install the 4-pin latch header and SIP switch on the Raspberry Pi Zero 2 W.</p>
       <p class="muted"><strong>Blockers:</strong> None</p>
-      <div class="actions">
-        <a class="link-button" href="task1-solder-raspberry-pi.html">Open task</a>
-      </div>
+      <div class="actions"><a class="link-button" href="task1-solder-raspberry-pi.html">Open task</a></div>
     </article>
-    
+
     <article class="task-card" data-task-card="task2">
-      <div class="kicker">Day 2–3</div>
-      <div class="badge-row"><span class="badge cadet-a">Cadet A</span><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 2A: Build the sensor suite superstructure</h3>
-      <p class="sub">Install the camera, cable, GPS module, and standoffs on the sensor suite superstructure before it is mated to the base plate.</p>
+      <div class="kicker">Day 2</div>
+      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
+      <h3>Task 2: Install GPS/Compass</h3>
+      <p class="sub">Mount the ARK SAM GPS module to the camera/GPS mount and connect the 6-wire GPS/compass cable.</p>
       <p class="muted"><strong>Blockers:</strong> None</p>
-      <div class="actions">
-        <a class="link-button" href="task2a-sensor-suite-superstructure.html">Open task</a>
-      </div>
+      <div class="actions"><a class="link-button" href="task2a-sensor-suite-superstructure.html">Open task</a></div>
     </article>
-    
+
     <article class="task-card" data-task-card="task3">
-      <div class="kicker">Day 2–3</div>
-      <div class="badge-row"><span class="badge cadet-b">Cadet B</span><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 3B: Assemble the lower frame</h3>
-      <p class="sub">Cadet B builds the lower airframe using the Lumenier frame kit while keeping the FC/ESC stack screws aside for later.</p>
+      <div class="kicker">Day 2</div>
+      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
+      <h3>Task 3: Install Camera</h3>
+      <p class="sub">Clear the printed holes, install the Raspberry Pi camera, and secure the camera ribbon cable.</p>
       <p class="muted"><strong>Blockers:</strong> None</p>
-      <div class="actions">
-        <a class="link-button" href="task3b-lower-frame.html">Open task</a>
-      </div>
+      <div class="actions"><a class="link-button" href="task3b-lower-frame.html">Open task</a></div>
     </article>
-    
+
     <article class="task-card" data-task-card="task4">
       <div class="kicker">Day 2–3</div>
-      <div class="badge-row"><span class="badge cadet-b">Cadet B</span><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 4: Install the motors</h3>
-      <p class="sub">Mount all four motors to the arms using the short motor screws from the EMAX motor kits.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 3B: Assemble the lower frame</p>
-      <div class="actions">
-        <a class="link-button" href="task4-install-motors.html">Open task</a>
-      </div>
+      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
+      <h3>Task 4: Assemble the lower frame</h3>
+      <p class="sub">Assemble the hub, arms, bottom plate, and lower deck using the short frame screws.</p>
+      <p class="muted"><strong>Blockers:</strong> None</p>
+      <div class="actions"><a class="link-button" href="task4-install-motors.html">Open task</a></div>
     </article>
-    
+
     <article class="task-card" data-task-card="task5">
-      <div class="kicker">Day 3–4</div>
-      <div class="badge-row"><span class="badge cadet-b">Cadet B</span><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 5: Install the ESC and flight controller stack</h3>
-      <p class="sub">Build the ARK ESC / ARK FPV flight-controller stack on the lower frame, attach the battery lead, and connect the motors to the ESC.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 3B: Assemble the lower frame · Task 4: Install the motors</p>
-      <div class="actions">
-        <a class="link-button" href="task5-stack.html">Open task</a>
-      </div>
+      <div class="kicker">Day 3</div>
+      <div class="badge-row"><span class="status-chip" data-status>Blocked until Task 4</span></div>
+      <h3>Task 5: Install the motors</h3>
+      <p class="sub">Confirm the lower frame orientation, then mount all four motors using the short motor screws.</p>
+      <p class="muted"><strong>Blockers:</strong> Task 4: Assemble the lower frame</p>
+      <div class="actions"><a class="link-button" href="task5-stack.html">Open task</a></div>
     </article>
-    
-    <article class="task-card" data-task-card="task6">
-      <div class="kicker">Day 4</div>
-      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 6: Install the vehicle top plate and sensor-suite base plate</h3>
-      <p class="sub">Merge the Cadet B lower frame with the top plate and the 3-D printed sensor-suite base plate.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 5: Install the ESC and flight controller stack</p>
-      <div class="actions">
-        <a class="link-button" href="task6-top-plate-and-base.html">Open task</a>
-      </div>
-    </article>
-    
-    <article class="task-card" data-task-card="task7">
-      <div class="kicker">Day 4</div>
-      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 7: Install the Raspberry Pi</h3>
-      <p class="sub">Mount the Raspberry Pi on the sensor-suite base plate before the superstructure is attached.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 1: Solder Raspberry Pi · Task 6: Install the vehicle top plate and sensor-suite base plate</p>
-      <div class="actions">
-        <a class="link-button" href="task7-install-rpi.html">Open task</a>
-      </div>
-    </article>
-    
-    <article class="task-card" data-task-card="task8">
-      <div class="kicker">Day 4</div>
-      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 8: Install the sensor suite and connect the wiring</h3>
-      <p class="sub">Mate the superstructure to the base plate, connect the camera cable, route the GPS lead, and connect the custom FC-to-RPi harness.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 2A: Build the sensor suite superstructure · Task 7: Install the Raspberry Pi</p>
-      <div class="actions">
-        <a class="link-button" href="task8-sensor-suite-and-wiring.html">Open task</a>
-      </div>
-    </article>
-    
-    <article class="task-card" data-task-card="task9">
-      <div class="kicker">Day 5</div>
-      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 9: Software setup and motor test</h3>
-      <p class="sub">Connect Mission Planner, set the frame type, and verify motor order and direction before propellers ever go on.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 8: Install the sensor suite and connect the wiring</p>
-      <div class="actions">
-        <a class="link-button" href="task9-software-and-motor-test.html">Open task</a>
-      </div>
-    </article>
-    
-    <article class="task-card" data-task-card="task10">
-      <div class="kicker">Day 5</div>
-      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 10: Load preset parameters</h3>
-      <p class="sub">Load the current faculty-issued preset parameter file after the aircraft is fully wired.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 9: Software setup and motor test</p>
-      <div class="actions">
-        <a class="link-button" href="task10-preset-parameters.html">Open task</a>
-      </div>
-    </article>
-    
-    <article class="task-card" data-task-card="task11">
-      <div class="kicker">Day 5</div>
-      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 11: Sensor calibration</h3>
-      <p class="sub">Run accelerometer and compass calibration, then enter the measured total battery voltage.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 10: Load preset parameters</p>
-      <div class="actions">
-        <a class="link-button" href="task11-sensor-calibration.html">Open task</a>
-      </div>
-    </article>
-    
-    <article class="task-card" data-task-card="task12">
-      <div class="kicker">Day 5–6</div>
-      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Task 12: Mount the propellers</h3>
-      <p class="sub">Install the correct CW and CCW propellers only after motor test and software setup are complete.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 11: Sensor calibration</p>
-      <div class="actions">
-        <a class="link-button" href="task12-mount-propellers.html">Open task</a>
-      </div>
-    </article>
-    
-    <article class="task-card" data-task-card="final-checks">
-      <div class="kicker">Day 6</div>
-      <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
-      <h3>Flight-day handoff checklist</h3>
-      <p class="sub">The workflow chart ends with Flight Day. Before an aircraft is handed off for its first prop-on run or flight event, confirm the items below.</p>
-      <p class="muted"><strong>Blockers:</strong> Task 12: Mount the propellers</p>
-      <div class="actions">
-        <a class="link-button" href="flight-day-handoff-checklist.html">Open task</a>
-      </div>
-    </article>
-    
   </div>
+  <div class="publish-note">Parts Guide remains available and unchanged. Later build tasks are hidden for now.</div>
 </section>
-
-<section class="section" id="template">
-  <h2>Write-your-own step template</h2>
-  <p class="muted">Use this when you want to draft a new task or rewrite a vague one in the same style as this manual.</p>
-  <div class="note-grid">
-    <div class="info-card">
-      <h3>What good steps do</h3>
-      <ul class="checklist">
-        <li>Name the exact part, tool, and fastener.</li>
-        <li>State the direction or orientation explicitly.</li>
-        <li>Tell the reader what to do first by hand, and when to tighten with tools.</li>
-        <li>Add a STOP checkpoint where a wrong move can damage hardware.</li>
-        <li>List the common mistakes that actually happen at the bench.</li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h3>Open the full template page</h3>
-      <p class="muted">Use the button below for a copyable template plus an example of a well-written single step.</p>
-      <p><a class="link-button" href="step-template.html">Open step template</a></p>
-    </div>
-  </div>
-</section>
-
 <div class="footer" data-site-footer></div>
 </main>
 <script src="assets/js/common.js"></script>

@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Task 3B: Assemble the lower frame</title>
+<title>Task 3: Install Camera</title>
   <link rel="stylesheet" href="assets/css/common.css">
   <link rel="icon" type="image/png" href="assets/img/rrc.png">
 </head>
 <body data-page="task3b-lower-frame.html">
 <main class="page">
-<section class="hero"><h1>Task 3B: Assemble the lower frame</h1><p>Cadet B builds the lower airframe using the Lumenier frame kit while keeping the FC/ESC stack screws aside for later.</p></section>
+<section class="hero"><h1>Task 3: Install Camera</h1><p>Clear the printed holes, install the Raspberry Pi camera, and secure the camera ribbon cable.</p></section>
 <nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
 <div data-task-strip></div>
 <section class="section annotate-terms" id="task3">
 <div class="task-header">
 <div>
-<div class="badge-row"><span class="badge day-tag">Day 2–3</span><span class="badge cadet-b">Cadet B</span><span class="badge">No blockers</span></div>
-<h3>Task 3B: Assemble the lower frame</h3>
-<p class="muted">Cadet B builds the lower airframe using the Lumenier frame kit while keeping the FC/ESC stack screws aside for later.</p>
+<div class="badge-row"><span class="badge day-tag">Day 2</span><span class="badge">No blockers</span></div>
+<h3>Task 3: Install Camera</h3>
+<p class="muted">Clear the printed holes, install the Raspberry Pi camera, and secure the camera ribbon cable.</p>
 </div>
 </div>
 <div class="blocker-panel">
@@ -28,21 +28,66 @@
 </div>
 <div class="progress-box">
 <label><input data-task-complete="task3" type="checkbox"/> Mark task complete on this device</label>
-<span class="muted" data-complete-label="">Not marked complete</span>
+<span class="muted" data-complete-label>Not marked complete</span>
 </div>
 </div>
-
-<div class="figure-grid-2"><div class="figure-card"><img alt="Frame identification reference" src="assets/img/frame_identification.png"/><div class="figure-caption">Identify the major lower-frame pieces before assembly.</div></div><div class="figure-card"><img alt="Bottom deck orientation reference" src="assets/img/bottom_deck_orientation.png"/><div class="figure-caption">Use the face with the raised metal rings facing upward.</div></div></div>
-<div class="figure-card"><img alt="Frame assembly visual guide" src="assets/img/frame_assembly_reference.png"/><div class="figure-caption">Supplemental current-semester visual guide. Use this to confirm the lower-frame stack-up and the M3 × 12 mm frame-screw locations before tightening anything.</div></div>
 <div class="parts-tools">
-<div class="info-card"><h4>Parts required</h4><ul><li>Lumenier QAV-R 2C 7-inch frame kit</li><li>Hub</li><li>Bottom plate</li><li>Bottom deck</li><li>Four arms</li></ul></div>
-<div class="info-card"><h4>Tools required</h4><ul><li>2.0 mm Allen key</li></ul></div>
+<div class="info-card"><h4>Parts required</h4><ul class="item-list"><li>Raspberry Pi camera module</li><li>1.5-inch camera ribbon cable</li><li>Camera/GPS mount from Task 2</li><li>Fastener kit, subkit labeled <strong>GPS + Camera</strong></li><li>Four M2 × 6 mm socket-head screws</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class="item-list"><li>1.5 mm Allen key</li><li>Needle-nose pliers</li></ul></div>
 </div>
-<div class="callout">The long FC/ESC stack screws supplied with the frame are M3 screws, but their heads take a 2.0 mm Allen key. Do not confuse them with the separate M3 socket-head screws from the fastener kit, which take a 2.5 mm Allen key.</div>
-<h3>Steps</h3>
-<ol class="step-list"><li>Lay out the frame parts shown in the reference figure and identify the hub, bottom plate, bottom deck, and four arms.</li><li>Retain all other bagged frame hardware for later use. Do not open or use hardware that this step does not call for.</li><li>Confirm the bottom deck orientation before assembly. The face with the raised metal rings must point upward toward the inside of the frame.</li><li>Assemble the center section by placing the arms between the lower center plates exactly as shown in the reference photos and the supplemental visual guide below. Start with one arm, then add the remaining three arms.</li><li>Use the nine short frame screws intended for the motor-arm mounting holes to clamp the arm stack-up. Start all nine before tightening.</li><li>Set aside the four long frame-supplied M3 stack screws for the FC/ESC stack. Do not lose them.</li><li>Use the remaining short deck screws to fasten the rest of the lower center plates together.</li><li>Do not use the extra 14 mm frame screws in this task.</li></ol>
+<div class="instruction-flow">
+  <section class="instruction-block">
+    <div>
+      <h4>Step 1. Clear the printed mounting holes</h4>
+      <ol class="compact-list">
+        <li>Look straight down each of the four camera mounting holes as shown in Fig. 3a.</li>
+        <li>Each hole must be completely clear. If printed plastic blocks a hole, thread one M2 × 6 mm socket-head screw into that hole from the outside of the mount.</li>
+        <li>Drive the screw in only far enough to push the plastic out the back side.</li>
+        <li>Back the screw completely out, then use the needle-nose pliers to remove any loose plastic still attached on the back side.</li>
+      </ol>
+      <div class="callout step-note"><strong>Inspection standard</strong><br>Do not install the camera until all four holes are fully open.</div>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="figure-card"><img src="assets/img/deck/task3-fig3a.png" alt="Task 3 Figure 3a clearing mounting holes"><div class="figure-caption">Fig. 3a. Verify that each camera hole is fully clear before installing the camera.</div></div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 2. Prepare the camera</h4>
+      <ol class="compact-list" start="5">
+        <li>Retrieve the camera.</li>
+        <li>Surrender the lens adjustment tool to a faculty member.</li>
+        <li>Gently release the black cable retainer on the camera.</li>
+        <li>Remove the white ribbon cable from the camera and surrender it to a faculty member.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="figure-card"><img src="assets/parts/camera.webp" alt="Raspberry Pi camera module"><div class="figure-caption">Camera module used in this task.</div></div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 3. Install the camera and ribbon cable</h4>
+      <ol class="compact-list" start="9">
+        <li>Install the camera into the camera/GPS mount in the orientation shown in Fig. 3b.</li>
+        <li>Make sure the black cable retainer faces the rear of the mount.</li>
+        <li>Make sure the camera PCB sits flush against the plastic mount so the lens seats properly in the square front opening.</li>
+        <li>Use the needle-nose pliers to hold each M2 × 6 mm screw in place while you start it with the 1.5 mm Allen key.</li>
+        <li>It is usually easiest to start with one of the rear holes, then install the remaining screws in a crisscross pattern.</li>
+        <li>Install the wide 15-pin end of the 1.5-inch camera cable into the camera, then gently close the retainer.</li>
+        <li>The exposed metal contacts on the ribbon cable must face downward, away from the black plastic retainer.</li>
+      </ol>
+      <div class="ok-box step-note"><strong>Time-saving option</strong><br>If time is limited, two screws installed on opposite corners are acceptable. Four screws are preferred when time allows.</div>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="figure-card"><img src="assets/img/deck/task3-fig3b.png" alt="Task 3 Figure 3b mounting camera"><div class="figure-caption">Fig. 3b. Use this figure to confirm camera orientation and screw direction.</div></div>
+    </div>
+  </section>
+</div>
 <h3>Common errors</h3>
-<ul class="error-list"><li>Installing the bottom deck upside down. The raised metal rings must face upward.</li><li>Mixing the stack screws in with the other frame screws and then not finding them later.</li><li>Starting to tighten before all arms and center plates are aligned.</li><li>Using the wrong screws from the frame hardware bags.</li></ul>
+<ul class="error-list"><li>Installing the camera before clearing all four holes.</li><li>Reinstalling the surrendered white ribbon cable instead of the correct 1.5-inch cable.</li><li>Orienting the camera so the cable retainer faces the wrong direction.</li><li>Installing the ribbon cable backward so the contacts face the retainer instead of away from it.</li><li>Using excessive force when seating the camera or tightening the screws.</li></ul>
 </section>
 <div class="footer" data-site-footer></div>
 </main>
