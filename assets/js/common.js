@@ -18,7 +18,8 @@ const GLOSSARY = {
       "connector, latch, 4-pin header",
       "4-pin header",
       "latch-style 4-pin header",
-      "Connector, latch, 4-pin header"
+      "Connector, latch, 4-pin header",
+      "4-pin latch header"
     ]
   },
   "sipswitch": {
@@ -29,7 +30,8 @@ const GLOSSARY = {
     "aliases": [
       "Switch, SIP",
       "SIP switch",
-      "switch, SIP"
+      "switch, SIP",
+      "single in-line package (SIP) switch"
     ]
   },
   "cammodule": {
@@ -254,10 +256,9 @@ const GLOSSARY = {
     "img": "assets/fastener-previews/91292A831.png",
     "placeholder": "M2 × 6 mm socket-head screw",
     "aliases": [
-      "M2 × 6 mm socket-head screw",
       "M2 x 6 mm socket-head screw",
       "M2 × 6 mm screw",
-      "M2 x 6 mm screw"
+      "M2 × 6 mm"
     ]
   },
   "m25x8": {
@@ -266,10 +267,9 @@ const GLOSSARY = {
     "img": "assets/fastener-previews/91292A012.png",
     "placeholder": "M2.5 × 8 mm socket-head screw",
     "aliases": [
+      "M2.5 × 8 mm screw",
       "M2.5 × 8 mm socket-head screw",
-      "M2.5 x 8 mm socket-head screw",
-      "M2.5 × 8 mm mounting screw",
-      "M2.5 x 8 mm mounting screw",
+      "M2.5 x 8 mm",
       "M2.5 mounting screws"
     ]
   },
@@ -280,9 +280,9 @@ const GLOSSARY = {
     "placeholder": "M3 × 10 mm flat-head screw",
     "aliases": [
       "M3 × 10 mm flat-head countersunk screw",
-      "M3 x 10 mm flat-head countersunk screw",
       "M3 × 10 mm flat-head screw",
-      "M3 x 10 mm flat-head screw",
+      "M3 × 10 mm screw",
+      "M3 × 10 mm",
       "countersunk screw",
       "countersunk screws"
     ]
@@ -294,9 +294,8 @@ const GLOSSARY = {
     "placeholder": "M3 × 12 mm socket-head screw",
     "aliases": [
       "M3 × 12 mm socket-head screw",
-      "M3 x 12 mm socket-head screw",
       "M3 × 12 mm screw",
-      "M3 x 12 mm screw"
+      "M3 × 12 mm"
     ]
   },
   "m3x25standoff": {
