@@ -483,14 +483,14 @@ const TEAM_ROSTER = [
   "Dominic Larkin, USMA EECS RRC, Oversight",
   "Arthur Chu, MIT Lincoln Laboratory, Project Manager",
   "Armaun Zargari, ORAU Fellow, Design Lead",
-  "Jacob Drone, CL 2028, Cadet-in-charge",
-  "Parker Brown, CL 2028, Assistant Cadet-in-charge",
-  "Raj Fanaswala, CL 2028, Assistant Cadet-in-charge",
-  "Maya Medrano, CL 2028",
-  "Radhati Srisukwattananan, CL 2028",
-  "Xavier Guild, CL 2029",
-  "Maxwell Sheng, CL 2029",
-  "Max Wasserman, CL 2029"
+  "Jacob Drone, USMA 2028, Cadet-in-charge",
+  "Parker Brown, USMA 2028, Assistant Cadet-in-charge",
+  "Raj Fanaswala, USMA 2028, Assistant Cadet-in-charge",
+  "Maya Medrano, USMA 2028",
+  "Radhati Srisukwattananan, USMA 2028",
+  "Xavier Guild, USMA 2029",
+  "Maxwell Sheng, USMA 2029",
+  "Max Wasserman, USMA 2029"
 ];
 
 const TASK_SEQUENCE = [
