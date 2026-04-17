@@ -98,7 +98,7 @@ const GLOSSARY = {
   "framekit": {
     "title": "Frame kit",
     "subtitle": "Lower frame structure",
-    "img": "assets/img/frame_identification.png",
+    "img": "assets/parts/frame.webp",
     "aliases": [
       "frame kit",
       "lower frame",
@@ -512,6 +512,8 @@ const TASK_SEQUENCE = [
   "task1","task2","task3","task4","task5"
 ];
 
+const PROGRESS_KEY = "hamr2-progress-v2";
+
 function currentFilename() {
   const path = decodeURIComponent(window.location.pathname || "");
   return path.split("/").pop() || "index.html";
@@ -667,6 +669,60 @@ function renderSiteNav() {
   nav.innerHTML = links.join("");
 }
 
+function progressSummary(progress = getProgress()) {
+  const completed = TASK_SEQUENCE.filter(id => progress[id]).length;
+  const total = TASK_SEQUENCE.length;
+  const percent = total ? Math.round((completed / total) * 100) : 0;
+  return { completed, total, percent };
+}
+
+function renderProgressPanel() {
+  const nav = document.querySelector('[data-site-nav]');
+  if (!nav) return;
+  const filename = currentFilename();
+  const currentTask = getCurrentTaskMeta();
+  const isHomepage = filename === 'index.html';
+  if (!isHomepage && !currentTask) return;
+
+  let panel = document.querySelector('[data-progress-panel]');
+  if (!panel) {
+    panel = document.createElement('section');
+    panel.className = 'progress-panel';
+    panel.dataset.progressPanel = '';
+    if (currentTask) {
+      const strip = document.querySelector('[data-task-strip]');
+      if (strip) {
+        strip.insertAdjacentElement('afterend', panel);
+      } else {
+        nav.insertAdjacentElement('afterend', panel);
+      }
+    } else {
+      nav.insertAdjacentElement('afterend', panel);
+    }
+  }
+
+  const progress = getProgress();
+  const { completed, total, percent } = progressSummary(progress);
+  const currentIndex = currentTask ? TASK_SEQUENCE.indexOf(currentTask.id) + 1 : null;
+  const title = currentTask ? `Task progress · Task ${currentIndex} of ${total}` : 'Build progress';
+  const subtitle = currentTask
+    ? `${completed} of ${total} published tasks complete.`
+    : `${completed} of ${total} published tasks complete.`;
+
+  panel.innerHTML = `
+    <div class="progress-panel-head">
+      <div>
+        <div class="kicker">${title}</div>
+        <div class="progress-summary-text">${subtitle}</div>
+      </div>
+      <div class="progress-count">${completed} / ${total}</div>
+    </div>
+    <div class="progress-track" aria-label="Build progress">
+      <div class="progress-fill" style="width:${percent}%"></div>
+    </div>
+  `;
+}
+
 function renderTaskStrip() {
   const host = document.querySelector('[data-task-strip]');
   const task = getCurrentTaskMeta();
@@ -685,9 +741,9 @@ function renderTaskStrip() {
   if (!ready && blockerLinks) {
     sub = `<span>Before you start, finish: ${blockerLinks}</span>`;
   } else if (done && next) {
-    sub = `<span>This task is marked complete on this device.</span><span>Next up: <a href="${next.slug}.html">${escapeHtml(next.title)}</a></span>`;
+    sub = `<span>This task is marked complete.</span><span>Next up: <a href="${next.slug}.html">${escapeHtml(next.title)}</a></span>`;
   } else if (done) {
-    sub = `<span>This task is marked complete on this device.</span><span>Later tasks are intentionally hidden while the manual is being revised.</span>`;
+    sub = `<span>This task is marked complete.</span><span>Later tasks are intentionally hidden while the manual is being revised.</span>`;
   } else if (next) {
     sub = `<span>When you finish this page, continue to <a href="${next.slug}.html">${escapeHtml(next.title)}</a>.</span>`;
   } else {
@@ -722,6 +778,48 @@ function getProgress() {
 
 function setProgress(progress) {
   localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+}
+
+function bindResetProgressButton() {
+  const resetBtn = document.querySelector('[data-reset-progress]');
+  if (!resetBtn || resetBtn.dataset.bound === 'true') return;
+  resetBtn.dataset.bound = 'true';
+  resetBtn.addEventListener('click', () => {
+    localStorage.removeItem(PROGRESS_KEY);
+    refreshProgressUi();
+  });
+}
+
+function renderTaskProgressControl() {
+  const box = document.querySelector('.progress-box');
+  if (!box) return;
+  const marker = box.querySelector('[data-task-complete]');
+  const taskId = box.dataset.taskId || marker?.dataset.taskComplete;
+  if (!taskId) return;
+  box.dataset.taskId = taskId;
+
+  const done = !!getProgress()[taskId];
+  box.innerHTML = `
+    <button class="task-complete-button${done ? ' done' : ''}" type="button" data-toggle-task="${taskId}" aria-pressed="${done}">${done ? 'Completed' : 'Mark task complete'}</button>`;
+
+  const button = box.querySelector('[data-toggle-task]');
+  if (!button) return;
+  button.addEventListener('click', () => {
+    const progress = getProgress();
+    progress[taskId] = !progress[taskId];
+    if (!progress[taskId]) delete progress[taskId];
+    setProgress(progress);
+    refreshProgressUi();
+  });
+}
+
+function refreshProgressUi() {
+  renderSiteNav();
+  renderTaskStrip();
+  renderProgressPanel();
+  renderTaskProgressControl();
+  renderIndexStatus();
+  bindResetProgressButton();
 }
 
 function placeholderSvg(title, subtitle) {
@@ -871,7 +969,7 @@ function renderIndexStatus() {
     card.classList.toggle("ready", ready && !done);
     card.classList.toggle("blocked", !ready && !done);
     if (done) {
-      status.textContent = "Done on this device";
+      status.textContent = "Done";
       status.className = "status-chip status-done";
     } else if (ready) {
       status.textContent = "Ready now";
@@ -884,34 +982,116 @@ function renderIndexStatus() {
 }
 
 function initTaskProgress() {
-  const progress = getProgress();
-  const checkbox = document.querySelector("[data-task-complete]");
-  if (!checkbox) return;
-  const taskId = checkbox.dataset.taskComplete;
-  checkbox.checked = !!progress[taskId];
-  checkbox.addEventListener("change", () => {
-    const updated = getProgress();
-    updated[taskId] = checkbox.checked;
-    setProgress(updated);
-    const status = document.querySelector("[data-complete-label]");
-    if (status) status.textContent = checkbox.checked ? "Marked complete on this device" : "Not marked complete";
-  });
-  const resetBtn = document.querySelector("[data-reset-progress]");
-  if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
-      localStorage.removeItem(PROGRESS_KEY);
-      location.reload();
+  renderTaskProgressControl();
+  bindResetProgressButton();
+}
+
+function ensureImageModal() {
+  let modal = document.getElementById('imageModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'imageModal';
+    modal.className = 'image-modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-label', 'Enlarged image');
+    modal.innerHTML = `
+      <div class="image-modal-dialog">
+        <button id="imageModalClose" class="image-modal-close" type="button" aria-label="Close enlarged image">×</button>
+        <img id="imageModalImg" src="" alt="">
+        <div id="imageModalCaption" class="image-modal-caption"></div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+  return modal;
+}
+
+function buildLightboxCaption(img) {
+  if (img.dataset.lightboxCaption) return img.dataset.lightboxCaption;
+  const figureCard = img.closest('.figure-card');
+  if (figureCard) {
+    const caption = figureCard.querySelector('.figure-caption');
+    if (caption && caption.textContent.trim()) return caption.textContent.trim();
+  }
+  const row = img.closest('tr');
+  if (row) {
+    const itemName = row.querySelector('.item-name')?.textContent?.trim() || '';
+    const hint = row.querySelector('.desc-cell')?.textContent?.trim() || '';
+    if (itemName && hint) return `${itemName} — ${hint}`;
+    if (itemName) return itemName;
+  }
+  return img.alt || '';
+}
+
+function openImageModal(img) {
+  if (typeof window.closeRowHoverPreview === 'function') {
+    try { window.closeRowHoverPreview(); } catch (e) {}
+  }
+  const modal = ensureImageModal();
+  const modalImg = modal.querySelector('#imageModalImg');
+  const modalCaption = modal.querySelector('#imageModalCaption');
+  const modalClose = modal.querySelector('#imageModalClose');
+  modalImg.src = img.currentSrc || img.src;
+  modalImg.alt = img.alt || 'Image';
+  modalCaption.textContent = buildLightboxCaption(img);
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  modalClose.focus();
+}
+
+function closeImageModal() {
+  const modal = document.getElementById('imageModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  const modalImg = modal.querySelector('#imageModalImg');
+  if (modalImg) modalImg.src = '';
+  document.body.style.overflow = '';
+}
+
+function initImageLightbox() {
+  const modal = ensureImageModal();
+  const closeBtn = modal.querySelector('#imageModalClose');
+  if (closeBtn && closeBtn.dataset.bound !== 'true') {
+    closeBtn.dataset.bound = 'true';
+    closeBtn.addEventListener('click', closeImageModal);
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeImageModal();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && modal.classList.contains('open')) closeImageModal();
     });
   }
+
+  const images = Array.from(document.querySelectorAll('main img')).filter(img => {
+    return !img.closest('.term-preview, .hover-preview, .image-modal, .topnav, .footer');
+  });
+
+  images.forEach(img => {
+    if (img.dataset.lightboxBound === 'true') return;
+    img.dataset.lightboxBound = 'true';
+    img.classList.add('enlargeable-image');
+    if (!img.hasAttribute('tabindex')) img.tabIndex = 0;
+    img.addEventListener('click', () => openImageModal(img));
+    img.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openImageModal(img);
+      }
+    });
+  });
+
+  window.HAMR = Object.assign(window.HAMR || {}, { openImageModal, closeImageModal });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   ensureSharedUiStyles();
-  renderSiteNav();
-  renderTaskStrip();
+  refreshProgressUi();
   renderFooter();
   document.querySelectorAll(".annotate-terms").forEach(annotateTerms);
   initTermPreview();
   initTaskProgress();
-  renderIndexStatus();
+  initImageLightbox();
 });

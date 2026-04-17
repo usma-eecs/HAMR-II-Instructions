@@ -225,3 +225,137 @@ a { color: var(--accent); }
   .instruction-block { grid-template-columns: 1fr; }
   .instruction-block .figure-grid-2 { grid-template-columns: 1fr; }
 }
+
+
+.progress-panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+  margin: 0 0 18px 0;
+}
+.progress-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.progress-summary-text {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.progress-count {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.progress-track {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e8edf6;
+  border: 1px solid var(--line);
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 180ms ease;
+}
+.progress-box {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.task-complete-button {
+  appearance: none;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: white;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.task-complete-button.done {
+  background: #eef7f0;
+  color: var(--ok-fg);
+  border-color: #b9dfc0;
+}
+.task-complete-button:hover,
+.task-complete-button:focus-visible {
+  transform: translateY(-1px);
+}
+.enlargeable-image {
+  cursor: zoom-in;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+.enlargeable-image:hover,
+.enlargeable-image:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(23, 32, 51, 0.14);
+}
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1600;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: rgba(12, 17, 27, 0.84);
+}
+.image-modal.open {
+  display: flex;
+}
+.image-modal-dialog {
+  position: relative;
+  width: min(1200px, 100%);
+  max-height: 100%;
+  background: white;
+  border-radius: 18px;
+  padding: 22px 22px 16px 22px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32);
+}
+.image-modal img {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 150px);
+  object-fit: contain;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+.image-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(23, 32, 51, 0.08);
+  color: var(--accent);
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.image-modal-caption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+@media (max-width: 700px) {
+  .image-modal {
+    padding: 14px;
+  }
+  .image-modal-dialog {
+    padding: 18px 18px 14px 18px;
+  }
+}
