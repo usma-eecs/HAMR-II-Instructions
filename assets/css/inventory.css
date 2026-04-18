@@ -1,0 +1,342 @@
+/* Shared inventory-page styling for the Parts Guide and Tools Inventory.
+   Shared site-wide layout, navigation, buttons, progress UI, and image modal live in common.css. */
+
+    .stats {
+      max-width: 760px;
+    }
+
+    .stat .value {
+      font-size: 1.8rem;
+    }
+
+    .stat .sub {
+      font-size: 0.9rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .search {
+      flex: 1 1 320px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--ink);
+      font-size: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .note {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--muted);
+      box-shadow: var(--shadow);
+    }
+
+    .table-wrap {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    #inventoryTable {
+      width: 100%;
+      min-width: 1080px;
+      table-layout: fixed;
+      border-collapse: collapse;
+      --kit-overflow-width: 110px;
+      /* Per System only */
+    }
+
+    #inventoryTable col.col-photo {
+      width: 170px;
+    }
+
+    #inventoryTable col.col-item {
+      width: 250px;
+    }
+
+    #inventoryTable col.col-desc {
+      width: 44%;
+      overflow: visible;
+    }
+
+    #inventoryTable col.col-per {
+      width: 110px;
+    }
+
+    #inventoryTable col.col-ref {
+      width: 150px;
+    }
+
+    #inventoryTable thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #edf2f8;
+      color: var(--accent);
+      font-size: 0.9rem;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      padding: 14px 12px;
+      white-space: nowrap;
+    }
+
+    #inventoryTable tbody td {
+      border-top: 1px solid var(--line);
+      padding: 12px;
+      vertical-align: top;
+      font-size: 0.94rem;
+      background: white;
+    }
+
+    #inventoryTable tbody tr:hover td {
+      background: #fbfcfe;
+    }
+
+    .photo-cell {
+      width: 170px;
+    }
+
+    .photo {
+      display: block;
+      width: 128px;
+      height: 80px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--soft);
+      cursor: zoom-in;
+    }
+
+    .photo:focus {
+      outline: 3px solid rgba(90, 124, 168, 0.35);
+      outline-offset: 2px;
+    }
+
+    .photo-hint {
+      display: none;
+    }
+
+    .kit-details {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--soft);
+      position: relative;
+      overflow: visible;
+      box-sizing: border-box;
+      width: calc(100% + var(--kit-overflow-width));
+      margin-right: calc(-1 * var(--kit-overflow-width));
+      z-index: 1;
+    }
+
+    .kit-details summary {
+      cursor: pointer;
+      padding: 10px 12px;
+      font-weight: 700;
+      color: var(--accent);
+      list-style: none;
+    }
+
+    .kit-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .kit-details summary::after {
+      content: 'Show';
+      float: right;
+      color: var(--accent-2);
+      font-weight: 400;
+    }
+
+    .kit-details[open] {
+      z-index: 20;
+    }
+
+    .kit-details[open] summary::after {
+      content: 'Hide';
+    }
+
+    .kit-details-body {
+      padding: 0 12px 12px 12px;
+      overflow-x: auto;
+    }
+
+    .kit-table {
+      width: 100%;
+      min-width: 0;
+      border-collapse: collapse;
+      margin-top: 2px;
+      font-size: 0.85rem;
+    }
+
+    .kit-table thead th {
+      position: static;
+      background: transparent;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      border-top: 0;
+      padding: 8px;
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .kit-table tbody td {
+      background: transparent;
+      padding: 8px;
+      border-top: 1px solid var(--line);
+    }
+
+    .kit-table tbody tr:first-child td {
+      border-top: 0;
+    }
+
+    .kit-table tbody tr[data-preview-src] {
+      cursor: help;
+    }
+
+    .kit-table tbody tr[data-preview-src]:hover td {
+      background: #f7f9fc;
+    }
+
+    .hover-preview {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 220px;
+      display: none;
+      pointer-events: none;
+      z-index: 1200;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 18px 36px rgba(23, 32, 51, 0.18);
+      padding: 10px;
+    }
+
+    .hover-preview.open {
+      display: block;
+    }
+
+    .hover-preview img {
+      display: block;
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .hover-preview .title {
+      margin-top: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .hover-preview .meta {
+      margin-top: 3px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .kit-caption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .item-name {
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .item-meta {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .desc-cell {
+      position: relative;
+      min-width: 0;
+      overflow: visible;
+      color: #273349;
+      z-index: 1;
+    }
+
+    .center {
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1200px) {
+      .kit-details {
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .stats {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 14px;
+      }
+
+      .hero {
+        padding: 22px;
+        border-radius: 16px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+
+      .table-wrap,
+      .search,
+      .note,
+      .stat,
+      .hero {
+        box-shadow: none;
+      }
+
+      .controls {
+        display: none;
+      }
+
+      #inventoryTable a.link-button {
+        color: var(--ink);
+        background: transparent;
+        border: 1px solid var(--line);
+      }
+    }

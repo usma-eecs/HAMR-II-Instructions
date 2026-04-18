@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAMR II Builder Tools Inventory</title>
+  <link rel="stylesheet" href="assets/css/common.css">
+  <link rel="stylesheet" href="assets/css/inventory.css">
+  <link rel="icon" type="image/png" href="assets/img/rrc.png">
+</head>
+
+<body data-page="tools-inventory.html">
+  <main class="page">
+    <section class="hero">
+      <h1>HAMR II Builder Tools Inventory</h1>
+      <p>
+        Use this page to identify the issued tools and bench-support items used during the published HAMR II build tasks.
+        Every image can be clicked to enlarge for easier tool identification at the bench.
+      </p>
+    </section>
+    <nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+    <section class="stats" aria-label="tools summary">
+      <div class="stat">
+        <div class="label">Distinct Tool Types</div>
+        <div class="value">12</div>
+        <div class="sub">Hand tools, safety items, and bench-support items on this page.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Issued Quantity</div>
+        <div class="value">14</div>
+        <div class="sub">Total quantity listed, counting duplicate Allen keys.</div>
+      </div>
+    </section>
+
+    <div class="controls">
+      <input id="searchBox" class="search" type="search" placeholder="Search by tool name or function"
+        aria-label="Search tools table">
+    </div>
+
+    <section class="table-wrap">
+      <div class="table-scroll">
+        <table id="inventoryTable">
+          <colgroup>
+            <col class="col-photo">
+            <col class="col-item">
+            <col class="col-desc">
+            <col class="col-per">
+            <!--<col class="col-ref">-->
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Picture</th>
+              <th>Item</th>
+              <th>Short Description</th>
+              <th>Per System</th>
+              <!--<th>Reference</th>-->
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-search="M1.5 Allen key  Used with M2 socket-head screws, especially on the camera mount.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/allen15.png" alt="M1.5 Allen key">
+                <div class="photo-hint">assets/img/allen15.png</div>
+              </td>
+              <td>
+                <div class="item-name">M1.5 Allen key</div>
+                
+              </td>
+              <td class="desc-cell">Used with M2 socket-head screws, especially on the camera mount.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Issued tool</span></td>-->
+            </tr>
+            <tr data-search="M2 Allen key  Used on the lower-frame screws and other M3 frame hardware that takes the 2.0 mm driver.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/allen20.png" alt="M2 Allen key">
+                <div class="photo-hint">assets/img/allen20.png</div>
+              </td>
+              <td>
+                <div class="item-name">M2 Allen key</div>
+                
+              </td>
+              <td class="desc-cell">Used on the lower-frame screws and other M3 frame hardware that takes the 2.0 mm driver.</td>
+              <td class="center">2</td>
+              <!--<td><span class='muted'>Issued tool</span></td>-->
+            </tr>
+            <tr data-search="M2.5 Allen key  Used with M3 socket-head screws such as the GPS mounting hardware.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/allen25.png" alt="M2.5 Allen key">
+                <div class="photo-hint">assets/img/allen25.png</div>
+              </td>
+              <td>
+                <div class="item-name">M2.5 Allen key</div>
+                
+              </td>
+              <td class="desc-cell">Used with M3 socket-head screws such as the GPS mounting hardware.</td>
+              <td class="center">2</td>
+              <!--<td><span class='muted'>Issued tool</span></td>-->
+            </tr>
+            <tr data-search="M5.5 nut driver  Used on M3 nylon-insert lock nuts in the GPS and camera task.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/driver55.png" alt="M5.5 nut driver">
+                <div class="photo-hint">assets/img/driver55.png</div>
+              </td>
+              <td>
+                <div class="item-name">M5.5 nut driver</div>
+                
+              </td>
+              <td class="desc-cell">Used on M3 nylon-insert lock nuts in the GPS and camera task.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Issued tool</span></td>-->
+            </tr>
+            <tr data-search="M8 nut driver  Larger hex nut driver kept with the issued tool set.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/m8driver.png" alt="M8 nut driver">
+                <div class="photo-hint">assets/img/m8driver.png</div>
+              </td>
+              <td>
+                <div class="item-name">M8 nut driver</div>
+                
+              </td>
+              <td class="desc-cell">Larger hex nut driver kept with the issued tool set.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Issued tool</span></td>-->
+            </tr>
+            <tr data-search="Pliers  General-purpose pliers for holding small hardware and removing pushed-out print debris.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/pliers.jpg" alt="Pliers">
+                <div class="photo-hint">assets/img/pliers.jpg</div>
+              </td>
+              <td>
+                <div class="item-name">Pliers</div>
+                
+              </td>
+              <td class="desc-cell">General-purpose pliers for holding small hardware and removing pushed-out print debris.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Issued tool</span></td>-->
+            </tr>
+            <tr data-search="Snips  Side cutters for trimming wire, zip ties, or other light cut tasks when directed.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/shear-cutter.jpg" alt="Snips">
+                <div class="photo-hint">assets/img/shear-cutter.jpg</div>
+              </td>
+              <td>
+                <div class="item-name">Snips</div>
+                
+              </td>
+              <td class="desc-cell">Side cutters for trimming wire, zip ties, or other light cut tasks when directed.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Issued tool</span></td>-->
+            </tr>
+            <tr data-search="Eye protection  Required before soldering or any task that can shed debris.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/eyepro.png" alt="Eye protection">
+                <div class="photo-hint">assets/img/eyepro.png</div>
+              </td>
+              <td>
+                <div class="item-name">Eye protection</div>
+                
+              </td>
+              <td class="desc-cell">Required before soldering or any task that can shed debris.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Safety item</span></td>-->
+            </tr>
+            <tr data-search="Soldering station  Bench soldering setup used to install the Raspberry Pi header and SIP switch.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/soldering-station.jpg" alt="Soldering station">
+                <div class="photo-hint">assets/img/soldering-station.jpg</div>
+              </td>
+              <td>
+                <div class="item-name">Soldering station</div>
+                
+              </td>
+              <td class="desc-cell">Bench soldering setup used to install the Raspberry Pi header and SIP switch.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Bench supply</span></td>-->
+            </tr>
+            <tr data-search="Roll of solder  Consumable solder wire for making the Raspberry Pi through-hole joints.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/solder.webp" alt="Roll of solder">
+                <div class="photo-hint">assets/img/solder.webp</div>
+              </td>
+              <td>
+                <div class="item-name">Roll of solder</div>
+                
+              </td>
+              <td class="desc-cell">Consumable solder wire for making the Raspberry Pi through-hole joints.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Bench supply</span></td>-->
+            </tr>
+            <tr data-search="microSD card  Classroom-issued storage card used when directed during the Raspberry Pi workflow.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/micro_sd_adapter.png" alt="microSD card">
+                <div class="photo-hint">assets/img/micro_sd_adapter.png</div>
+              </td>
+              <td>
+                <div class="item-name">microSD card</div>
+                
+              </td>
+              <td class="desc-cell">Classroom-issued storage card used when directed during the Raspberry Pi workflow.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Bench supply</span></td>--> 
+            </tr>
+            <tr data-search="Helping hand  Light holding fixture for stabilizing small parts during bench work.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/3rd-hand.jpg" alt="Helping hand">
+                <div class="photo-hint">assets/img/3rd-hand.jpg</div>
+              </td>
+              <td>
+                <div class="item-name">Helping hand</div>
+                
+              </td>
+              <td class="desc-cell">Light holding fixture for stabilizing small parts during bench work.</td>
+              <td class="center">1</td>
+              <!--<td><span class='muted'>Bench supply</span></td>-->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="footer" data-site-footer></div>
+  </main>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/inventory.js"></script>
+</body>
+
+</html>

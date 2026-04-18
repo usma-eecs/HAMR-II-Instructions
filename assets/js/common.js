@@ -265,6 +265,16 @@ const GLOSSARY = {
       "USMAKIT-01"
     ]
   },
+  "m25x6roundhex": {
+    "title": "M2.5 × 6 mm round-head hex screw",
+    "subtitle": "ARK ESC mounting screw",
+    "img": "assets/parts/screw-m2_5x6-round-hex-placeholder.svg",
+    "aliases": [
+      "M2.5 × 6 mm round-head hex screw",
+      "M2.5 x 6 mm round headed hex screw",
+      "ESC mounting screw"
+    ]
+  },
   "m2x6": {
     "title": "M2 × 6 mm socket-head screw",
     "subtitle": "Camera fastener",
@@ -422,6 +432,16 @@ const GLOSSARY = {
       "M8 nut driver"
     ]
   },
+  "snips": {
+    "title": "Snips",
+    "subtitle": "Light cutting tool",
+    "img": "assets/img/snips-placeholder.svg",
+    "placeholder": "Snips",
+    "aliases": [
+      "snips",
+      "side cutters"
+    ]
+  },
   "pliers": {
     "title": "Pliers",
     "subtitle": "Light holding / pull-through tool",
@@ -500,7 +520,9 @@ const GLOSSARY = {
     "aliases": [
       "GPS/compass cable",
       "6-wire GPS cable",
-      "GPS cable"
+      "GPS cable",
+      "6-wire GPS/compass cable",
+      "GPS/compass cable"
     ],
     "damper": {
       "title": "Vibration damper",
@@ -687,6 +709,7 @@ function renderSiteNav() {
   }
 
   links.push(`<a href="parts-guide.html" class="secondary${filename === "parts-guide.html" ? ' nav-current' : ''}"${filename === "parts-guide.html" ? ' aria-current="page"' : ''}>Parts Guide</a>`);
+  links.push(`<a href="tools-inventory.html" class="secondary${filename === "tools-inventory.html" ? ' nav-current' : ''}"${filename === "tools-inventory.html" ? ' aria-current="page"' : ''}>Tools Inventory</a>`);
   links.push(progressReset);
   nav.innerHTML = links.join("");
 }
@@ -1029,23 +1052,42 @@ function ensureImageModal() {
   return modal;
 }
 
+function getDescCellCaption(descCell) {
+  if (!descCell) return '';
+
+  const parts = [];
+
+  for (const node of descCell.childNodes) {
+    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'DETAILS') {
+      break;
+    }
+    parts.push(node.textContent || '');
+  }
+
+  return parts.join(' ').replace(/\s+/g, ' ').trim();
+}
+
 function buildLightboxCaption(img) {
   if (img.dataset.lightboxCaption) return img.dataset.lightboxCaption;
+
   const figureCard = img.closest('.figure-card');
   if (figureCard) {
     const caption = figureCard.querySelector('.figure-caption');
     if (caption && caption.textContent.trim()) return caption.textContent.trim();
   }
+
   const row = img.closest('tr');
   if (row) {
     const itemName = row.querySelector('.item-name')?.textContent?.trim() || '';
-    const hint = row.querySelector('.desc-cell')?.textContent?.trim() || '';
+    const descCell = row.querySelector('.desc-cell');
+    const hint = getDescCellCaption(descCell);
+
     if (itemName && hint) return `${itemName} — ${hint}`;
     if (itemName) return itemName;
   }
+
   return img.alt || '';
 }
-
 function openImageModal(img) {
   if (typeof window.closeRowHoverPreview === 'function') {
     try { window.closeRowHoverPreview(); } catch (e) {}

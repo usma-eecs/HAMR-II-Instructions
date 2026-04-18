@@ -149,7 +149,7 @@
       z-index: 1000;
     }
 
-    .image-modal.open {
+    /*.image-modal.open {
       display: flex;
     }
 
@@ -192,7 +192,7 @@
       color: rgba(255, 255, 255, 0.92);
       text-align: center;
       font-size: 0.95rem;
-    }
+    }*/
 
     .photo-hint {
       display: none;
@@ -423,7 +423,7 @@
     <section class="stats" aria-label="build summary">
       <div class="stat">
         <div class="label">Parts Per System</div>
-        <div class="value">19</div>
+        <div class="value">21</div>
         <div class="sub">One complete quadcopter, counting four motors.</div>
       </div>
       <div class="stat">
@@ -552,6 +552,21 @@
                   rel='noopener noreferrer'>Product page</a></td>
             </tr>
             <tr
+              data-search="6-wire GPS/compass cable ARK cable GPS compass lead harness Connects the ARK SAM GPS module to the flight controller and carries GPS and compass signals.">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/gps-cable.png"
+                  alt="6-wire GPS/compass cable">
+                <div class="photo-hint">assets/parts/gps-compass-cable-placeholder.svg</div>
+              </td>
+              <td>
+                <div class="item-name">6-wire GPS/compass cable</div>
+                <div class="item-meta">ARK</div>
+              </td>
+              <td class="desc-cell">Connects the ARK SAM GPS module to the flight controller and carries both GPS and compass signals.</td>
+              <td class="center">1</td>
+              <td><span class='muted'>Shipped with GPS module</span></td>
+            </tr>
+            <tr
               data-search="ESC ARK ARK 4IN1 ESC CONS Four-in-one electronic speed controller. It converts battery power into controlled three-phase output for the four brushless motors.">
               <td class="photo-cell">
                 <img class="photo" tabindex="0" src="assets/parts/esc.jpg"
@@ -568,6 +583,21 @@
               <td class="center">1</td>
               <td><a class='link-button' href='https://arkelectron.com/product/ark-4in1-esc-cons/' target='_blank'
                   rel='noopener noreferrer'>Product page</a></td>
+            </tr>
+            <tr
+              data-search="M2.5 x 6 mm round-head hex screw ARK ESC mounting screw fasten the ESC short mounting hardware">
+              <td class="photo-cell">
+                <img class="photo" tabindex="0" src="assets/img/m2506round.png"
+                  alt="M2.5 × 6 mm round-head hex screw">
+                <div class="photo-hint">assets/parts/screw-m2_5x6-round-hex-placeholder.svg</div>
+              </td>
+              <td>
+                <div class="item-name">M2.5 × 6 mm round-head hex screw</div>
+                <div class="item-meta">ARK</div>
+              </td>
+              <td class="desc-cell">Short mounting screw used to fasten the ESC to the frame stack.</td>
+              <td class="center">2</td>
+              <td><span class='muted'>Shipped with ESC</span></td>
             </tr>
             <tr
               data-search="Connectors, battery Palm Beach Bots XT60 Connector (Male) with Pigtail Main battery power lead. The XT60 connector carries battery power into the aircraft power system.">
@@ -743,10 +773,9 @@
                 <div class="item-meta">NSK Industries · USMAKIT-01</div>
               </td>
               <td class="desc-cell">
-                Assorted screws, nuts, standoffs, and small hardware used across the build. Open the list below when you
-                reach each subassembly step.
+                Assorted screws, nuts, standoffs, and small hardware used across the build.
                 <details class="kit-details">
-                  <summary>Fastener kit contents by build step</summary>
+                  <summary>Fastener kit contents by subkit</summary>
                   <div class="kit-details-body">
                     <div class="kit-caption">One kit contains 40 total pieces.</div>
                     <table class="kit-table" aria-label="Fastener kit contents">
@@ -884,24 +913,13 @@
   </main>
 
   <script src="assets/js/common.js"></script>
+  <script src="assets/js/inventory.js"></script>
   <script>
-    const searchBox = document.getElementById('searchBox');
-    const rows = Array.from(document.querySelectorAll('#inventoryTable tbody tr'));
     const rowHoverPreview = document.getElementById('rowHoverPreview');
     const rowHoverPreviewImg = document.getElementById('rowHoverPreviewImg');
     const rowHoverPreviewTitle = document.getElementById('rowHoverPreviewTitle');
     const rowHoverPreviewMeta = document.getElementById('rowHoverPreviewMeta');
     const fastenerRows = Array.from(document.querySelectorAll('.kit-table tbody tr[data-preview-src]'));
-
-    searchBox.addEventListener('input', () => {
-      const q = searchBox.value.trim().toLowerCase();
-      rows.forEach(row => {
-        const hay = row.dataset.search.toLowerCase();
-        row.style.display = hay.includes(q) ? '' : 'none';
-      });
-      closeRowHoverPreview();
-    });
-
 
     function positionHoverPreview(event) {
       if (!rowHoverPreview.classList.contains('open')) return;
