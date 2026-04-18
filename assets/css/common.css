@@ -134,8 +134,9 @@ a { color: var(--accent); }
 .step-list li, .error-list li, .checklist li { margin: 8px 0; }
 .error-list li { color: #6b2737; }
 .figure-grid-2 { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin-top: 14px; }
+.task-card { display:flex; flex-direction:column; }
 .task-card h3 { margin: 2px 0 6px 0; font-size: 1.15rem; color: var(--accent); }
-.task-card .actions { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
+.task-card .actions { margin-top: auto; padding-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
 .task-card.ready { border-color: #b9dfc0; }
 .task-card.blocked { border-color: #f0d9a1; }
 .task-card.done { border-color: #b9dfc0; background: #f7fff8; }

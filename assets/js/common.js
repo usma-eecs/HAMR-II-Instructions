@@ -2,7 +2,7 @@ const GLOSSARY = {
   "rpi": {
     "title": "Raspberry Pi Zero 2 W",
     "subtitle": "Companion computer",
-    "img": "assets/parts/computer-single-board.webp",
+    "img": "assets/images/parts/computer-single-board.webp",
     "aliases": [
       "Raspberry Pi Zero",
       //"Raspberry Pi",
@@ -12,7 +12,7 @@ const GLOSSARY = {
   "header4": {
     "title": "Connector, latch, 4-pin header",
     "subtitle": "RPi-to-FC UART header",
-    "img": "assets/parts/connector-latch-4-pin-header.png",
+    "img": "assets/images/parts/connector-latch-4-pin-header.png",
     "placeholder": "4-pin header",
     "aliases": [
       "connector, latch, 4-pin header",
@@ -25,7 +25,7 @@ const GLOSSARY = {
   "sipswitch": {
     "title": "SIP switch",
     "subtitle": "Configuration switch",
-    "img": "assets/parts/switches-sip.jpg",
+    "img": "assets/images/parts/switches-sip.jpg",
     "placeholder": "SIP switch",
     "aliases": [
       "Switch, SIP",
@@ -37,7 +37,7 @@ const GLOSSARY = {
   "cammodule": {
     "title": "Raspberry Pi Camera Module",
     "subtitle": "Forward camera",
-    "img": "assets/parts/camera.webp",
+    "img": "assets/images/parts/camera.webp",
     "placeholder": "Camera module",
     "aliases": [
       "Raspberry Pi Camera Module",
@@ -48,7 +48,7 @@ const GLOSSARY = {
   "camcable": {
     "title": "Camera adapter cable",
     "subtitle": "Pi-to-camera ribbon",
-    "img": "assets/parts/cabling-camera.webp",
+    "img": "assets/images/parts/cabling-camera.webp",
     "placeholder": "Camera cable",
     "aliases": [
       "camera cable",
@@ -63,7 +63,7 @@ const GLOSSARY = {
   "gps": {
     "title": "ARK SAM GPS",
     "subtitle": "GPS + compass module",
-    "img": "assets/parts/gps-compass.jpg",
+    "img": "assets/images/parts/gps-compass.jpg",
     "aliases": [
       "ARK SAM GPS",
       "GPS module",
@@ -75,7 +75,7 @@ const GLOSSARY = {
   "superstructure": {
     "title": "Sensor suite superstructure",
     "subtitle": "Upper printed structure",
-    "img": "assets/parts/mount-camera-gps.png",
+    "img": "assets/images/parts/mount-camera-gps.png",
     "aliases": [
       "sensor suite superstructure",
       "superstructure",
@@ -87,7 +87,7 @@ const GLOSSARY = {
   "baseplate": {
     "title": "Sensor suite base plate",
     "subtitle": "Lower printed sensor plate",
-    "img": "assets/parts/mount-raspberry-pi.png",
+    "img": "assets/images/parts/mount-raspberry-pi.png",
     "placeholder": "Sensor suite base plate",
     "aliases": [
       "sensor-suite base plate",
@@ -98,7 +98,7 @@ const GLOSSARY = {
   "framekit": {
     "title": "Frame kit",
     "subtitle": "Lower frame structure",
-    "img": "assets/parts/frame.webp",
+    "img": "assets/images/parts/frame.webp",
     "aliases": [
       "frame kit",
       "lower frame",
@@ -108,7 +108,7 @@ const GLOSSARY = {
   "hub": {
     "title": "Hub",
     "subtitle": "Frame center hub",
-    "img": "assets/img/hub.jpg",
+    "img": "assets/images/reference/hub.jpg",
     "aliases": [
       "hub"
     ]
@@ -116,7 +116,7 @@ const GLOSSARY = {
   "bottomplate": {
     "title": "Bottom plate",
     "subtitle": "Main lower plate",
-    "img": "assets/img/bottom_plate.jpg",
+    "img": "assets/images/reference/bottom_plate.jpg",
     "aliases": [
       "bottom plate"
     ]
@@ -124,7 +124,7 @@ const GLOSSARY = {
   "bottomdeck": {
     "title": "Bottom deck",
     "subtitle": "Upper lower-frame deck",
-    "img": "assets/img/bottom_deck_top.jpg",
+    "img": "assets/images/reference/bottom_deck_top.jpg",
     "aliases": [
       "bottom deck"
     ]
@@ -132,7 +132,7 @@ const GLOSSARY = {
   "arm": {
     "title": "Frame arm",
     "subtitle": "Motor arm",
-    "img": "assets/img/arm.jpg",
+    "img": "assets/images/reference/arm.jpg",
     "aliases": [
       "arms"
     ]
@@ -140,7 +140,7 @@ const GLOSSARY = {
   "motor": {
     "title": "EMAX Pro Series 2808 motor",
     "subtitle": "Brushless motor",
-    "img": "assets/parts/motors.jpg",
+    "img": "assets/images/parts/motors.jpg",
     "aliases": [
       "EMAX Pro Series 2808 motor",
       "motor",
@@ -150,7 +150,7 @@ const GLOSSARY = {
   "esc": {
     "title": "ARK 4-in-1 ESC",
     "subtitle": "Electronic speed controller",
-    "img": "assets/parts/esc.jpg",
+    "img": "assets/images/parts/esc.jpg",
     "placeholder": "ARK 4-in-1 ESC",
     "aliases": [
       "ARK 4-in-1 ESC"
@@ -160,7 +160,7 @@ const GLOSSARY = {
     "title": "ARK FPV flight controller",
     "subtitle": "Autopilot board",
     "placeholder": "ARK FPV flight controller",
-    "img": "assets/parts/flight-controller.jpg",
+    "img": "assets/images/parts/flight-controller.jpg",
     "aliases": [
       "ARK FPV flight controller",
       "flight controller"
@@ -170,7 +170,7 @@ const GLOSSARY = {
     "title": "Custom FC-to-RPi harness",
     "subtitle": "RPi-to-FC UART/power harness",
     "placeholder": "FC-to-RPi harness",
-    "img": "assets/parts/cable-harness-fc-to-rpi.png",
+    "img": "assets/images/parts/cable-harness-fc-to-rpi.png",
     "aliases": [
       "custom FC-to-RPi harness",
       "FC-to-RPi harness",
@@ -190,7 +190,7 @@ const GLOSSARY = {
     "title": "XT60 battery lead",
     "subtitle": "Battery lead",
     "placeholder": "XT60 battery lead",
-    "img": "assets/parts/connectors-battery.webp",
+    "img": "assets/images/parts/connectors-battery.webp",
     "aliases": [
       "XT60 battery lead",
       "battery lead",
@@ -200,7 +200,7 @@ const GLOSSARY = {
   "cableties": {
     "title": "Cable ties",
     "subtitle": "Secures motor wires and battery lead",
-    "img": "assets/parts/cable-ties.png",
+    "img": "assets/images/fasteners/7130K742.png",
     "aliases": [
       "cable ties",
       "cable tie",
@@ -212,7 +212,7 @@ const GLOSSARY = {
   "topplate": {
     "title": "Vehicle top plate",
     "subtitle": "Upper carbon plate",
-    "img": "assets/img/top_plate.jpg",
+    "img": "assets/images/reference/top_plate.jpg",
     "aliases": [
       "vehicle top plate",
       "top plate"
@@ -229,7 +229,7 @@ const GLOSSARY = {
   "sdcard": {
     "title": "microSD card",
     "subtitle": "Issued tool item",
-    "img": "assets/img/micro_sd_adapter.png",
+    "img": "assets/images/tools/micro_sd_adapter.png",
     "aliases": [
       "microSD card",
       "microSD adapter",
@@ -239,7 +239,7 @@ const GLOSSARY = {
   "propellers": {
     "title": "Gemfan LR 7035 2-blade propellers",
     "subtitle": "CW and CCW propeller set",
-    "img": "assets/parts/propellers.webp",
+    "img": "assets/images/parts/propellers.webp",
     "aliases": [
       "Gemfan LR 7035 2-blade propellers",
       "propellers",
@@ -260,7 +260,7 @@ const GLOSSARY = {
   "spacer": {
     "title": "M2.5 × 4 mm nylon spacer",
     "subtitle": "Raspberry Pi spacer",
-    "img": "assets/fastener-previews/93657A204.png",
+    "img": "assets/images/fasteners/93657A204.png",
     "aliases": [
       "M2.5 × 4 mm nylon spacer",
       "M2.5 nylon spacer",
@@ -270,7 +270,7 @@ const GLOSSARY = {
   "nskkit": {
     "title": "Fastener Kit",
     "subtitle": "Nuts, screws, standoffs, and spacers",
-    "img": "assets/parts/fastener-kit.png",
+    "img": "assets/images/parts/fastener-kit.png",
     "aliases": [
       "Fastener Kit",
       "fastener kit",
@@ -280,7 +280,7 @@ const GLOSSARY = {
   "m25x6roundhex": {
     "title": "M2.5 × 6 mm round-head hex screw",
     "subtitle": "Battery-connector screw",
-    "img": "assets/parts/screw-m2_5x6-round-hex-placeholder.svg",
+    "img": "assets/images/fasteners/92095A458.png",
     "aliases": [
       "M2.5 × 6 mm round-head hex screw",
       "M2.5 x 6 mm round headed hex screw",
@@ -290,7 +290,7 @@ const GLOSSARY = {
   "m2x6": {
     "title": "M2 × 6 mm socket-head screw",
     "subtitle": "Camera fastener",
-    "img": "assets/fastener-previews/91292A831.png",
+    "img": "assets/images/fasteners/91292A831.png",
     "placeholder": "M2 × 6 mm socket-head screw",
     "aliases": [
       "M2 x 6 mm socket-head screw",
@@ -301,7 +301,7 @@ const GLOSSARY = {
   "m25x8": {
     "title": "M2.5 × 8 mm socket-head screw",
     "subtitle": "Raspberry Pi fastener",
-    "img": "assets/fastener-previews/91292A012.png",
+    "img": "assets/images/fasteners/91292A012.png",
     "placeholder": "M2.5 × 8 mm socket-head screw",
     "aliases": [
       "M2.5 × 8 mm screw",
@@ -313,7 +313,7 @@ const GLOSSARY = {
   "m3x10flat": {
     "title": "M3 × 10 mm flat-head countersunk screw",
     "subtitle": "Sensor-base fastener",
-    "img": "assets/fastener-previews/91294A130.png",
+    "img": "assets/images/fasteners/91294A130.png",
     "placeholder": "M3 × 10 mm flat-head screw",
     "aliases": [
       "M3 × 10 mm flat-head countersunk screw",
@@ -327,7 +327,7 @@ const GLOSSARY = {
   "m3x12socket": {
     "title": "M3 × 12 mm socket-head screw",
     "subtitle": "GPS / frame fastener",
-    "img": "assets/fastener-previews/91292A114.png",
+    "img": "assets/images/fasteners/91292A114.png",
     "placeholder": "M3 × 12 mm socket-head screw",
     "aliases": [
       "M3 × 12 mm socket-head screw",
@@ -338,7 +338,7 @@ const GLOSSARY = {
   "m3x25standoff": {
     "title": "M3 × 25 mm aluminum standoff",
     "subtitle": "Female/female standoff",
-    "img": "assets/fastener-previews/95947A018.png",
+    "img": "assets/images/fasteners/95947A018.png",
     "placeholder": "M3 × 25 mm aluminum standoff",
     "aliases": [
       "M3 × 25 mm aluminum standoff",
@@ -349,7 +349,7 @@ const GLOSSARY = {
   "m3locknut": {
     "title": "M3 nylon-insert lock nut",
     "subtitle": "Self-locking nut",
-    "img": "assets/fastener-previews/90576A102.png",
+    "img": "assets/images/fasteners/90576A102.png",
     "placeholder": "M3 nylon-insert lock nut",
     "aliases": [
       "M3 nylon-insert lock nut",
@@ -362,7 +362,7 @@ const GLOSSARY = {
   "m330stack": {
     "title": "M3 × 30 mm stack screw",
     "subtitle": "Frame-supplied stack fastener",
-    "img": "assets/img/m330stack.png",
+    "img": "assets/images/fasteners/m330stack.png",
     "aliases": [
       "M3 × 30 mm stack screw",
       "M3 x 30 mm stack screw",
@@ -374,7 +374,7 @@ const GLOSSARY = {
   "m312round": {
     "title": "M3 × 12 mm round-head screw",
     "subtitle": "Bottom-plate fastener",
-    "img": "assets/img/m312round.png",
+    "img": "assets/images/fasteners/m312round.png",
     "placeholder": "M3 × 12 mm round-head screw",
     "aliases": [
       "M3 × 12 mm round-head screw",
@@ -386,7 +386,7 @@ const GLOSSARY = {
   "m38round": {
     "title": "M3 × 8 mm round-head screw",
     "subtitle": "Top-plate fastener",
-    "img": "assets/img/m38round.png",
+    "img": "assets/images/fasteners/m38round.png",
     "placeholder": "M3 × 8 mm round-head screw",
     "aliases": [
       "M3 × 8 mm round-head screw",
@@ -398,7 +398,7 @@ const GLOSSARY = {
   "allen15": {
     "title": "1.5 mm Allen key",
     "subtitle": "M2 and battery-connector screws",
-    "img": "assets/img/allen15.png",
+    "img": "assets/images/tools/allen15.png",
     "placeholder": "1.5 mm Allen key",
     "aliases": [
       "1.5 mm Allen key",
@@ -409,7 +409,7 @@ const GLOSSARY = {
   "allen20": {
     "title": "2.0 mm Allen key",
     "subtitle": "M2.5 and stack screws",
-    "img": "assets/img/allen20.png",
+    "img": "assets/images/tools/allen20.png",
     "placeholder": "2.0 mm Allen key",
     "aliases": [
       "2.0 mm Allen key",
@@ -419,7 +419,7 @@ const GLOSSARY = {
   "allen25": {
     "title": "2.5 mm Allen key",
     "subtitle": "M3 socket-head fasteners",
-    "img": "assets/img/allen25.png",
+    "img": "assets/images/tools/allen25.png",
     "placeholder": "2.5 mm Allen key",
     "aliases": [
       "2.5 mm Allen key",
@@ -429,7 +429,7 @@ const GLOSSARY = {
   "driver55": {
     "title": "5.5 mm nut driver",
     "subtitle": "M3 lock nuts",
-    "img": "assets/img/driver55.png",
+    "img": "assets/images/tools/driver55.png",
     "placeholder": "5.5 mm nut driver",
     "aliases": [
       "5.5 mm nut driver",
@@ -439,7 +439,7 @@ const GLOSSARY = {
   "m8driver": {
     "title": "M8 nut driver",
     "subtitle": "Propeller lock nuts",
-    "img": "assets/img/m8driver.png",
+    "img": "assets/images/tools/m8driver.png",
     "placeholder": "M8 nut driver",
     "aliases": [
       "M8 nut driver"
@@ -448,7 +448,7 @@ const GLOSSARY = {
   "snips": {
     "title": "Snips",
     "subtitle": "Light cutting tool",
-    "img": "assets/img/snips-placeholder.svg",
+    "img": "assets/images/tools/shear-cutter.jpg",
     "placeholder": "Snips",
     "aliases": [
       "snips",
@@ -458,7 +458,7 @@ const GLOSSARY = {
   "pliers": {
     "title": "Pliers",
     "subtitle": "Light holding / pull-through tool",
-    "img": "assets/img/pliers.jpg",
+    "img": "assets/images/tools/pliers.jpg",
     "placeholder": "Pliers",
     "aliases": [
       "pliers",
@@ -477,7 +477,7 @@ const GLOSSARY = {
   "lipoTester": {
     "title": "LiPo battery tester",
     "subtitle": "Reads total battery voltage",
-    "img": "assets/img/lipo-tester.webp",
+    "img": "assets/images/tools/lipo-tester.webp",
     "placeholder": "LiPo battery tester",
     "aliases": [
       "LiPo battery tester",
@@ -529,7 +529,7 @@ const GLOSSARY = {
   "gpscable": {
     "title": "GPS/compass cable",
     "subtitle": "GPS-to-FC cable",
-    "img": "assets/img/gps-cable.png",
+    "img": "assets/images/reference/gps-cable.png",
     "placeholder": "GPS/compass cable",
     "aliases": [
       "GPS/compass cable",
@@ -541,7 +541,7 @@ const GLOSSARY = {
   "damper": {
     "title": "Vibration damper",
     "subtitle": "FC/ESC vibration isolator",
-    "img": "assets/img/damper.png",
+    "img": "assets/images/reference/damper.png",
     "aliases": [
       "vibration damper",
       "damper",
