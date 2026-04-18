@@ -595,38 +595,6 @@ function ensureSharedUiStyles() {
       border: 1px solid var(--line);
       font-weight: 700;
     }
-    .task-strip {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px 16px;
-      margin: 0 0 18px 0;
-      box-shadow: var(--shadow);
-    }
-    .task-strip .label {
-      color: var(--muted);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
-    }
-    .task-strip .main {
-      font-size: 1rem;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-    .task-strip .sub {
-      color: var(--muted);
-      font-size: 0.92rem;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .task-strip .sub a {
-      font-weight: 700;
-      text-decoration: none;
-    }
     .footer {
       margin: 18px 0 40px 0;
       color: var(--muted);
@@ -692,10 +660,12 @@ function renderSiteNav() {
   if (!nav) return;
   const filename = currentFilename();
   const currentTask = getCurrentTaskMeta();
-  const progressReset = '<button class="buttonish secondary" type="button" data-reset-progress>Reset progress</button>';
   const links = [];
 
   links.push(`<a href="index.html"${filename === "index.html" ? ' aria-current="page" class="nav-current"' : ""}>Home</a>`);
+
+  links.push(`<a href="parts-guide.html" class="secondary${filename === "parts-guide.html" ? ' nav-current' : ''}"${filename === "parts-guide.html" ? ' aria-current="page"' : ''}>Parts Guide</a>`);
+  links.push(`<a href="tools-inventory.html" class="secondary${filename === "tools-inventory.html" ? ' nav-current' : ''}"${filename === "tools-inventory.html" ? ' aria-current="page"' : ''}>Tools Inventory</a>&ensp;`);
 
   if (filename === "index.html") {
     links.push('<a href="#jump-ahead" class="secondary">Task index</a>');
@@ -707,10 +677,6 @@ function renderSiteNav() {
     links.push(`<a href="${currentTask.slug}.html" aria-current="page" class="secondary nav-current">${escapeHtml(currentTask.title)}</a>`);
     if (next) links.push(`<a href="${next.slug}.html" class="secondary">${escapeHtml(next.title)} →</a>`);
   }
-
-  links.push(`<a href="parts-guide.html" class="secondary${filename === "parts-guide.html" ? ' nav-current' : ''}"${filename === "parts-guide.html" ? ' aria-current="page"' : ''}>Parts Guide</a>`);
-  links.push(`<a href="tools-inventory.html" class="secondary${filename === "tools-inventory.html" ? ' nav-current' : ''}"${filename === "tools-inventory.html" ? ' aria-current="page"' : ''}>Tools Inventory</a>`);
-  links.push(progressReset);
   nav.innerHTML = links.join("");
 }
 
@@ -719,83 +685,6 @@ function progressSummary(progress = getProgress()) {
   const total = TASK_SEQUENCE.length;
   const percent = total ? Math.round((completed / total) * 100) : 0;
   return { completed, total, percent };
-}
-
-function renderProgressPanel() {
-  const nav = document.querySelector('[data-site-nav]');
-  if (!nav) return;
-  const filename = currentFilename();
-  const currentTask = getCurrentTaskMeta();
-  const isHomepage = filename === 'index.html';
-  if (!isHomepage && !currentTask) return;
-
-  let panel = document.querySelector('[data-progress-panel]');
-  if (!panel) {
-    panel = document.createElement('section');
-    panel.className = 'progress-panel';
-    panel.dataset.progressPanel = '';
-    if (currentTask) {
-      const strip = document.querySelector('[data-task-strip]');
-      if (strip) {
-        strip.insertAdjacentElement('afterend', panel);
-      } else {
-        nav.insertAdjacentElement('afterend', panel);
-      }
-    } else {
-      nav.insertAdjacentElement('afterend', panel);
-    }
-  }
-
-  const progress = getProgress();
-  const { completed, total, percent } = progressSummary(progress);
-  const currentIndex = currentTask ? TASK_SEQUENCE.indexOf(currentTask.id) + 1 : null;
-  const title = currentTask ? `Task progress · Task ${currentIndex} of ${total}` : 'Build progress';
-  const subtitle = currentTask
-    ? `${completed} of ${total} published tasks complete.`
-    : `${completed} of ${total} published tasks complete.`;
-
-  panel.innerHTML = `
-    <div class="progress-panel-head">
-      <div>
-        <div class="kicker">${title}</div>
-        <div class="progress-summary-text">${subtitle}</div>
-      </div>
-      <div class="progress-count">${completed} / ${total}</div>
-    </div>
-    <div class="progress-track" aria-label="Build progress">
-      <div class="progress-fill" style="width:${percent}%"></div>
-    </div>
-  `;
-}
-
-function renderTaskStrip() {
-  const host = document.querySelector('[data-task-strip]');
-  const task = getCurrentTaskMeta();
-  if (!host || !task) return;
-  const progress = getProgress();
-  const done = !!progress[task.id];
-  const ready = blockersDone(task.id, progress);
-  const { next } = getTaskNeighbors(task.id);
-  const blockerLinks = (task.blockers || []).map(id => {
-    const meta = TASK_META[id];
-    return meta ? `<a href="${meta.slug}.html">${escapeHtml(meta.title)}</a>` : '';
-  }).filter(Boolean).join(' · ');
-
-  let main = `<strong>You are here:</strong> ${escapeHtml(task.title)}`;
-  let sub = '';
-  if (!ready && blockerLinks) {
-    sub = `<span>Before you start, finish: ${blockerLinks}</span>`;
-  } else if (done && next) {
-    sub = `<span>This task is marked complete.</span><span>Next up: <a href="${next.slug}.html">${escapeHtml(next.title)}</a></span>`;
-  } else if (done) {
-    sub = `<span>This task is marked complete.</span><span>Later tasks are intentionally hidden while the manual is being revised.</span>`;
-  } else if (next) {
-    sub = `<span>When you finish this page, continue to <a href="${next.slug}.html">${escapeHtml(next.title)}</a>.</span>`;
-  } else {
-    sub = `<span>This is the last published task in the current draft.</span>`;
-  }
-
-  host.innerHTML = `<div class="task-strip"><div class="label">Build flow</div><div class="main">${main}</div><div class="sub">${sub}</div></div>`;
 }
 
 function renderFooter() {
@@ -860,8 +749,6 @@ function renderTaskProgressControl() {
 
 function refreshProgressUi() {
   renderSiteNav();
-  renderTaskStrip();
-  renderProgressPanel();
   renderTaskProgressControl();
   renderIndexStatus();
   bindResetProgressButton();
