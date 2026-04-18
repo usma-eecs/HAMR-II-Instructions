@@ -377,3 +377,40 @@ a { color: var(--accent); }
     padding: 18px 18px 14px 18px;
   }
 }
+
+
+.task-page [data-task-strip] {
+  margin: 0 0 18px 0;
+}
+.task-page .annotate-terms[id^="task"] {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.task-page .parts-tools {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+.task-page .task-strip-top {
+  align-items: flex-start;
+}
+.task-page .task-strip-top .badge-row {
+  flex: 1 1 auto;
+}
+.task-page .task-strip-top .progress-box {
+  flex: 0 0 auto;
+}
+.task-subsection {
+  margin-top: 18px;
+}
+.task-subsection h3 {
+  margin-top: 0;
+}
+.common-errors-card {
+  background: #fffafb;
+  border-color: #efd3d3;
+}
+.common-errors-card .error-list {
+  margin-top: 0;
+}

@@ -786,6 +786,45 @@ function renderTaskProgressControl() {
   });
 }
 
+function wrapTaskPageSection(root, headingText, className) {
+  if (!root) return;
+
+  const heading = Array.from(root.children).find(node => {
+    return /^H[23]$/.test(node.tagName) && node.textContent.trim().toLowerCase() === headingText.toLowerCase();
+  });
+  if (!heading || heading.parentElement?.classList.contains(className)) return;
+
+  const wrapper = document.createElement('section');
+  wrapper.className = `section task-subsection ${className}`;
+  heading.before(wrapper);
+
+  let node = heading;
+  while (node) {
+    const next = node.nextElementSibling;
+    wrapper.appendChild(node);
+    if (!next || /^H[23]$/.test(next.tagName)) break;
+    node = next;
+  }
+}
+
+function initTaskPageLayout() {
+  const pageName = document.body?.dataset.page || '';
+  if (!/^task\d+/.test(pageName)) return;
+
+  document.body.classList.add('task-page');
+
+  const root = document.querySelector('.annotate-terms[id^="task"]');
+  if (!root || root.dataset.layoutEnhanced === 'true') return;
+
+  root.dataset.layoutEnhanced = 'true';
+  root.classList.add('task-content-shell');
+
+  if (!root.querySelector('.instruction-flow')) {
+    wrapTaskPageSection(root, 'Steps', 'task-steps-card');
+  }
+  wrapTaskPageSection(root, 'Common errors', 'common-errors-card');
+}
+
 function refreshProgressUi() {
   renderSiteNav();
   renderTaskStrip();
@@ -975,13 +1014,8 @@ function renderTaskStrip() {
       <div class="task-strip-main">
         <div class="task-strip-top">
           <div class="badge-row"><span class="badge day-tag">${escapeHtml(task.day)}</span>${statusBadges}</div>
-          <div class="progress-box" data-task-id="${escapeHtml(task.id)}">
-            <label><input data-task-complete="${escapeHtml(task.id)}" type="checkbox"/> Mark task complete</label>
-            <span class="muted" data-complete-label>Not marked complete</span>
-          </div>
+          <div class="progress-box" data-task-id="${escapeHtml(task.id)}"></div>
         </div>
-        <h3>${escapeHtml(task.title)}</h3>
-        <p class="muted">${escapeHtml(task.summary)}</p>
       </div>
     </div>`;
 }
@@ -1159,6 +1193,7 @@ function initImageLightbox() {
 
 document.addEventListener("DOMContentLoaded", () => {
   ensureSharedUiStyles();
+  initTaskPageLayout();
   refreshProgressUi();
   renderFooter();
   document.querySelectorAll(".annotate-terms").forEach(annotateTerms);
