@@ -806,11 +806,11 @@ function renderFooter() {
 }
 
 const TASK_META = {
-  "task1": {"id": "task1", "title": "Task 1: Prepare the Raspberry Pi", "slug": "task1-solder-raspberry-pi", "day": "Day 1", "blockers": [], "summary": "Install the 4-pin latch header and SIP switch on the Raspberry Pi Zero 2 W.", "role": null},
-  "task2": {"id": "task2", "title": "Task 2: Install GPS/Compass", "slug": "task2a-sensor-suite-superstructure", "day": "Day 2", "blockers": [], "summary": "Mount the ARK SAM GPS module to the camera/GPS mount and connect the 6-wire GPS/compass cable.", "role": null},
-  "task3": {"id": "task3", "title": "Task 3: Install Camera", "slug": "task3b-lower-frame", "day": "Day 2", "blockers": [], "summary": "Clear the printed mounting holes, install the Raspberry Pi camera, and secure the camera ribbon cable.", "role": null},
-  "task4": {"id": "task4", "title": "Task 4: Assemble the lower frame", "slug": "task4-install-motors", "day": "Day 2–3", "blockers": [], "summary": "Assemble the hub, arms, bottom plate, and lower deck using the short frame screws.", "role": null},
-  "task5": {"id": "task5", "title": "Task 5: Install the motors", "slug": "task5-stack", "day": "Day 3", "blockers": ["task4"], "summary": "Confirm the lower frame orientation, then mount all four motors using the short motor screws.", "role": null}
+  "task1": {"id": "task1", "title": "Task 1: Prepare the Raspberry Pi", "slug": "task1-prepare-raspberry-pi", "day": "Day 1", "blockers": [], "summary": "Install the 4-pin latch header and SIP switch on the Raspberry Pi Zero 2 W.", "role": null},
+  "task2": {"id": "task2", "title": "Task 2: Install GPS/Compass", "slug": "task2-install-gps-compass", "day": "Day 1", "blockers": [], "summary": "Mount the ARK SAM GPS module to the camera/GPS mount and connect the 6-wire GPS/compass cable.", "role": null},
+  "task3": {"id": "task3", "title": "Task 3: Install Camera", "slug": "task3-install-camera", "day": "Day 1", "blockers": [], "summary": "Clear the printed mounting holes, install the Raspberry Pi camera, and secure the camera ribbon cable.", "role": null},
+  "task4": {"id": "task4", "title": "Task 4: Assemble the lower frame", "slug": "task4-assemble-lower-frame", "day": "Day 1", "blockers": [], "summary": "Assemble the hub, arms, bottom plate, and lower deck using the short frame screws.", "role": null},
+  "task5": {"id": "task5", "title": "Task 5: Install the motors", "slug": "task5-install-motors", "day": "Day 2", "blockers": ["task4"], "summary": "Confirm the lower frame orientation, then mount all four motors using the short motor screws.", "role": null}
 };
 
 function getProgress() {
