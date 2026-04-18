@@ -11,7 +11,7 @@ const GLOSSARY = {
   },
   "header4": {
     "title": "Connector, latch, 4-pin header",
-    "subtitle": "FC-to-RPi connection header",
+    "subtitle": "RPi-to-FC UART header",
     "img": "assets/parts/connector-latch-4-pin-header.png",
     "placeholder": "4-pin header",
     "aliases": [
@@ -47,7 +47,7 @@ const GLOSSARY = {
   },
   "camcable": {
     "title": "Camera adapter cable",
-    "subtitle": "22-pin ribbon cable",
+    "subtitle": "Pi-to-camera ribbon",
     "img": "assets/parts/cabling-camera.webp",
     "placeholder": "Camera cable",
     "aliases": [
@@ -168,7 +168,7 @@ const GLOSSARY = {
   },
   "fcharness": {
     "title": "Custom FC-to-RPi harness",
-    "subtitle": "TELEM connection harness",
+    "subtitle": "RPi-to-FC UART/power harness",
     "placeholder": "FC-to-RPi harness",
     "img": "assets/parts/cable-harness-fc-to-rpi.png",
     "aliases": [
@@ -188,13 +188,25 @@ const GLOSSARY = {
   },
   "xt60": {
     "title": "XT60 battery lead",
-    "subtitle": "Main battery connection",
+    "subtitle": "Battery lead",
     "placeholder": "XT60 battery lead",
     "img": "assets/parts/connectors-battery.webp",
     "aliases": [
       "XT60 battery lead",
       "battery lead",
       "XT60"
+    ]
+  },
+  "cableties": {
+    "title": "Cable ties",
+    "subtitle": "Secures motor wires and battery lead",
+    "img": "assets/parts/cable-ties.png",
+    "aliases": [
+      "cable ties",
+      "cable tie",
+      "zip ties",
+      "zip tie",
+      "ties, cable"
     ]
   },
   "topplate": {
@@ -267,12 +279,12 @@ const GLOSSARY = {
   },
   "m25x6roundhex": {
     "title": "M2.5 × 6 mm round-head hex screw",
-    "subtitle": "ARK ESC mounting screw",
+    "subtitle": "Battery-connector screw",
     "img": "assets/parts/screw-m2_5x6-round-hex-placeholder.svg",
     "aliases": [
       "M2.5 × 6 mm round-head hex screw",
       "M2.5 x 6 mm round headed hex screw",
-      "ESC mounting screw"
+      "battery-connector screw"
     ]
   },
   "m2x6": {
@@ -385,12 +397,13 @@ const GLOSSARY = {
   },
   "allen15": {
     "title": "1.5 mm Allen key",
-    "subtitle": "M2 fasteners",
+    "subtitle": "M2 and battery-connector screws",
     "img": "assets/img/allen15.png",
     "placeholder": "1.5 mm Allen key",
     "aliases": [
       "1.5 mm Allen key",
-      "M1.5 hex key"
+      "M1.5 hex key",
+      "M1.5 Allen key"
     ]
   },
   "allen20": {
@@ -469,8 +482,8 @@ const GLOSSARY = {
     "aliases": [
       "LiPo battery tester",
       "battery tester"
-    ],
-  //},
+    ]
+  },
   //"solderingiron": {
   //  "title": "Soldering iron",
   //  "subtitle": "For board soldering",
@@ -512,29 +525,28 @@ const GLOSSARY = {
   //  "aliases": [
   //    "eye protection"
   //  ]
+  //},
   "gpscable": {
     "title": "GPS/compass cable",
-    "subtitle": "6-wire GPS/compass cable",
+    "subtitle": "GPS-to-FC cable",
     "img": "assets/img/gps-cable.png",
     "placeholder": "GPS/compass cable",
     "aliases": [
       "GPS/compass cable",
       "6-wire GPS cable",
       "GPS cable",
-      "6-wire GPS/compass cable",
-      "GPS/compass cable"
-    ],
-    "damper": {
-      "title": "Vibration damper",
-      "subtitle": "Vibration dampening for flight Controller and ESC",
-      "img": "assets/img/damper.png",
-      "aliases": [
-        "vibration damper",
-        "damper",
-        "rubber damper"
-      ]
-    }
-  }
+      "6-wire GPS/compass cable"
+    ]
+  },
+  "damper": {
+    "title": "Vibration damper",
+    "subtitle": "FC/ESC vibration isolator",
+    "img": "assets/img/damper.png",
+    "aliases": [
+      "vibration damper",
+      "damper",
+      "rubber damper"
+    ]
   }
 };
 
@@ -552,11 +564,17 @@ const TEAM_ROSTER = [
   "Max Wasserman, USMA 2029"
 ];
 
-const TASK_SEQUENCE = [
-  "task1","task2","task3","task4","task5"
-];
-
 const PROGRESS_KEY = "hamr2-progress-v2";
+
+function getOrderedTaskIds() {
+  return Object.values(TASK_META)
+    .sort((a, b) => (a.order || 0) - (b.order || 0))
+    .map(task => task.id);
+}
+
+function getPublishedTaskIds() {
+  return getOrderedTaskIds().filter(id => TASK_META[id] && TASK_META[id].published);
+}
 
 function currentFilename() {
   const path = decodeURIComponent(window.location.pathname || "");
@@ -569,10 +587,12 @@ function getCurrentTaskMeta() {
 }
 
 function getTaskNeighbors(taskId) {
-  const idx = TASK_SEQUENCE.indexOf(taskId);
+  const task = TASK_META[taskId];
+  const orderedIds = task && task.published ? getPublishedTaskIds() : getOrderedTaskIds();
+  const idx = orderedIds.indexOf(taskId);
   if (idx === -1) return { prev: null, next: null };
-  const prevId = TASK_SEQUENCE[idx - 1] || null;
-  const nextId = TASK_SEQUENCE[idx + 1] || null;
+  const prevId = orderedIds[idx - 1] || null;
+  const nextId = orderedIds[idx + 1] || null;
   return {
     prev: prevId ? TASK_META[prevId] : null,
     next: nextId ? TASK_META[nextId] : null
@@ -681,8 +701,9 @@ function renderSiteNav() {
 }
 
 function progressSummary(progress = getProgress()) {
-  const completed = TASK_SEQUENCE.filter(id => progress[id]).length;
-  const total = TASK_SEQUENCE.length;
+  const orderedIds = getOrderedTaskIds();
+  const completed = orderedIds.filter(id => progress[id]).length;
+  const total = orderedIds.length;
   const percent = total ? Math.round((completed / total) * 100) : 0;
   return { completed, total, percent };
 }
@@ -695,11 +716,18 @@ function renderFooter() {
 }
 
 const TASK_META = {
-  "task1": {"id": "task1", "title": "Task 1: Prepare the Raspberry Pi", "slug": "task1-prepare-raspberry-pi", "day": "Day 1", "blockers": [], "summary": "Install the 4-pin latch header and SIP switch on the Raspberry Pi Zero 2 W.", "role": null},
-  "task2": {"id": "task2", "title": "Task 2: Install GPS/Compass", "slug": "task2-install-gps-compass", "day": "Day 1", "blockers": [], "summary": "Mount the ARK SAM GPS module to the camera/GPS mount and connect the 6-wire GPS/compass cable.", "role": null},
-  "task3": {"id": "task3", "title": "Task 3: Install Camera", "slug": "task3-install-camera", "day": "Day 1", "blockers": [], "summary": "Clear the printed mounting holes, install the Raspberry Pi camera, and secure the camera ribbon cable.", "role": null},
-  "task4": {"id": "task4", "title": "Task 4: Assemble the lower frame", "slug": "task4-assemble-lower-frame", "day": "Day 1", "blockers": [], "summary": "Assemble the hub, arms, bottom plate, and lower deck using the short frame screws.", "role": null},
-  "task5": {"id": "task5", "title": "Task 5: Install the motors", "slug": "task5-install-motors", "day": "Day 2", "blockers": ["task4"], "summary": "Confirm the lower frame orientation, then mount all four motors using the short motor screws.", "role": null}
+  "task1": {"id": "task1", "order": 1, "published": true, "title": "Task 1: Prepare the Raspberry Pi", "slug": "task1-prepare-raspberry-pi", "day": "Day 1", "blockers": [], "summary": "Install the 4-pin latch header and SIP switch on the Raspberry Pi Zero 2 W.", "role": null},
+  "task2": {"id": "task2", "order": 2, "published": true, "title": "Task 2: Install GPS/Compass", "slug": "task2-install-gps-compass", "day": "Day 1", "blockers": [], "summary": "Mount the ARK SAM GPS to the camera/GPS mount and connect the 6-wire cable.", "role": null},
+  "task3": {"id": "task3", "order": 3, "published": true, "title": "Task 3: Install Camera", "slug": "task3-install-camera", "day": "Day 1", "blockers": ["task2"], "summary": "Clear the printed holes, install the camera, and secure the ribbon cable.", "role": null},
+  "task4": {"id": "task4", "order": 4, "published": true, "title": "Task 4: Assemble the lower frame", "slug": "task4-assemble-lower-frame", "day": "Day 1", "blockers": [], "summary": "Assemble the hub, arms, bottom plate, and lower deck with the short frame screws.", "role": null},
+  "task5": {"id": "task5", "order": 5, "published": true, "title": "Task 5: Install the motors", "slug": "task5-install-motors", "day": "Day 2", "blockers": ["task4"], "summary": "Confirm frame orientation, then mount all four motors with the short motor screws.", "role": null},
+  "task6": {"id": "task6", "order": 6, "published": false, "title": "Task 6: Install the vehicle top plate and sensor-suite base plate", "slug": "task6-top-plate-and-base", "day": "Day 4", "blockers": ["task5"], "summary": "Join the lower frame to the top plate and printed sensor-suite base plate.", "role": null},
+  "task7": {"id": "task7", "order": 7, "published": false, "title": "Task 7: Install the Raspberry Pi", "slug": "task7-install-rpi", "day": "Day 4", "blockers": ["task1", "task6"], "summary": "Mount the Raspberry Pi on the sensor-suite base plate before the superstructure is attached.", "role": null},
+  "task8": {"id": "task8", "order": 8, "published": false, "title": "Task 8: Install the sensor suite and connect the wiring", "slug": "task8-sensor-suite-and-wiring", "day": "Day 4", "blockers": ["task2", "task7"], "summary": "Install the superstructure, connect the camera cable, route the GPS lead, and connect the FC-to-RPi harness.", "role": null},
+  "task9": {"id": "task9", "order": 9, "published": false, "title": "Task 9: Software setup and motor test", "slug": "task9-software-and-motor-test", "day": "Day 5", "blockers": ["task8"], "summary": "Connect Mission Planner, set the frame type, and verify motor order and direction before propellers go on.", "role": null},
+  "task10": {"id": "task10", "order": 10, "published": false, "title": "Task 10: Load preset parameters", "slug": "task10-preset-parameters", "day": "Day 5", "blockers": ["task9"], "summary": "Load the current faculty parameter file after the aircraft is fully wired.", "role": null},
+  "task11": {"id": "task11", "order": 11, "published": false, "title": "Task 11: Sensor calibration", "slug": "task11-sensor-calibration", "day": "Day 5", "blockers": ["task10"], "summary": "Run accelerometer and compass calibration, then enter total battery voltage.", "role": null},
+  "task12": {"id": "task12", "order": 12, "published": false, "title": "Task 12: Mount the propellers", "slug": "task12-mount-propellers", "day": "Day 5–6", "blockers": ["task11"], "summary": "Install the correct CW and CCW propellers only after motor test and software setup are complete.", "role": null}
 };
 
 function getProgress() {
@@ -732,23 +760,36 @@ function renderTaskProgressControl() {
   if (!taskId) return;
   box.dataset.taskId = taskId;
 
-  const done = !!getProgress()[taskId];
+  const progress = getProgress();
+  const done = !!progress[taskId];
+  const blocked = !done && !blockersDone(taskId, progress);
+  const blockedBy = blocked
+    ? ((TASK_META[taskId] && TASK_META[taskId].blockers) || [])
+        .filter(id => !progress[id])
+        .map(id => blockerShortLabel(id))
+    : [];
+  const disabledNote = blockedBy.length
+    ? ` Complete ${blockedBy.join(', ')} first.`
+    : '';
+
   box.innerHTML = `
-    <button class="task-complete-button${done ? ' done' : ''}" type="button" data-toggle-task="${taskId}" aria-pressed="${done}">${done ? 'Completed' : 'Mark task complete'}</button>`;
+    <button class="task-complete-button${done ? ' done' : ''}${blocked ? ' disabled' : ''}" type="button" data-toggle-task="${taskId}" aria-pressed="${done}"${blocked ? ' disabled aria-disabled="true"' : ''}${blocked ? ` title="Task is blocked.${disabledNote}"` : ''}>${done ? 'Completed' : 'Mark task complete'}</button>`;
 
   const button = box.querySelector('[data-toggle-task]');
-  if (!button) return;
+  if (!button || blocked) return;
   button.addEventListener('click', () => {
-    const progress = getProgress();
-    progress[taskId] = !progress[taskId];
-    if (!progress[taskId]) delete progress[taskId];
-    setProgress(progress);
+    const nextProgress = getProgress();
+    nextProgress[taskId] = !nextProgress[taskId];
+    if (!nextProgress[taskId]) delete nextProgress[taskId];
+    setProgress(nextProgress);
     refreshProgressUi();
   });
 }
 
 function refreshProgressUi() {
   renderSiteNav();
+  renderTaskStrip();
+  renderTaskIndex();
   renderTaskProgressControl();
   renderIndexStatus();
   bindResetProgressButton();
@@ -888,6 +929,85 @@ function initTermPreview() {
 function blockersDone(taskId, progress) {
   const blockers = (TASK_META[taskId] && TASK_META[taskId].blockers) || [];
   return blockers.every(id => progress[id]);
+}
+
+function blockerShortLabel(taskId) {
+  const blocker = TASK_META[taskId];
+  if (!blocker) return "required task";
+  return blocker.title
+    .replace(/^Task\s+(\d+):\s+.*$/, "Task $1")
+    .replace(/^Task\s+(\d+).*$/, "Task $1");
+}
+
+function getTaskPageStatusBadges(task, progress = getProgress()) {
+  if (!task) {
+    return [];
+  }
+
+  if (progress[task.id]) {
+    return [{ label: "Done", className: "status-chip status-done" }];
+  }
+
+  if (blockersDone(task.id, progress)) {
+    return [{ label: "Ready now", className: "status-chip status-ready" }];
+  }
+
+  return (task.blockers || [])
+    .filter(id => !progress[id])
+    .map(id => ({
+      label: `Blocked by ${blockerShortLabel(id)}`,
+      className: "status-chip status-blocked"
+    }));
+}
+
+function renderTaskStrip() {
+  const slot = document.querySelector('[data-task-strip]');
+  if (!slot) return;
+  const task = getCurrentTaskMeta();
+  if (!task) return;
+
+  const statusBadges = getTaskPageStatusBadges(task)
+    .map(status => `<span class="${escapeHtml(status.className)}">${escapeHtml(status.label)}</span>`)
+    .join('');
+
+  slot.innerHTML = `
+    <div class="task-header">
+      <div class="task-strip-main">
+        <div class="task-strip-top">
+          <div class="badge-row"><span class="badge day-tag">${escapeHtml(task.day)}</span>${statusBadges}</div>
+          <div class="progress-box" data-task-id="${escapeHtml(task.id)}">
+            <label><input data-task-complete="${escapeHtml(task.id)}" type="checkbox"/> Mark task complete</label>
+            <span class="muted" data-complete-label>Not marked complete</span>
+          </div>
+        </div>
+        <h3>${escapeHtml(task.title)}</h3>
+        <p class="muted">${escapeHtml(task.summary)}</p>
+      </div>
+    </div>`;
+}
+
+function renderTaskIndex() {
+  const grid = document.querySelector('[data-task-index]');
+  if (!grid) return;
+  const publishedTasks = getPublishedTaskIds().map(id => TASK_META[id]);
+  grid.innerHTML = publishedTasks.map(task => {
+    const blockers = task.blockers.length
+      ? task.blockers
+          .map(id => TASK_META[id])
+          .filter(Boolean)
+          .map(blocker => escapeHtml(blocker.title))
+          .join('; ')
+      : 'None';
+    return `
+      <article class="task-card" data-task-card="${escapeHtml(task.id)}">
+        <div class="kicker">${escapeHtml(task.day)}</div>
+        <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
+        <h3>${escapeHtml(task.title)}</h3>
+        <p class="sub">${escapeHtml(task.summary)}</p>
+        <p class="muted"><strong>Blockers:</strong> ${blockers}</p>
+        <div class="actions"><a class="link-button" href="${escapeHtml(task.slug)}.html">Open task</a></div>
+      </article>`;
+  }).join('');
 }
 
 function renderIndexStatus() {

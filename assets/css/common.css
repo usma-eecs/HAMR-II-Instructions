@@ -126,6 +126,10 @@ a { color: var(--accent); }
 .parts-tools ul { margin: 0; padding-left: 18px; }
 .parts-tools li { margin: 6px 0; }
 .task-header { display: flex; justify-content: space-between; align-items: start; gap: 12px; flex-wrap: wrap; }
+.task-strip-main { flex: 1 1 100%; }
+.task-strip-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.task-strip-top .badge-row { margin: 0; }
+.task-strip-top .progress-box { margin-left: auto; justify-content: flex-end; }
 .step-list, .error-list, .checklist { margin: 10px 0 0 0; padding-left: 20px; }
 .step-list li, .error-list li, .checklist li { margin: 8px 0; }
 .error-list li { color: #6b2737; }
@@ -289,9 +293,23 @@ a { color: var(--accent); }
   color: var(--ok-fg);
   border-color: #b9dfc0;
 }
+.task-complete-button.disabled,
+.task-complete-button:disabled {
+  background: #e5e7eb;
+  color: #6b7280;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+  box-shadow: none;
+}
 .task-complete-button:hover,
 .task-complete-button:focus-visible {
   transform: translateY(-1px);
+}
+.task-complete-button.disabled:hover,
+.task-complete-button.disabled:focus-visible,
+.task-complete-button:disabled:hover,
+.task-complete-button:disabled:focus-visible {
+  transform: none;
 }
 .enlargeable-image {
   cursor: zoom-in;
