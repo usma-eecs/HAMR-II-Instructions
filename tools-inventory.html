@@ -1,229 +1,222 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMR II Builder Tools Inventory</title>
-  <link rel="stylesheet" href="assets/css/common.css">
-  <link rel="stylesheet" href="assets/css/inventory.css">
-  <link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HAMR II Builder Tools Inventory</title>
+<link href="assets/css/common.css" rel="stylesheet"/>
+<link href="assets/css/inventory.css" rel="stylesheet"/>
+<link href="assets/images/branding/rrc.png" rel="icon" type="image/png"/>
 </head>
-
 <body data-page="tools-inventory.html">
-  <main class="page">
-    <section class="hero">
-      <h1>HAMR II Builder Tools Inventory</h1>
-      <p>
-        Use this page during assembly. It shows the tools used in the published HAMR II tasks. Click any image to
-        enlarge it at the bench.
-      </p>
-    </section>
-    <nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
-    <section class="stats" aria-label="tools summary">
-      <div class="stat">
-        <div class="label">Distinct Tool Types</div>
-        <div class="value">12</div>
-        <div class="sub">Hand tools, safety items, and bench-support items on this page.</div>
-      </div>
-      <div class="stat">
-        <div class="label">Issued Quantity</div>
-        <div class="value">14</div>
-        <div class="sub">Total quantity listed, counting duplicate Allen keys.</div>
-      </div>
-    </section>
-
-    <div class="controls">
-      <input id="searchBox" class="search" type="search" placeholder="Search by tool name or function"
-        aria-label="Search tools table">
-    </div>
-
-    <section class="table-wrap">
-      <div class="table-scroll">
-        <table id="inventoryTable">
-          <colgroup>
-            <col class="col-photo">
-            <col class="col-item">
-            <col class="col-desc">
-            <col class="col-per">
-            <!--<col class="col-ref">-->
-          </colgroup>
-          <thead>
-            <tr>
-              <th>Picture</th>
-              <th>Item</th>
-              <th>Short Description</th>
-              <th>Per System</th>
-              <!--<th>Reference</th>-->
-            </tr>
-          </thead>
-          <tbody>
-            <tr data-search="M1.5 Allen key Used on M2 camera screws and the M2.5 × 6 battery-connector screws at the ESC.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/allen15.png" alt="M1.5 Allen key">
-                <div class="photo-hint">assets/images/tools/allen15.png</div>
-              </td>
-              <td>
-                <div class="item-name">M1.5 Allen key</div>
-                
-              </td>
-              <td class="desc-cell">Used on M2 camera screws and the M2.5 × 6 battery-connector screws at the ESC.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Issued tool</span></td>-->
-            </tr>
-            <tr data-search="M2 Allen key Used on the Raspberry Pi mounting screws and frame hardware that takes a 2.0 mm driver.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/allen20.png" alt="M2 Allen key">
-                <div class="photo-hint">assets/images/tools/allen20.png</div>
-              </td>
-              <td>
-                <div class="item-name">M2 Allen key</div>
-                
-              </td>
-              <td class="desc-cell">Used on the Raspberry Pi mounting screws and frame hardware that takes a 2.0 mm driver.</td>
-              <td class="center">2</td>
-              <!--<td><span class='muted'>Issued tool</span></td>-->
-            </tr>
-            <tr data-search="M2.5 Allen key Used on M3 socket-head screws such as the GPS and superstructure hardware.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/allen25.png" alt="M2.5 Allen key">
-                <div class="photo-hint">assets/images/tools/allen25.png</div>
-              </td>
-              <td>
-                <div class="item-name">M2.5 Allen key</div>
-                
-              </td>
-              <td class="desc-cell">Used on M3 socket-head screws such as the GPS and superstructure hardware.</td>
-              <td class="center">2</td>
-              <!--<td><span class='muted'>Issued tool</span></td>-->
-            </tr>
-            <tr data-search="M5.5 nut driver Used on M3 nylon-insert lock nuts in the GPS and camera assembly.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/driver55.png" alt="M5.5 nut driver">
-                <div class="photo-hint">assets/images/tools/driver55.png</div>
-              </td>
-              <td>
-                <div class="item-name">M5.5 nut driver</div>
-                
-              </td>
-              <td class="desc-cell">Used on M3 nylon-insert lock nuts in the GPS and camera assembly.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Issued tool</span></td>-->
-            </tr>
-            <tr data-search="M8 nut driver Used on the propeller lock nuts.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/m8driver.png" alt="M8 nut driver">
-                <div class="photo-hint">assets/images/tools/m8driver.png</div>
-              </td>
-              <td>
-                <div class="item-name">M8 nut driver</div>
-                
-              </td>
-              <td class="desc-cell">Used on the propeller lock nuts.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Issued tool</span></td>-->
-            </tr>
-            <tr data-search="Pliers Holds small hardware and removes pushed-through print debris.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/pliers.jpg" alt="Pliers">
-                <div class="photo-hint">assets/images/tools/pliers.jpg</div>
-              </td>
-              <td>
-                <div class="item-name">Pliers</div>
-                
-              </td>
-              <td class="desc-cell">Holds small hardware and removes pushed-through print debris.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Issued tool</span></td>-->
-            </tr>
-            <tr data-search="Snips Trims wire and cable ties when directed.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/shear-cutter.jpg" alt="Snips">
-                <div class="photo-hint">assets/images/tools/shear-cutter.jpg</div>
-              </td>
-              <td>
-                <div class="item-name">Snips</div>
-                
-              </td>
-              <td class="desc-cell">Trims wire and cable ties when directed.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Issued tool</span></td>-->
-            </tr>
-            <tr data-search="Eye protection Required for soldering and any task that can shed debris.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/eyepro.png" alt="Eye protection">
-                <div class="photo-hint">assets/images/tools/eyepro.png</div>
-              </td>
-              <td>
-                <div class="item-name">Eye protection</div>
-                
-              </td>
-              <td class="desc-cell">Required for soldering and any task that can shed debris.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Safety item</span></td>-->
-            </tr>
-            <tr data-search="Soldering station Used to solder the Raspberry Pi header and SIP switch.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/soldering-station.jpg" alt="Soldering station">
-                <div class="photo-hint">assets/images/tools/soldering-station.jpg</div>
-              </td>
-              <td>
-                <div class="item-name">Soldering station</div>
-                
-              </td>
-              <td class="desc-cell">Used to solder the Raspberry Pi header and SIP switch.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Bench supply</span></td>-->
-            </tr>
-            <tr data-search="Roll of solder Solder wire for the Raspberry Pi through-hole joints.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/solder.webp" alt="Roll of solder">
-                <div class="photo-hint">assets/images/tools/solder.webp</div>
-              </td>
-              <td>
-                <div class="item-name">Roll of solder</div>
-                
-              </td>
-              <td class="desc-cell">Solder wire for the Raspberry Pi through-hole joints.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Bench supply</span></td>-->
-            </tr>
-            <tr data-search="microSD card Issued card used with the Raspberry Pi when directed.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/micro_sd_adapter.png" alt="microSD card">
-                <div class="photo-hint">assets/images/tools/micro_sd_adapter.png</div>
-              </td>
-              <td>
-                <div class="item-name">microSD card</div>
-                
-              </td>
-              <td class="desc-cell">Issued card used with the Raspberry Pi when directed.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Bench supply</span></td>--> 
-            </tr>
-            <tr data-search="Helping hand Holds small parts steady during bench work.">
-              <td class="photo-cell">
-                <img class="photo" tabindex="0" src="assets/images/tools/3rd-hand.jpg" alt="Helping hand">
-                <div class="photo-hint">assets/images/tools/3rd-hand.jpg</div>
-              </td>
-              <td>
-                <div class="item-name">Helping hand</div>
-                
-              </td>
-              <td class="desc-cell">Holds small parts steady during bench work.</td>
-              <td class="center">1</td>
-              <!--<td><span class='muted'>Bench supply</span></td>-->
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <div class="footer" data-site-footer></div>
-  </main>
-
-  <script src="assets/js/common.js"></script>
-  <script src="assets/js/inventory.js"></script>
+<main class="page">
+<section class="hero">
+<h1>HAMR II Builder Tools Inventory</h1>
+<p>Use this page during assembly. It shows the tools, safety items, and cables used in the HAMR II tasks. Click any image to enlarge it at the bench.</p>
+</section>
+<nav aria-label="Page navigation" class="topnav" data-site-nav=""></nav>
+<section aria-label="tools summary" class="stats">
+<div class="stat">
+<div class="label">Distinct Tool Types</div>
+<div class="value">14</div>
+<div class="sub">Hand tools, safety items, bench-support items, test items, and cables listed on this page.</div>
+</div>
+<div class="stat">
+<div class="label">Issued Quantity</div>
+<div class="value">16</div>
+<div class="sub">Total quantity listed, counting duplicate Allen keys.</div>
+</div>
+</section>
+<div class="controls">
+<input aria-label="Search tools table" class="search" id="searchBox" placeholder="Search by tool name or function" type="search"/>
+</div>
+<section class="table-wrap">
+<div class="table-scroll">
+<table id="inventoryTable">
+<colgroup>
+<col class="col-photo"/>
+<col class="col-item"/>
+<col class="col-desc"/>
+<col class="col-per"/>
+<!--<col class="col-ref">-->
+</colgroup>
+<thead>
+<tr>
+<th>Picture</th>
+<th>Item</th>
+<th>Short Description</th>
+<th>Per System</th>
+<!--<th>Reference</th>-->
+</tr>
+</thead>
+<tbody>
+<tr data-search="M1.5 Allen key Used on M2 camera screws and the M2.5 × 6 battery-connector screws at the ESC.">
+<td class="photo-cell">
+<img alt="M1.5 Allen key" class="photo" src="assets/images/tools/allen15.png" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/allen15.png</div>
+</td>
+<td>
+<div class="item-name">M1.5 Allen key</div>
+</td>
+<td class="desc-cell">Used on M2 camera screws and the M2.5 × 6 battery-connector screws at the ESC.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Issued tool</span></td>-->
+</tr>
+<tr data-search="M2 Allen key Used on the Raspberry Pi mounting screws and frame hardware that takes a 2.0 mm driver.">
+<td class="photo-cell">
+<img alt="M2 Allen key" class="photo" src="assets/images/tools/allen20.png" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/allen20.png</div>
+</td>
+<td>
+<div class="item-name">M2 Allen key</div>
+</td>
+<td class="desc-cell">Used on the Raspberry Pi mounting screws and frame hardware that takes a 2.0 mm driver.</td>
+<td class="center">2</td>
+<!--<td><span class='muted'>Issued tool</span></td>-->
+</tr>
+<tr data-search="M2.5 Allen key Used on M3 socket-head screws such as the GPS hardware and camera/GPS mount hardware.">
+<td class="photo-cell">
+<img alt="M2.5 Allen key" class="photo" src="assets/images/tools/allen25.png" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/allen25.png</div>
+</td>
+<td>
+<div class="item-name">M2.5 Allen key</div>
+</td>
+<td class="desc-cell">Used on M3 socket-head screws such as the GPS hardware and camera/GPS mount hardware.</td>
+<td class="center">2</td>
+<!--<td><span class='muted'>Issued tool</span></td>-->
+</tr>
+<tr data-search="M5.5 nut driver Used on M3 lock nuts in the GPS and FC/ESC stack tasks.">
+<td class="photo-cell">
+<img alt="M5.5 nut driver" class="photo" src="assets/images/tools/driver55.png" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/driver55.png</div>
+</td>
+<td>
+<div class="item-name">M5.5 nut driver</div>
+</td>
+<td class="desc-cell">Used on M3 lock nuts in the GPS and FC/ESC stack tasks.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Issued tool</span></td>-->
+</tr>
+<tr data-search="M8 nut driver Used on the propeller lock nuts.">
+<td class="photo-cell">
+<img alt="M8 nut driver" class="photo" src="assets/images/tools/m8driver.png" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/m8driver.png</div>
+</td>
+<td>
+<div class="item-name">M8 nut driver</div>
+</td>
+<td class="desc-cell">Used on the propeller lock nuts.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Issued tool</span></td>-->
+</tr>
+<tr data-search="Pliers Holds small hardware and removes pushed-through print debris.">
+<td class="photo-cell">
+<img alt="Pliers" class="photo" src="assets/images/tools/pliers.jpg" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/pliers.jpg</div>
+</td>
+<td>
+<div class="item-name">Pliers</div>
+</td>
+<td class="desc-cell">Holds small hardware and removes pushed-through print debris.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Issued tool</span></td>-->
+</tr>
+<tr data-search="Snips Trims wire and cable ties when directed.">
+<td class="photo-cell">
+<img alt="Snips" class="photo" src="assets/images/tools/shear-cutter.jpg" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/shear-cutter.jpg</div>
+</td>
+<td>
+<div class="item-name">Snips</div>
+</td>
+<td class="desc-cell">Trims wire and cable ties when directed.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Issued tool</span></td>-->
+</tr>
+<tr data-search="Eye protection Required for soldering and any task that can shed debris.">
+<td class="photo-cell">
+<img alt="Eye protection" class="photo" src="assets/images/tools/eyepro.png" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/eyepro.png</div>
+</td>
+<td>
+<div class="item-name">Eye protection</div>
+</td>
+<td class="desc-cell">Required for soldering and any task that can shed debris.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Safety item</span></td>-->
+</tr>
+<tr data-search="Soldering station Used to solder the Raspberry Pi header and SIP switch.">
+<td class="photo-cell">
+<img alt="Soldering station" class="photo" src="assets/images/tools/soldering-station.jpg" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/soldering-station.jpg</div>
+</td>
+<td>
+<div class="item-name">Soldering station</div>
+</td>
+<td class="desc-cell">Used to solder the Raspberry Pi header and SIP switch.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Bench supply</span></td>-->
+</tr>
+<tr data-search="Roll of solder Solder wire for the Raspberry Pi through-hole joints.">
+<td class="photo-cell">
+<img alt="Roll of solder" class="photo" src="assets/images/tools/solder.webp" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/solder.webp</div>
+</td>
+<td>
+<div class="item-name">Roll of solder</div>
+</td>
+<td class="desc-cell">Solder wire for the Raspberry Pi through-hole joints.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Bench supply</span></td>-->
+</tr>
+<tr data-search="microSD card Issued card used with the Raspberry Pi when directed.">
+<td class="photo-cell">
+<img alt="microSD card" class="photo" src="assets/images/tools/micro_sd_adapter.png" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/micro_sd_adapter.png</div>
+</td>
+<td>
+<div class="item-name">microSD card</div>
+</td>
+<td class="desc-cell">Issued card used with the Raspberry Pi when directed.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Bench supply</span></td>-->
+</tr>
+<tr data-search="Helping hand Holds small parts steady during bench work.">
+<td class="photo-cell">
+<img alt="Helping hand" class="photo" src="assets/images/tools/3rd-hand.jpg" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/3rd-hand.jpg</div>
+</td>
+<td>
+<div class="item-name">Helping hand</div>
+</td>
+<td class="desc-cell">Holds small parts steady during bench work.</td>
+<td class="center">1</td>
+<!--<td><span class='muted'>Bench supply</span></td>-->
+</tr>
+<tr data-search="LiPo battery tester Measures total battery voltage during sensor calibration."><td class="photo-cell">
+<img alt="LiPo battery tester" class="photo" src="assets/images/tools/lipo-tester.webp" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/lipo-tester.webp</div>
+</td><td>
+<div class="item-name">LiPo battery tester</div>
+</td><td class="desc-cell">Measures total battery voltage during sensor calibration.</td><td class="center">1</td></tr><tr data-search="USB-C cable Connects the PC to the flight controller for Mission Planner tasks.">
+<td class="photo-cell">
+<img alt="USB-C cable" class="photo" src="assets/images/tools/usb-c-cable.svg" tabindex="0"/>
+<div class="photo-hint">assets/images/tools/usb-c-cable.svg</div>
+</td>
+<td>
+<div class="item-name">USB-C cable</div>
+</td>
+<td class="desc-cell">Connects the PC to the flight controller for Mission Planner tasks.</td>
+<td class="center">1</td>
+</tr></tbody>
+</table>
+</div>
+</section>
+<div class="footer" data-site-footer=""></div>
+</main>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/inventory.js"></script>
 </body>
-
 </html>

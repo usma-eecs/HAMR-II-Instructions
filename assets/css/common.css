@@ -131,6 +131,37 @@ a { color: var(--accent); }
 .task-strip-top .badge-row { margin: 0; }
 .task-strip-top .progress-box { margin-left: auto; justify-content: flex-end; }
 .step-list, .error-list, .checklist { margin: 10px 0 0 0; padding-left: 20px; }
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.matrix th,
+.matrix td {
+  border-top: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.matrix thead th {
+  border-top: 0;
+  background: #edf2f8;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+.matrix code,
+.kbd {
+  font-family: Consolas, "Courier New", monospace;
+  background: #f5f7fb;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1px 6px;
+}
 .step-list li, .error-list li, .checklist li { margin: 8px 0; }
 .error-list li { color: #6b2737; }
 .figure-grid-2 { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin-top: 14px; }

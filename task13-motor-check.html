@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task 13: Motor check</title>
+<link rel="stylesheet" href="assets/css/common.css">
+<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+</head>
+<body data-page="task13-motor-check.html">
+<main class="page">
+<section class="hero"><h1>Task 13: Motor check</h1><p>Connect Mission Planner, confirm frame settings, and verify motor order and direction.</p></section>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
+<section class="section annotate-terms" id="task13-motor-check">
+<div class="parts-tools">
+<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Vehicle with motors, ESC, FC, battery lead, and camera/GPS mount installed</li><li>4S LiPo battery</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>USB-C cable</li><li>PC running Mission Planner</li></ul></div>
+</div>
+
+<div class="instruction-flow">
+  <section class="instruction-block">
+    <div>
+      <h4>Step 1. Connect the FC and verify attitude sensing</h4>
+      <ol class="compact-list">
+        <li>Connect the PC to the flight controller with the USB-C cable.</li>
+        <li>Open Mission Planner.</li>
+        <li>Select <strong>COMnn Ardupilot MAVLink</strong> in the top-right corner, set <strong>Baud rate = 921600</strong>, and select <strong>CONNECT</strong>.</li>
+        <li>Roll, pitch, and yaw the aircraft gently by hand.</li>
+        <li>Confirm the artificial horizon on the <strong>Data</strong> tab moves in the correct direction.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="ok-box"><strong>No propellers installed.</strong><br>Keep the propellers off for the entire motor-check task.</div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 2. Confirm the frame settings</h4>
+      <ol class="compact-list" start="6">
+        <li>Open <strong>CONFIG → Full Parameter List</strong>.</li>
+        <li>Navigate to <strong>FRAME</strong>.</li>
+        <li>Set <strong>FRAME_CLASS = 1</strong> (Quad).</li>
+        <li>Set <strong>FRAME_TYPE = 12</strong> (BetaFlight X).</li>
+        <li>Select <strong>Write Params</strong> and acknowledge the dialogs.</li>
+        <li>Disconnect and reconnect the USB-C cable so the FC reboots, then reconnect in Mission Planner.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="callout"><strong>Reboot required.</strong><br>The flight controller must reboot after the frame parameters are changed.</div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 3. Run Motor Test</h4>
+      <ol class="compact-list" start="12">
+        <li>Open <strong>SETUP → Optional Hardware → Motor Test</strong>.</li>
+        <li>Only after you are on the Motor Test page, connect the 4S LiPo battery.</li>
+        <li>Set <strong>Throttle % = 15</strong> and <strong>Duration (s) = 2</strong>.</li>
+        <li>Test one motor at a time.</li>
+        <li>Confirm each motor spins and that its direction matches the diagram.</li>
+        <li>Stop immediately if a motor spins the wrong way, does not start cleanly, or makes abnormal noise.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="figure-card"><img src="assets/images/figures/motor_map.png" alt="Motor map"><div class="figure-caption">Motor map for Motor Test.</div></div>
+    </div>
+  </section>
+</div>
+<h3>Common errors</h3>
+<ul class="error-list">
+  <li>Testing with propellers installed.</li>
+  <li>Using the wrong COM port or baud rate.</li>
+  <li>Forgetting to reboot after changing FRAME_CLASS or FRAME_TYPE.</li>
+  <li>Testing multiple motors at once instead of one at a time.</li>
+  <li>Ignoring abnormal motor behavior such as stuttering, scraping, or non-start.</li>
+</ul>
+
+</section>
+<div class="footer" data-site-footer></div>
+</main>
+<script src="assets/js/common.js"></script>
+</body>
+</html>

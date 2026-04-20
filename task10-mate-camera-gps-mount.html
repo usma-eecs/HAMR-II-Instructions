@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task 10: Mate camera/GPS mount onto the frame</title>
+<link rel="stylesheet" href="assets/css/common.css">
+<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+</head>
+<body data-page="task10-mate-camera-gps-mount.html">
+<main class="page">
+<section class="hero"><h1>Task 10: Mate camera/GPS mount onto the frame</h1><p>Set the SIP switch, connect the camera ribbon, route the cables, and install the camera/GPS mount.</p></section>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
+<section class="section annotate-terms" id="task10-mate-camera-gps-mount">
+<div class="parts-tools">
+<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Upper/lower frame assembly from Task 9</li><li>Camera/GPS mount assembly from Tasks 2 and 3</li><li>Camera ribbon cable</li><li>GPS/compass cable</li><li>FC/RPi cable</li><li><strong>Superstructure</strong> subkit from the fastener kit <span class='muted'>(four M3 × 25 mm standoffs and eight M3 × 12 mm socket-head screws)</span></li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>2.5 mm Allen key</li></ul></div>
+</div>
+
+<div class="instruction-flow">
+  <section class="instruction-block">
+    <div>
+      <h4>Step 1. Set the SIP switch</h4>
+      <ol class="compact-list">
+        <li>Set the Raspberry Pi SIP switch based on your group number.</li>
+        <li>Switches in the <strong>down</strong> position are 0. Switches in the <strong>up</strong> position are 1.</li>
+      </ol>
+      <div class="callout step-note"><strong>Binary table.</strong><br>Use this 4-bit table to convert decimal to binary. Confirm the physical switch order on the bench example before you set the switches.</div>
+      <table class="matrix" aria-label="Decimal to binary table">
+        <thead><tr><th>Decimal</th><th>4-bit binary</th></tr></thead>
+        <tbody><tr><td>0</td><td><code>0000</code></td></tr>
+<tr><td>1</td><td><code>0001</code></td></tr>
+<tr><td>2</td><td><code>0010</code></td></tr>
+<tr><td>3</td><td><code>0011</code></td></tr>
+<tr><td>4</td><td><code>0100</code></td></tr>
+<tr><td>5</td><td><code>0101</code></td></tr>
+<tr><td>6</td><td><code>0110</code></td></tr>
+<tr><td>7</td><td><code>0111</code></td></tr>
+<tr><td>8</td><td><code>1000</code></td></tr>
+<tr><td>9</td><td><code>1001</code></td></tr>
+<tr><td>10</td><td><code>1010</code></td></tr>
+<tr><td>11</td><td><code>1011</code></td></tr>
+<tr><td>12</td><td><code>1100</code></td></tr>
+<tr><td>13</td><td><code>1101</code></td></tr>
+<tr><td>14</td><td><code>1110</code></td></tr>
+<tr><td>15</td><td><code>1111</code></td></tr></tbody>
+      </table>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="figure-card"><img src="assets/images/tasks/task10/task10-fig10a.png" alt="Figure 10a placeholder wiring view"><div class="figure-caption">Fig. 10a. Current routing and hardware view. This figure is still being refined.</div></div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 2. Connect the camera ribbon before installing the camera/GPS mount</h4>
+      <ol class="compact-list" start="3">
+        <li>Locate the Raspberry Pi CSI connector on the front edge of the Raspberry Pi.</li>
+        <li>Gently lift the locking bar with a fingernail. Do not remove it.</li>
+        <li>Insert the free end of the camera ribbon cable fully and evenly into the connector.</li>
+        <li>On the Raspberry Pi end, the exposed metal contacts must face down toward the Raspberry Pi PCB.</li>
+        <li>Press the locking bar back down to clamp the cable. Lightly tug the ribbon to confirm it is locked.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="ok-box"><strong>Do this first.</strong><br>The Raspberry Pi CSI connector is much easier to reach before the camera/GPS mount is installed above it.</div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 3. Route the GPS and FC/RPi cables</h4>
+      <ol class="compact-list" start="8">
+        <li>Route the GPS cable under the Raspberry Pi from the right side of the aircraft, then between the second pair of frame standoffs, then under the front-left motor connector, and then to the FC port marked <strong>GPS</strong> on the top left front edge of the FC.</li>
+        <li>Route the FC/RPi cable between the second pair of frame standoffs, then under the front-left motor connector, and then to the FC port marked <strong>TELEM</strong> on the top left rear edge of the FC.</li>
+        <li>Connect the FC/RPi cable to the 4-pin latch header on the Raspberry Pi.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="callout"><strong>Cable routing goal.</strong><br>Keep both cables low, clear of the propeller arc, and out of any pinch point between the decks and the mount.</div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 4. Install the camera/GPS mount</h4>
+      <ol class="compact-list" start="11">
+        <li>Use the four M3 × 25 mm standoffs and eight M3 × 12 mm socket-head screws from the <strong>Superstructure</strong> subkit to join the camera/GPS mount to the frame.</li>
+        <li>Use four M3 × 12 mm screws from below the upper deck into the standoffs.</li>
+        <li>Use the other four M3 × 12 mm screws from the top of the camera/GPS mount into the standoffs.</li>
+        <li>Start all hardware before tightening any one screw fully.</li>
+        <li>Tighten in a crisscross pattern.</li>
+      </ol>
+      <div class="stop-box step-note"><strong>STOP.</strong> Ask a faculty member to verify the camera ribbon, GPS cable, and FC/RPi cable before you proceed to software setup.</div>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="figure-card"><img src="assets/images/tasks/task10/task10-fig10a.png" alt="Figure 10a mount installation placeholder"><div class="figure-caption">Fig. 10a. Install the camera/GPS mount with the Superstructure subkit.</div></div>
+    </div>
+  </section>
+</div>
+<h3>Common errors</h3>
+<ul class="error-list">
+  <li>Breaking the Raspberry Pi CSI latch by prying too hard.</li>
+  <li>Installing the camera ribbon with the metal contacts facing the wrong direction.</li>
+  <li>Routing the GPS cable or FC/RPi cable into the wrong FC port.</li>
+  <li>Pinching a cable between the upper deck and the camera/GPS mount.</li>
+</ul>
+
+</section>
+<div class="footer" data-site-footer></div>
+</main>
+<script src="assets/js/common.js"></script>
+</body>
+</html>

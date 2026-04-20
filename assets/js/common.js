@@ -4,142 +4,185 @@ const GLOSSARY = {
     "subtitle": "Companion computer",
     "img": "assets/images/parts/computer-single-board.webp",
     "aliases": [
+      "Raspberry Pi Zero 2 W",
       "Raspberry Pi Zero",
-      //"Raspberry Pi",
+      "Raspberry Pi",
       "RPi0"
     ]
   },
   "header4": {
     "title": "Connector, latch, 4-pin header",
-    "subtitle": "RPi-to-FC UART header",
+    "subtitle": "UART header between the Raspberry Pi and FC cable",
     "img": "assets/images/parts/connector-latch-4-pin-header.png",
-    "placeholder": "4-pin header",
     "aliases": [
       "connector, latch, 4-pin header",
       "4-pin header",
-      "latch-style 4-pin header",
-      "Connector, latch, 4-pin header",
-      "4-pin latch header"
+      "4-pin latch header",
+      "latch-style 4-pin header"
     ]
   },
   "sipswitch": {
     "title": "SIP switch",
-    "subtitle": "Configuration switch",
+    "subtitle": "4-bit group-number switch",
     "img": "assets/images/parts/switches-sip.jpg",
-    "placeholder": "SIP switch",
     "aliases": [
-      "Switch, SIP",
       "SIP switch",
       "switch, SIP",
       "single in-line package (SIP) switch"
+    ]
+  },
+  "gps": {
+    "title": "ARK SAM GPS/compass module",
+    "subtitle": "GPS and compass sensor",
+    "img": "assets/images/parts/gps-compass.jpg",
+    "aliases": [
+      "ARK SAM GPS",
+      "GPS module",
+      "GPS/compass module",
+      "GPS + compass module",
+      "GPS/compass"
+    ]
+  },
+  "gpscable": {
+    "title": "GPS/compass cable",
+    "subtitle": "6-wire cable between the GPS module and FC GPS port",
+    "img": "assets/images/reference/gps-cable.png",
+    "aliases": [
+      "GPS/compass cable",
+      "6-wire GPS/compass cable",
+      "6-wire GPS cable",
+      "GPS cable"
     ]
   },
   "cammodule": {
     "title": "Raspberry Pi Camera Module",
     "subtitle": "Forward camera",
     "img": "assets/images/parts/camera.webp",
-    "placeholder": "Camera module",
     "aliases": [
       "Raspberry Pi Camera Module",
-      "Raspberry Pi camera module",
-      "camera module"
+      "camera module",
+      "camera"
     ]
   },
   "camcable": {
-    "title": "Camera adapter cable",
-    "subtitle": "Pi-to-camera ribbon",
+    "title": "Camera ribbon cable",
+    "subtitle": "Ribbon cable between the Raspberry Pi and camera",
     "img": "assets/images/parts/cabling-camera.webp",
-    "placeholder": "Camera cable",
     "aliases": [
+      "camera ribbon cable",
       "camera cable",
-      "adapter cable",
-      "22-pin ribbon cable",
-      "1.5 inch camera module adapter cable",
-      "CSI ribbon cable",
       "camera adapter cable",
-      "camera ribbon cable"
+      "1.5-inch camera cable",
+      "1.5 in camera cable",
+      "CSI ribbon cable",
+      "22-pin camera cable"
     ]
   },
-  "gps": {
-    "title": "ARK SAM GPS",
-    "subtitle": "GPS + compass module",
-    "img": "assets/images/parts/gps-compass.jpg",
-    "aliases": [
-      "ARK SAM GPS",
-      "GPS module",
-      "GPS/compass module",
-      "GPS + compass",
-      "compass module"
-    ]
-  },
-  "superstructure": {
-    "title": "Sensor suite superstructure",
-    "subtitle": "Upper printed structure",
+  "cameragpsmount": {
+    "title": "Camera/GPS mount",
+    "subtitle": "Printed mount for the camera and GPS module",
     "img": "assets/images/parts/mount-camera-gps.png",
     "aliases": [
-      "sensor suite superstructure",
-      "superstructure",
       "camera/GPS mount",
       "camera GPS mount",
-      "mount"
+      "sensor suite superstructure",
+      "superstructure"
     ]
   },
-  "baseplate": {
-    "title": "Sensor suite base plate",
-    "subtitle": "Lower printed sensor plate",
+  "rpimount": {
+    "title": "Raspberry Pi mount",
+    "subtitle": "Printed mount for the Raspberry Pi",
     "img": "assets/images/parts/mount-raspberry-pi.png",
-    "placeholder": "Sensor suite base plate",
     "aliases": [
-      "sensor-suite base plate",
+      "Raspberry Pi mount",
       "sensor suite base plate",
+      "sensor-suite base plate",
       "base plate"
     ]
   },
   "framekit": {
     "title": "Frame kit",
-    "subtitle": "Lower frame structure",
+    "subtitle": "Main airframe kit",
     "img": "assets/images/parts/frame.webp",
     "aliases": [
       "frame kit",
+      "Lumenier frame kit"
+    ]
+  },
+  "lowerframe": {
+    "title": "Lower frame",
+    "subtitle": "Assembled bottom plate, hub, arms, and lower deck",
+    "img": "assets/images/parts/frame.webp",
+    "aliases": [
       "lower frame",
-      "vehicle frame"
+      "vehicle frame",
+      "frame assembly"
     ]
   },
   "hub": {
     "title": "Hub",
-    "subtitle": "Frame center hub",
+    "subtitle": "Center frame hub",
     "img": "assets/images/reference/hub.jpg",
     "aliases": [
-      "hub"
+      "hub",
+      "arm hub"
     ]
   },
   "bottomplate": {
     "title": "Bottom plate",
-    "subtitle": "Main lower plate",
+    "subtitle": "Lowest carbon plate in the airframe stack",
     "img": "assets/images/reference/bottom_plate.jpg",
     "aliases": [
       "bottom plate"
     ]
   },
-  "bottomdeck": {
-    "title": "Bottom deck",
-    "subtitle": "Upper lower-frame deck",
+  "lowerdeck": {
+    "title": "Lower deck",
+    "subtitle": "Carbon deck with threaded metal inserts",
     "img": "assets/images/reference/bottom_deck_top.jpg",
     "aliases": [
+      "lower deck",
       "bottom deck"
     ]
   },
-  "arm": {
-    "title": "Frame arm",
-    "subtitle": "Motor arm",
-    "img": "assets/images/reference/arm.jpg",
+  "upperdeck": {
+    "title": "Upper deck",
+    "subtitle": "Top carbon plate with the Lumenier marking",
+    "img": "assets/images/reference/top_plate.jpg",
     "aliases": [
-      "arms"
+      "upper deck",
+      "top deck",
+      "top plate",
+      "vehicle top plate",
+      "upper frame"
+    ]
+  },
+  "framestandoff": {
+    "title": "Frame standoff",
+    "subtitle": "Black spacer between the upper and lower decks",
+    "img": "assets/images/parts/framestandoff.png",
+    "aliases": [
+      "frame standoff",
+      "frame standoffs",
+      "stand off",
+      "stand offs",
+      "standoff",
+      "standoffs"
+    ]
+  },
+  "batterypad": {
+    "title": "Battery pad",
+    "subtitle": "Non-slip pad on the upper deck",
+    "img": "assets/images/reference/batterypad.jpg",
+    "aliases": [
+      "battery pad",
+      "silicone battery pad",
+      "non-slip battery pad"
     ]
   },
   "motor": {
     "title": "EMAX Pro Series 2808 motor",
-    "subtitle": "Brushless motor",
+    "subtitle": "Brushless motor for one propeller",
     "img": "assets/images/parts/motors.jpg",
     "aliases": [
       "EMAX Pro Series 2808 motor",
@@ -147,59 +190,84 @@ const GLOSSARY = {
       "motors"
     ]
   },
-  "esc": {
-    "title": "ARK 4-in-1 ESC",
-    "subtitle": "Electronic speed controller",
-    "img": "assets/images/parts/esc.jpg",
-    "placeholder": "ARK 4-in-1 ESC",
-    "aliases": [
-      "ARK 4-in-1 ESC"
-    ]
-  },
   "fc": {
-    "title": "ARK FPV flight controller",
-    "subtitle": "Autopilot board",
-    "placeholder": "ARK FPV flight controller",
+    "title": "Flight controller (FC)",
+    "subtitle": "Main autopilot board",
     "img": "assets/images/parts/flight-controller.jpg",
     "aliases": [
-      "ARK FPV flight controller",
-      "flight controller"
+      "flight controller",
+      "FC",
+      "autopilot board"
+    ]
+  },
+  "esc": {
+    "title": "4-in-1 ESC",
+    "subtitle": "Electronic speed controller for all four motors",
+    "img": "assets/images/parts/esc.jpg",
+    "aliases": [
+      "ESC",
+      "4-in-1 ESC",
+      "electronic speed controller"
+    ]
+  },
+  "fcesccable": {
+    "title": "FC/ESC cable",
+    "subtitle": "8-wire cable between the flight controller and ESC",
+    "img": "assets/images/reference/fc-esc-cable.png",
+    "aliases": [
+      "FC/ESC cable",
+      "8-wire FC/ESC cable",
+      "8-wire cable",
+      "JST-SH connector",
+      "JST-GH connector"
     ]
   },
   "fcharness": {
-    "title": "Custom FC-to-RPi harness",
-    "subtitle": "RPi-to-FC UART/power harness",
-    "placeholder": "FC-to-RPi harness",
+    "title": "FC/RPi cable",
+    "subtitle": "4-wire cable between the flight controller and Raspberry Pi",
     "img": "assets/images/parts/cable-harness-fc-to-rpi.png",
     "aliases": [
-      "custom FC-to-RPi harness",
+      "FC/RPi cable",
       "FC-to-RPi harness",
-      "TELEM harness",
-      "TELEM"
+      "custom FC-to-RPi harness",
+      "RPi-to-FC cable",
+      "TELEM cable",
+      "TELEM harness"
     ]
   },
   "gpsport": {
     "title": "GPS port",
-    "subtitle": "Flight-controller GPS connector",
-    "placeholder": "GPS port",
+    "subtitle": "Flight-controller connector for the GPS/compass cable",
+    "img": "assets/images/reference/gpsport.png",
     "aliases": [
-      "GPS port"
+      "GPS port",
+      "connector marked GPS"
+    ]
+  },
+  "telemport": {
+    "title": "TELEM port",
+    "subtitle": "Flight-controller connector for the FC/RPi cable",
+    "img": "assets/images/reference/telemport.png",
+    "aliases": [
+      "TELEM port",
+      "connector marked TELEM"
     ]
   },
   "xt60": {
     "title": "XT60 battery lead",
-    "subtitle": "Battery lead",
-    "placeholder": "XT60 battery lead",
+    "subtitle": "Main battery lead into the ESC",
     "img": "assets/images/parts/connectors-battery.webp",
     "aliases": [
       "XT60 battery lead",
       "battery lead",
+      "XT60 connector",
+      "XT60 battery connector",
       "XT60"
     ]
   },
   "cableties": {
     "title": "Cable ties",
-    "subtitle": "Secures motor wires and battery lead",
+    "subtitle": "Secure motor wires and the battery lead",
     "img": "assets/images/fasteners/7130K742.png",
     "aliases": [
       "cable ties",
@@ -209,36 +277,9 @@ const GLOSSARY = {
       "ties, cable"
     ]
   },
-  "topplate": {
-    "title": "Vehicle top plate",
-    "subtitle": "Upper carbon plate",
-    "img": "assets/images/reference/top_plate.jpg",
-    "aliases": [
-      "vehicle top plate",
-      "top plate"
-    ]
-  },
-  "batterypad": {
-    "title": "Battery pad",
-    "subtitle": "Non-slip top-plate pad",
-    "placeholder": "Battery pad",
-    "aliases": [
-      "battery pad"
-    ]
-  },
-  "sdcard": {
-    "title": "microSD card",
-    "subtitle": "Issued tool item",
-    "img": "assets/images/tools/micro_sd_adapter.png",
-    "aliases": [
-      "microSD card",
-      "microSD adapter",
-      "SD adapter"
-    ]
-  },
   "propellers": {
     "title": "Gemfan LR 7035 2-blade propellers",
-    "subtitle": "CW and CCW propeller set",
+    "subtitle": "CW and CCW propellers",
     "img": "assets/images/parts/propellers.webp",
     "aliases": [
       "Gemfan LR 7035 2-blade propellers",
@@ -248,28 +289,42 @@ const GLOSSARY = {
       "CCW prop"
     ]
   },
-  "lipo": {
+  /*"lipo": {
     "title": "4S LiPo battery",
-    "subtitle": "Flight battery",
+    "subtitle": "Main flight battery",
+    "img": "assets/images/parts/battery.webp",
     "placeholder": "4S LiPo battery",
     "aliases": [
       "4S LiPo battery",
-      "LiPo battery"
+      "LiPo battery",
+      "battery"
+    ]
+  },*/
+  "sdcard": {
+    "title": "microSD card",
+    "subtitle": "Storage card used by the flight controller or Raspberry Pi",
+    "img": "assets/images/tools/micro_sd_adapter.png",
+    "aliases": [
+      "microSD card",
+      "microSD memory card",
+      "SD adapter"
     ]
   },
   "spacer": {
     "title": "M2.5 × 4 mm nylon spacer",
-    "subtitle": "Raspberry Pi spacer",
+    "subtitle": "Insulating spacer under the Raspberry Pi",
     "img": "assets/images/fasteners/93657A204.png",
     "aliases": [
       "M2.5 × 4 mm nylon spacer",
       "M2.5 nylon spacer",
-      "nylon spacer"
+      "nylon spacer",
+      "spacer",
+      "spacers"
     ]
   },
   "nskkit": {
-    "title": "Fastener Kit",
-    "subtitle": "Nuts, screws, standoffs, and spacers",
+    "title": "Fastener kit",
+    "subtitle": "Bagged hardware used across the build",
     "img": "assets/images/parts/fastener-kit.png",
     "aliases": [
       "Fastener Kit",
@@ -279,127 +334,153 @@ const GLOSSARY = {
   },
   "m25x6roundhex": {
     "title": "M2.5 × 6 mm round-head hex screw",
-    "subtitle": "Battery-connector screw",
+    "subtitle": "Fastens the battery connector to the ESC",
     "img": "assets/images/fasteners/92095A458.png",
     "aliases": [
       "M2.5 × 6 mm round-head hex screw",
-      "M2.5 x 6 mm round headed hex screw",
-      "battery-connector screw"
+      "M2.5 x 6 mm round headed screw",
+      "M2.5 x 6mm round headed screw"
     ]
   },
   "m2x6": {
     "title": "M2 × 6 mm socket-head screw",
-    "subtitle": "Camera fastener",
+    "subtitle": "Camera mounting screw",
     "img": "assets/images/fasteners/91292A831.png",
-    "placeholder": "M2 × 6 mm socket-head screw",
     "aliases": [
+      "M2 × 6 mm socket-head screw",
       "M2 x 6 mm socket-head screw",
-      "M2 × 6 mm screw",
-      "M2 × 6 mm"
+      "M2 × 6 mm screw"
     ]
   },
   "m25x8": {
     "title": "M2.5 × 8 mm socket-head screw",
-    "subtitle": "Raspberry Pi fastener",
+    "subtitle": "Raspberry Pi mounting screw",
     "img": "assets/images/fasteners/91292A012.png",
-    "placeholder": "M2.5 × 8 mm socket-head screw",
     "aliases": [
-      "M2.5 × 8 mm screw",
       "M2.5 × 8 mm socket-head screw",
-      "M2.5 x 8 mm",
-      "M2.5 mounting screws"
+      "M2.5 × 8 mm screw",
+      "M2.5 x 8 mm"
     ]
   },
   "m3x10flat": {
     "title": "M3 × 10 mm flat-head countersunk screw",
-    "subtitle": "Sensor-base fastener",
+    "subtitle": "Front frame-standoff screw",
     "img": "assets/images/fasteners/91294A130.png",
-    "placeholder": "M3 × 10 mm flat-head screw",
     "aliases": [
       "M3 × 10 mm flat-head countersunk screw",
+      "M3 × 10 mm countersunk screw",
       "M3 × 10 mm flat-head screw",
-      "M3 × 10 mm screw",
-      "M3 × 10 mm",
-      "countersunk screw",
-      "countersunk screws"
+      "M3 × 10 mm screw"
     ]
   },
   "m3x12socket": {
     "title": "M3 × 12 mm socket-head screw",
-    "subtitle": "GPS / frame fastener",
+    "subtitle": "GPS and camera/GPS mount hardware",
     "img": "assets/images/fasteners/91292A114.png",
-    "placeholder": "M3 × 12 mm socket-head screw",
     "aliases": [
       "M3 × 12 mm socket-head screw",
       "M3 × 12 mm screw",
-      "M3 × 12 mm"
+      "M3 x 12 mm socket-head screw"
     ]
   },
   "m3x25standoff": {
     "title": "M3 × 25 mm aluminum standoff",
-    "subtitle": "Female/female standoff",
+    "subtitle": "Camera/GPS-mount standoff",
     "img": "assets/images/fasteners/95947A018.png",
-    "placeholder": "M3 × 25 mm aluminum standoff",
     "aliases": [
       "M3 × 25 mm aluminum standoff",
       "M3 x 25 mm aluminum standoff",
-      "female/female standoff"
+      "aluminum standoff"
     ]
   },
   "m3locknut": {
     "title": "M3 nylon-insert lock nut",
-    "subtitle": "Self-locking nut",
+    "subtitle": "Self-locking nut for M3 hardware",
     "img": "assets/images/fasteners/90576A102.png",
-    "placeholder": "M3 nylon-insert lock nut",
     "aliases": [
       "M3 nylon-insert lock nut",
       "lock nut",
       "lock nuts",
       "nylon-insert lock nut",
-      "nylon-insert nuts"
+      "nylon-insert lock nuts"
     ]
   },
   "m330stack": {
-    "title": "M3 × 30 mm stack screw",
-    "subtitle": "Frame-supplied stack fastener",
+    "title": "M3 × 30 mm round-head screw",
+    "subtitle": "Frame-supplied FC/ESC stack screw",
     "img": "assets/images/fasteners/m330stack.png",
     "aliases": [
-      "M3 × 30 mm stack screw",
-      "M3 x 30 mm stack screw",
-      "long stack screw",
-      "stack screw",
-      "stack screws"
+      "M3 × 30 mm round-head screw",
+      "M3 x 30 mm round head screw",
+      "M3 × 30 mm round head screw",
+      "M3 × 30 mm"
     ]
   },
   "m312round": {
     "title": "M3 × 12 mm round-head screw",
-    "subtitle": "Bottom-plate fastener",
+    "subtitle": "Frame-supplied lower-frame screw",
     "img": "assets/images/fasteners/m312round.png",
-    "placeholder": "M3 × 12 mm round-head screw",
     "aliases": [
       "M3 × 12 mm round-head screw",
-      "M3 x 12 mm round-head screw",
-      "round-head screw",
-      "round-head screws"
+      "M3 x 12 mm round head screw",
+      "M3 × 12 mm round head screw"
     ]
   },
   "m38round": {
     "title": "M3 × 8 mm round-head screw",
-    "subtitle": "Top-plate fastener",
+    "subtitle": "Frame-supplied upper-deck screw",
     "img": "assets/images/fasteners/m38round.png",
-    "placeholder": "M3 × 8 mm round-head screw",
     "aliases": [
       "M3 × 8 mm round-head screw",
-      "M3 x 8 mm round-head screw",
-      "round-head screw",
-      "round-head screws"
+      "M3 x 8 mm round head screw",
+      "M3 × 8 mm round head screw"
+    ]
+  },
+  "m5locknut": {
+    "title": "M5 nylon-insert lock nut",
+    "subtitle": "Temporary motor-shaft nut for accountability",
+    "img": "assets/images/fasteners/92461A200.png",
+    "aliases": [
+      "M5 nylon-insert lock nut",
+      "propeller shaft nut",
+      "M5 lock nut"
+    ]
+  },
+  "m3x8motor": {
+    "title": "M3 × 8 mm socket-head screw",
+    "subtitle": "Motor mounting screw",
+    "img": "assets/images/fasteners/91290A113.png",
+    "aliases": [
+      "M3 × 8 mm socket-head screw",
+      "M3x8mm socket-head screw",
+      "M3 x 8 mm socket head screw"
+    ]
+  },
+  "m3x10motor": {
+    "title": "M3 × 10 mm socket-head screw",
+    "subtitle": "Motor accessory screw not used for mounting",
+    "img": "assets/images/fasteners/91290A115.png",
+    "aliases": [
+      "M3 × 10 mm socket-head screw",
+      "M3x10mm socket-head screw",
+      "M3 x 10 mm socket head screw"
+    ]
+  },
+  "damper": {
+    "title": "Silicone vibration damper",
+    "subtitle": "Vibration isolator for the FC and ESC",
+    "img": "assets/images/reference/damper.png",
+    "aliases": [
+      "silicone vibration damper",
+      "vibration damper",
+      "damper",
+      "silicone damper"
     ]
   },
   "allen15": {
     "title": "1.5 mm Allen key",
-    "subtitle": "M2 and battery-connector screws",
+    "subtitle": "Driver for M2 camera screws and the battery-lead screws",
     "img": "assets/images/tools/allen15.png",
-    "placeholder": "1.5 mm Allen key",
     "aliases": [
       "1.5 mm Allen key",
       "M1.5 hex key",
@@ -408,29 +489,28 @@ const GLOSSARY = {
   },
   "allen20": {
     "title": "2.0 mm Allen key",
-    "subtitle": "M2.5 and stack screws",
+    "subtitle": "Driver for Raspberry Pi and frame screws that use a 2.0 mm hex",
     "img": "assets/images/tools/allen20.png",
-    "placeholder": "2.0 mm Allen key",
     "aliases": [
       "2.0 mm Allen key",
-      "M2 hex key"
+      "M2 hex key",
+      "M2 Allen key"
     ]
   },
   "allen25": {
     "title": "2.5 mm Allen key",
-    "subtitle": "M3 socket-head fasteners",
+    "subtitle": "Driver for M3 socket-head screws",
     "img": "assets/images/tools/allen25.png",
-    "placeholder": "2.5 mm Allen key",
     "aliases": [
       "2.5 mm Allen key",
-      "M2.5 hex key"
+      "M2.5 hex key",
+      "M2.5 Allen key"
     ]
   },
   "driver55": {
     "title": "5.5 mm nut driver",
-    "subtitle": "M3 lock nuts",
+    "subtitle": "Driver for M3 lock nuts",
     "img": "assets/images/tools/driver55.png",
-    "placeholder": "5.5 mm nut driver",
     "aliases": [
       "5.5 mm nut driver",
       "M5.5 nut driver"
@@ -438,116 +518,94 @@ const GLOSSARY = {
   },
   "m8driver": {
     "title": "M8 nut driver",
-    "subtitle": "Propeller lock nuts",
+    "subtitle": "Driver for propeller lock nuts",
     "img": "assets/images/tools/m8driver.png",
-    "placeholder": "M8 nut driver",
     "aliases": [
       "M8 nut driver"
     ]
   },
   "snips": {
     "title": "Snips",
-    "subtitle": "Light cutting tool",
+    "subtitle": "Trim cable ties and light material",
     "img": "assets/images/tools/shear-cutter.jpg",
-    "placeholder": "Snips",
     "aliases": [
       "snips",
+      "shear cutter",
       "side cutters"
     ]
   },
   "pliers": {
-    "title": "Pliers",
-    "subtitle": "Light holding / pull-through tool",
+    "title": "Needle-nose pliers",
+    "subtitle": "Hold small hardware and pull material through tight holes",
     "img": "assets/images/tools/pliers.jpg",
-    "placeholder": "Pliers",
     "aliases": [
       "pliers",
       "needle-nose pliers",
-      "pair of pliers"
+      "needle nose pliers"
     ]
   },
-  //"usb": {
-  //  "title": "USB-C cable",
-  //  "subtitle": "Connect to flight controller",
-  //  "placeholder": "USB-C cable",
-  //  "aliases": [
-  //    "USB-C cable"
-  //  ]
-  //},
+  "usb": {
+    "title": "USB-C cable",
+    "subtitle": "Bench cable for Mission Planner tasks",
+    "img": "assets/images/tools/usb-c-cable.svg",
+    "aliases": [
+      "USB-C cable",
+      "USB cable"
+    ]
+  },
   "lipoTester": {
     "title": "LiPo battery tester",
     "subtitle": "Reads total battery voltage",
     "img": "assets/images/tools/lipo-tester.webp",
-    "placeholder": "LiPo battery tester",
     "aliases": [
       "LiPo battery tester",
       "battery tester"
     ]
   },
-  //"solderingiron": {
-  //  "title": "Soldering iron",
-  //  "subtitle": "For board soldering",
-  //  "placeholder": "Soldering iron",
-  //  "aliases": [
-  //    "soldering iron",
-  //    "iron"
-  //  ]
-  //},
-  //"solderingstation": {
-  //  "title": "Soldering station",
-  //  "subtitle": "Bench soldering tool",
-  //  "placeholder": "Soldering station",
-  //  "aliases": [
-  //    "soldering station"
-  //  ]
-  //},
-  //"helpinghands": {
-  //  "title": "Helping hands",
-  //  "subtitle": "Board holding fixture",
-  //  "placeholder": "Helping hands",
-  //  "aliases": [
-  //    "helping hands"
-  //  ]
-  //},
-  //"fan": {
-  //  "title": "Ventilation fan",
-  //  "subtitle": "Solder fume extraction",
-  //  "placeholder": "Ventilation fan",
-  //  "aliases": [
-  //    "ventilation fan",
-  //    "fan"
-  //  ]
-  //},
-  //"eyepro": {
-  //  "title": "Eye protection",
-  //  "subtitle": "Required PPE",
-  //  "placeholder": "Eye protection",
-  //  "aliases": [
-  //    "eye protection"
-  //  ]
-  //},
-  "gpscable": {
-    "title": "GPS/compass cable",
-    "subtitle": "GPS-to-FC cable",
-    "img": "assets/images/reference/gps-cable.png",
-    "placeholder": "GPS/compass cable",
+  "helpinghands": {
+    "title": "Helping hand",
+    "subtitle": "Bench fixture that holds small parts during soldering",
+    "img": "assets/images/tools/3rd-hand.jpg",
     "aliases": [
-      "GPS/compass cable",
-      "6-wire GPS cable",
-      "GPS cable",
-      "6-wire GPS/compass cable"
+      "helping hand",
+      "helping hands"
     ]
   },
-  "damper": {
-    "title": "Vibration damper",
-    "subtitle": "FC/ESC vibration isolator",
-    "img": "assets/images/reference/damper.png",
+  "solderingstation": {
+    "title": "Soldering station",
+    "subtitle": "Bench station for the soldering iron",
+    "img": "assets/images/tools/soldering-station.jpg",
     "aliases": [
-      "vibration damper",
-      "damper",
-      "rubber damper"
+      "soldering station"
     ]
-  }
+  },
+  "solder": {
+    "title": "Roll of solder",
+    "subtitle": "Solder wire for the through-hole joints",
+    "img": "assets/images/tools/solder.webp",
+    "aliases": [
+      "solder",
+      "roll of solder"
+    ]
+  },
+  "eyepro": {
+    "title": "Eye protection",
+    "subtitle": "Required PPE for soldering and debris-producing steps",
+    "img": "assets/images/tools/eyepro.png",
+    "aliases": [
+      "eye protection",
+      "safety glasses"
+    ]
+  }/*,
+  "fan": {
+    "title": "Ventilation fan",
+    "subtitle": "Moves solder fumes away from the bench",
+    "placeholder": "Ventilation fan",
+    "aliases": [
+      "ventilation fan",
+      "fan"
+    ]
+  }*/
 };
 
 const TEAM_ROSTER = [
@@ -716,18 +774,182 @@ function renderFooter() {
 }
 
 const TASK_META = {
-  "task1": {"id": "task1", "order": 1, "published": true, "title": "Task 1: Prepare the Raspberry Pi", "slug": "task1-prepare-raspberry-pi", "day": "Day 1", "blockers": [], "summary": "Install the 4-pin latch header and SIP switch on the Raspberry Pi Zero 2 W.", "role": null},
-  "task2": {"id": "task2", "order": 2, "published": true, "title": "Task 2: Install GPS/Compass", "slug": "task2-install-gps-compass", "day": "Day 1", "blockers": [], "summary": "Mount the ARK SAM GPS to the camera/GPS mount and connect the 6-wire cable.", "role": null},
-  "task3": {"id": "task3", "order": 3, "published": true, "title": "Task 3: Install Camera", "slug": "task3-install-camera", "day": "Day 1", "blockers": ["task2"], "summary": "Clear the printed holes, install the camera, and secure the ribbon cable.", "role": null},
-  "task4": {"id": "task4", "order": 4, "published": true, "title": "Task 4: Assemble the lower frame", "slug": "task4-assemble-lower-frame", "day": "Day 1", "blockers": [], "summary": "Assemble the hub, arms, bottom plate, and lower deck with the short frame screws.", "role": null},
-  "task5": {"id": "task5", "order": 5, "published": true, "title": "Task 5: Install the motors", "slug": "task5-install-motors", "day": "Day 2", "blockers": ["task4"], "summary": "Confirm frame orientation, then mount all four motors with the short motor screws.", "role": null},
-  "task6": {"id": "task6", "order": 6, "published": false, "title": "Task 6: Install the vehicle top plate and sensor-suite base plate", "slug": "task6-top-plate-and-base", "day": "Day 4", "blockers": ["task5"], "summary": "Join the lower frame to the top plate and printed sensor-suite base plate.", "role": null},
-  "task7": {"id": "task7", "order": 7, "published": false, "title": "Task 7: Install the Raspberry Pi", "slug": "task7-install-rpi", "day": "Day 4", "blockers": ["task1", "task6"], "summary": "Mount the Raspberry Pi on the sensor-suite base plate before the superstructure is attached.", "role": null},
-  "task8": {"id": "task8", "order": 8, "published": false, "title": "Task 8: Install the sensor suite and connect the wiring", "slug": "task8-sensor-suite-and-wiring", "day": "Day 4", "blockers": ["task2", "task7"], "summary": "Install the superstructure, connect the camera cable, route the GPS lead, and connect the FC-to-RPi harness.", "role": null},
-  "task9": {"id": "task9", "order": 9, "published": false, "title": "Task 9: Software setup and motor test", "slug": "task9-software-and-motor-test", "day": "Day 5", "blockers": ["task8"], "summary": "Connect Mission Planner, set the frame type, and verify motor order and direction before propellers go on.", "role": null},
-  "task10": {"id": "task10", "order": 10, "published": false, "title": "Task 10: Load preset parameters", "slug": "task10-preset-parameters", "day": "Day 5", "blockers": ["task9"], "summary": "Load the current faculty parameter file after the aircraft is fully wired.", "role": null},
-  "task11": {"id": "task11", "order": 11, "published": false, "title": "Task 11: Sensor calibration", "slug": "task11-sensor-calibration", "day": "Day 5", "blockers": ["task10"], "summary": "Run accelerometer and compass calibration, then enter total battery voltage.", "role": null},
-  "task12": {"id": "task12", "order": 12, "published": false, "title": "Task 12: Mount the propellers", "slug": "task12-mount-propellers", "day": "Day 5–6", "blockers": ["task11"], "summary": "Install the correct CW and CCW propellers only after motor test and software setup are complete.", "role": null}
+  "task1": {
+    "id": "task1",
+    "order": 1,
+    "published": true,
+    "title": "Task 1: Prepare the Raspberry Pi",
+    "slug": "task1-prepare-raspberry-pi",
+    "day": "",
+    "blockers": [],
+    "summary": "Install the 4-pin latch header and SIP switch on the Raspberry Pi."
+  },
+  "task2": {
+    "id": "task2",
+    "order": 2,
+    "published": true,
+    "title": "Task 2: Install GPS/Compass",
+    "slug": "task2-install-gps-compass",
+    "day": "",
+    "blockers": [],
+    "summary": "Mount the GPS/compass module on the camera/GPS mount and connect the 6-wire cable."
+  },
+  "task3": {
+    "id": "task3",
+    "order": 3,
+    "published": true,
+    "title": "Task 3: Install Camera",
+    "slug": "task3-install-camera",
+    "day": "",
+    "blockers": [
+      "task2"
+    ],
+    "summary": "Clear the printed holes, install the camera, and connect the camera ribbon cable."
+  },
+  "task4": {
+    "id": "task4",
+    "order": 4,
+    "published": true,
+    "title": "Task 4: Assemble the lower frame",
+    "slug": "task4-assemble-lower-frame",
+    "day": "",
+    "blockers": [],
+    "summary": "Assemble the bottom plate, hub, arms, lower deck, and foam feet."
+  },
+  "task5": {
+    "id": "task5",
+    "order": 5,
+    "published": true,
+    "title": "Task 5: Install motors",
+    "slug": "task5-install-motors",
+    "day": "",
+    "blockers": [
+      "task4"
+    ],
+    "summary": "Install all four motors with the short motor screws and retain the prop-shaft nuts."
+  },
+  "task6": {
+    "id": "task6",
+    "order": 6,
+    "published": true,
+    "title": "Task 6: Mount FC/ESC",
+    "slug": "task6-mount-fc-esc",
+    "day": "",
+    "blockers": [
+      "task4"
+    ],
+    "summary": "Prepare the flight controller, connect it to the ESC, and install the FC/ESC stack."
+  },
+  "task7": {
+    "id": "task7",
+    "order": 7,
+    "published": true,
+    "title": "Task 7: Set up powertrain",
+    "slug": "task7-set-up-powertrain",
+    "day": "",
+    "blockers": [
+      "task6"
+    ],
+    "summary": "Install the XT60 battery lead and plug all four motor leads into the ESC."
+  },
+  "task8": {
+    "id": "task8",
+    "order": 8,
+    "published": true,
+    "title": "Task 8: Set up the upper deck",
+    "slug": "task8-set-up-upper-deck",
+    "day": "",
+    "blockers": [
+      "task1"
+    ],
+    "summary": "Install the frame standoffs, Raspberry Pi mount, Raspberry Pi, and battery pad on the upper deck."
+  },
+  "task9": {
+    "id": "task9",
+    "order": 9,
+    "published": true,
+    "title": "Task 9: Mate upper and lower frames",
+    "slug": "task9-mate-upper-and-lower-frames",
+    "day": "",
+    "blockers": [
+      "task7",
+      "task8"
+    ],
+    "summary": "Join the upper and lower frames with the remaining frame screws."
+  },
+  "task10": {
+    "id": "task10",
+    "order": 10,
+    "published": true,
+    "title": "Task 10: Mate camera/GPS mount onto the frame",
+    "slug": "task10-mate-camera-gps-mount",
+    "day": "",
+    "blockers": [
+      "task3",
+      "task9"
+    ],
+    "summary": "Set the SIP switch, connect the camera ribbon, route the cables, and install the camera/GPS mount."
+  },
+  "task11": {
+    "id": "task11",
+    "order": 11,
+    "published": true,
+    "title": "Task 11: Install Mission Planner",
+    "slug": "task11-install-mission-planner",
+    "day": "",
+    "blockers": [
+      "task10"
+    ],
+    "summary": "Download and install Mission Planner on the PC."
+  },
+  "task12": {
+    "id": "task12",
+    "order": 12,
+    "published": true,
+    "title": "Task 12: Set up param file",
+    "slug": "task12-set-up-param-file",
+    "day": "",
+    "blockers": [
+      "task11"
+    ],
+    "summary": "Load the faculty-issued preset parameter file into the flight controller."
+  },
+  "task13": {
+    "id": "task13",
+    "order": 13,
+    "published": true,
+    "title": "Task 13: Motor check",
+    "slug": "task13-motor-check",
+    "day": "",
+    "blockers": [
+      "task12"
+    ],
+    "summary": "Connect Mission Planner, confirm frame settings, and verify motor order and direction."
+  },
+  "task14": {
+    "id": "task14",
+    "order": 14,
+    "published": true,
+    "title": "Task 14: Install propellers",
+    "slug": "task14-install-propellers",
+    "day": "",
+    "blockers": [
+      "task13"
+    ],
+    "summary": "Install the correct CW and CCW propellers after motor testing is complete."
+  },
+  "task15": {
+    "id": "task15",
+    "order": 15,
+    "published": true,
+    "title": "Task 15: Flight Day",
+    "slug": "task15-flight-day",
+    "day": "",
+    "blockers": [
+      "task14"
+    ],
+    "summary": "Run the final handoff checks before a prop-on run or flight event."
+  }
 };
 
 function getProgress() {
@@ -1009,11 +1231,12 @@ function renderTaskStrip() {
     .map(status => `<span class="${escapeHtml(status.className)}">${escapeHtml(status.label)}</span>`)
     .join('');
 
+  const taskTag = task.day ? `<span class="badge day-tag">${escapeHtml(task.day)}</span>` : "";
   slot.innerHTML = `
     <div class="task-header">
       <div class="task-strip-main">
         <div class="task-strip-top">
-          <div class="badge-row"><span class="badge day-tag">${escapeHtml(task.day)}</span>${statusBadges}</div>
+          <div class="badge-row">${taskTag}${statusBadges}</div>
           <div class="progress-box" data-task-id="${escapeHtml(task.id)}"></div>
         </div>
       </div>
@@ -1032,9 +1255,10 @@ function renderTaskIndex() {
           .map(blocker => escapeHtml(blocker.title))
           .join('; ')
       : 'None';
+    const kicker = task.day ? `<div class="kicker">${escapeHtml(task.day)}</div>` : '';
     return `
       <article class="task-card" data-task-card="${escapeHtml(task.id)}">
-        <div class="kicker">${escapeHtml(task.day)}</div>
+        ${kicker}
         <div class="badge-row"><span class="status-chip" data-status>Ready now</span></div>
         <h3>${escapeHtml(task.title)}</h3>
         <p class="sub">${escapeHtml(task.summary)}</p>

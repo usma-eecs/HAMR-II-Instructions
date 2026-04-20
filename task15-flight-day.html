@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task 15: Flight Day</title>
+<link rel="stylesheet" href="assets/css/common.css">
+<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+</head>
+<body data-page="task15-flight-day.html">
+<main class="page">
+<section class="hero"><h1>Task 15: Flight Day</h1><p>Run the final handoff checks before a prop-on run or flight event.</p></section>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
+<section class="section annotate-terms" id="task15-flight-day">
+<div class="parts-tools">
+<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Completed aircraft</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>Faculty verification</li></ul></div>
+</div>
+
+<h3>Flight-day handoff checklist</h3>
+<p class="muted">Before an aircraft is handed off for its first prop-on run or flight event, confirm the items below.</p>
+<table aria-label="flight day handoff checklist" class="matrix">
+  <thead><tr><th>Check</th><th>What good looks like</th></tr></thead>
+  <tbody>
+    <tr><td>Airframe</td><td>No missing fasteners, no visibly cracked printed parts, no loose arms, and no loose FC/ESC stack hardware.</td></tr>
+    <tr><td>Wiring</td><td>Camera ribbon fully seated, GPS cable connected to <code class="kbd">GPS</code>, FC/RPi cable connected to <code class="kbd">TELEM</code>, and no loose wires in the propeller arc.</td></tr>
+    <tr><td>Software</td><td>Mission Planner installed, frame type confirmed, preset parameters loaded, and motor check completed.</td></tr>
+    <tr><td>Propellers</td><td>CW and CCW propellers match the verified motor directions and all propeller nuts are snug.</td></tr>
+    <tr><td>Issued items</td><td>The issued microSD card and any borrowed tools are accounted for.</td></tr>
+  </tbody>
+</table>
+<div class="stop-box"><strong>STOP.</strong> Do not proceed to a prop-on test or flight event until a faculty member verifies the completed aircraft.</div>
+<h3>Common errors</h3>
+<ul class="error-list">
+  <li>Assuming software is correct without checking the motor-test results.</li>
+  <li>Leaving loose wiring where a propeller can strike it.</li>
+  <li>Proceeding to a prop-on run without faculty verification.</li>
+</ul>
+
+</section>
+<div class="footer" data-site-footer></div>
+</main>
+<script src="assets/js/common.js"></script>
+</body>
+</html>

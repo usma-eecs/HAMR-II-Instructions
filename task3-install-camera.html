@@ -4,19 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Task 3: Install Camera</title>
-  <link rel="stylesheet" href="assets/css/common.css">
-  <link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+<link rel="stylesheet" href="assets/css/common.css">
+<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
 </head>
 <body data-page="task3-install-camera.html">
 <main class="page">
-<section class="hero"><h1>Task 3: Install Camera</h1><p>Clear the printed holes, install the Raspberry Pi camera, and secure the camera ribbon cable.</p></section>
+<section class="hero"><h1>Task 3: Install Camera</h1><p>Clear the printed holes, install the camera, and connect the camera ribbon cable.</p></section>
 <nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
 <div data-task-strip></div>
-<section class="section annotate-terms" id="task3">
+<section class="section annotate-terms" id="task3-install-camera">
 <div class="parts-tools">
-<div class="info-card"><h4>Parts required</h4><ul class="item-list"><li>Raspberry Pi camera module</li><li>1.5-inch camera ribbon cable</li><li>Camera/GPS mount from Task 2</li><li>Fastener kit, subkit labeled <strong>GPS + Camera</strong></li><li>Four M2 × 6 mm socket-head screws</li></ul></div>
-<div class="info-card"><h4>Tools required</h4><ul class="item-list"><li>1.5 mm Allen key</li><li>Needle-nose pliers</li></ul></div>
+<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Camera/GPS mount from Task 2</li><li>Raspberry Pi Camera Module</li><li>1.5-inch camera ribbon cable</li><li>Fastener kit, subkit labeled <strong>GPS + Camera</strong></li><li>Four M2 × 6 mm socket-head screws</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>1.5 mm Allen key</li><li>Needle-nose pliers</li></ul></div>
 </div>
+
 <div class="instruction-flow">
   <section class="instruction-block">
     <div>
@@ -27,49 +28,40 @@
         <li>Drive the screw in only far enough to push the plastic out the back side.</li>
         <li>Back the screw completely out, then use the needle-nose pliers to remove any loose plastic still attached on the back side.</li>
       </ol>
-      <div class="callout step-note"><strong>Inspection standard</strong><br>Do not install the camera until all four holes are fully open.</div>
     </div>
     <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/tasks/task3/task3-fig3a.png" alt="Task 3 Figure 3a clearing mounting holes"><div class="figure-caption">Fig. 3a. Verify that each camera hole is fully clear before installing the camera.</div></div>
+      <div class="figure-card"><img src="assets/images/tasks/task3/task3-fig3a.png" alt="Figure 3a clearing camera mounting holes"><div class="figure-caption">Fig. 3a. Clear all four mounting holes before installing the camera.</div></div>
     </div>
   </section>
 
   <section class="instruction-block">
     <div>
-      <h4>Step 2. Prepare the camera</h4>
+      <h4>Step 2. Install the camera and ribbon cable</h4>
       <ol class="compact-list" start="5">
-        <li>Retrieve the camera.</li>
-        <li>Surrender the lens adjustment tool to a faculty member.</li>
+        <li>Retrieve the camera. Surrender the lens-adjustment tool to a faculty member.</li>
         <li>Gently release the black cable retainer on the camera.</li>
         <li>Remove the white ribbon cable from the camera and surrender it to a faculty member.</li>
+        <li>Install the camera into the camera/GPS mount exactly as shown in Fig. 3b. The cable retainer must face the rear of the mount.</li>
+        <li>Make sure the PCB sits flush against the plastic mount so the lens seats fully in the square opening.</li>
+        <li>Use the needle-nose pliers to hold each M2 × 6 mm screw in place and tighten it gently with the 1.5 mm Allen key. Start with one of the rear holes if that is easier, then tighten in a crisscross pattern.</li>
+        <li>Install the wide, 15-pin end of the 1.5-inch camera cable on the camera and secure the retainer gently.</li>
+        <li>The metal contacts on the ribbon cable must face downward, away from the black retainer.</li>
       </ol>
+      <div class="callout step-note"><strong>If time is tight.</strong><br>Two diagonal camera screws are acceptable. Four screws are preferred.</div>
     </div>
     <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/parts/camera.webp" alt="Raspberry Pi camera module"><div class="figure-caption">Camera module used in this task.</div></div>
-    </div>
-  </section>
-
-  <section class="instruction-block">
-    <div>
-      <h4>Step 3. Install the camera and ribbon cable</h4>
-      <ol class="compact-list" start="9">
-        <li>Install the camera into the camera/GPS mount in the orientation shown in Fig. 3b.</li>
-        <li>Make sure the black cable retainer faces the rear of the mount.</li>
-        <li>Make sure the camera PCB sits flush against the plastic mount so the lens seats properly in the square front opening.</li>
-        <li>Use the needle-nose pliers to hold each M2 × 6 mm screw in place while you start it with the 1.5 mm Allen key.</li>
-        <li>It is usually easiest to start with one of the rear holes, then install the remaining screws in a crisscross pattern.</li>
-        <li>Install the wide 15-pin end of the 1.5-inch camera cable into the camera, then gently close the retainer.</li>
-        <li>The exposed metal contacts on the ribbon cable must face downward, away from the black plastic retainer.</li>
-      </ol>
-      <div class="ok-box step-note"><strong>Time-saving option</strong><br>If time is limited, two screws installed on opposite corners are acceptable. Four screws are preferred when time allows.</div>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/tasks/task3/task3-fig3b.png" alt="Task 3 Figure 3b mounting camera"><div class="figure-caption">Fig. 3b. Use this figure to confirm camera orientation and screw direction.</div></div>
+      <div class="figure-card"><img src="assets/images/tasks/task3/task3-fig3b.png" alt="Figure 3b mounting the camera"><div class="figure-caption">Fig. 3b. Camera orientation and hardware.</div></div>
     </div>
   </section>
 </div>
 <h3>Common errors</h3>
-<ul class="error-list"><li>Installing the camera before clearing all four holes.</li><li>Reinstalling the surrendered white ribbon cable instead of the correct 1.5-inch cable.</li><li>Orienting the camera so the cable retainer faces the wrong direction.</li><li>Installing the ribbon cable backward so the contacts face the retainer instead of away from it.</li><li>Using excessive force when seating the camera or tightening the screws.</li></ul>
+<ul class="error-list">
+  <li>Leaving print debris in the holes and forcing the screws.</li>
+  <li>Installing the camera backward so the cable retainer does not face the rear.</li>
+  <li>Not seating the lens fully in the square opening.</li>
+  <li>Installing the ribbon cable with the metal contacts facing the wrong way.</li>
+</ul>
+
 </section>
 <div class="footer" data-site-footer></div>
 </main>

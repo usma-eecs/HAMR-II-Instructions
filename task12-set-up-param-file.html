@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task 12: Set up param file</title>
+<link rel="stylesheet" href="assets/css/common.css">
+<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+</head>
+<body data-page="task12-set-up-param-file.html">
+<main class="page">
+<section class="hero"><h1>Task 12: Set up param file</h1><p>Load the faculty-issued preset parameter file into the flight controller.</p></section>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
+<section class="section annotate-terms" id="task12-set-up-param-file">
+<div class="parts-tools">
+<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Vehicle with the FC, ESC, and camera/GPS mount installed</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>USB-C cable</li><li>PC running Mission Planner</li></ul></div>
+</div>
+
+<div class="callout"><strong>Download link placeholder.</strong><br>Replace this box with the current faculty-issued parameter-file link for the course. The procedure below matches last year’s workflow.</div>
+<h3>Steps</h3>
+<ol class="step-list">
+  <li>Download the current preset parameter file from the faculty-provided course location.</li>
+  <li>Connect the USB-C cable between the PC and the flight controller.</li>
+  <li>Open Mission Planner.</li>
+  <li>In the top-right corner, select <strong>COMnn Ardupilot MAVLink</strong> and set <strong>Baud rate = 921600</strong>.</li>
+  <li>Select <strong>CONNECT</strong>.</li>
+  <li>Open <strong>CONFIG → Full Parameter List</strong>.</li>
+  <li>Select <strong>Load from file</strong> on the right side of the window.</li>
+  <li>Select the preset <code>.param</code> file and acknowledge the pop-up dialogs.</li>
+  <li>Select <strong>Write Params</strong> and confirm the write operation.</li>
+  <li>Disconnect and reconnect the USB-C cable to reboot the flight controller.</li>
+  <li>Reconnect in Mission Planner and confirm the FC connects normally.</li>
+</ol>
+<h3>Common errors</h3>
+<ul class="error-list">
+  <li>Loading the file but forgetting to select <strong>Write Params</strong>.</li>
+  <li>Using the wrong COM port or baud rate and assuming the FC is faulty.</li>
+  <li>Skipping the USB reboot after writing the parameters.</li>
+</ul>
+
+</section>
+<div class="footer" data-site-footer></div>
+</main>
+<script src="assets/js/common.js"></script>
+</body>
+</html>
