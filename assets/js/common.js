@@ -614,7 +614,7 @@ const GLOSSARY = {
       "ventilation fan",
       "fan"
     ]
-  }*/s
+  }*/
 };
 
 const TEAM_ROSTER = [
