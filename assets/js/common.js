@@ -392,9 +392,9 @@ const GLOSSARY = {
     "img": "assets/images/fasteners/90576A102.png",
     "aliases": [
       "M3 nylon-insert lock nut",
-      "M3 nylon-insert lock nuts",
-      "nylon-insert lock nut",
-      "nylon-insert lock nuts"
+      "M3 nylon-insert lock nuts"//,
+      //"nylon-insert lock nut",
+      //"nylon-insert lock nuts"
     ]
   },
   "m330stack": {
@@ -931,7 +931,7 @@ const TASK_META = {
     "slug": "task13-sensor-calibration",
     "day": "",
     "blockers": [
-      "task7",
+      //"task7",
       "task9",
       "task10",
       "task12"
