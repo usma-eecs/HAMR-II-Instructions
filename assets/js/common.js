@@ -194,7 +194,6 @@ const GLOSSARY = {
     "img": "assets/images/parts/flight-controller.jpg",
     "aliases": [
       "flight controller",
-      "FC",
       "autopilot board"
     ]
   },
@@ -203,7 +202,6 @@ const GLOSSARY = {
     "subtitle": "Electronic speed controller for all four motors",
     "img": "assets/images/parts/esc.jpg",
     "aliases": [
-      "ESC",
       "4-in-1 ESC",
       "electronic speed controller"
     ]
@@ -215,9 +213,8 @@ const GLOSSARY = {
     "aliases": [
       "FC/ESC cable",
       "8-wire FC/ESC cable",
-      "8-wire cable",
-      "JST-SH connector",
-      "JST-GH connector"
+      "JST-SH end of the FC/ESC cable",
+      "JST-GH end of the FC/ESC cable"
     ]
   },
   "fcharness": {
@@ -633,6 +630,79 @@ const TEAM_ROSTER = [
 
 const PROGRESS_KEY = "hamr2-progress-v2";
 
+
+const TASK_INTRO = {
+  "task1": {
+    "accomplishes": "This task prepares the Raspberry Pi for integration with the aircraft.",
+    "parts": "The 4-pin latch header provides the UART connection to the flight controller, and the SIP switch stores the aircraft group number."
+  },
+  "task2": {
+    "accomplishes": "This task installs the GPS/compass module on the camera/GPS mount.",
+    "parts": "The GPS/compass module provides position and heading data, and the 6-wire cable carries those signals to the flight controller."
+  },
+  "task3": {
+    "accomplishes": "This task installs the forward camera and connects its ribbon cable.",
+    "parts": "The camera provides forward video, and the camera ribbon cable carries image data to the Raspberry Pi."
+  },
+  "task4": {
+    "accomplishes": "This task builds the lower frame of the aircraft.",
+    "parts": "The bottom plate, hub, arms, and lower deck form the main airframe structure, and the foam feet protect the frame on the bench."
+  },
+  "task5": {
+    "accomplishes": "This task installs all four motors on the lower frame.",
+    "parts": "Each motor drives one propeller to produce thrust and control torque, and the short motor screws secure the motor to the arm."
+  },
+  "task6": {
+    "accomplishes": "This task prepares the flight controller, connects it to the ESC, and installs the FC/ESC stack.",
+    "parts": "The flight controller is the autopilot board, the ESC meters battery power to all four motors, the dampers isolate vibration, and the FC/ESC cable links the two boards."
+  },
+  "task7": {
+    "accomplishes": "This task completes the aircraft powertrain wiring.",
+    "parts": "The XT60 battery lead brings main battery power into the ESC, and the motor leads carry ESC output power to the four motors."
+  },
+  "task8": {
+    "accomplishes": "This task builds the upper-deck assembly around the Raspberry Pi.",
+    "parts": "The frame standoffs tie the decks together, the Raspberry Pi mount supports the Pi, the Raspberry Pi is the companion computer, and the battery pad keeps the battery from sliding."
+  },
+  "task9": {
+    "accomplishes": "This task joins the upper and lower frame assemblies.",
+    "parts": "The remaining frame screws and standoffs lock the airframe into one rigid structure."
+  },
+  "task10": {
+    "accomplishes": "This task installs the camera/GPS mount and routes the camera, GPS, and FC/RPi cables.",
+    "parts": "The camera/GPS mount positions the sensors above the frame, the camera ribbon cable links the camera to the Raspberry Pi, the GPS/compass cable links the GPS module to the flight controller, and the FC/RPi cable carries serial data between the Raspberry Pi and flight controller."
+  },
+  "task11": {
+    "accomplishes": "This task installs Mission Planner on the PC.",
+    "partsLabel": "What this setup does.",
+    "parts": "Mission Planner is the ground-control and configuration software used to connect to and configure the flight controller."
+  },
+  "task12": {
+    "accomplishes": "This task loads the faculty-issued preset parameter file into the flight controller.",
+    "partsLabel": "What this setup does.",
+    "parts": "The parameter file applies the baseline aircraft configuration before calibration and motor testing."
+  },
+  "task13": {
+    "accomplishes": "This task calibrates the aircraft sensors and battery monitor.",
+    "partsLabel": "What this setup does.",
+    "parts": "Accelerometer and compass calibration establish the correct attitude and heading references, and the measured battery voltage aligns Mission Planner with the actual pack voltage."
+  },
+  "task14": {
+    "accomplishes": "This task verifies motor order and spin direction in Mission Planner.",
+    "partsLabel": "What this setup does.",
+    "parts": "This check confirms that the frame settings, ESC connections, and motor outputs all agree before propellers are installed."
+  },
+  "task15": {
+    "accomplishes": "This task installs the propellers after the motor check is complete.",
+    "parts": "The CW and CCW propellers convert motor torque into lift and yaw control."
+  },
+  "task16": {
+    "accomplishes": "This task completes the final handoff checks before a prop-on run or flight event.",
+    "partsLabel": "What this setup does.",
+    "parts": "The final checks confirm that the aircraft, battery, software, and safety items are ready for operation."
+  }
+};
+
 function getOrderedTaskIds() {
   return Object.values(TASK_META)
     .sort((a, b) => (a.order || 0) - (b.order || 0))
@@ -1032,6 +1102,30 @@ function renderTaskProgressControl() {
   });
 }
 
+function renderTaskIntro(root) {
+  if (!root || root.querySelector('.task-intro-card')) return;
+  const task = getCurrentTaskMeta();
+  if (!task) return;
+  const intro = TASK_INTRO[task.id];
+  if (!intro) return;
+
+  const section = document.createElement('section');
+  section.className = 'section task-subsection task-intro-card';
+  const partsLabel = intro.partsLabel || 'What these parts do.';
+  section.innerHTML = `
+    <h3>At a glance</h3>
+    <p><strong>What this task accomplishes.</strong> ${escapeHtml(intro.accomplishes)}</p>
+    <p><strong>${escapeHtml(partsLabel)}</strong> ${escapeHtml(intro.parts)}</p>
+  `;
+
+  const firstChild = root.firstElementChild;
+  if (firstChild) {
+    root.insertBefore(section, firstChild);
+  } else {
+    root.appendChild(section);
+  }
+}
+
 function wrapTaskPageSection(root, headingText, className) {
   if (!root) return;
 
@@ -1064,6 +1158,7 @@ function initTaskPageLayout() {
 
   root.dataset.layoutEnhanced = 'true';
   root.classList.add('task-content-shell');
+  renderTaskIntro(root);
 
   if (!root.querySelector('.instruction-flow')) {
     wrapTaskPageSection(root, 'Steps', 'task-steps-card');
@@ -1095,33 +1190,149 @@ function placeholderSvg(title, subtitle) {
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
 
-function buildGlossaryTermIndex() {
+
+function escapeRegex(str) {
+  return String(str).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+const SINGLE_WORD_PLURAL_OK = new Set([
+  "battery", "bolt", "cable", "card", "connector", "damper", "driver", "key",
+  "kit", "module", "mount", "nut", "pad", "plate", "port", "propeller",
+  "screw", "sensor", "spacer", "standoff", "switch", "washer"
+]);
+
+function singularizeWord(word) {
+  const lower = word.toLowerCase();
+  if (lower.endsWith('ies') && lower.length > 3) return word.slice(0, -3) + 'y';
+  if (/(ches|shes|sses|xes|zes)$/i.test(word)) return word.slice(0, -2);
+  if (lower.endsWith('s') && !lower.endsWith('ss')) return word.slice(0, -1);
+  return word;
+}
+
+function pluralizeWord(word) {
+  if (!word) return word;
+  if (/[^aeiou]y$/i.test(word)) return word.slice(0, -1) + 'ies';
+  if (/(s|x|z|ch|sh)$/i.test(word)) return word + 'es';
+  return word + 's';
+}
+
+function shouldPluralizeAlias(alias) {
+  const cleaned = String(alias || '').trim();
+  if (!cleaned) return false;
+  if (/\s|\//.test(cleaned) || /^M\d/i.test(cleaned)) return true;
+  return SINGLE_WORD_PLURAL_OK.has(cleaned.toLowerCase());
+}
+
+function expandAliasVariants(alias) {
+  const cleaned = String(alias || '').trim().replace(/\s+/g, ' ');
+  const variants = new Set();
+  if (!cleaned) return [];
+  variants.add(cleaned);
+  if (!shouldPluralizeAlias(cleaned)) return Array.from(variants);
+
+  const match = cleaned.match(/([A-Za-z]+)(?!.*[A-Za-z])/);
+  if (!match) return Array.from(variants);
+
+  const word = match[1];
+  const singular = singularizeWord(word);
+  const plural = pluralizeWord(singular);
+  const prefix = cleaned.slice(0, match.index);
+  const suffix = cleaned.slice(match.index + word.length);
+
+  variants.add(prefix + singular + suffix);
+  variants.add(prefix + plural + suffix);
+  return Array.from(variants);
+}
+
+function aliasTextToRegexSource(alias) {
+  const DIM_MARK = '\u0000';
+  const MM_MARK = '\u0001';
+  const IN_MARK = '\u0002';
+  const text = String(alias || '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/(?<=\d)\s*[×x]\s*(?=\d)/g, DIM_MARK)
+    .replace(/(?<=\d)\s*mm\b/gi, MM_MARK)
+    .replace(/(?<=\d)\s*in\b/gi, IN_MARK);
+
+  let out = '';
+  for (const ch of text) {
+    if (ch === DIM_MARK) {
+      out += '\\s*[×x]\\s*';
+    } else if (ch === MM_MARK) {
+      out += '\\s*mm';
+    } else if (ch === IN_MARK) {
+      out += '\\s*in';
+    } else if (/\s/.test(ch)) {
+      out += '(?:\\s+|-)';
+    } else if (ch === '-') {
+      out += '(?:-|\\s)?';
+    } else {
+      out += escapeRegex(ch);
+    }
+  }
+  return out;
+}
+
+function buildGlossaryMatchers() {
   const seen = new Set();
-  const termPairs = [];
+  const matchers = [];
 
   for (const [key, entry] of Object.entries(GLOSSARY)) {
-    const terms = [entry.title, ...(entry.aliases || [])].filter(Boolean);
-    for (const term of terms) {
-      const normalized = term.toLowerCase();
-      if (seen.has(normalized)) continue;
-      seen.add(normalized);
-      termPairs.push([term, key]);
+    const aliases = [entry.title, ...(entry.aliases || [])].filter(Boolean);
+    for (const alias of aliases) {
+      for (const variant of expandAliasVariants(alias)) {
+        const dedupeKey = `${key}::${variant.toLowerCase()}`;
+        if (seen.has(dedupeKey)) continue;
+        seen.add(dedupeKey);
+        matchers.push({
+          key,
+          alias: variant,
+          length: variant.length,
+          regex: new RegExp(`(?<![A-Za-z0-9])${aliasTextToRegexSource(variant)}(?![A-Za-z0-9])`, 'gi')
+        });
+      }
     }
   }
 
-  termPairs.sort((a, b) => b[0].length - a[0].length || a[0].localeCompare(b[0]));
-  return termPairs;
+  matchers.sort((a, b) => b.length - a.length || a.alias.localeCompare(b.alias));
+  return matchers;
 }
 
-function buildAliasRegex(termPairs = GLOSSARY_TERM_INDEX) {
-  const escaped = termPairs.map(([alias]) => alias.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-  return new RegExp(`(?<![A-Za-z0-9])(${escaped.join("|")})(?![A-Za-z0-9])`, "gi");
+function findGlossaryMatches(text) {
+  const matches = [];
+
+  for (const matcher of GLOSSARY_MATCHERS) {
+    matcher.regex.lastIndex = 0;
+    let match;
+    while ((match = matcher.regex.exec(text))) {
+      if (!match[0]) {
+        matcher.regex.lastIndex += 1;
+        continue;
+      }
+      matches.push({
+        start: match.index,
+        end: match.index + match[0].length,
+        text: match[0],
+        key: matcher.key,
+        length: match[0].length
+      });
+    }
+  }
+
+  matches.sort((a, b) => a.start - b.start || b.length - a.length || a.text.localeCompare(b.text));
+
+  const selected = [];
+  let cursor = 0;
+  for (const match of matches) {
+    if (match.start < cursor) continue;
+    selected.push(match);
+    cursor = match.end;
+  }
+  return selected;
 }
 
-const GLOSSARY_TERM_INDEX = buildGlossaryTermIndex();
-const ALIAS_REGEX = buildAliasRegex();
-const ALIAS_TO_KEY = new Map(GLOSSARY_TERM_INDEX.map(([alias, key]) => [alias.toLowerCase(), key]));
-
+const GLOSSARY_MATCHERS = buildGlossaryMatchers();
 
 function annotateTerms(root) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
@@ -1138,22 +1349,23 @@ function annotateTerms(root) {
 
   for (const node of textNodes) {
     const text = node.nodeValue;
-    if (!ALIAS_REGEX.test(text)) continue;
-    ALIAS_REGEX.lastIndex = 0;
+    const matches = findGlossaryMatches(text);
+    if (!matches.length) continue;
+
     const frag = document.createDocumentFragment();
     let last = 0;
-    text.replace(ALIAS_REGEX, (match, term, offset) => {
-      if (offset > last) frag.appendChild(document.createTextNode(text.slice(last, offset)));
-      const key = ALIAS_TO_KEY.get(term.toLowerCase());
+
+    for (const match of matches) {
+      if (match.start > last) frag.appendChild(document.createTextNode(text.slice(last, match.start)));
       const span = document.createElement("span");
       span.className = "term";
       span.tabIndex = 0;
-      span.dataset.termKey = key;
-      span.textContent = match;
+      span.dataset.termKey = match.key;
+      span.textContent = match.text;
       frag.appendChild(span);
-      last = offset + match.length;
-      return match;
-    });
+      last = match.end;
+    }
+
     if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
     node.parentNode.replaceChild(frag, node);
   }

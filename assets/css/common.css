@@ -439,6 +439,16 @@ a { color: var(--accent); }
 .task-subsection h3 {
   margin-top: 0;
 }
+.task-intro-card {
+  background: #f8fbff;
+  border-color: #d7e4f3;
+}
+.task-intro-card p {
+  margin: 0.45rem 0 0 0;
+}
+.task-intro-card p:first-of-type {
+  margin-top: 0;
+}
 .common-errors-card {
   background: #fffafb;
   border-color: #efd3d3;
