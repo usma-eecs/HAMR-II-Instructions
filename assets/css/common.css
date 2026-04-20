@@ -446,3 +446,7 @@ a { color: var(--accent); }
 .common-errors-card .error-list {
   margin-top: 0;
 }
+
+.kit-list { margin: 6px 0 0 0; padding-left: 18px; }
+.kit-list li + li { margin-top: 4px; }
+.item-list > li > .kit-list { margin-top: 6px; }

@@ -158,7 +158,7 @@ const GLOSSARY = {
   "framestandoff": {
     "title": "Frame standoff",
     "subtitle": "Black spacer between the upper and lower decks",
-    "placeholder": "Frame standoff",
+    "img": "assets/images/parts/framestandoff.png",
     "aliases": [
       "frame standoff",
       "frame standoffs",
@@ -171,7 +171,7 @@ const GLOSSARY = {
   "batterypad": {
     "title": "Battery pad",
     "subtitle": "Non-slip pad on the upper deck",
-    "placeholder": "Battery pad",
+    "img": "assets/images/reference/batterypad.jpg",
     "aliases": [
       "battery pad",
       "silicone battery pad",
@@ -236,7 +236,7 @@ const GLOSSARY = {
   "gpsport": {
     "title": "GPS port",
     "subtitle": "Flight-controller connector for the GPS/compass cable",
-    "placeholder": "GPS port",
+    "img": "assets/images/reference/gpsport.png",
     "aliases": [
       "GPS port",
       "connector marked GPS"
@@ -245,7 +245,7 @@ const GLOSSARY = {
   "telemport": {
     "title": "TELEM port",
     "subtitle": "Flight-controller connector for the FC/RPi cable",
-    "placeholder": "TELEM port",
+    "img": "assets/images/reference/telemport.png",
     "aliases": [
       "TELEM port",
       "connector marked TELEM"
@@ -392,9 +392,9 @@ const GLOSSARY = {
     "img": "assets/images/fasteners/90576A102.png",
     "aliases": [
       "M3 nylon-insert lock nut",
-      "M3 nylon-insert lock nuts"//,
-      //"nylon-insert lock nut",
-      //"nylon-insert lock nuts"
+      "M3 nylon-insert lock nuts",
+      "nylon-insert lock nut",
+      "nylon-insert lock nuts"
     ]
   },
   "m330stack": {
@@ -406,8 +406,8 @@ const GLOSSARY = {
       "M3 x 30 mm round head screw",
       "M3 × 30 mm round head screw",
       "M3 × 30 mm",
-      "longest frame-kit screw",
-      "longest screw"
+      "longest frame-kit screw"/*,
+      "longest screw"*/
     ]
   },
   "m312round": {
@@ -418,20 +418,20 @@ const GLOSSARY = {
       "M3 × 12 mm round-head screw",
       "M3 x 12 mm round head screw",
       "M3 × 12 mm round head screw",
-      "second shortest frame-kit screw",
-      "second shortest screw"
+      "second shortest frame-kit screw"/*,
+      "second shortest screw"*/
     ]
   },
   "m314round": {
     "title": "M3 × 14 mm round-head screw",
     "subtitle": "Frame-supplied round-head screw from the third shortest bag",
-    "placeholder": "M3 × 14 mm round-head screw",
+    "img": "assets/images/fasteners/91239A118.png",
     "aliases": [
       "M3 × 14 mm round-head screw",
       "M3 x 14 mm round head screw",
       "M3 × 14 mm round head screw",
-      "third shortest frame-kit screw",
-      "third shortest screw"
+      "third shortest frame-kit screw"/*,
+      "third shortest screw"*/
     ]
   },
   "m38round": {
@@ -442,14 +442,14 @@ const GLOSSARY = {
       "M3 × 8 mm round-head screw",
       "M3 x 8 mm round head screw",
       "M3 × 8 mm round head screw",
-      "shortest frame-kit screw",
-      "shortest screw"
+      "shortest frame-kit screw"/*,
+      "shortest screw"*/
     ]
   },
   "m5locknut": {
     "title": "M5 nylon-insert lock nut",
     "subtitle": "Temporary motor-shaft nut for accountability",
-    "placeholder": "M5 nylon-insert lock nut",
+    "img": "assets/images/fasteners/92461A200.png",
     "aliases": [
       "M5 nylon-insert lock nut",
       "propeller shaft nut",
@@ -459,7 +459,7 @@ const GLOSSARY = {
   "m3x8motor": {
     "title": "M3 × 8 mm socket-head screw",
     "subtitle": "Motor mounting screw",
-    "placeholder": "M3 × 8 mm socket-head screw",
+    "img": "assets/images/fasteners/91290A113.png",
     "aliases": [
       "M3 × 8 mm socket-head screw",
       "M3x8mm socket-head screw",
@@ -469,7 +469,7 @@ const GLOSSARY = {
   "m3x10motor": {
     "title": "M3 × 10 mm socket-head screw",
     "subtitle": "Motor accessory screw not used for mounting",
-    "placeholder": "M3 × 10 mm socket-head screw",
+    "img": "assets/images/fasteners/91290A115.png",
     "aliases": [
       "M3 × 10 mm socket-head screw",
       "M3x10mm socket-head screw",
@@ -605,7 +605,7 @@ const GLOSSARY = {
       "eye protection",
       "safety glasses"
     ]
-  },
+  }/*,
   "fan": {
     "title": "Ventilation fan",
     "subtitle": "Moves solder fumes away from the bench",
@@ -614,7 +614,7 @@ const GLOSSARY = {
       "ventilation fan",
       "fan"
     ]
-  }
+  }*/s
 };
 
 const TEAM_ROSTER = [
@@ -931,11 +931,11 @@ const TASK_META = {
     "slug": "task13-sensor-calibration",
     "day": "",
     "blockers": [
-      //"task7",
+      "task7",
       "task9",
       "task10",
       "task12"
-    ],
+],
     "summary": "Calibrate the accelerometer and compass, then enter the measured battery voltage in Mission Planner."
   },
   "task14": {
@@ -947,7 +947,7 @@ const TASK_META = {
     "day": "",
     "blockers": [
       "task13"
-    ],
+],
     "summary": "Connect Mission Planner, confirm frame settings, and verify motor order and direction."
   },
   "task15": {
