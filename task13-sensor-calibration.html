@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task 13: Sensor calibration</title>
+<link rel="stylesheet" href="assets/css/common.css">
+<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+</head>
+<body data-page="task13-sensor-calibration.html">
+<main class="page">
+<section class="hero"><h1>Task 13: Sensor calibration</h1><p>Calibrate the accelerometer and compass, then enter the measured battery voltage in Mission Planner.</p></section>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<div data-task-strip></div>
+<section class="section annotate-terms" id="task13-sensor-calibration">
+<div class="parts-tools">
+<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Vehicle with the motors, FC/ESC stack, and camera/GPS mount installed</li><li>4S LiPo battery</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>USB-C cable</li><li>PC running Mission Planner</li><li>LiPo battery voltage tester</li></ul></div>
+</div>
+
+<div class="instruction-flow">
+  <section class="instruction-block">
+    <div>
+      <h4>Step 1. Calibrate the accelerometer</h4>
+      <ol class="compact-list">
+        <li>Open <strong>SETUP → Mandatory Hardware → Accel Calibration</strong> in Mission Planner.</li>
+        <li>Place the aircraft on a flat, stable surface with the propellers removed and the LiPo disconnected.</li>
+        <li>Start the calibration and follow the prompts for all six orientations: level, left side down, right side down, nose down, nose up, and upside down.</li>
+        <li>Hold the aircraft still for each orientation until Mission Planner confirms the step.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="ok-box"><strong>Stable surface.</strong><br>Use a rigid, level bench. Do not calibrate on a soft mat or while touching the aircraft.</div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 2. Calibrate the compass</h4>
+      <ol class="compact-list" start="5">
+        <li>Open <strong>SETUP → Mandatory Hardware → Compass</strong>.</li>
+        <li>Under <strong>Onboard Mag Calibration</strong>, select <strong>Start</strong>.</li>
+        <li>Rotate the aircraft slowly and smoothly about all three axes until the calibration completes.</li>
+        <li>If Mission Planner requests a reboot after a successful calibration, select <strong>Reboot</strong> and reconnect.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="callout"><strong>Keep clear of metal.</strong><br>Do not calibrate near large metal objects, computers, power supplies, or tool piles that can disturb the compass.</div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 3. Enter the measured battery voltage</h4>
+      <ol class="compact-list" start="9">
+        <li>Connect the 4S LiPo battery.</li>
+        <li>Measure the total battery voltage with the LiPo battery tester using the white balance connector.</li>
+        <li>Open <strong>SETUP → Optional Hardware → Battery Monitor</strong>.</li>
+        <li>Enter the measured total voltage in the <strong>Measured battery voltage</strong> field.</li>
+        <li>Disconnect the battery when finished.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="stop-box"><strong>Propellers remain off.</strong><br>Do not install the propellers until after Task 15.</div>
+    </div>
+  </section>
+</div>
+<h3>Common errors</h3>
+<ul class="error-list">
+  <li>Calibrating the accelerometer on a non-level or soft surface.</li>
+  <li>Moving the aircraft before Mission Planner confirms an orientation.</li>
+  <li>Rotating too quickly during compass calibration.</li>
+  <li>Calibrating near metal objects or powered electronics that distort the compass.</li>
+  <li>Entering a single-cell voltage instead of the total battery voltage.</li>
+  <li>Leaving the LiPo battery connected after the task is complete.</li>
+</ul>
+
+</section>
+<div class="footer" data-site-footer></div>
+</main>
+<script src="assets/js/common.js"></script>
+</body>
+</html>

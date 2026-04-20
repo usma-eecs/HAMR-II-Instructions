@@ -60,8 +60,7 @@ const GLOSSARY = {
     "img": "assets/images/parts/camera.webp",
     "aliases": [
       "Raspberry Pi Camera Module",
-      "camera module",
-      "camera"
+      "camera module"
     ]
   },
   "camcable": {
@@ -70,11 +69,12 @@ const GLOSSARY = {
     "img": "assets/images/parts/cabling-camera.webp",
     "aliases": [
       "camera ribbon cable",
-      "camera cable",
       "camera adapter cable",
+      "1.5-inch camera ribbon cable",
       "1.5-inch camera cable",
       "1.5 in camera cable",
       "CSI ribbon cable",
+      "22-pin camera ribbon cable",
       "22-pin camera cable"
     ]
   },
@@ -85,8 +85,7 @@ const GLOSSARY = {
     "aliases": [
       "camera/GPS mount",
       "camera GPS mount",
-      "sensor suite superstructure",
-      "superstructure"
+      "sensor suite superstructure"
     ]
   },
   "rpimount": {
@@ -96,8 +95,7 @@ const GLOSSARY = {
     "aliases": [
       "Raspberry Pi mount",
       "sensor suite base plate",
-      "sensor-suite base plate",
-      "base plate"
+      "sensor-suite base plate"
     ]
   },
   "framekit": {
@@ -160,7 +158,7 @@ const GLOSSARY = {
   "framestandoff": {
     "title": "Frame standoff",
     "subtitle": "Black spacer between the upper and lower decks",
-    "img": "assets/images/parts/framestandoff.png",
+    "placeholder": "Frame standoff",
     "aliases": [
       "frame standoff",
       "frame standoffs",
@@ -173,7 +171,7 @@ const GLOSSARY = {
   "batterypad": {
     "title": "Battery pad",
     "subtitle": "Non-slip pad on the upper deck",
-    "img": "assets/images/reference/batterypad.jpg",
+    "placeholder": "Battery pad",
     "aliases": [
       "battery pad",
       "silicone battery pad",
@@ -186,8 +184,8 @@ const GLOSSARY = {
     "img": "assets/images/parts/motors.jpg",
     "aliases": [
       "EMAX Pro Series 2808 motor",
-      "motor",
-      "motors"
+      "2808 motor",
+      "brushless motor"
     ]
   },
   "fc": {
@@ -238,7 +236,7 @@ const GLOSSARY = {
   "gpsport": {
     "title": "GPS port",
     "subtitle": "Flight-controller connector for the GPS/compass cable",
-    "img": "assets/images/reference/gpsport.png",
+    "placeholder": "GPS port",
     "aliases": [
       "GPS port",
       "connector marked GPS"
@@ -247,7 +245,7 @@ const GLOSSARY = {
   "telemport": {
     "title": "TELEM port",
     "subtitle": "Flight-controller connector for the FC/RPi cable",
-    "img": "assets/images/reference/telemport.png",
+    "placeholder": "TELEM port",
     "aliases": [
       "TELEM port",
       "connector marked TELEM"
@@ -259,9 +257,8 @@ const GLOSSARY = {
     "img": "assets/images/parts/connectors-battery.webp",
     "aliases": [
       "XT60 battery lead",
-      "battery lead",
-      "XT60 connector",
       "XT60 battery connector",
+      "XT60 connector",
       "XT60"
     ]
   },
@@ -289,17 +286,15 @@ const GLOSSARY = {
       "CCW prop"
     ]
   },
-  /*"lipo": {
+  "lipo": {
     "title": "4S LiPo battery",
     "subtitle": "Main flight battery",
-    "img": "assets/images/parts/battery.webp",
     "placeholder": "4S LiPo battery",
     "aliases": [
       "4S LiPo battery",
-      "LiPo battery",
-      "battery"
+      "LiPo battery"
     ]
-  },*/
+  },
   "sdcard": {
     "title": "microSD card",
     "subtitle": "Storage card used by the flight controller or Raspberry Pi",
@@ -317,9 +312,7 @@ const GLOSSARY = {
     "aliases": [
       "M2.5 × 4 mm nylon spacer",
       "M2.5 nylon spacer",
-      "nylon spacer",
-      "spacer",
-      "spacers"
+      "nylon spacer"
     ]
   },
   "nskkit": {
@@ -399,8 +392,7 @@ const GLOSSARY = {
     "img": "assets/images/fasteners/90576A102.png",
     "aliases": [
       "M3 nylon-insert lock nut",
-      "lock nut",
-      "lock nuts",
+      "M3 nylon-insert lock nuts",
       "nylon-insert lock nut",
       "nylon-insert lock nuts"
     ]
@@ -413,7 +405,9 @@ const GLOSSARY = {
       "M3 × 30 mm round-head screw",
       "M3 x 30 mm round head screw",
       "M3 × 30 mm round head screw",
-      "M3 × 30 mm"
+      "M3 × 30 mm",
+      "longest frame-kit screw",
+      "longest screw"
     ]
   },
   "m312round": {
@@ -423,7 +417,21 @@ const GLOSSARY = {
     "aliases": [
       "M3 × 12 mm round-head screw",
       "M3 x 12 mm round head screw",
-      "M3 × 12 mm round head screw"
+      "M3 × 12 mm round head screw",
+      "second shortest frame-kit screw",
+      "second shortest screw"
+    ]
+  },
+  "m314round": {
+    "title": "M3 × 14 mm round-head screw",
+    "subtitle": "Frame-supplied round-head screw from the third shortest bag",
+    "placeholder": "M3 × 14 mm round-head screw",
+    "aliases": [
+      "M3 × 14 mm round-head screw",
+      "M3 x 14 mm round head screw",
+      "M3 × 14 mm round head screw",
+      "third shortest frame-kit screw",
+      "third shortest screw"
     ]
   },
   "m38round": {
@@ -433,13 +441,15 @@ const GLOSSARY = {
     "aliases": [
       "M3 × 8 mm round-head screw",
       "M3 x 8 mm round head screw",
-      "M3 × 8 mm round head screw"
+      "M3 × 8 mm round head screw",
+      "shortest frame-kit screw",
+      "shortest screw"
     ]
   },
   "m5locknut": {
     "title": "M5 nylon-insert lock nut",
     "subtitle": "Temporary motor-shaft nut for accountability",
-    "img": "assets/images/fasteners/92461A200.png",
+    "placeholder": "M5 nylon-insert lock nut",
     "aliases": [
       "M5 nylon-insert lock nut",
       "propeller shaft nut",
@@ -449,7 +459,7 @@ const GLOSSARY = {
   "m3x8motor": {
     "title": "M3 × 8 mm socket-head screw",
     "subtitle": "Motor mounting screw",
-    "img": "assets/images/fasteners/91290A113.png",
+    "placeholder": "M3 × 8 mm socket-head screw",
     "aliases": [
       "M3 × 8 mm socket-head screw",
       "M3x8mm socket-head screw",
@@ -459,7 +469,7 @@ const GLOSSARY = {
   "m3x10motor": {
     "title": "M3 × 10 mm socket-head screw",
     "subtitle": "Motor accessory screw not used for mounting",
-    "img": "assets/images/fasteners/91290A115.png",
+    "placeholder": "M3 × 10 mm socket-head screw",
     "aliases": [
       "M3 × 10 mm socket-head screw",
       "M3x10mm socket-head screw",
@@ -473,7 +483,6 @@ const GLOSSARY = {
     "aliases": [
       "silicone vibration damper",
       "vibration damper",
-      "damper",
       "silicone damper"
     ]
   },
@@ -596,7 +605,7 @@ const GLOSSARY = {
       "eye protection",
       "safety glasses"
     ]
-  }/*,
+  },
   "fan": {
     "title": "Ventilation fan",
     "subtitle": "Moves solder fumes away from the bench",
@@ -605,7 +614,7 @@ const GLOSSARY = {
       "ventilation fan",
       "fan"
     ]
-  }*/
+  }
 };
 
 const TEAM_ROSTER = [
@@ -898,8 +907,7 @@ const TASK_META = {
     "title": "Task 11: Install Mission Planner",
     "slug": "task11-install-mission-planner",
     "day": "",
-    "blockers": [
-    ],
+    "blockers": [],
     "summary": "Download and install Mission Planner on the PC."
   },
   "task12": {
@@ -919,36 +927,50 @@ const TASK_META = {
     "id": "task13",
     "order": 13,
     "published": true,
-    "title": "Task 13: Motor check",
-    "slug": "task13-motor-check",
+    "title": "Task 13: Sensor calibration",
+    "slug": "task13-sensor-calibration",
     "day": "",
     "blockers": [
       "task7",
+      "task9",
+      "task10",
       "task12"
     ],
-    "summary": "Connect Mission Planner, confirm frame settings, and verify motor order and direction."
+    "summary": "Calibrate the accelerometer and compass, then enter the measured battery voltage in Mission Planner."
   },
   "task14": {
     "id": "task14",
     "order": 14,
     "published": true,
-    "title": "Task 14: Install propellers",
-    "slug": "task14-install-propellers",
+    "title": "Task 14: Motor check",
+    "slug": "task14-motor-check",
     "day": "",
     "blockers": [
       "task13"
     ],
-    "summary": "Install the correct CW and CCW propellers after motor testing is complete."
+    "summary": "Connect Mission Planner, confirm frame settings, and verify motor order and direction."
   },
   "task15": {
     "id": "task15",
     "order": 15,
     "published": true,
-    "title": "Task 15: Flight Day",
-    "slug": "task15-flight-day",
+    "title": "Task 15: Install propellers",
+    "slug": "task15-install-propellers",
     "day": "",
     "blockers": [
       "task14"
+    ],
+    "summary": "Install the correct CW and CCW propellers after motor testing is complete."
+  },
+  "task16": {
+    "id": "task16",
+    "order": 16,
+    "published": true,
+    "title": "Task 16: Flight Day",
+    "slug": "task16-flight-day",
+    "day": "",
+    "blockers": [
+      "task15"
     ],
     "summary": "Run the final handoff checks before a prop-on run or flight event."
   }
