@@ -848,6 +848,7 @@ const TASK_META = {
     "slug": "task7-set-up-powertrain",
     "day": "",
     "blockers": [
+      "task5",
       "task6"
     ],
     "summary": "Install the XT60 battery lead and plug all four motor leads into the ESC."
@@ -886,7 +887,7 @@ const TASK_META = {
     "day": "",
     "blockers": [
       "task3",
-      "task9"
+      "task8"
     ],
     "summary": "Set the SIP switch, connect the camera ribbon, route the cables, and install the camera/GPS mount."
   },
@@ -898,7 +899,6 @@ const TASK_META = {
     "slug": "task11-install-mission-planner",
     "day": "",
     "blockers": [
-      "task10"
     ],
     "summary": "Download and install Mission Planner on the PC."
   },
@@ -910,6 +910,7 @@ const TASK_META = {
     "slug": "task12-set-up-param-file",
     "day": "",
     "blockers": [
+      "task6",
       "task11"
     ],
     "summary": "Load the faculty-issued preset parameter file into the flight controller."
@@ -922,6 +923,7 @@ const TASK_META = {
     "slug": "task13-motor-check",
     "day": "",
     "blockers": [
+      "task7",
       "task12"
     ],
     "summary": "Connect Mission Planner, confirm frame settings, and verify motor order and direction."
