@@ -208,7 +208,7 @@ const GLOSSARY = {
   },
   "fcesccable": {
     "title": "FC/ESC cable",
-    "subtitle": "8-wire cable between the flight controller and ESC",
+    "subtitle": "8-wire cable between the flight controller and electronic speed controller",
     "img": "assets/images/reference/fc-esc-cable.png",
     "aliases": [
       "FC/ESC cable",
@@ -653,8 +653,8 @@ const TASK_INTRO = {
     "parts": "Each motor drives one propeller to produce thrust and control torque, and the short motor screws secure the motor to the arm."
   },
   "task6": {
-    "accomplishes": "This task prepares the flight controller, connects it to the ESC, and installs the FC/ESC stack.",
-    "parts": "The flight controller is the autopilot board, the ESC meters battery power to all four motors, the dampers isolate vibration, and the FC/ESC cable links the two boards."
+    "accomplishes": "This task prepares the flight controller, connects it to the electronic speed controller, and installs the FC/ESC stack.",
+    "parts": "The flight controller is the autopilot board, the electronic speed controller meters battery power to all four motors, the dampers isolate vibration, and the FC/ESC cable links the two boards."
   },
   "task7": {
     "accomplishes": "This task completes the aircraft powertrain wiring.",
@@ -917,7 +917,7 @@ const TASK_META = {
     "blockers": [
       "task4"
     ],
-    "summary": "Prepare the flight controller, connect it to the ESC, and install the FC/ESC stack."
+    "summary": "Prepare the flight controller, connect it to the electronic speed controller, and install the FC/ESC stack."
   },
   "task7": {
     "id": "task7",
