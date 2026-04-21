@@ -286,7 +286,7 @@ const GLOSSARY = {
   "lipo": {
     "title": "4S LiPo battery",
     "subtitle": "Main flight battery",
-    "placeholder": "4S LiPo battery",
+    "img": "assets/images/parts/lipo.png",
     "aliases": [
       "4S LiPo battery",
       "LiPo battery"
