@@ -46,7 +46,7 @@ const GLOSSARY = {
   "gpscable": {
     "title": "GPS/compass cable",
     "subtitle": "6-wire cable between the GPS module and FC GPS port",
-    "img": "assets/images/reference/gps-cable.png",
+    "img": "assets/images/parts/gps-cable.png",
     "aliases": [
       "GPS/compass cable",
       "6-wire GPS/compass cable",
@@ -107,7 +107,7 @@ const GLOSSARY = {
       "Lumenier frame kit"
     ]
   },
-  "lowerframe": {
+  /*"lowerframe": {
     "title": "Lower frame",
     "subtitle": "Assembled bottom plate, hub, arms, and lower deck",
     "img": "assets/images/parts/frame.webp",
@@ -116,11 +116,11 @@ const GLOSSARY = {
       "vehicle frame",
       "frame assembly"
     ]
-  },
+  },*/
   "hub": {
     "title": "Hub",
     "subtitle": "Center frame hub",
-    "img": "assets/images/reference/hub.jpg",
+    "img": "assets/images/parts/hub.jpg",
     "aliases": [
       "hub",
       "arm hub"
@@ -129,7 +129,7 @@ const GLOSSARY = {
   "bottomplate": {
     "title": "Bottom plate",
     "subtitle": "Lowest carbon plate in the airframe stack",
-    "img": "assets/images/reference/bottom_plate.jpg",
+    "img": "assets/images/parts/bottom_plate.jpg",
     "aliases": [
       "bottom plate"
     ]
@@ -137,7 +137,7 @@ const GLOSSARY = {
   "lowerdeck": {
     "title": "Lower deck",
     "subtitle": "Carbon deck with threaded metal inserts",
-    "img": "assets/images/reference/bottom_deck_top.jpg",
+    "img": "assets/images/parts/bottom_deck_top.jpg",
     "aliases": [
       "lower deck",
       "bottom deck"
@@ -146,7 +146,7 @@ const GLOSSARY = {
   "upperdeck": {
     "title": "Upper deck",
     "subtitle": "Top carbon plate with the Lumenier marking",
-    "img": "assets/images/reference/top_plate.jpg",
+    "img": "assets/images/parts/top_plate.jpg",
     "aliases": [
       "upper deck",
       "top deck",
@@ -171,7 +171,7 @@ const GLOSSARY = {
   "batterypad": {
     "title": "Battery pad",
     "subtitle": "Non-slip pad on the upper deck",
-    "img": "assets/images/reference/batterypad.jpg",
+    "img": "assets/images/parts/batterypad.jpg",
     "aliases": [
       "battery pad",
       "silicone battery pad",
@@ -209,7 +209,7 @@ const GLOSSARY = {
   "fcesccable": {
     "title": "FC/ESC cable",
     "subtitle": "8-wire cable between the flight controller and electronic speed controller",
-    "img": "assets/images/reference/fc-esc-cable.png",
+    "img": "assets/images/parts/fc-esc-cable.png",
     "aliases": [
       "FC/ESC cable",
       "8-wire FC/ESC cable",
@@ -233,7 +233,7 @@ const GLOSSARY = {
   "gpsport": {
     "title": "GPS port",
     "subtitle": "Flight-controller connector for the GPS/compass cable",
-    "img": "assets/images/reference/gpsport.png",
+    "img": "assets/images/parts/gpsport.png",
     "aliases": [
       "GPS port",
       "connector marked GPS"
@@ -242,7 +242,7 @@ const GLOSSARY = {
   "telemport": {
     "title": "TELEM port",
     "subtitle": "Flight-controller connector for the FC/RPi cable",
-    "img": "assets/images/reference/telemport.png",
+    "img": "assets/images/parts/telemport.png",
     "aliases": [
       "TELEM port",
       "connector marked TELEM"
@@ -419,18 +419,6 @@ const GLOSSARY = {
       "second shortest screw"*/
     ]
   },
-  "m314round": {
-    "title": "M3 × 14 mm round-head screw",
-    "subtitle": "Frame-supplied round-head screw from the third shortest bag",
-    "img": "assets/images/fasteners/91239A118.png",
-    "aliases": [
-      "M3 × 14 mm round-head screw",
-      "M3 x 14 mm round head screw",
-      "M3 × 14 mm round head screw",
-      "third shortest frame-kit screw"/*,
-      "third shortest screw"*/
-    ]
-  },
   "m38round": {
     "title": "M3 × 8 mm round-head screw",
     "subtitle": "Frame-supplied upper-deck screw",
@@ -476,7 +464,7 @@ const GLOSSARY = {
   "damper": {
     "title": "Silicone vibration damper",
     "subtitle": "Vibration isolator for the FC and ESC",
-    "img": "assets/images/reference/damper.png",
+    "img": "assets/images/parts/damper.png",
     "aliases": [
       "silicone vibration damper",
       "vibration damper",
@@ -553,7 +541,7 @@ const GLOSSARY = {
   "usb": {
     "title": "USB-C cable",
     "subtitle": "Bench cable for Mission Planner tasks",
-    "img": "assets/images/tools/usb-c-cable.svg",
+    "img": "assets/images/tools/usb-c-cable.png",
     "aliases": [
       "USB-C cable",
       "USB cable"
@@ -602,16 +590,7 @@ const GLOSSARY = {
       "eye protection",
       "safety glasses"
     ]
-  }/*,
-  "fan": {
-    "title": "Ventilation fan",
-    "subtitle": "Moves solder fumes away from the bench",
-    "placeholder": "Ventilation fan",
-    "aliases": [
-      "ventilation fan",
-      "fan"
-    ]
-  }*/
+  }
 };
 
 const TEAM_ROSTER = [

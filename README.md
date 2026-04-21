@@ -75,17 +75,15 @@ Use the current image structure:
 * `assets/images/parts/`
 * `assets/images/fasteners/`
 * `assets/images/tools/`
-* `assets/images/reference/`
-* `assets/images/figures/`
+* `assets/images/diagrams/`
 * `assets/images/tasks/taskX/`
 
 Use them as follows:
 
-* `parts/` for top-level platform parts
+* `parts/` for platform parts, close-up references, cables, ports, and support photos tied to a specific component
 * `fasteners/` for screws, nuts, spacers, standoffs, and similar hardware
 * `tools/` for hand tools, bench tools, and test gear
-* `reference/` for glossary/support images
-* `figures/` for shared figures such as the workflow chart
+* `diagrams/` for shared figures such as the workflow chart, motor map, and propeller map
 * `tasks/taskX/` for task-specific figures extracted from the slide deck or PDF
 
 Do not create duplicate copies of the same asset in multiple folders unless there is a strong reason.
@@ -371,21 +369,24 @@ Be consistent across:
 
 ## Frame-kit screw identification
 
-The frame kit contains four small screw bags in increasing length order:
+State only the frame-supplied hardware that is actually used in the build unless a page is explicitly documenting the full kit contents.
+
+For the current build, the frame-supplied round-head screws used in the instructions are:
 
 1. `M3 × 8 mm round-head screws`
 2. `M3 × 12 mm round-head screws`
-3. `M3 × 14 mm round-head screws`
-4. `M3 × 30 mm round-head screws`
+3. `M3 × 30 mm round-head screws`
 
-This should be stated:
+The current build also uses two black zip ties from the frame kit.
 
-* in the parts guide
-* in the glossary entries for those screws
-* in Task 4 where cadets first retrieve the frame-kit screws
-* in later tasks that refer back to frame-kit screw selection
+Be consistent across:
 
-If this packaging order changes in the future, update all four places together.
+* task pages
+* parts guide
+* glossary
+* figure captions
+
+Do not infer per-system usage counts from packaging order or from unused hardware present in the kit.
 
 ---
 
@@ -506,7 +507,7 @@ If a figure is intentionally incomplete, keep the placeholder in place until a f
 
 The workflow chart is derived from the blocker structure in `TASK_META`.
 
-If the blockers change, regenerate the workflow figure.
+If the blockers change, regenerate the workflow diagram.
 
 ### Important note
 
