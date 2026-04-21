@@ -596,7 +596,7 @@ const GLOSSARY = {
 const TEAM_ROSTER = [
   "Dominic Larkin, USMA EECS RRC, Oversight",
   "Arthur Chu, MIT Lincoln Laboratory, Project Manager",
-  "Armaun Zargari, ORAU Fellow, Design Lead",
+  "Armaun Zargari, Oak Ridge Associated Universities, Design Lead",
   "Jacob Drone, USMA 2028, Cadet-in-charge",
   "Parker Brown, USMA 2028, Assistant Cadet-in-charge",
   "Raj Fanaswala, USMA 2028, Assistant Cadet-in-charge",
