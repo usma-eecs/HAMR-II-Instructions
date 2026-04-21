@@ -613,72 +613,67 @@ const PROGRESS_KEY = "hamr2-progress-v2";
 const TASK_INTRO = {
   "task1": {
     "accomplishes": "This task prepares the Raspberry Pi for integration with the aircraft.",
-    "parts": "The 4-pin latch header provides the UART connection to the flight controller, and the SIP switch stores the aircraft group number."
+    "body": "The Raspberry Pi is the companion computer. On this aircraft, it supports functions such as telemetry, networking, and video-related software. It is not the flight controller, which closes the control loop fast enough to keep the aircraft stable in flight. For scale, the Apollo Guidance Computer operated at about 1 MHz and had about 2 KB of erasable memory. The Raspberry Pi Zero 2 W operates at 1 GHz and has 512 MB of RAM. That is why one small board can add networked computing to a student-built aircraft, provided the header beneath it is soldered correctly."
   },
   "task2": {
     "accomplishes": "This task installs the GPS/compass module on the camera/GPS mount.",
-    "parts": "The GPS/compass module provides position and heading data, and the 6-wire cable carries those signals to the flight controller."
+    "body": "This module combines two distinct sensors. The GPS receiver estimates position, speed, and time from satellite signals. The compass is a three-axis magnetometer that helps the autopilot estimate heading after calibration. One locates the aircraft in space; the other defines its orientation within that space. That combination is what lets a four-motor vehicle do more than hover. It can hold a heading, follow a route, and report where it is."
   },
   "task3": {
     "accomplishes": "This task installs the forward camera and connects its ribbon cable.",
-    "parts": "The camera provides forward video, and the camera ribbon cable carries image data to the Raspberry Pi."
+    "body": "The camera provides the operator with a live view for situational awareness. It is valuable to the pilot, but it is not the primary sensor responsible for flight stability. A useful imaging system depends on more than power and a video signal: lens focus, mount stiffness, and cable routing all affect what reaches the screen. On a small aircraft, image quality is shaped by optics, mechanics, and electronics sharing a very small volume."
   },
   "task4": {
     "accomplishes": "This task builds the lower frame of the aircraft.",
-    "parts": "The bottom plate, hub, arms, and lower deck form the main airframe structure, and the foam feet protect the frame on the bench."
+    "body": "The lower frame is the structural base of the aircraft. It establishes the geometry for every major step that follows, from motor alignment to deck fit and cable routing. In engineering, geometry established early often sets the limits of the final system. If this base is square and aligned, the rest of the build usually proceeds cleanly. Four arms that look identical on the bench only behave identically in flight if the structure holding them preserves the intended shape."
   },
   "task5": {
     "accomplishes": "This task installs all four motors on the lower frame.",
-    "parts": "Each motor drives one propeller to produce thrust and control torque, and the short motor screws secure the motor to the arm."
+    "body": "These are brushless motors. In a brushed motor, electrical switching happens through mechanical contact inside the motor; here, it is handled electronically by the ESC. That is why brushless motors dominate modern multirotors: they offer better efficiency, durability, and control response. The motor is one link in a chain. Motor position, ESC output, and propeller direction must all agree before electrical power becomes controlled thrust."
   },
   "task6": {
     "accomplishes": "This task prepares the flight controller, connects it to the electronic speed controller, and installs the FC/ESC stack.",
-    "parts": "The flight controller is the autopilot board, the electronic speed controller meters battery power to all four motors, the dampers isolate vibration, and the FC/ESC cable links the two boards."
+    "body": "The flight controller and ESC sit close together but perform different jobs. The flight controller reads sensors, estimates the motion of the aircraft, and computes motor commands. The ESC converts battery power into timed electrical drive for the motor windings. The silicone dampers under the flight controller are there because its inertial sensors are sensitive to vibration. Keeping vibration out of the measurements is part of keeping the control system accurate."
   },
   "task7": {
     "accomplishes": "This task completes the aircraft powertrain wiring.",
-    "parts": "The XT60 battery lead brings main battery power into the ESC, and the motor leads carry ESC output power to the four motors."
+    "body": "This is the high-energy heart of the aircraft. The battery lead carries significant current into the ESC, which then distributes power to the motors. That makes the powertrain fundamentally different from ordinary signal wiring: here, the hardware is handling the energy that will eventually become lift. Polarity, connector seating, and screw security matter because the power path has to be electrically correct and mechanically secure before the aircraft can fly."
   },
   "task8": {
     "accomplishes": "This task builds the upper-deck assembly around the Raspberry Pi.",
-    "parts": "The frame standoffs tie the decks together, the Raspberry Pi mount supports the Pi, the Raspberry Pi is the companion computer, and the battery pad keeps the battery from sliding."
+    "body": "The stock frame was not designed around this exact combination of Raspberry Pi, GPS module, and camera. That is why this build uses a custom 3D-printed mount. Additive manufacturing allows one part to replace several brackets and spacers while fixing the relative positions of the Pi, GPS, and camera in one structure. The advantage is speed and flexibility for a low-volume build. The tradeoff is that the final part still depends on material strength, print orientation, and dimensional control."
   },
   "task9": {
     "accomplishes": "This task joins the upper and lower frame assemblies.",
-    "parts": "The remaining frame screws and standoffs lock the airframe into one rigid structure."
+    "body": "This step is a small example of modular manufacturing. By joining pre-tested subassemblies, the build gains speed, repeatability, and easier repair. Aerospace uses the same logic at much larger scale. On the Boeing 787, major sections are manufactured in places including Japan and Italy, then airlifted to South Carolina for final assembly. The payoff is efficiency. The cost is that cable routing, connector access, and dimensional stack-up all have to be controlled much more carefully at the interfaces."
   },
   "task10": {
     "accomplishes": "This task installs the camera/GPS mount and routes the camera, GPS, and FC/RPi cables.",
-    "parts": "The camera/GPS mount positions the sensors above the frame, the camera ribbon cable links the camera to the Raspberry Pi, the GPS/compass cable links the GPS module to the flight controller, and the FC/RPi cable carries serial data between the Raspberry Pi and flight controller."
+    "body": "Sensor performance is a function of placement. The camera needs a clear and stable view. The GPS antenna needs visibility to the sky. The compass needs distance from current-carrying wires and other sources of magnetic disturbance. Putting all three on one mount turns packaging into a systems problem. A compact mount only works when it preserves the physical requirements of all three sensors at the same time."
   },
   "task11": {
     "accomplishes": "This task installs Mission Planner on the PC.",
-    "partsLabel": "What this setup does.",
-    "parts": "Mission Planner is the ground-control and configuration software used to connect to and configure the flight controller."
+    "body": "Mission Planner is the ground control station, or GCS. It allows the operator to connect to the autopilot, inspect status, load settings, and run setup procedures. It is the dashboard for the aircraft, but it does not fly the aircraft; that logic resides on the flight controller. This software is the interface between human and machine, which is why understanding the screen matters almost as much as understanding the hardware."
   },
   "task12": {
     "accomplishes": "This task loads the faculty-issued preset parameter file into the flight controller.",
-    "partsLabel": "What this setup does.",
-    "parts": "The parameter file applies the baseline aircraft configuration before calibration and motor testing."
+    "body": "A parameter file is a digital record of engineering decisions. It defines items such as frame type, sensor orientation, control limits, communication settings, and safety behaviors. Loading one file can synchronize hundreds of assumptions about how the aircraft should respond. That makes the file more than a convenience. It is a fast way to reproduce a known configuration, provided the parameters actually match the hardware and firmware on the aircraft."
   },
   "task13": {
     "accomplishes": "This task calibrates the aircraft sensors and battery monitor.",
-    "partsLabel": "What this setup does.",
-    "parts": "Accelerometer and compass calibration establish the correct attitude and heading references, and the measured battery voltage aligns Mission Planner with the actual pack voltage."
+    "body": "Calibration is how the autopilot accounts for predictable sensor error. Accelerometers, gyroscopes, and magnetometers all have offsets and scaling errors that must be measured and compensated. Calibration does not make the sensors perfect, but it reduces error to a level the control system can use. This is one of the core tasks in modern engineering: turning imperfect physical measurements into reliable digital information. Lens focus is separate again. It affects image sharpness, not inertial or magnetic accuracy."
   },
   "task14": {
     "accomplishes": "This task verifies motor order and spin direction in Mission Planner.",
-    "partsLabel": "What this setup does.",
-    "parts": "This check confirms that the frame settings, ESC connections, and motor outputs all agree before propellers are installed."
+    "body": "Before propellers are installed, the motors must prove three things: correct numbering, correct direction, and correct response to commands. This is a critical safety gate. Without spinning blades, the software logic can be checked against the hardware outputs with much less risk. A motor check confirms that the flight controller, ESC outputs, wiring, and frame layout all agree before the aircraft is asked to make thrust."
   },
   "task15": {
     "accomplishes": "This task installs the propellers after the motor check is complete.",
-    "parts": "The CW and CCW propellers convert motor torque into lift and yaw control."
+    "body": "A propeller is a rotating wing. Its airfoil is matched to a specific direction of rotation, which is why clockwise and counterclockwise propellers are not interchangeable. Once the propellers are secured, the aircraft is no longer just a bench assembly. It is a vehicle capable of generating meaningful thrust. At this stage, motor torque finally meets the air."
   },
   "task16": {
     "accomplishes": "This task completes the final handoff checks before a prop-on run or flight event.",
-    "partsLabel": "What this setup does.",
-    "parts": "The final checks confirm that the aircraft, battery, software, and safety items are ready for operation."
+    "body": "Flight day is the final test of systems integration. Structure, power, sensing, configuration, and operator procedure all have to function together. In aviation, a system only works when every discipline succeeds at the same time. A rigorous preflight check is the last chance to confirm that the aircraft on the table is ready to operate as one machine. When that happens, the diagram becomes flight."
   }
 };
 
@@ -1090,12 +1085,25 @@ function renderTaskIntro(root) {
 
   const section = document.createElement('section');
   section.className = 'section task-subsection task-intro-card';
-  const partsLabel = intro.partsLabel || 'What these parts do.';
-  section.innerHTML = `
-    <h3>At a glance</h3>
-    <p><strong>What this task accomplishes.</strong> ${escapeHtml(intro.accomplishes)}</p>
-    <p><strong>${escapeHtml(partsLabel)}</strong> ${escapeHtml(intro.parts)}</p>
-  `;
+
+  const bodyParagraphs = intro.body
+    ? (Array.isArray(intro.body) ? intro.body : [intro.body])
+    : null;
+
+  if (bodyParagraphs && bodyParagraphs.length) {
+    const paragraphsHtml = bodyParagraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+    section.innerHTML = `
+      <h3>${escapeHtml(intro.accomplishes || 'What is this about?')}</h3>
+      ${paragraphsHtml}
+    `;
+  } else {
+    const partsLabel = intro.partsLabel || 'What these parts do.';
+    section.innerHTML = `
+      <h3>${escapeHtml(intro.title || 'At a glance')}</h3>
+      <p><strong>What this task accomplishes.</strong> ${escapeHtml(intro.accomplishes)}</p>
+      <p><strong>${escapeHtml(partsLabel)}</strong> ${escapeHtml(intro.parts)}</p>
+    `;
+  }
 
   const firstChild = root.firstElementChild;
   if (firstChild) {
