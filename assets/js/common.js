@@ -607,7 +607,7 @@ const TEAM_ROSTER = [
   "Max Wasserman, USMA 2029"
 ];
 
-const PROGRESS_KEY = "hamr2-progress-v2";
+const PROGRESS_KEY = "hamr2-progress-cache-v1";
 const TEAM_ID_KEY = "hamr2-team-id-v1";
 const LOCAL_PROGRESS_SCOPE = "__local__";
 const TEAM_SYNC_CONFIG = Object.assign({
@@ -1408,6 +1408,7 @@ async function pushProgressToRemote(progress, teamId = getTeamId()) {
   }
 
   TEAM_SYNC_STATE.busy = true;
+  const startedAt = Date.now();
   setTeamSyncStatus('syncing', 'Syncing team progress…');
   renderTaskNavigator();
 

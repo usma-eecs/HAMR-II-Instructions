@@ -697,24 +697,27 @@ a { color: var(--accent); }
 }
 
 body.has-floating-task-pager {
-  padding-bottom: 118px;
+  padding-bottom: 108px;
 }
 
 .task-pager {
   position: fixed;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-  width: min(calc(100% - 24px), 1280px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
   z-index: 35;
   margin-top: 0;
 }
 .task-pager-card {
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(8px);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 16px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  padding: 14px 16px;
   box-shadow: var(--shadow);
 }
 .task-pager-nav {
@@ -757,14 +760,13 @@ body.has-floating-task-pager {
     flex-basis: 100%;
   }
   body.has-floating-task-pager {
-    padding-bottom: 132px;
+    padding-bottom: 128px;
   }
   .task-pager {
-    bottom: 10px;
-    width: calc(100% - 16px);
+    width: 100%;
   }
   .task-pager-card {
-    padding: 14px;
-    border-radius: 16px;
+    padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
+    border-radius: 14px 14px 0 0;
   }
 }

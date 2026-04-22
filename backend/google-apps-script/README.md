@@ -26,7 +26,15 @@ The `Teams` tab is the instructor-facing operational view. It sorts, filters, an
 6. Deploy the script as a web app.
    - Execute as: **Me**
    - Who has access: **Anyone**
+   - Use the deployed **/exec** URL, not the editor URL and not the test **/dev** URL.
 7. Copy the deployed web app URL.
+
+If the browser console shows a cross-origin or CORB error, the web app is usually returning an HTML page instead of JavaScript. The most common causes are:
+- the deployment is not public (**Who has access** is not **Anyone**)
+- the wrong URL was pasted into `team-sync-config.js`
+- the deployment was updated but the new version was not redeployed
+
+The frontend expects the web app to return JavaScript for JSONP. A Google sign-in page or Apps Script editor page will be blocked by the browser.
 8. In the website repo, open `assets/js/team-sync-config.js`.
 9. Set:
 
