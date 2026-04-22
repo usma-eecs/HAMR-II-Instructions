@@ -1,10 +1,31 @@
 const SPREADSHEET_ID = 'PASTE_YOUR_SPREADSHEET_ID_HERE';
 const TEAMS_SHEET_NAME = 'Teams';
 const EVENTS_SHEET_NAME = 'Events';
-const TASK_IDS = [
-  'task1','task2','task3','task4','task5','task6','task7','task8',
-  'task9','task10','task11','task12','task13','task14','task15','task16'
+const TASKS = [
+  { id: 'task1',  title: 'Task 1: Prepare the Raspberry Pi' },
+  { id: 'task2',  title: 'Task 2: Install GPS/Compass' },
+  { id: 'task3',  title: 'Task 3: Install Camera' },
+  { id: 'task4',  title: 'Task 4: Assemble the lower frame' },
+  { id: 'task5',  title: 'Task 5: Install motors' },
+  { id: 'task6',  title: 'Task 6: Mount FC/ESC' },
+  { id: 'task7',  title: 'Task 7: Set up powertrain' },
+  { id: 'task8',  title: 'Task 8: Set up the upper deck' },
+  { id: 'task9',  title: 'Task 9: Mate upper and lower frames' },
+  { id: 'task10', title: 'Task 10: Mate camera/GPS mount onto the frame' },
+  { id: 'task11', title: 'Task 11: Install Mission Planner' },
+  { id: 'task12', title: 'Task 12: Set up param file' },
+  { id: 'task13', title: 'Task 13: Sensor calibration' },
+  { id: 'task14', title: 'Task 14: Motor check' },
+  { id: 'task15', title: 'Task 15: Install propellers' },
+  { id: 'task16', title: 'Task 16: Flight Day' }
 ];
+
+const TEAM_ID_COL = 1;
+const UPDATED_AT_COL = 2;
+const COMPLETED_COUNT_COL = 3;
+const FIRST_TASK_COL = 4;
+const TASK_COUNT = TASKS.length;
+const LAST_TASK_COL = FIRST_TASK_COL + TASK_COUNT - 1;
 
 function doGet(e) {
   const params = e && e.parameter ? e.parameter : {};
@@ -64,6 +85,60 @@ function respond_(payload, callback) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+function setupBackend() {
+  const sheets = ensureSheets_();
+  applySheetLayout_(sheets.teams);
+  SpreadsheetApp.flush();
+}
+
+function installEditTrigger() {
+  const projectTriggers = ScriptApp.getProjectTriggers();
+  const hasTrigger = projectTriggers.some(function(trigger) {
+    return trigger.getHandlerFunction() === 'onTeamsSheetEdit';
+  });
+
+  if (!hasTrigger) {
+    ScriptApp.newTrigger('onTeamsSheetEdit')
+      .forSpreadsheet(SPREADSHEET_ID)
+      .onEdit()
+      .create();
+  }
+}
+
+function removeEditTriggers() {
+  ScriptApp.getProjectTriggers().forEach(function(trigger) {
+    if (trigger.getHandlerFunction() === 'onTeamsSheetEdit') {
+      ScriptApp.deleteTrigger(trigger);
+    }
+  });
+}
+
+function onTeamsSheetEdit(e) {
+  if (!e || !e.range) return;
+
+  const range = e.range;
+  const sheet = range.getSheet();
+  if (sheet.getName() !== TEAMS_SHEET_NAME) return;
+  if (range.getRow() < 2) return;
+
+  const startCol = range.getColumn();
+  const endCol = startCol + range.getNumColumns() - 1;
+  const overlapsTrackedCols = !(endCol < TEAM_ID_COL || startCol > LAST_TASK_COL);
+  if (!overlapsTrackedCols) return;
+
+  const row = range.getRow();
+  const teamId = sanitizeTeamId_(sheet.getRange(row, TEAM_ID_COL).getValue());
+  if (!teamId) return;
+
+  sheet.getRange(row, TEAM_ID_COL).setValue(teamId);
+  ensureCheckboxesForRow_(sheet, row);
+  applyCompletedCountFormula_(sheet, row);
+  sheet.getRange(row, UPDATED_AT_COL).setValue(new Date());
+
+  const state = buildStateFromSheetRow_(sheet, row);
+  logEvent_(teamId, 'manual-edit', state, countCompleted_(state), 'sheet-edit', row);
+}
+
 function getTeamState_(rawTeamId) {
   const teamId = sanitizeTeamId_(rawTeamId);
   if (!teamId) {
@@ -76,10 +151,9 @@ function getTeamState_(rawTeamId) {
     return buildPayload_(teamId, defaultState_(), '', 0);
   }
 
-  const row = sheets.teams.getRange(rowIndex, 1, 1, 4 + TASK_IDS.length).getValues()[0];
-  const state = row[3] || defaultState_();
-  const updatedAt = row[1] || '';
-  const completedCount = Number(row[2] || 0);
+  const state = buildStateFromSheetRow_(sheets.teams, rowIndex);
+  const updatedAt = sheets.teams.getRange(rowIndex, UPDATED_AT_COL).getValue() || '';
+  const completedCount = countCompleted_(state);
   return buildPayload_(teamId, state, updatedAt, completedCount);
 }
 
@@ -93,30 +167,26 @@ function setTeamState_(rawTeamId, rawState, rawSource) {
   const source = String(rawSource || '').trim();
   const timestamp = new Date();
   const completedCount = countCompleted_(state);
-  const taskFlags = state.split('').map(bit => bit === '1');
+  const taskFlags = state.split('').map(function(bit) { return bit === '1'; });
 
   const sheets = ensureSheets_();
   let rowIndex = findTeamRow_(sheets.teams, teamId);
-  const rowValues = [[teamId, timestamp, completedCount, state].concat(taskFlags)];
 
-  if (rowIndex) {
-    sheets.teams.getRange(rowIndex, 1, 1, rowValues[0].length).setValues(rowValues);
-  } else {
-    sheets.teams.appendRow(rowValues[0]);
-    rowIndex = sheets.teams.getLastRow();
+  if (!rowIndex) {
+    rowIndex = appendEmptyTeamRow_(sheets.teams, teamId);
   }
 
-  sheets.events.appendRow([
-    timestamp,
-    teamId,
-    'set',
-    state,
-    completedCount,
-    source,
-    rowIndex
-  ]);
+  ensureCheckboxesForRow_(sheets.teams, rowIndex);
+  sheets.teams.getRange(rowIndex, TEAM_ID_COL).setValue(teamId);
+  sheets.teams.getRange(rowIndex, UPDATED_AT_COL).setValue(timestamp);
+  sheets.teams.getRange(rowIndex, FIRST_TASK_COL, 1, TASK_COUNT).setValues([taskFlags]);
+  applyCompletedCountFormula_(sheets.teams, rowIndex);
 
-  return buildPayload_(teamId, state, timestamp, completedCount);
+  const derivedState = buildStateFromSheetRow_(sheets.teams, rowIndex);
+  const derivedCount = countCompleted_(derivedState);
+  logEvent_(teamId, 'set', derivedState, derivedCount, source, rowIndex);
+
+  return buildPayload_(teamId, derivedState, timestamp, derivedCount);
 }
 
 function buildPayload_(teamId, state, updatedAt, completedCount) {
@@ -138,33 +208,111 @@ function ensureSheets_() {
   const teams = ss.getSheetByName(TEAMS_SHEET_NAME) || ss.insertSheet(TEAMS_SHEET_NAME);
   const events = ss.getSheetByName(EVENTS_SHEET_NAME) || ss.insertSheet(EVENTS_SHEET_NAME);
 
-  ensureHeader_(teams, ['Team ID', 'Updated At', 'Completed Count', 'State'].concat(TASK_IDS));
-  ensureHeader_(events, ['Timestamp', 'Team ID', 'Action', 'State', 'Completed Count', 'Source', 'Row']);
+  ensureTeamsSheet_(teams);
+  ensureEventsSheet_(events);
 
   return { spreadsheet: ss, teams: teams, events: events };
+}
+
+function ensureTeamsSheet_(sheet) {
+  const header = ['Team ID', 'Updated At', 'Completed Count'].concat(TASKS.map(function(task) {
+    return task.title;
+  }));
+  ensureHeader_(sheet, header);
+  applySheetLayout_(sheet);
+}
+
+function ensureEventsSheet_(sheet) {
+  ensureHeader_(sheet, ['Timestamp', 'Team ID', 'Action', 'State', 'Completed Count', 'Source', 'Row']);
+}
+
+function applySheetLayout_(sheet) {
+  sheet.setFrozenRows(1);
+  sheet.autoResizeColumns(1, LAST_TASK_COL);
+
+  if (sheet.getFilter()) {
+    sheet.getFilter().remove();
+  }
+  const lastRow = Math.max(sheet.getLastRow(), 2);
+  sheet.getRange(1, 1, lastRow, LAST_TASK_COL).createFilter();
+
+  const checkboxRange = sheet.getRange(2, FIRST_TASK_COL, Math.max(sheet.getMaxRows() - 1, 1), TASK_COUNT);
+  checkboxRange.insertCheckboxes();
+
+  const headerRange = sheet.getRange(1, 1, 1, LAST_TASK_COL);
+  headerRange.setFontWeight('bold');
+  headerRange.setWrap(true);
 }
 
 function ensureHeader_(sheet, header) {
   if (sheet.getLastRow() === 0) {
     sheet.getRange(1, 1, 1, header.length).setValues([header]);
-    sheet.setFrozenRows(1);
     return;
   }
 
-  const existing = sheet.getRange(1, 1, 1, header.length).getValues()[0];
-  const mismatch = header.some(function(value, index) {
+  const existingWidth = Math.max(sheet.getLastColumn(), header.length);
+  const existing = sheet.getRange(1, 1, 1, existingWidth).getValues()[0].slice(0, header.length);
+  const mismatch = header.length !== existing.length || header.some(function(value, index) {
     return existing[index] !== value;
   });
 
   if (mismatch) {
     sheet.getRange(1, 1, 1, header.length).setValues([header]);
-    sheet.setFrozenRows(1);
   }
 }
 
 function findTeamRow_(sheet, teamId) {
   const finder = sheet.getRange('A:A').createTextFinder(teamId).matchEntireCell(true).findNext();
   return finder ? finder.getRow() : 0;
+}
+
+function appendEmptyTeamRow_(sheet, teamId) {
+  const rowValues = [teamId, '', ''];
+  for (let i = 0; i < TASK_COUNT; i += 1) {
+    rowValues.push(false);
+  }
+  sheet.appendRow(rowValues);
+  const rowIndex = sheet.getLastRow();
+  ensureCheckboxesForRow_(sheet, rowIndex);
+  applyCompletedCountFormula_(sheet, rowIndex);
+  return rowIndex;
+}
+
+function ensureCheckboxesForRow_(sheet, rowIndex) {
+  sheet.getRange(rowIndex, FIRST_TASK_COL, 1, TASK_COUNT).insertCheckboxes();
+}
+
+function applyCompletedCountFormula_(sheet, rowIndex) {
+  const firstTaskA1 = sheet.getRange(rowIndex, FIRST_TASK_COL).getA1Notation();
+  const lastTaskA1 = sheet.getRange(rowIndex, LAST_TASK_COL).getA1Notation();
+  sheet.getRange(rowIndex, COMPLETED_COUNT_COL).setFormula('=COUNTIF(' + firstTaskA1 + ':' + lastTaskA1 + ',TRUE)');
+}
+
+function buildStateFromSheetRow_(sheet, rowIndex) {
+  const values = sheet.getRange(rowIndex, FIRST_TASK_COL, 1, TASK_COUNT).getValues()[0];
+  return values.map(function(value) {
+    return isTruthyTaskCell_(value) ? '1' : '0';
+  }).join('');
+}
+
+function isTruthyTaskCell_(value) {
+  if (value === true) return true;
+  if (value === false || value === '' || value === null) return false;
+  const normalized = String(value).trim().toLowerCase();
+  return normalized === '1' || normalized === 'true' || normalized === 'yes' || normalized === 'y' || normalized === 'done' || normalized === 'complete' || normalized === 'completed';
+}
+
+function logEvent_(teamId, action, state, completedCount, source, rowIndex) {
+  const sheets = ensureSheets_();
+  sheets.events.appendRow([
+    new Date(),
+    teamId,
+    action,
+    normalizeState_(state),
+    Number(completedCount || 0),
+    String(source || '').trim(),
+    Number(rowIndex || 0)
+  ]);
 }
 
 function sanitizeTeamId_(value) {
@@ -177,14 +325,14 @@ function sanitizeTeamId_(value) {
 function normalizeState_(value) {
   const bits = String(value || '').replace(/[^01]/g, '');
   let output = '';
-  for (let i = 0; i < TASK_IDS.length; i += 1) {
+  for (let i = 0; i < TASK_COUNT; i += 1) {
     output += bits.charAt(i) === '1' ? '1' : '0';
   }
   return output;
 }
 
 function defaultState_() {
-  return new Array(TASK_IDS.length + 1).join('0');
+  return new Array(TASK_COUNT + 1).join('0');
 }
 
 function countCompleted_(state) {
