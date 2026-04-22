@@ -589,12 +589,54 @@ a { color: var(--accent); }
   cursor: pointer;
 }
 .task-nav-summary {
+  margin: 14px 0 12px 0;
+}
+.task-nav-summary-main {
   display: flex;
   justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.task-nav-team-box {
+  flex: 1 1 260px;
+}
+.task-nav-team-label {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+.task-nav-team-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.task-nav-team-input {
+  flex: 1 1 140px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: white;
+}
+.task-nav-team-help {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+.task-nav-summary-meta {
+  display: flex;
   gap: 10px;
   align-items: center;
   flex-wrap: wrap;
-  margin: 14px 0 12px 0;
+  justify-content: flex-end;
 }
 .task-nav-list {
   display: grid;
@@ -654,11 +696,22 @@ a { color: var(--accent); }
   margin-top: 0;
 }
 
+body.has-floating-task-pager {
+  padding-bottom: 118px;
+}
+
 .task-pager {
-  margin-top: 20px;
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  width: min(calc(100% - 24px), 1280px);
+  z-index: 35;
+  margin-top: 0;
 }
 .task-pager-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 16px;
@@ -691,3 +744,27 @@ a { color: var(--accent); }
 .kit-list { margin: 6px 0 0 0; padding-left: 18px; }
 .kit-list li + li { margin-top: 4px; }
 .item-list > li > .kit-list { margin-top: 6px; }
+
+
+@media (max-width: 640px) {
+  .task-nav-summary-meta {
+    justify-content: flex-start;
+  }
+  .task-nav-team-form {
+    align-items: stretch;
+  }
+  .task-nav-team-input {
+    flex-basis: 100%;
+  }
+  body.has-floating-task-pager {
+    padding-bottom: 132px;
+  }
+  .task-pager {
+    bottom: 10px;
+    width: calc(100% - 16px);
+  }
+  .task-pager-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+}

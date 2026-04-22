@@ -608,6 +608,23 @@ const TEAM_ROSTER = [
 ];
 
 const PROGRESS_KEY = "hamr2-progress-v2";
+const TEAM_ID_KEY = "hamr2-team-id-v1";
+const LOCAL_PROGRESS_SCOPE = "__local__";
+const TEAM_SYNC_CONFIG = Object.assign({
+  endpoint: "",
+  requestTimeoutMs: 8000,
+  maxTeamIdLength: 20
+}, window.HAMR_TEAM_SYNC_CONFIG || {});
+const TEAM_SYNC_STATE = {
+  status: TEAM_SYNC_CONFIG.endpoint ? "idle" : "local-only",
+  message: TEAM_SYNC_CONFIG.endpoint
+    ? "Set a Team ID to share progress across browsers."
+    : "Local progress only until the Apps Script URL is configured.",
+  busy: false,
+  lastLocalWriteAt: 0
+};
+let teamSyncWindowBound = false;
+let teamSyncRequestCounter = 0;
 
 
 const TASK_INTRO = {
@@ -797,7 +814,6 @@ function renderSiteNav() {
   if (!nav) return;
 
   const filename = currentFilename();
-  const currentTask = getCurrentTaskMeta();
 
   const siteLinks = [];
   const taskLinks = [];
@@ -805,14 +821,7 @@ function renderSiteNav() {
   siteLinks.push(`<a href="index.html"${filename === "index.html" ? ' aria-current="page" class="nav-current"' : ""}>Home</a>`);
   siteLinks.push(`<a href="parts-guide.html" class="secondary${filename === "parts-guide.html" ? ' nav-current' : ''}"${filename === "parts-guide.html" ? ' aria-current="page"' : ''}>Parts Guide</a>`);
   siteLinks.push(`<a href="tools-inventory.html" class="secondary${filename === "tools-inventory.html" ? ' nav-current' : ''}"${filename === "tools-inventory.html" ? ' aria-current="page"' : ''}>Tools Inventory</a>`);
-
-  if (filename === "index.html") {
-    taskLinks.push('<a href="#jump-ahead" class="secondary nav-current" aria-current="page">Task index</a>');
-  } else if (currentTask) {
-    taskLinks.push('<button type="button" class="buttonish secondary task-nav-trigger" data-open-task-nav="true" aria-haspopup="dialog" aria-controls="taskNavigatorPanel">Task Navigator</button>');
-  } else {
-    taskLinks.push('<a href="index.html#jump-ahead" class="secondary">Task index</a>');
-  }
+  taskLinks.push('<button type="button" class="buttonish secondary task-nav-trigger" data-open-task-nav="true" aria-haspopup="dialog" aria-controls="taskNavigatorPanel">Task Navigator</button>');
 
   nav.innerHTML = `
     <div class="topnav-group" data-nav-group="site">${siteLinks.join('')}</div>
@@ -851,6 +860,7 @@ function openTaskNavigator() {
   document.body.classList.add('task-nav-open');
   const closeButton = backdrop.querySelector('[data-close-task-nav]');
   if (closeButton) closeButton.focus();
+  void syncProgressFromRemote();
 }
 
 function closeTaskNavigator() {
@@ -893,15 +903,59 @@ function renderTaskNavigator() {
   const list = backdrop.querySelector('[data-task-nav-list]');
   if (!summaryBox || !list) return;
 
-  const progress = getProgress();
+  const teamId = getTeamId();
+  const progress = getProgress(teamId);
   const summary = progressSummary(progress);
   const currentTask = getCurrentTaskMeta();
   const tasks = getPublishedTaskIds().map(id => TASK_META[id]).filter(Boolean);
+  const syncMessage = getTeamSyncMessage();
 
   summaryBox.innerHTML = `
-    <span class="badge">${summary.completed} of ${summary.total} complete</span>
-    <a class="link-button secondary" href="index.html#jump-ahead">Open full task index</a>
+    <div class="task-nav-summary-main">
+      <div class="task-nav-team-box">
+        <label class="task-nav-team-label" for="taskNavigatorTeamId">Team ID</label>
+        <form class="task-nav-team-form" data-team-id-form>
+          <input id="taskNavigatorTeamId" class="task-nav-team-input" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="${TEAM_SYNC_CONFIG.maxTeamIdLength}" value="${escapeHtml(teamId)}" placeholder="Optional">
+          <button class="link-button secondary" type="submit">Set</button>
+          ${teamId ? '<button class="link-button secondary" type="button" data-clear-team-id="true">Clear</button>' : ''}
+        </form>
+        <div class="task-nav-team-help">${escapeHtml(syncMessage)}</div>
+      </div>
+      <div class="task-nav-summary-meta">
+        <span class="badge">${summary.completed} of ${summary.total} complete</span>
+        <a class="link-button secondary" href="index.html#jump-ahead">Open full task navigator</a>
+      </div>
+    </div>
   `;
+
+  const form = summaryBox.querySelector('[data-team-id-form]');
+  if (form && form.dataset.bound !== 'true') {
+    form.dataset.bound = 'true';
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const input = form.querySelector('#taskNavigatorTeamId');
+      const nextTeamId = setTeamId(input ? input.value : '');
+      refreshProgressUi();
+      void syncProgressFromRemote(nextTeamId);
+      bindTeamSyncRefresh();
+    });
+  }
+  const teamInput = summaryBox.querySelector('#taskNavigatorTeamId');
+  if (teamInput && teamInput.dataset.bound !== 'true') {
+    teamInput.dataset.bound = 'true';
+    teamInput.addEventListener('input', () => {
+      teamInput.value = normalizeTeamId(teamInput.value);
+    });
+  }
+  const clearButton = summaryBox.querySelector('[data-clear-team-id]');
+  if (clearButton && clearButton.dataset.bound !== 'true') {
+    clearButton.dataset.bound = 'true';
+    clearButton.addEventListener('click', () => {
+      setTeamId('');
+      refreshProgressUi();
+      bindTeamSyncRefresh();
+    });
+  }
 
   list.innerHTML = tasks.map(task => {
     const done = !!progress[task.id];
@@ -1145,16 +1199,265 @@ const TASK_META = {
   }
 };
 
-function getProgress() {
+function normalizeTeamId(value) {
+  return String(value || '')
+    .toUpperCase()
+    .replace(/[^A-Z0-9-]/g, '')
+    .slice(0, TEAM_SYNC_CONFIG.maxTeamIdLength);
+}
+
+function getTeamId() {
   try {
-    return JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}");
+    return normalizeTeamId(localStorage.getItem(TEAM_ID_KEY) || '');
+  } catch (e) {
+    return '';
+  }
+}
+
+function setTeamId(teamId) {
+  const normalized = normalizeTeamId(teamId);
+  if (normalized) {
+    localStorage.setItem(TEAM_ID_KEY, normalized);
+  } else {
+    localStorage.removeItem(TEAM_ID_KEY);
+  }
+  return normalized;
+}
+
+function activeProgressScope(teamId = getTeamId()) {
+  return teamId || LOCAL_PROGRESS_SCOPE;
+}
+
+function getProgressStore() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}');
+    return parsed && typeof parsed === 'object' ? parsed : {};
   } catch (e) {
     return {};
   }
 }
 
-function setProgress(progress) {
-  localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+function setProgressStore(store) {
+  localStorage.setItem(PROGRESS_KEY, JSON.stringify(store));
+}
+
+function normalizeProgress(progress) {
+  const clean = {};
+  getOrderedTaskIds().forEach(id => {
+    if (progress && progress[id]) clean[id] = true;
+  });
+  return clean;
+}
+
+function getProgress(teamId = getTeamId()) {
+  const store = getProgressStore();
+  return normalizeProgress(store[activeProgressScope(teamId)] || {});
+}
+
+function setProgress(progress, teamId = getTeamId()) {
+  const store = getProgressStore();
+  const scope = activeProgressScope(teamId);
+  const clean = normalizeProgress(progress);
+  if (Object.keys(clean).length) {
+    store[scope] = clean;
+  } else {
+    delete store[scope];
+  }
+  setProgressStore(store);
+  return clean;
+}
+
+function serializeProgress(progress = getProgress()) {
+  return getPublishedTaskIds().map(id => (progress[id] ? '1' : '0')).join('');
+}
+
+function deserializeProgress(state = '') {
+  const normalizedState = String(state || '').replace(/[^01]/g, '');
+  const progress = {};
+  getPublishedTaskIds().forEach((id, index) => {
+    if (normalizedState[index] === '1') progress[id] = true;
+  });
+  return progress;
+}
+
+function hasTeamSyncBackend() {
+  return !!String(TEAM_SYNC_CONFIG.endpoint || '').trim();
+}
+
+function buildTeamSyncUrl(params = {}) {
+  const url = new URL(String(TEAM_SYNC_CONFIG.endpoint || ''), window.location.href);
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) url.searchParams.set(key, value);
+  });
+  url.searchParams.set('_', String(Date.now()));
+  return url.toString();
+}
+
+function jsonpTeamSync(params = {}) {
+  return new Promise((resolve, reject) => {
+    if (!hasTeamSyncBackend()) {
+      reject(new Error('Team sync endpoint is not configured.'));
+      return;
+    }
+
+    const callbackName = `hamrTeamSync_${Date.now()}_${teamSyncRequestCounter++}`;
+    const script = document.createElement('script');
+    const timeoutMs = Number(TEAM_SYNC_CONFIG.requestTimeoutMs || 8000);
+    let settled = false;
+
+    const cleanup = (timer) => {
+      window.clearTimeout(timer);
+      if (script.parentNode) script.parentNode.removeChild(script);
+      try {
+        delete window[callbackName];
+      } catch (e) {
+        window[callbackName] = undefined;
+      }
+    };
+
+    const timer = window.setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      cleanup(timer);
+      reject(new Error('Team sync timed out.'));
+    }, timeoutMs);
+
+    window[callbackName] = payload => {
+      if (settled) return;
+      settled = true;
+      cleanup(timer);
+      resolve(payload || {});
+    };
+
+    script.onerror = () => {
+      if (settled) return;
+      settled = true;
+      cleanup(timer);
+      reject(new Error('Team sync request failed.'));
+    };
+
+    script.src = buildTeamSyncUrl(Object.assign({}, params, { callback: callbackName }));
+    document.body.appendChild(script);
+  });
+}
+
+function setTeamSyncStatus(status, message) {
+  TEAM_SYNC_STATE.status = status;
+  TEAM_SYNC_STATE.message = message || '';
+}
+
+function getTeamSyncMessage() {
+  if (TEAM_SYNC_STATE.status === 'syncing') {
+    return 'Syncing team progress…';
+  }
+  if (TEAM_SYNC_STATE.status === 'error' && TEAM_SYNC_STATE.message) {
+    return TEAM_SYNC_STATE.message;
+  }
+  if (!hasTeamSyncBackend()) {
+    return 'Local progress only until the Apps Script URL is configured.';
+  }
+  if (!getTeamId()) {
+    return 'Set a Team ID to share progress across browsers.';
+  }
+  return 'Shared progress is active for this Team ID.';
+}
+
+async function syncProgressFromRemote(teamId = getTeamId()) {
+  if (!teamId) {
+    setTeamSyncStatus('idle', 'Set a Team ID to share progress across browsers.');
+    return getProgress(teamId);
+  }
+  if (!hasTeamSyncBackend()) {
+    setTeamSyncStatus('local-only', 'Local progress only until the Apps Script URL is configured.');
+    return getProgress(teamId);
+  }
+  if (TEAM_SYNC_STATE.busy) {
+    return getProgress(teamId);
+  }
+
+  TEAM_SYNC_STATE.busy = true;
+  const startedAt = Date.now();
+  setTeamSyncStatus('syncing', 'Syncing team progress…');
+  renderTaskNavigator();
+
+  try {
+    const payload = await jsonpTeamSync({ action: 'get', teamId });
+    if (!payload || payload.ok !== true) {
+      throw new Error(payload && payload.error ? payload.error : 'Sync failed.');
+    }
+    const remoteProgress = deserializeProgress(payload.state || '');
+    if (startedAt < TEAM_SYNC_STATE.lastLocalWriteAt) {
+      return getProgress(teamId);
+    }
+    setProgress(remoteProgress, teamId);
+    setTeamSyncStatus('ready', `Shared progress synced for ${teamId}.`);
+    refreshProgressUi();
+    return remoteProgress;
+  } catch (error) {
+    setTeamSyncStatus('error', `${error.message || 'Sync failed.'} Using cached progress on this browser.`);
+    renderTaskNavigator();
+    return getProgress(teamId);
+  } finally {
+    TEAM_SYNC_STATE.busy = false;
+  }
+}
+
+async function pushProgressToRemote(progress, teamId = getTeamId()) {
+  if (!teamId || !hasTeamSyncBackend()) {
+    return normalizeProgress(progress);
+  }
+
+  TEAM_SYNC_STATE.busy = true;
+  setTeamSyncStatus('syncing', 'Syncing team progress…');
+  renderTaskNavigator();
+
+  try {
+    const payload = await jsonpTeamSync({
+      action: 'set',
+      teamId,
+      state: serializeProgress(progress),
+      source: currentFilename()
+    });
+    if (!payload || payload.ok !== true) {
+      throw new Error(payload && payload.error ? payload.error : 'Sync failed.');
+    }
+    const remoteProgress = deserializeProgress(payload.state || '');
+    if (startedAt < TEAM_SYNC_STATE.lastLocalWriteAt) {
+      return getProgress(teamId);
+    }
+    setProgress(remoteProgress, teamId);
+    setTeamSyncStatus('ready', `Shared progress synced for ${teamId}.`);
+    refreshProgressUi();
+    return remoteProgress;
+  } catch (error) {
+    setTeamSyncStatus('error', `${error.message || 'Sync failed.'} Changes remain cached on this browser.`);
+    renderTaskNavigator();
+    return normalizeProgress(progress);
+  } finally {
+    TEAM_SYNC_STATE.busy = false;
+  }
+}
+
+function bindTeamSyncRefresh() {
+  if (teamSyncWindowBound) return;
+  teamSyncWindowBound = true;
+
+  window.addEventListener('focus', () => {
+    if (getTeamId()) void syncProgressFromRemote();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && getTeamId()) void syncProgressFromRemote();
+  });
+}
+
+function bootstrapTeamProgress() {
+  bindTeamSyncRefresh();
+  if (!getTeamId()) {
+    setTeamSyncStatus('idle', 'Set a Team ID to share progress across browsers.');
+    return Promise.resolve(getProgress());
+  }
+  return syncProgressFromRemote();
 }
 
 function bindResetProgressButton() {
@@ -1162,8 +1465,11 @@ function bindResetProgressButton() {
   if (!resetBtn || resetBtn.dataset.bound === 'true') return;
   resetBtn.dataset.bound = 'true';
   resetBtn.addEventListener('click', () => {
-    localStorage.removeItem(PROGRESS_KEY);
+    const teamId = getTeamId();
+    TEAM_SYNC_STATE.lastLocalWriteAt = Date.now();
+    setProgress({}, teamId);
     refreshProgressUi();
+    if (teamId) void pushProgressToRemote({}, teamId);
   });
 }
 
@@ -1190,11 +1496,14 @@ function renderTaskProgressControl() {
     const button = box.querySelector('[data-toggle-task]');
     if (!button || blocked) return;
     button.addEventListener('click', () => {
-      const nextProgress = getProgress();
+      const teamId = getTeamId();
+      const nextProgress = getProgress(teamId);
       nextProgress[taskId] = !nextProgress[taskId];
       if (!nextProgress[taskId]) delete nextProgress[taskId];
-      setProgress(nextProgress);
+      TEAM_SYNC_STATE.lastLocalWriteAt = Date.now();
+      const stored = setProgress(nextProgress, teamId);
       refreshProgressUi();
+      if (teamId) void pushProgressToRemote(stored, teamId);
     });
   });
 }
@@ -1297,6 +1606,7 @@ function initTaskPageLayout() {
     pager.dataset.taskPager = 'true';
     root.appendChild(pager);
   }
+  document.body.classList.add('has-floating-task-pager');
 }
 
 function refreshProgressUi() {
@@ -1609,12 +1919,28 @@ function renderTaskStrip() {
   slot.hidden = true;
 }
 
-function renderTaskPager() {
+function hideTaskPager() {
+  document.body.classList.remove('has-floating-task-pager');
   const slot = document.querySelector('[data-task-pager]');
   if (!slot) return;
+  slot.innerHTML = '';
+  slot.hidden = true;
+}
+
+function renderTaskPager() {
+  const slot = document.querySelector('[data-task-pager]');
+  if (!slot) {
+    document.body.classList.remove('has-floating-task-pager');
+    return;
+  }
 
   const task = getCurrentTaskMeta();
-  if (!task) return;
+  if (!task) {
+    document.body.classList.remove('has-floating-task-pager');
+    return;
+  }
+  document.body.classList.add('has-floating-task-pager');
+  slot.hidden = false;
 
   const progress = getProgress();
   const { prev, next } = getTaskNeighbors(task.id);

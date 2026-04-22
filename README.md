@@ -100,7 +100,6 @@ It currently handles:
 * glossary annotation and hover previews
 * task metadata
 * task blockers and progress state
-* task status-strip rendering
 * homepage task-card rendering and status
 * site navigation
 * footer rendering
@@ -173,8 +172,7 @@ Shared task-page behavior is handled centrally.
 These are rendered or controlled by shared code:
 
 * top navigation
-* task status strip
-* blocker status chips
+* blocker banner
 * task completion button
 * task progress state
 * footer
@@ -702,3 +700,28 @@ When in doubt, prefer the change that:
 * improves clarity for cadets
 * keeps terminology consistent
 * and is easy to verify after editing
+
+
+---
+
+## Team progress sync
+
+Phase 1 shared progress uses a Team ID entered from the Task Navigator panel.
+
+Frontend files:
+
+* `assets/js/team-sync-config.js`
+* `assets/js/common.js`
+
+Backend reference:
+
+* `backend/google-apps-script/Code.gs`
+* `backend/google-apps-script/README.md`
+
+Behavior:
+
+* Progress is still cached locally in the browser.
+* If a Team ID is set and the Apps Script endpoint is configured, progress is also synced to the shared backend.
+* Different browsers using the same Team ID will read and write the same task state.
+
+Keep the endpoint URL out of `common.js`. Put it only in `assets/js/team-sync-config.js`.
