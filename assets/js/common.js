@@ -710,6 +710,12 @@ function getTaskNeighbors(taskId) {
   };
 }
 
+function taskShortLabel(task) {
+  if (!task) return '';
+  const match = String(task.title || '').match(/^Task\s+\d+/i);
+  return match ? match[0] : task.title;
+}
+
 function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
 }
@@ -789,26 +795,145 @@ function ensureSharedUiStyles() {
 function renderSiteNav() {
   const nav = document.querySelector('[data-site-nav]');
   if (!nav) return;
+
   const filename = currentFilename();
   const currentTask = getCurrentTaskMeta();
-  const links = [];
 
-  links.push(`<a href="index.html"${filename === "index.html" ? ' aria-current="page" class="nav-current"' : ""}>Home</a>`);
+  const siteLinks = [];
+  const taskLinks = [];
 
-  links.push(`<a href="parts-guide.html" class="secondary${filename === "parts-guide.html" ? ' nav-current' : ''}"${filename === "parts-guide.html" ? ' aria-current="page"' : ''}>Parts Guide</a>`);
-  links.push(`<a href="tools-inventory.html" class="secondary${filename === "tools-inventory.html" ? ' nav-current' : ''}"${filename === "tools-inventory.html" ? ' aria-current="page"' : ''}>Tools Inventory</a>&ensp;`);
+  siteLinks.push(`<a href="index.html"${filename === "index.html" ? ' aria-current="page" class="nav-current"' : ""}>Home</a>`);
+  siteLinks.push(`<a href="parts-guide.html" class="secondary${filename === "parts-guide.html" ? ' nav-current' : ''}"${filename === "parts-guide.html" ? ' aria-current="page"' : ''}>Parts Guide</a>`);
+  siteLinks.push(`<a href="tools-inventory.html" class="secondary${filename === "tools-inventory.html" ? ' nav-current' : ''}"${filename === "tools-inventory.html" ? ' aria-current="page"' : ''}>Tools Inventory</a>`);
 
   if (filename === "index.html") {
-    links.push('<a href="#jump-ahead" class="secondary">Task index</a>');
+    taskLinks.push('<a href="#jump-ahead" class="secondary nav-current" aria-current="page">Task index</a>');
+  } else if (currentTask) {
+    taskLinks.push('<button type="button" class="buttonish secondary task-nav-trigger" data-open-task-nav="true" aria-haspopup="dialog" aria-controls="taskNavigatorPanel">Task Navigator</button>');
+  } else {
+    taskLinks.push('<a href="index.html#jump-ahead" class="secondary">Task index</a>');
   }
 
-  if (currentTask) {
-    const { prev, next } = getTaskNeighbors(currentTask.id);
-    if (prev) links.push(`<a href="${prev.slug}.html" class="secondary">← ${escapeHtml(prev.title)}</a>`);
-    links.push(`<a href="${currentTask.slug}.html" aria-current="page" class="secondary nav-current">${escapeHtml(currentTask.title)}</a>`);
-    if (next) links.push(`<a href="${next.slug}.html" class="secondary">${escapeHtml(next.title)} →</a>`);
-  }
-  nav.innerHTML = links.join("");
+  nav.innerHTML = `
+    <div class="topnav-group" data-nav-group="site">${siteLinks.join('')}</div>
+    <div class="topnav-group" data-nav-group="task">${taskLinks.join('')}</div>`;
+}
+
+function ensureTaskNavigator() {
+  let backdrop = document.getElementById('taskNavigatorBackdrop');
+  if (backdrop) return backdrop;
+
+  backdrop = document.createElement('div');
+  backdrop.id = 'taskNavigatorBackdrop';
+  backdrop.className = 'task-nav-backdrop';
+  backdrop.setAttribute('aria-hidden', 'true');
+  backdrop.innerHTML = `
+    <aside id="taskNavigatorPanel" class="task-nav-panel" role="dialog" aria-modal="true" aria-labelledby="taskNavigatorTitle">
+      <div class="task-nav-head">
+        <div>
+          <div class="kicker">Task navigator</div>
+          <h2 id="taskNavigatorTitle">Jump to any task</h2>
+        </div>
+        <button type="button" class="task-nav-close" data-close-task-nav="true" aria-label="Close task navigator">×</button>
+      </div>
+      <div class="task-nav-summary" data-task-nav-summary></div>
+      <div class="task-nav-list" data-task-nav-list></div>
+    </aside>
+  `;
+  document.body.appendChild(backdrop);
+  return backdrop;
+}
+
+function openTaskNavigator() {
+  const backdrop = ensureTaskNavigator();
+  backdrop.classList.add('open');
+  backdrop.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('task-nav-open');
+  const closeButton = backdrop.querySelector('[data-close-task-nav]');
+  if (closeButton) closeButton.focus();
+}
+
+function closeTaskNavigator() {
+  const backdrop = document.getElementById('taskNavigatorBackdrop');
+  if (!backdrop) return;
+  backdrop.classList.remove('open');
+  backdrop.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('task-nav-open');
+}
+
+function bindTaskNavigator() {
+  ensureTaskNavigator();
+
+  document.querySelectorAll('[data-open-task-nav]').forEach(button => {
+    if (button.dataset.bound === 'true') return;
+    button.dataset.bound = 'true';
+    button.addEventListener('click', openTaskNavigator);
+  });
+
+  const backdrop = document.getElementById('taskNavigatorBackdrop');
+  if (!backdrop || backdrop.dataset.bound === 'true') return;
+  backdrop.dataset.bound = 'true';
+
+  backdrop.addEventListener('click', event => {
+    if (event.target === backdrop || event.target.closest('[data-close-task-nav]')) {
+      closeTaskNavigator();
+    }
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && backdrop.classList.contains('open')) {
+      closeTaskNavigator();
+    }
+  });
+}
+
+function renderTaskNavigator() {
+  const backdrop = ensureTaskNavigator();
+  const summaryBox = backdrop.querySelector('[data-task-nav-summary]');
+  const list = backdrop.querySelector('[data-task-nav-list]');
+  if (!summaryBox || !list) return;
+
+  const progress = getProgress();
+  const summary = progressSummary(progress);
+  const currentTask = getCurrentTaskMeta();
+  const tasks = getPublishedTaskIds().map(id => TASK_META[id]).filter(Boolean);
+
+  summaryBox.innerHTML = `
+    <span class="badge">${summary.completed} of ${summary.total} complete</span>
+    <a class="link-button secondary" href="index.html#jump-ahead">Open full task index</a>
+  `;
+
+  list.innerHTML = tasks.map(task => {
+    const done = !!progress[task.id];
+    const ready = blockersDone(task.id, progress);
+    const current = currentTask && currentTask.id === task.id;
+    const blockingIds = ((task.blockers || []).filter(id => !progress[id]));
+    const statusLabel = done
+      ? 'Done'
+      : ready
+        ? 'Ready now'
+        : `Blocked by ${blockingIds.map(blockerShortLabel).join(', ')}`;
+    const statusClass = done
+      ? 'status-chip status-done'
+      : ready
+        ? 'status-chip status-ready'
+        : 'status-chip status-blocked';
+    return `
+      <a class="task-nav-item${current ? ' current' : ''}" href="${task.slug}.html" ${current ? 'aria-current="page"' : ''}>
+        <div class="task-nav-item-top">
+          <strong>${escapeHtml(taskShortLabel(task))}</strong>
+          <span class="${statusClass}">${escapeHtml(statusLabel)}</span>
+        </div>
+        <div class="task-nav-item-title">${escapeHtml(task.title.replace(/^Task\s+\d+:\s*/, ''))}</div>
+        <div class="task-nav-item-sub">${escapeHtml(task.summary)}</div>
+      </a>`;
+  }).join('');
+
+  list.querySelectorAll('a').forEach(link => {
+    if (link.dataset.bound === 'true') return;
+    link.dataset.bound = 'true';
+    link.addEventListener('click', closeTaskNavigator);
+  });
 }
 
 function progressSummary(progress = getProgress()) {
@@ -1043,36 +1168,34 @@ function bindResetProgressButton() {
 }
 
 function renderTaskProgressControl() {
-  const box = document.querySelector('.progress-box');
-  if (!box) return;
-  const marker = box.querySelector('[data-task-complete]');
-  const taskId = box.dataset.taskId || marker?.dataset.taskComplete;
-  if (!taskId) return;
-  box.dataset.taskId = taskId;
+  document.querySelectorAll('[data-task-complete-control]').forEach(box => {
+    const taskId = box.dataset.taskId;
+    if (!taskId) return;
 
-  const progress = getProgress();
-  const done = !!progress[taskId];
-  const blocked = !done && !blockersDone(taskId, progress);
-  const blockedBy = blocked
-    ? ((TASK_META[taskId] && TASK_META[taskId].blockers) || [])
-        .filter(id => !progress[id])
-        .map(id => blockerShortLabel(id))
-    : [];
-  const disabledNote = blockedBy.length
-    ? ` Complete ${blockedBy.join(', ')} first.`
-    : '';
+    const progress = getProgress();
+    const done = !!progress[taskId];
+    const blocked = !done && !blockersDone(taskId, progress);
+    const blockedBy = blocked
+      ? ((TASK_META[taskId] && TASK_META[taskId].blockers) || [])
+          .filter(id => !progress[id])
+          .map(id => blockerShortLabel(id))
+      : [];
+    const disabledNote = blockedBy.length
+      ? ` Complete ${formatHumanList(blockedBy)} first.`
+      : '';
 
-  box.innerHTML = `
-    <button class="task-complete-button${done ? ' done' : ''}${blocked ? ' disabled' : ''}" type="button" data-toggle-task="${taskId}" aria-pressed="${done}"${blocked ? ' disabled aria-disabled="true"' : ''}${blocked ? ` title="Task is blocked.${disabledNote}"` : ''}>${done ? 'Completed' : 'Mark task complete'}</button>`;
+    box.innerHTML = `
+      <button class="task-complete-button${done ? ' done' : ''}${blocked ? ' disabled' : ''}" type="button" data-toggle-task="${taskId}" aria-pressed="${done}"${blocked ? ' disabled aria-disabled="true"' : ''}${blocked ? ` title="Task is blocked.${disabledNote}"` : ''}>${done ? 'Completed' : 'Complete task'}</button>`;
 
-  const button = box.querySelector('[data-toggle-task]');
-  if (!button || blocked) return;
-  button.addEventListener('click', () => {
-    const nextProgress = getProgress();
-    nextProgress[taskId] = !nextProgress[taskId];
-    if (!nextProgress[taskId]) delete nextProgress[taskId];
-    setProgress(nextProgress);
-    refreshProgressUi();
+    const button = box.querySelector('[data-toggle-task]');
+    if (!button || blocked) return;
+    button.addEventListener('click', () => {
+      const nextProgress = getProgress();
+      nextProgress[taskId] = !nextProgress[taskId];
+      if (!nextProgress[taskId]) delete nextProgress[taskId];
+      setProgress(nextProgress);
+      refreshProgressUi();
+    });
   });
 }
 
@@ -1147,15 +1270,42 @@ function initTaskPageLayout() {
   root.classList.add('task-content-shell');
   renderTaskIntro(root);
 
+  if (!root.querySelector('[data-task-blocker-banner]')) {
+    const banner = document.createElement('div');
+    banner.className = 'task-blocker-banner';
+    banner.dataset.taskBlockerBanner = 'true';
+    const introCard = root.querySelector('.task-intro-card');
+    if (introCard && introCard.nextSibling) {
+      root.insertBefore(banner, introCard.nextSibling);
+    } else if (introCard) {
+      root.appendChild(banner);
+    } else if (root.firstChild) {
+      root.insertBefore(banner, root.firstChild);
+    } else {
+      root.appendChild(banner);
+    }
+  }
+
   if (!root.querySelector('.instruction-flow')) {
     wrapTaskPageSection(root, 'Steps', 'task-steps-card');
   }
   wrapTaskPageSection(root, 'Common errors', 'common-errors-card');
+
+  if (!root.querySelector('[data-task-pager]')) {
+    const pager = document.createElement('div');
+    pager.className = 'task-pager';
+    pager.dataset.taskPager = 'true';
+    root.appendChild(pager);
+  }
 }
 
 function refreshProgressUi() {
   renderSiteNav();
+  bindTaskNavigator();
+  renderTaskNavigator();
   renderTaskStrip();
+  renderTaskPager();
+  renderTaskBlockerState();
   renderTaskIndex();
   renderTaskProgressControl();
   renderIndexStatus();
@@ -1423,6 +1573,14 @@ function blockerShortLabel(taskId) {
     .replace(/^Task\s+(\d+).*$/, "Task $1");
 }
 
+function formatHumanList(items = []) {
+  const filtered = items.filter(Boolean);
+  if (!filtered.length) return "";
+  if (filtered.length === 1) return filtered[0];
+  if (filtered.length === 2) return `${filtered[0]} and ${filtered[1]}`;
+  return `${filtered.slice(0, -1).join(', ')}, and ${filtered[filtered.length - 1]}`;
+}
+
 function getTaskPageStatusBadges(task, progress = getProgress()) {
   if (!task) {
     return [];
@@ -1447,21 +1605,38 @@ function getTaskPageStatusBadges(task, progress = getProgress()) {
 function renderTaskStrip() {
   const slot = document.querySelector('[data-task-strip]');
   if (!slot) return;
+  slot.innerHTML = '';
+  slot.hidden = true;
+}
+
+function renderTaskPager() {
+  const slot = document.querySelector('[data-task-pager]');
+  if (!slot) return;
+
   const task = getCurrentTaskMeta();
   if (!task) return;
 
-  const statusBadges = getTaskPageStatusBadges(task)
-    .map(status => `<span class="${escapeHtml(status.className)}">${escapeHtml(status.label)}</span>`)
-    .join('');
+  const progress = getProgress();
+  const { prev, next } = getTaskNeighbors(task.id);
+  const blockingIds = ((task.blockers || []).filter(id => !progress[id]));
+  const firstBlockingTask = blockingIds.length ? TASK_META[blockingIds[0]] : null;
 
-  const taskTag = task.day ? `<span class="badge day-tag">${escapeHtml(task.day)}</span>` : "";
+  const prevLink = prev
+    ? `<a class="link-button secondary" href="${prev.slug}.html" title="${escapeHtml(prev.title)}">← Previous</a>`
+    : '';
+  const blockerLink = firstBlockingTask
+    ? `<a class="link-button secondary" href="${firstBlockingTask.slug}.html" title="${escapeHtml(firstBlockingTask.title)}">← Go to ${escapeHtml(taskShortLabel(firstBlockingTask))}</a>`
+    : '';
+  const nextLink = next
+    ? `<a class="link-button" href="${next.slug}.html" title="${escapeHtml(next.title)}">Next task →</a>`
+    : '';
+
   slot.innerHTML = `
-    <div class="task-header">
-      <div class="task-strip-main">
-        <div class="task-strip-top">
-          <div class="badge-row">${taskTag}${statusBadges}</div>
-          <div class="progress-box" data-task-id="${escapeHtml(task.id)}"></div>
-        </div>
+    <div class="task-pager-card">
+      <div class="task-pager-nav">
+        <div class="task-pager-side left">${prevLink}${blockerLink}</div>
+        <div class="task-pager-center" data-task-complete-control data-task-id="${escapeHtml(task.id)}"></div>
+        <div class="task-pager-side right">${nextLink}</div>
       </div>
     </div>`;
 }
@@ -1489,6 +1664,37 @@ function renderTaskIndex() {
         <div class="actions"><a class="link-button" href="${escapeHtml(task.slug)}.html">Open task</a></div>
       </article>`;
   }).join('');
+}
+
+function renderTaskBlockerState() {
+  const root = document.querySelector('.task-content-shell');
+  const task = getCurrentTaskMeta();
+  if (!root || !task) return;
+
+  const progress = getProgress();
+  const done = !!progress[task.id];
+  const blockingIds = done ? [] : ((task.blockers || []).filter(id => !progress[id]));
+  const banner = root.querySelector('[data-task-blocker-banner]');
+
+  root.classList.toggle('task-blocked', blockingIds.length > 0);
+
+  if (!banner) return;
+  if (!blockingIds.length) {
+    banner.classList.remove('open');
+    banner.innerHTML = '';
+    return;
+  }
+
+  const blockerLinks = blockingIds
+    .map(id => TASK_META[id])
+    .filter(Boolean)
+    .map(blocker => `<a class="link-button secondary" href="${blocker.slug}.html">${escapeHtml(blocker.title)}</a>`)
+    .join('');
+
+  banner.innerHTML = `
+    <div class="task-blocker-copy"><strong>Complete first:</strong></div>
+    <div class="task-blocker-actions">${blockerLinks}</div>`;
+  banner.classList.add('open');
 }
 
 function renderIndexStatus() {
