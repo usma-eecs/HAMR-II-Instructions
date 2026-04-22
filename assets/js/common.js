@@ -1614,7 +1614,6 @@ function refreshProgressUi() {
   renderSiteNav();
   bindTaskNavigator();
   renderTaskNavigator();
-  renderTaskStrip();
   renderTaskPager();
   renderTaskBlockerState();
   renderTaskIndex();
@@ -1892,33 +1891,6 @@ function formatHumanList(items = []) {
   return `${filtered.slice(0, -1).join(', ')}, and ${filtered[filtered.length - 1]}`;
 }
 
-function getTaskPageStatusBadges(task, progress = getProgress()) {
-  if (!task) {
-    return [];
-  }
-
-  if (progress[task.id]) {
-    return [{ label: "Done", className: "status-chip status-done" }];
-  }
-
-  if (blockersDone(task.id, progress)) {
-    return [{ label: "Ready now", className: "status-chip status-ready" }];
-  }
-
-  return (task.blockers || [])
-    .filter(id => !progress[id])
-    .map(id => ({
-      label: `Blocked by ${blockerShortLabel(id)}`,
-      className: "status-chip status-blocked"
-    }));
-}
-
-function renderTaskStrip() {
-  const slot = document.querySelector('[data-task-strip]');
-  if (!slot) return;
-  slot.innerHTML = '';
-  slot.hidden = true;
-}
 
 function hideTaskPager() {
   document.body.classList.remove('has-floating-task-pager');
