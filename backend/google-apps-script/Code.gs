@@ -76,8 +76,14 @@ function doPost(e) {
 function respond_(payload, callback) {
   const json = JSON.stringify(payload);
   if (callback) {
+    const safeCallback = String(callback || '').trim();
+    if (!/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(safeCallback)) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ ok: false, error: 'Invalid callback.' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
     return ContentService
-      .createTextOutput(callback + '(' + json + ');')
+      .createTextOutput('window[' + JSON.stringify(safeCallback) + '] && window[' + JSON.stringify(safeCallback) + '](' + json + ');')
       .setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
   return ContentService

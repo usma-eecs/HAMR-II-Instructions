@@ -380,9 +380,7 @@ const GLOSSARY = {
     "aliases": [
       "M3 × 25 mm aluminum standoff",
       "M3 x 25 mm aluminum standoff",
-      "aluminum standoff",
-      "M3 × 25 mm standoff",
-      "M3 x 25 mm standoff",
+      "M3 x 25 mm standoff"
     ]
   },
   "m3locknut": {
@@ -615,7 +613,10 @@ const LOCAL_PROGRESS_SCOPE = "__local__";
 const TEAM_SYNC_CONFIG = Object.assign({
   endpoint: "",
   requestTimeoutMs: 8000,
-  maxTeamIdLength: 20
+  maxTeamIdLength: 20,
+  enforceTeamIdPattern: false,
+  teamIdPattern: "[A-E][1-2][0-1][0-9]",
+  teamIdPatternExample: "A201"
 }, window.HAMR_TEAM_SYNC_CONFIG || {});
 const TEAM_SYNC_STATE = {
   status: TEAM_SYNC_CONFIG.endpoint ? "idle" : "local-only",
@@ -627,6 +628,36 @@ const TEAM_SYNC_STATE = {
 };
 let teamSyncWindowBound = false;
 let teamSyncRequestCounter = 0;
+
+function teamIdPatternEnabled() {
+  return !!TEAM_SYNC_CONFIG.enforceTeamIdPattern;
+}
+
+function getTeamIdPattern() {
+  return String(TEAM_SYNC_CONFIG.teamIdPattern || '').trim();
+}
+
+function getTeamIdExample() {
+  return String(TEAM_SYNC_CONFIG.teamIdPatternExample || 'A201').trim() || 'A201';
+}
+
+function isValidTeamId(teamId) {
+  const normalized = normalizeTeamId(teamId);
+  if (!normalized) return false;
+  if (!teamIdPatternEnabled()) return true;
+  const pattern = getTeamIdPattern();
+  if (!pattern) return true;
+  try {
+    return new RegExp(`^(?:${pattern})$`).test(normalized);
+  } catch (e) {
+    return true;
+  }
+}
+
+function getTeamIdConstraintMessage() {
+  if (!teamIdPatternEnabled()) return '';
+  return `Team ID must match ${getTeamIdPattern()}. Example: ${getTeamIdExample()}.`;
+}
 
 
 const TASK_INTRO = {
@@ -917,7 +948,7 @@ function renderTaskNavigator() {
       <div class="task-nav-team-box">
         <label class="task-nav-team-label" for="taskNavigatorTeamId">Team ID</label>
         <form class="task-nav-team-form" data-team-id-form>
-          <input id="taskNavigatorTeamId" class="task-nav-team-input" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="${TEAM_SYNC_CONFIG.maxTeamIdLength}" value="${escapeHtml(teamId)}" placeholder="Optional">
+          <input id="taskNavigatorTeamId" class="task-nav-team-input" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="${TEAM_SYNC_CONFIG.maxTeamIdLength}" value="${escapeHtml(teamId)}" placeholder="${escapeHtml(teamIdPatternEnabled() ? getTeamIdExample() : 'Optional')}" ${teamIdPatternEnabled() ? `pattern="${escapeHtml(getTeamIdPattern())}" title="${escapeHtml(getTeamIdConstraintMessage())}"` : ''}>
           <button class="link-button secondary" type="submit">Set</button>
           ${teamId ? '<button class="link-button secondary" type="button" data-clear-team-id="true">Clear</button>' : ''}
         </form>
@@ -936,7 +967,21 @@ function renderTaskNavigator() {
     form.addEventListener('submit', event => {
       event.preventDefault();
       const input = form.querySelector('#taskNavigatorTeamId');
-      const nextTeamId = setTeamId(input ? input.value : '');
+      const rawValue = input ? input.value : '';
+      const normalizedValue = normalizeTeamId(rawValue);
+      if (input) input.value = normalizedValue;
+      if (normalizedValue && !isValidTeamId(normalizedValue)) {
+        const message = getTeamIdConstraintMessage();
+        if (input) {
+          input.setCustomValidity(message);
+          if (typeof input.reportValidity === 'function') input.reportValidity();
+        }
+        setTeamSyncStatus('error', message);
+        renderTaskNavigator();
+        return;
+      }
+      if (input) input.setCustomValidity('');
+      const nextTeamId = setTeamId(normalizedValue);
       refreshProgressUi();
       void syncProgressFromRemote(nextTeamId);
       bindTeamSyncRefresh();
@@ -947,6 +992,7 @@ function renderTaskNavigator() {
     teamInput.dataset.bound = 'true';
     teamInput.addEventListener('input', () => {
       teamInput.value = normalizeTeamId(teamInput.value);
+      teamInput.setCustomValidity('');
     });
   }
   const clearButton = summaryBox.querySelector('[data-clear-team-id]');
@@ -1210,7 +1256,12 @@ function normalizeTeamId(value) {
 
 function getTeamId() {
   try {
-    return normalizeTeamId(localStorage.getItem(TEAM_ID_KEY) || '');
+    const normalized = normalizeTeamId(localStorage.getItem(TEAM_ID_KEY) || '');
+    if (normalized && !isValidTeamId(normalized)) {
+      localStorage.removeItem(TEAM_ID_KEY);
+      return '';
+    }
+    return normalized;
   } catch (e) {
     return '';
   }
@@ -1218,6 +1269,9 @@ function getTeamId() {
 
 function setTeamId(teamId) {
   const normalized = normalizeTeamId(teamId);
+  if (normalized && !isValidTeamId(normalized)) {
+    return '';
+  }
   if (normalized) {
     localStorage.setItem(TEAM_ID_KEY, normalized);
   } else {
