@@ -380,7 +380,9 @@ const GLOSSARY = {
     "aliases": [
       "M3 × 25 mm aluminum standoff",
       "M3 x 25 mm aluminum standoff",
-      "aluminum standoff"
+      "aluminum standoff",
+      "M3 × 25 mm standoff",
+      "M3 x 25 mm standoff",
     ]
   },
   "m3locknut": {

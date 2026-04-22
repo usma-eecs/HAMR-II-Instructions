@@ -23,7 +23,7 @@
     <div>
       <h4>Step 1. Set the SIP switch</h4>
       <ol class="compact-list">
-        <li>Set the Raspberry Pi SIP switch based on your group number.</li>
+        <li>Set the Raspberry Pi SIP switch based on your team number.</li>
         <li>Switches in the <strong>down</strong> position are 0. Switches in the <strong>up</strong> position are 1.</li>
       </ol>
       <div class="callout step-note"><strong>Binary table.</strong><br>Use this 4-bit table to convert decimal to binary. Confirm the physical switch order on the bench example before you set the switches.</div>
@@ -48,7 +48,7 @@
       </table>
     </div>
     <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/tasks/task10/task10-fig10a.png" alt="Figure 10a placeholder wiring view"><div class="figure-caption">Fig. 10a. Current routing and hardware view. This figure is still being refined.</div></div>
+      <div class="figure-card"><img src="assets/images/tasks/task10/task10-fig10a.png" alt="Figure 10a Raspberry Pi switch setting example for team 07"><div class="figure-caption">Fig. 10a. Example of the switch setting. This example shows 0-1-1-1, corresponding to Team 07.</div></div>
     </div>
   </section>
 
@@ -56,15 +56,16 @@
     <div>
       <h4>Step 2. Connect the camera ribbon before installing the camera/GPS mount</h4>
       <ol class="compact-list" start="3">
-        <li>Locate the Raspberry Pi CSI connector on the front edge of the Raspberry Pi.</li>
-        <li>Use a fingernail to gently lift the locking bar. Do not remove it.</li>
-        <li>Insert the free end of the camera ribbon cable fully and evenly into the connector.</li>
+        <li>Locate the camera connector on the front edge of the Raspberry Pi. This connector is labeled CSI on the board.</li>
+        <li>Use a fingernail to gently lift the retainer. Do not remove it.</li>
+        <li>Insert the free end of the camera ribbon cable fully and evenly into the camera connector.</li>
         <li>On the Raspberry Pi end, the exposed metal contacts must face down toward the Raspberry Pi PCB.</li>
-        <li>Press the locking bar back down to clamp the cable. Lightly tug the ribbon to confirm it is locked.</li>
+        <li>Press the retainer back down to clamp the cable. Lightly tug the ribbon to confirm it is locked.</li>
       </ol>
     </div>
     <div class="instruction-figure-stack">
-      <div class="ok-box"><strong>Do this first.</strong><br>The Raspberry Pi CSI connector is much easier to reach before the camera/GPS mount is installed above it.</div>
+      <div class="figure-card"><img src="assets/images/tasks/task10/task10-fig10b.png" alt="Figure 10b camera ribbon insertion into the Raspberry Pi camera connector"><div class="figure-caption">Fig. 10b. Insert the camera ribbon cable into the Raspberry Pi camera connector. Manipulate the retainer gently. The exposed metal contacts on the Raspberry Pi end must face down toward the PCB.</div></div>
+      <div class="ok-box"><strong>Do this first.</strong><br>The Raspberry Pi camera connector is much easier to reach before the camera/GPS mount is installed above it.</div>
     </div>
   </section>
 
@@ -95,13 +96,13 @@
       <div class="stop-box step-note"><strong>STOP.</strong> Ask a faculty member to verify the camera ribbon, GPS cable, and FC/RPi cable before you proceed to software setup.</div>
     </div>
     <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/tasks/task10/task10-fig10a.png" alt="Figure 10a mount installation placeholder"><div class="figure-caption">Fig. 10a. Install the camera/GPS mount with the Superstructure subkit.</div></div>
+      <div class="figure-card"><img src="assets/images/tasks/task10/task10-fig10c.png" alt="Figure 10c camera GPS mount installation"><div class="figure-caption">Fig. 10c. Install the camera/GPS mount with the Superstructure subkit.</div></div>
     </div>
   </section>
 </div>
 <h3>Common errors</h3>
 <ul class="error-list">
-  <li>Breaking the Raspberry Pi CSI latch by prying too hard.</li>
+  <li>Breaking the camera-connector retainer by prying too hard.</li>
   <li>Installing the camera ribbon with the metal contacts facing the wrong direction.</li>
   <li>Routing the GPS cable or FC/RPi cable into the wrong FC port.</li>
   <li>Pinching a cable between the upper deck and the camera/GPS mount.</li>
