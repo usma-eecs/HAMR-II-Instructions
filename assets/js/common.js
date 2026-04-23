@@ -1202,7 +1202,6 @@ const TASK_META = {
     "slug": "task13-sensor-calibration",
     "day": "",
     "blockers": [
-      "task7",
       "task9",
       "task10",
       "task12"
