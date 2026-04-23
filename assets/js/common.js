@@ -638,7 +638,7 @@ function getTeamIdPattern() {
 }
 
 function getTeamIdExample() {
-  return String(TEAM_SYNC_CONFIG.teamIdPatternExample || 'Example: A201').trim() || 'Example: A201';
+  return String(TEAM_SYNC_CONFIG.teamIdPatternExample || 'A201').trim() || 'A201';
 }
 
 function isValidTeamId(teamId) {
