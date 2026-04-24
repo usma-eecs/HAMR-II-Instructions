@@ -23,7 +23,7 @@ const GLOSSARY = {
   },
   "sipswitch": {
     "title": "SIP switch",
-    "subtitle": "4-bit group-number switch",
+    "subtitle": "4-bit team-number switch",
     "img": "assets/images/parts/switches-sip.jpg",
     "aliases": [
       "SIP switch",

@@ -32,7 +32,7 @@
         <li>Open Mission Planner.</li>
         <li>Along the left side of the Mission Planner window, click <strong>SETUP</strong>. In the setup pane, click <strong>Install Firmware</strong>. See Fig. 12a.</li>
         <li>In the main firmware area, click <strong>Copter V4.6.3 OFFICIAL</strong>. This button is in the center of the screen. See Fig. 12a.</li>
-        <li>If a <strong>Continue</strong> dialog appears in the middle of the screen, click <strong>Yes</strong>.</li>
+        <li>When the <strong>Continue</strong> dialog appears in the middle of the screen, click <strong>Yes</strong>.</li>
         <li><strong>Possibility 1, normal case:</strong> when the unplug/replug prompt appears in the middle of the screen, click <strong>OK</strong>, unplug the flight controller, and plug it back in promptly. See Fig. 12b.</li>
         <li>Wait for Mission Planner to begin the upload. Continue waiting until the status window shows activity such as <strong>Downloading from the Internet</strong> and the progress bar starts moving. Then keep waiting until Mission Planner reports <strong>Upload Done</strong>. After <strong>Upload Done</strong>, unplug the flight controller and plug it back in again.</li>
         <li><strong>Possibility 2, retry case:</strong> if Mission Planner instead shows a failed port-detect condition like Fig. 12c, or reports that it found the board type but does not actually start the upload, restart the firmware install by clicking <strong>Copter V4.6.3 OFFICIAL</strong> again from Fig. 12a and repeat the process.</li>
@@ -50,7 +50,7 @@
     <div>
       <h4>Part B. Load parameter file</h4>
       <ol class="compact-list" start="11">
-        <li>In the upper-right corner of the Mission Planner window, open the port dropdown and select the correct entry. The text in that entry should include <strong>ArduPilot MAVLink</strong>. Then set the adjacent baud-rate dropdown to <strong>921600</strong> and click <strong>CONNECT</strong>. See Fig. 12d.</li>
+        <li>In the upper-right corner of the Mission Planner window, open the port dropdown and select the COM-port entry that includes <strong>ArduPilot MAVLink</strong>. Then set the adjacent baud-rate dropdown to <strong>921600</strong> and click <strong>CONNECT</strong>. See Fig. 12d.</li>
         <li>On the top menu bar, click <strong>CONFIG</strong>.</li>
         <li>In the left-side configuration menu, click <strong>Full Parameter List</strong>. See Fig. 12e.</li>
         <li>On the right side of the <strong>Full Parameter List</strong> page, click <strong>Load from file</strong>.</li>
@@ -66,7 +66,7 @@
     </div>
     <div class="instruction-figure-stack">
       <div class="figure-card"><img src="assets/images/tasks/task12/task12-fig12d.png" alt="Figure 12d Mission Planner connection controls"><div class="figure-caption">Fig. 12d. In the upper-right corner, select the correct port entry that includes <strong>ArduPilot MAVLink</strong>, set <strong>921600</strong>, and click <strong>CONNECT</strong>.</div></div>
-      <div class="figure-card"><img src="assets/images/tasks/task12/task12-fig12e.png" alt="Figure 12e Mission Planner Full Parameter List screen"><div class="figure-caption">Fig. 12e. Open <strong>CONFIG</strong>, then <strong>Full Parameter List</strong>. Use <strong>Load from file</strong> to load the faculty-issued parameter file, then click <strong>Write Params</strong>.</div></div>
+      <div class="figure-card"><img src="assets/images/tasks/task12/task12-fig12e.png" alt="Figure 12e Mission Planner Full Parameter List screen"><div class="figure-caption">Fig. 12e. Open <strong>CONFIG</strong> → <strong>Full Parameter List</strong>, load the Rev1 parameter file, acknowledge any <strong>Read Only</strong> prompts, click <strong>Write Params</strong>, then acknowledge <strong>Saved</strong> and <strong>Reboot Required</strong> before unplugging/replugging and reconnecting.</div></div>
     </div>
   </section>
 </div>
