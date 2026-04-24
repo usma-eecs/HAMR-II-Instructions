@@ -703,15 +703,15 @@ const TASK_INTRO = {
   },
   "task11": {
     "accomplishes": "This task installs Mission Planner on the PC.",
-    "body": "Mission Planner is the ground control station, or GCS. It allows the operator to connect to the autopilot, inspect status, load settings, and run setup procedures. It is the dashboard for the aircraft, but it does not fly the aircraft; that logic resides on the flight controller. This software is the interface between human and machine, which is why understanding the screen matters almost as much as understanding the hardware."
+    "body": "Mission Planner is the ground control station, or GCS. It allows the operator to connect to the autopilot, inspect status, load settings, install firmware, and run setup procedures. It is the dashboard for the aircraft, but it does not fly the aircraft; that logic resides on the flight controller. This software is the interface between human and machine, which is why understanding the screen matters almost as much as understanding the hardware."
   },
   "task12": {
-    "accomplishes": "This task loads the faculty-issued preset parameter file into the flight controller.",
-    "body": "A parameter file is a digital record of engineering decisions. It defines items such as frame type, sensor orientation, control limits, communication settings, and safety behaviors. Loading one file can synchronize hundreds of assumptions about how the aircraft should respond. That makes the file more than a convenience. It is a fast way to reproduce a known configuration, provided the parameters actually match the hardware and firmware on the aircraft."
+    "accomplishes": "This task installs firmware on the flight controller and then loads the faculty-issued parameter file.",
+    "body": "Firmware is the software that runs directly on the flight controller processor. It is not just a settings file. It contains the actual flight-control logic, including sensor handling, communication, motor-output behavior, and safety features. The parameter file comes afterward. Firmware determines what the controller is capable of doing; parameters tell that firmware how this specific aircraft is built and how it should behave. Both must be correct before moving on to calibration and motor testing."
   },
   "task13": {
-    "accomplishes": "This task calibrates the aircraft sensors and battery monitor.",
-    "body": "Calibration is how the autopilot accounts for predictable sensor error. Accelerometers, gyroscopes, and magnetometers all have offsets and scaling errors that must be measured and compensated. Calibration does not make the sensors perfect, but it reduces error to a level the control system can use. This is one of the core tasks in modern engineering: turning imperfect physical measurements into reliable digital information. Lens focus is separate again. It affects image sharpness, not inertial or magnetic accuracy."
+    "accomplishes": "This task calibrates the aircraft sensors, updates the battery monitor, and adjusts camera focus.",
+    "body": "Calibration is how the autopilot accounts for predictable sensor error. Accelerometers, gyroscopes, and magnetometers all have offsets and scaling errors that must be measured and compensated. Calibration does not make the sensors perfect, but it reduces error to a level the control system can use. Lens focus is separate again. It affects image sharpness, not inertial or magnetic accuracy, which is why this task covers both sensor calibration and camera focus adjustment."
   },
   "task14": {
     "accomplishes": "This task verifies motor order and spin direction in Mission Planner.",
@@ -1185,14 +1185,14 @@ const TASK_META = {
     "id": "task12",
     "order": 12,
     "published": true,
-    "title": "Task 12: Set up param file",
+    "title": "Task 12: Install firmware and load parameter file",
     "slug": "task12-set-up-param-file",
     "day": "",
     "blockers": [
       "task6",
       "task11"
     ],
-    "summary": "Load the faculty-issued preset parameter file into the flight controller."
+    "summary": "Install ArduCopter firmware on the flight controller, then load the faculty-issued parameter file."
   },
   "task13": {
     "id": "task13",
@@ -1206,7 +1206,7 @@ const TASK_META = {
       "task10",
       "task12"
 ],
-    "summary": "Calibrate the accelerometer and compass, then enter the measured battery voltage in Mission Planner."
+    "summary": "Calibrate the accelerometer and compass, enter the measured battery voltage, and adjust camera focus."
   },
   "task14": {
     "id": "task14",
