@@ -41,14 +41,14 @@
       <ol class="compact-list" start="6">
         <li>Open <strong>CONFIG → Full Parameter List</strong>.</li>
         <li>Navigate to <strong>FRAME</strong>.</li>
-        <li>Set <strong>FRAME_CLASS = 1</strong> (Quad).</li>
-        <li>Set <strong>FRAME_TYPE = 12</strong> (BetaFlight X).</li>
-        <li>Select <strong>Write Params</strong> and acknowledge the dialogs.</li>
-        <li>Disconnect and reconnect the USB-C cable so the FC reboots, then reconnect in Mission Planner.</li>
+        <li>Confirm <strong>FRAME_CLASS = 1</strong> (Quad).</li>
+        <li>Confirm <strong>FRAME_TYPE = 12</strong> (BetaFlight X).</li>
+        <!--<li>Select <strong>Write Params</strong> and acknowledge the dialogs.</li>
+        <li>Disconnect and reconnect the USB-C cable so the FC reboots, then reconnect in Mission Planner.</li>-->
       </ol>
     </div>
     <div class="instruction-figure-stack">
-      <div class="callout"><strong>Reboot required.</strong><br>The flight controller must reboot after the frame parameters are changed.</div>
+      <div class="callout"><strong>Mismatching parameters.</strong><br>If the parameters do not match the values above, ask for assistance from a faculty member.</div>
     </div>
   </section>
 
@@ -58,7 +58,7 @@
       <ol class="compact-list" start="12">
         <li>Open <strong>SETUP → Optional Hardware → Motor Test</strong>.</li>
         <li>Only after you are on the Motor Test page, connect the 4S LiPo battery.</li>
-        <li>Set <strong>Throttle % = 15</strong> and <strong>Duration (s) = 2</strong>.</li>
+        <li>Set <strong>Throttle % = 5</strong> and <strong>Duration (s) = 3</strong>.</li>
         <li>Test one motor at a time.</li>
         <li>Confirm each motor spins and that its direction matches the diagram.</li>
         <li>Stop immediately if a motor spins the wrong way, does not start cleanly, or makes abnormal noise.</li>
@@ -74,7 +74,7 @@
   <li>Testing with propellers installed.</li>
   <li>Using the wrong COM port or baud rate.</li>
   <li>Forgetting to reboot after changing FRAME_CLASS or FRAME_TYPE.</li>
-  <li>Testing multiple motors at once instead of one at a time.</li>
+  <!--<li>Testing multiple motors at once instead of one at a time.</li>-->
   <li>Ignoring abnormal motor behavior such as stuttering, scraping, or non-start.</li>
 </ul>
 
