@@ -293,6 +293,25 @@ a { color: var(--accent); }
 .instruction-figure-stack { display: grid; gap: 12px; }
 .compact-list { margin: 0; padding-left: 20px; }
 .compact-list li + li { margin-top: 8px; }
+.substep-list {
+  margin: 8px 0 0 0;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: substep;
+}
+.substep-list li {
+  position: relative;
+  padding-left: 28px;
+  margin-top: 8px;
+}
+.substep-list li::before {
+  counter-increment: substep;
+  content: counter(substep, lower-alpha) ")";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
 .step-note { margin-top: 12px; }
 .item-list { margin: 8px 0 0 0; padding-left: 18px; }
 .item-list li + li { margin-top: 6px; }
