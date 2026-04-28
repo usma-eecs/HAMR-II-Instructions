@@ -851,9 +851,11 @@ function renderSiteNav() {
   const siteLinks = [];
   const taskLinks = [];
 
+  const checklistCurrent = filename === "post-build-checklist.html" || filename === "flight-day-handoff-checklist.html";
   siteLinks.push(`<a href="index.html"${filename === "index.html" ? ' aria-current="page" class="nav-current"' : ""}>Home</a>`);
   siteLinks.push(`<a href="parts-guide.html" class="secondary${filename === "parts-guide.html" ? ' nav-current' : ''}"${filename === "parts-guide.html" ? ' aria-current="page"' : ''}>Parts Guide</a>`);
   siteLinks.push(`<a href="tools-inventory.html" class="secondary${filename === "tools-inventory.html" ? ' nav-current' : ''}"${filename === "tools-inventory.html" ? ' aria-current="page"' : ''}>Tools Inventory</a>`);
+  //siteLinks.push(`<a href="post-build-checklist.html" class="secondary${checklistCurrent ? ' nav-current' : ''}"${checklistCurrent ? ' aria-current="page"' : ''}>Post-build Checklist</a>`);
   taskLinks.push('<button type="button" class="buttonish secondary task-nav-trigger" data-open-task-nav="true" aria-haspopup="dialog" aria-controls="taskNavigatorPanel">Task Navigator</button>');
 
   nav.innerHTML = `

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-build checklist</title>
+<link rel="stylesheet" href="assets/css/common.css">
+<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+</head>
+<body data-page="post-build-checklist.html">
+<main class="page">
+<section class="hero"><h1>Post-build checklist</h1><p>Inspect the completed aircraft by subsystem. Each line checks one end state. If any line fails, correct it before any prop-on run or flight event.</p></section>
+<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
+<section class="section annotate-terms" id="post-build-checklist">
+  <div class="checklist-toolbar">
+    <div>
+      <h2>Completed-aircraft inspection</h2>
+      <p class="muted" data-post-build-checklist-summary>Loading checklist.</p>
+    </div>
+    <button class="buttonish secondary" type="button" onclick="window.print()">Print checklist</button>
+  </div>
+  <div class="callout"><strong>Inspection rule.</strong><br>Do not replay the build procedure. Inspect the completed drone. Location, orientation, connector seating, routing, fastener count, and software state are separate checks.</div>
+  <div data-post-build-checklist></div>
+  <div class="stop-box"><strong>STOP.</strong> Do not proceed to a prop-on test or flight event until a faculty member verifies the completed aircraft.</div>
+</section>
+<div class="footer" data-site-footer></div>
+</main>
+<script src="assets/js/team-sync-config.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/post-build-checklist.js"></script>
+</body>
+</html>

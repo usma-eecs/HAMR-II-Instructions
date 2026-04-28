@@ -789,3 +789,85 @@ body.has-floating-task-pager {
     border-radius: 14px 14px 0 0;
   }
 }
+
+.local-video-card video {
+  display: block;
+  width: 100%;
+  max-height: 560px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #0f172a;
+}
+.checklist-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 12px 0 18px 0;
+}
+.checklist-group {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+  box-shadow: var(--shadow);
+  margin: 14px 0;
+  overflow: hidden;
+}
+.checklist-group summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 14px 16px;
+  background: #edf2f8;
+  color: var(--accent);
+  font-weight: 700;
+}
+.checklist-group > p {
+  padding: 0 16px;
+}
+.post-build-table {
+  margin: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 0;
+}
+.post-build-table th:nth-child(1),
+.post-build-table td:nth-child(1) { width: 72px; }
+.post-build-table th:nth-child(3),
+.post-build-table td:nth-child(3),
+.post-build-table th:nth-child(4),
+.post-build-table td:nth-child(4) {
+  width: 92px;
+  text-align: center;
+}
+.check-cell input {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.check-id {
+  color: var(--accent);
+  white-space: nowrap;
+}
+.checklist-error-list {
+  margin: 0;
+  padding-left: 18px;
+}
+.checklist-error-list li + li { margin-top: 4px; }
+@media print {
+  .checklist-toolbar .link-button,
+  .checklist-toolbar .buttonish,
+  .local-video-card { display: none !important; }
+  .checklist-group {
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+  .checklist-group summary {
+    background: white;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
