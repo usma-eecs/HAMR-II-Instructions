@@ -9,33 +9,138 @@
 </head>
 <body data-page="task16-flight-day.html">
 <main class="page">
-<section class="hero"><h1>Task 16: Flight Day</h1><p>Run the final handoff checks before a prop-on run or flight event.</p></section>
+<section class="hero"><h1>Task 16: Flight Day</h1><p>Review emergency actions, complete a short HAMR II preflight check, plan the ATAK mission, and report to the lane OIC for final release.</p></section>
 <nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
 <div data-task-strip></div>
 <section class="section annotate-terms" id="task16-flight-day">
 <div class="parts-tools">
-<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Completed aircraft</li></ul></div>
-<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>Faculty verification</li></ul></div>
+<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Completed HAMR II aircraft</li><li>4S flight battery</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>Faculty or lane OIC verification</li><li>Ground-station computer</li><li>ATAK device</li><li>Battery checker</li></ul></div>
 </div>
 
-<h3>Flight-day handoff checklist</h3>
-<p class="muted">Before an aircraft is handed off for its first prop-on run or flight event, confirm the items below.</p>
-<table aria-label="flight day handoff checklist" class="matrix">
-  <thead><tr><th>Check</th><th>What good looks like</th></tr></thead>
-  <tbody>
-    <tr><td>Airframe</td><td>No missing fasteners, no visibly cracked printed parts, no loose arms, and no loose FC/ESC stack hardware.</td></tr>
-    <tr><td>Wiring</td><td>Camera ribbon fully seated, GPS cable connected to <code class="kbd">GPS</code>, FC/RPi cable connected to <code class="kbd">TELEM</code>, and no loose wires in the propeller arc.</td></tr>
-    <tr><td>Software</td><td>Mission Planner installed, frame type confirmed, preset parameters loaded, sensor calibration completed, and motor check completed.</td></tr>
-    <tr><td>Propellers</td><td>CW and CCW propellers match the verified motor directions and all propeller nuts are snug.</td></tr>
-    <tr><td>Issued items</td><td>The issued microSD card and any borrowed tools are accounted for.</td></tr>
-  </tbody>
-</table>
-<div class="stop-box"><strong>STOP.</strong> Do not proceed to a prop-on test or flight event until a faculty member verifies the completed aircraft.</div>
+<div class="callout"><strong>Task 16 is a flight-day preparation gate.</strong><br>Do not rebuild the aircraft here. Confirm the safety-critical end states below, plan the mission in ATAK, and get lane OIC release before any prop-on operation or flight.</div>
+
+<div class="instruction-flow">
+  <section class="instruction-block">
+    <div>
+      <h4>Step 1. Review emergency procedures</h4>
+      <p>Review these actions before the aircraft is powered. When in doubt, aviate, navigate, then communicate.</p>
+      <div class="responsive-table-wrap">
+        <table class="compact-procedure-table">
+          <thead>
+            <tr><th>Condition</th><th>Primary action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Imminent collision with people or property</td><td>Force disarm. Personnel remain clear until all propellers stop.</td></tr>
+            <tr><td>Unstable flight on takeoff</td><td>Select LAND.</td></tr>
+            <tr><td>Unstable flight en route</td><td>If line of sight exists and the area below is clear, select LAND. Otherwise select RTL and clear the takeoff area.</td></tr>
+            <tr><td>Obstacle encounter</td><td>Select POSHOLD. If line of sight exists, manually fly to the landing area and select LAND. Otherwise select RTL and clear the takeoff area.</td></tr>
+            <tr><td>Communication loss, GCS failure, or low battery</td><td>Clear the takeoff area. The vehicle will return and land autonomously.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="stop-box"><strong>Emergency priority.</strong><br>Protect people first. Do not approach the aircraft until all propellers have stopped.</div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 2. Complete the HAMR II preflight check</h4>
+      <p>Focus on the errors most likely to create a safety problem on HAMR II.</p>
+      <ol class="compact-list preflight-critical-list">
+        <li><strong>FC/ESC stack lower lock nuts:</strong> about two full threads protrude below each lock nut. The stack is not loose, and the dampers are not crushed.</li>
+        <li><strong>Motors and superstructure:</strong> all motors are fastened with no wobble. Frame and Camera/GPS mount hardware are snug with no loose standoffs.</li>
+        <li><strong>XT60 battery lead:</strong> red is on ESC positive, black is on ESC negative, terminal screws are snug, and the ring terminals do not touch or block the underside JST-SH connector.</li>
+        <li><strong>XT60 strain relief:</strong> the battery lead is tied to the lower deck so only the yellow XT60 connector extends beyond the rear edge.</li>
+        <li><strong>Battery restraint:</strong> the battery pad slots are open. The strap passes through the upper-deck slots and is flat, centered, and accessible.</li>
+        <li><strong>Wiring clearance:</strong> motor wires, GPS cable, TELEM cable, camera ribbon, and battery lead are restrained. No wiring enters any propeller arc.</li>
+        <li><strong>Propellers:</strong> propellers match the verified motor spin directions, label sides face up, lock nuts are snug, and no propeller has visible wobble or play.</li>
+        <li><strong>Camera and sensor suite:</strong> camera lens is clear of film or obstruction. GPS/compass and camera mount hardware are secure.</li>
+        <li><strong>Flight battery:</strong> battery voltage is at least 15.0 V before flight.</li>
+      </ol>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="figure-card"><img src="assets/images/tasks/task6/task6-fig6h.png" alt="Bottom view of FC ESC stack lock nuts"><div class="figure-caption">FC/ESC stack check. About two full turns should protrude below each lower lock nut.</div></div>
+      <div class="figure-card"><img src="assets/images/tasks/task7/task7-fig7b.png" alt="Battery lead secured to the lower deck"><div class="figure-caption">Battery lead check. Secure the XT60 lead so only the connector extends beyond the rear edge.</div></div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 3. Plan the ATAK mission</h4>
+      <p>Use ATAK UAS Tool to create and review the mission before reporting for final release. Do not arm the aircraft until directed.</p>
+      <div class="atak-flow-grid">
+        <div class="mini-procedure-card">
+          <h5>Device setup</h5>
+          <ol class="compact-list">
+            <li>Connect the ATAK device to the GCS using USB-C.</li>
+            <li>Launch ATAK.</li>
+            <li>Open the Tools menu and select <strong>UAS Tool</strong>.</li>
+            <li>From the Flight menu, select the play button to load the UAS interface.</li>
+          </ol>
+        </div>
+        <div class="mini-procedure-card">
+          <h5>Mission setup</h5>
+          <ol class="compact-list">
+            <li>Swipe left from the Flight menu to open the Task menu.</li>
+            <li>Select <strong>Add New Task</strong>.</li>
+            <li>Set altitude at least 150 ft AGL unless clearance is assured. Do not exceed 400 ft AGL.</li>
+            <li>Set flight speed no higher than 10 m/s. Recommended speed is 7 m/s.</li>
+            <li>Add TAKEOFF, WAYPOINT, and LAND mission items.</li>
+            <li>Place waypoints and landing location well clear of obstructions.</li>
+            <li>Select <strong>Save</strong>, then swipe right to return to the Flight menu.</li>
+          </ol>
+        </div>
+        <div class="mini-procedure-card">
+          <h5>Queueing and troubleshooting</h5>
+          <ol class="compact-list">
+            <li>Queue the mission only when directed.</li>
+            <li>If the mission fails to queue, disable ATAK device Wi-Fi and try again.</li>
+            <li>If needed, restart ATAK and UAS Tool.</li>
+            <li>If still unsuccessful, notify the lane OIC before power cycling the vehicle.</li>
+          </ol>
+        </div>
+      </div>
+      <p><a class="link-button" href="assets/downloads/atak-uas-tool-quick-reference-card.pdf" target="_blank" rel="noopener">Download ATAK UAS Tool Quick Reference Card</a></p>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="ok-box"><strong>Mission review standard.</strong><br>The mission profile must be reviewed before takeoff and must remain well clear of personnel, buildings, trees, vehicles, and other obstructions.</div>
+    </div>
+  </section>
+
+  <section class="instruction-block">
+    <div>
+      <h4>Step 4. Report to the lane OIC</h4>
+      <p>On flight day, report to the lane OIC to receive communications equipment and final inspection. If reassigned to a lane that does not match your current Team ID, reset the SIP switches as directed.</p>
+      <div class="responsive-table-wrap">
+        <table class="compact-procedure-table lane-table">
+          <thead>
+            <tr><th>Lane</th><th>Required Team ID range</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A</td><td>01-04</td></tr>
+            <tr><td>B</td><td>05-08</td></tr>
+            <tr><td>C</td><td>09-12</td></tr>
+            <tr><td>D</td><td>13-15</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="instruction-figure-stack">
+      <div class="stop-box"><strong>STOP.</strong><br>Do not proceed to a prop-on run or flight until the lane OIC completes the final inspection and releases the aircraft.</div>
+    </div>
+  </section>
+</div>
+
 <h3>Common errors</h3>
 <ul class="error-list">
-  <li>Assuming software is correct without checking the motor-test results.</li>
-  <li>Leaving loose wiring where a propeller can strike it.</li>
-  <li>Proceeding to a prop-on run without faculty verification.</li>
+  <li>Overtightening or leaving loose the FC/ESC stack lower lock nuts.</li>
+  <li>Leaving motor wires, camera ribbon, GPS cable, TELEM cable, or battery lead where a propeller can strike it.</li>
+  <li>Flying with loose motors, loose superstructure, or loose propeller nuts.</li>
+  <li>Leaving the XT60 battery lead unsecured or with excess cable hanging aft.</li>
+  <li>Planning an ATAK mission that passes near obstructions or outside the assigned lane controls.</li>
 </ul>
 
 </section>

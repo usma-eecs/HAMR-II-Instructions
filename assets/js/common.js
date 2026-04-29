@@ -722,8 +722,8 @@ const TASK_INTRO = {
     "body": "A propeller is a rotating wing. Its airfoil is matched to a specific direction of rotation, which is why clockwise and counterclockwise propellers are not interchangeable. Once the propellers are secured, the aircraft is no longer just a bench assembly. It is a vehicle capable of generating meaningful thrust. At this stage, motor torque finally meets the air."
   },
   "task16": {
-    "accomplishes": "This task completes the final handoff checks before a prop-on run or flight event.",
-    "body": "Flight day is the final test of systems integration. Structure, power, sensing, configuration, and operator procedure all have to function together. In aviation, a system only works when every discipline succeeds at the same time. A rigorous preflight check is the last chance to confirm that the aircraft on the table is ready to operate as one machine. When that happens, the diagram becomes flight."
+    "accomplishes": "This task completes the post-build inspection, ATAK reference-card review, and faculty release gate before a prop-on run or flight event.",
+    "body": "Flight day brings structure, power, sensing, configuration, and operator procedure together. Complete the emergency review, preflight check, ATAK mission planning, and lane OIC release before any prop-on operation or flight."
   }
 };
 
@@ -851,11 +851,9 @@ function renderSiteNav() {
   const siteLinks = [];
   const taskLinks = [];
 
-  const checklistCurrent = filename === "post-build-checklist.html" || filename === "flight-day-handoff-checklist.html";
   siteLinks.push(`<a href="index.html"${filename === "index.html" ? ' aria-current="page" class="nav-current"' : ""}>Home</a>`);
   siteLinks.push(`<a href="parts-guide.html" class="secondary${filename === "parts-guide.html" ? ' nav-current' : ''}"${filename === "parts-guide.html" ? ' aria-current="page"' : ''}>Parts Guide</a>`);
   siteLinks.push(`<a href="tools-inventory.html" class="secondary${filename === "tools-inventory.html" ? ' nav-current' : ''}"${filename === "tools-inventory.html" ? ' aria-current="page"' : ''}>Tools Inventory</a>`);
-  //siteLinks.push(`<a href="post-build-checklist.html" class="secondary${checklistCurrent ? ' nav-current' : ''}"${checklistCurrent ? ' aria-current="page"' : ''}>Post-build Checklist</a>`);
   taskLinks.push('<button type="button" class="buttonish secondary task-nav-trigger" data-open-task-nav="true" aria-haspopup="dialog" aria-controls="taskNavigatorPanel">Task Navigator</button>');
 
   nav.innerHTML = `
@@ -1244,7 +1242,7 @@ const TASK_META = {
     "blockers": [
       "task15"
     ],
-    "summary": "Run the final handoff checks before a prop-on run or flight event."
+    "summary": "Review emergency actions, complete the HAMR II preflight check, plan the ATAK mission, and report to the lane OIC for final release."
   }
 };
 

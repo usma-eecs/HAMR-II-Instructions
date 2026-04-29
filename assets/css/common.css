@@ -837,13 +837,13 @@ body.has-floating-task-pager {
 }
 .post-build-table th:nth-child(1),
 .post-build-table td:nth-child(1) { width: 72px; }
-.post-build-table th:nth-child(3),
+/*.post-build-table th:nth-child(3),
 .post-build-table td:nth-child(3),
 .post-build-table th:nth-child(4),
 .post-build-table td:nth-child(4) {
   width: 92px;
   text-align: center;
-}
+}*/
 .check-cell input {
   width: 1.1rem;
   height: 1.1rem;
@@ -871,3 +871,63 @@ body.has-floating-task-pager {
   }
 }
 
+
+/* Task 16 flight-day procedure helpers */
+.responsive-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.compact-procedure-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 10px 0 0 0;
+  font-size: 0.95rem;
+}
+.compact-procedure-table th,
+.compact-procedure-table td {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.compact-procedure-table th {
+  background: #edf2f8;
+  color: var(--accent);
+}
+.lane-table th:first-child,
+.lane-table td:first-child {
+  width: 96px;
+  font-weight: 700;
+  text-align: center;
+}
+.preflight-critical-list li + li {
+  margin-top: 10px;
+}
+.atak-flow-grid {
+  display: grid;
+  gap: 12px;
+  margin: 12px 0;
+}
+.mini-procedure-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 12px 14px;
+}
+.mini-procedure-card h5 {
+  margin: 0 0 8px 0;
+  color: var(--accent);
+  font-size: 0.98rem;
+}
+@media print {
+  .compact-procedure-table {
+    break-inside: avoid;
+  }
+  .mini-procedure-card {
+    break-inside: avoid;
+  }
+}
