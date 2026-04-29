@@ -731,8 +731,8 @@ const TASK_INTRO = {
     "body": "A propeller is a rotating wing. Its airfoil is matched to a specific direction of rotation, which is why clockwise and counterclockwise propellers are not interchangeable. Once the propellers are secured, the aircraft is no longer just a bench assembly. It is a vehicle capable of generating meaningful thrust. At this stage, motor torque finally meets the air."
   },
   "task16": {
-    "accomplishes": "This task completes the post-build inspection, ATAK reference-card review, and faculty release gate before a prop-on run or flight event.",
-    "body": "Flight day brings structure, power, sensing, configuration, and operator procedure together. Complete the emergency review, preflight check, ATAK mission planning, and lane OIC release before any prop-on operation or flight."
+    "accomplishes": "This task completes the HAMR II preflight check, ATAK mission planning, emergency review, and lane OIC release gate before a prop-on run or flight event.",
+    "body": "Flight day brings structure, power, sensing, configuration, and operator procedure together. Complete the preflight check, ATAK mission planning, emergency review, and lane OIC release before any prop-on operation or flight."
   }
 };
 
@@ -1251,7 +1251,7 @@ const TASK_META = {
     "blockers": [
       "task15"
     ],
-    "summary": "Review emergency actions, complete the HAMR II preflight check, plan the ATAK mission, and report to the lane OIC for final release."
+    "summary": "Complete the HAMR II preflight check, plan the ATAK mission, review emergency actions, and report to the lane OIC for final release."
   }
 };
 
