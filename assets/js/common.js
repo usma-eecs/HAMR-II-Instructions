@@ -590,6 +590,15 @@ const GLOSSARY = {
       "eye protection",
       "safety glasses"
     ]
+  },
+  "foamfoot": {
+    "title": "Foam foot",
+    "subtitle": "Protects the frame from damage during landing",
+    "img": "assets/images/parts/foamfoot.png",
+    "aliases": [
+      "foam foot",
+      "foam feet"
+    ]
   }
 };
 
