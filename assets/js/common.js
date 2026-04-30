@@ -671,20 +671,20 @@ function getTeamIdConstraintMessage() {
 
 const TASK_INTRO = {
   "task1": {
-    "accomplishes": "This task prepares the Raspberry Pi for integration with the aircraft.",
-    "body": "The Raspberry Pi is the companion computer. On this aircraft, it supports functions such as telemetry, networking, and video-related software. It is not the flight controller, which closes the control loop fast enough to keep the aircraft stable in flight. For scale, the Apollo Guidance Computer operated at about 1 MHz and had about 2 KB of erasable memory. The Raspberry Pi Zero 2 W operates at 1 GHz and has 512 MB of RAM. That is why one small board can add networked computing to a student-built aircraft, provided the header beneath it is soldered correctly."
+    "accomplishes": "This task prepares the Raspberry Pi for integration with the vehicle.",
+    "body": "The Raspberry Pi is the companion computer. On this vehicle, it supports functions such as telemetry, networking, and video-related software. It is not the flight controller, which closes the control loop fast enough to keep the vehicle stable in flight. For scale, the Apollo Guidance Computer operated at about 1 MHz and had about 2 KB of erasable memory. The Raspberry Pi Zero 2 W operates at 1 GHz and has 512 MB of RAM. That is why one small board can add networked computing to a student-built vehicle, provided the header beneath it is soldered correctly."
   },
   "task2": {
     "accomplishes": "This task installs the GPS/compass module on the camera/GPS mount.",
-    "body": "This module combines two distinct sensors. The GPS receiver estimates position, speed, and time from satellite signals. The compass is a three-axis magnetometer that helps the autopilot estimate heading after calibration. One locates the aircraft in space; the other defines its orientation within that space. That combination is what lets a four-motor vehicle do more than hover. It can hold a heading, follow a route, and report where it is."
+    "body": "This module combines two distinct sensors. The GPS receiver estimates position, speed, and time from satellite signals. The compass is a three-axis magnetometer that helps the autopilot estimate heading after calibration. One locates the vehicle in space; the other defines its orientation within that space. That combination is what lets a four-motor vehicle do more than hover. It can hold a heading, follow a route, and report where it is."
   },
   "task3": {
     "accomplishes": "This task installs the forward camera and connects its ribbon cable.",
-    "body": "The camera provides the operator with a live view for situational awareness. It is valuable to the pilot, but it is not the primary sensor responsible for flight stability. A useful imaging system depends on more than power and a video signal: lens focus, mount stiffness, and cable routing all affect what reaches the screen. On a small aircraft, image quality is shaped by optics, mechanics, and electronics sharing a very small volume."
+    "body": "The camera provides the operator with a live view for situational awareness. It is valuable to the pilot, but it is not the primary sensor responsible for flight stability. A useful imaging system depends on more than power and a video signal: lens focus, mount stiffness, and cable routing all affect what reaches the screen. On a small vehicle, image quality is shaped by optics, mechanics, and electronics sharing a very small volume."
   },
   "task4": {
-    "accomplishes": "This task builds the lower frame of the aircraft.",
-    "body": "The lower frame is the structural base of the aircraft. It establishes the geometry for every major step that follows, from motor alignment to deck fit and cable routing. In engineering, geometry established early often sets the limits of the final system. If this base is square and aligned, the rest of the build usually proceeds cleanly. Four arms that look identical on the bench only behave identically in flight if the structure holding them preserves the intended shape."
+    "accomplishes": "This task builds the lower frame of the vehicle.",
+    "body": "The lower frame is the structural base of the vehicle. It establishes the geometry for every major step that follows, from motor alignment to deck fit and cable routing. In engineering, geometry established early often sets the limits of the final system. If this base is square and aligned, the rest of the build usually proceeds cleanly. Four arms that look identical on the bench only behave identically in flight if the structure holding them preserves the intended shape."
   },
   "task5": {
     "accomplishes": "This task installs all four motors on the lower frame.",
@@ -692,11 +692,11 @@ const TASK_INTRO = {
   },
   "task6": {
     "accomplishes": "This task prepares the flight controller, connects it to the electronic speed controller, and installs the FC/ESC stack.",
-    "body": "The flight controller and ESC sit close together but perform different jobs. The flight controller reads sensors, estimates the motion of the aircraft, and computes motor commands. The ESC converts battery power into timed electrical drive for the motor windings. The silicone dampers under the flight controller are there because its inertial sensors are sensitive to vibration. Keeping vibration out of the measurements is part of keeping the control system accurate."
+    "body": "The flight controller and ESC sit close together but perform different jobs. The flight controller reads sensors, estimates the motion of the vehicle, and computes motor commands. The ESC converts battery power into timed electrical drive for the motor windings. The silicone dampers under the flight controller are there because its inertial sensors are sensitive to vibration. Keeping vibration out of the measurements is part of keeping the control system accurate."
   },
   "task7": {
-    "accomplishes": "This task completes the aircraft powertrain wiring.",
-    "body": "This is the high-energy heart of the aircraft. The battery lead carries significant current into the ESC, which then distributes power to the motors. That makes the powertrain fundamentally different from ordinary signal wiring: here, the hardware is handling the energy that will eventually become lift. Polarity, connector seating, and screw security matter because the power path has to be electrically correct and mechanically secure before the aircraft can fly."
+    "accomplishes": "This task completes the vehicle powertrain wiring.",
+    "body": "This is the high-energy heart of the vehicle. The battery lead carries significant current into the ESC, which then distributes power to the motors. That makes the powertrain fundamentally different from ordinary signal wiring: here, the hardware is handling the energy that will eventually become lift. Polarity, connector seating, and screw security matter because the power path has to be electrically correct and mechanically secure before the vehicle can fly."
   },
   "task8": {
     "accomplishes": "This task builds the upper-deck assembly around the Raspberry Pi.",
@@ -712,23 +712,23 @@ const TASK_INTRO = {
   },
   "task11": {
     "accomplishes": "This task installs Mission Planner on the PC.",
-    "body": "Mission Planner is the ground control station, or GCS. It allows the operator to connect to the autopilot, inspect status, load settings, install firmware, and run setup procedures. It is the dashboard for the aircraft, but it does not fly the aircraft; that logic resides on the flight controller. This software is the interface between human and machine, which is why understanding the screen matters almost as much as understanding the hardware."
+    "body": "Mission Planner is the ground control station, or GCS. It allows the operator to connect to the autopilot, inspect status, load settings, install firmware, and run setup procedures. It is the dashboard for the vehicle, but it does not fly the vehicle; that logic resides on the flight controller. This software is the interface between human and machine, which is why understanding the screen matters almost as much as understanding the hardware."
   },
   "task12": {
     "accomplishes": "This task installs firmware on the flight controller and then loads the faculty-issued parameter file.",
-    "body": "Firmware is the software that runs directly on the flight controller processor. It is not just a settings file. It contains the actual flight-control logic, including sensor handling, communication, motor-output behavior, and safety features. The parameter file comes afterward. Firmware determines what the controller is capable of doing; parameters tell that firmware how this specific aircraft is built and how it should behave. Both must be correct before moving on to calibration and motor testing."
+    "body": "Firmware is the software that runs directly on the flight controller processor. It is not just a settings file. It contains the actual flight-control logic, including sensor handling, communication, motor-output behavior, and safety features. The parameter file comes afterward. Firmware determines what the controller is capable of doing; parameters tell that firmware how this specific vehicle is built and how it should behave. Both must be correct before moving on to calibration and motor testing."
   },
   "task13": {
-    "accomplishes": "This task calibrates the aircraft sensors, updates the battery monitor, and adjusts camera focus.",
+    "accomplishes": "This task calibrates the vehicle sensors, updates the battery monitor, and adjusts camera focus.",
     "body": "Calibration is how the autopilot accounts for predictable sensor error. Accelerometers, gyroscopes, and magnetometers all have offsets and scaling errors that must be measured and compensated. Calibration does not make the sensors perfect, but it reduces error to a level the control system can use. Lens focus is separate again. It affects image sharpness, not inertial or magnetic accuracy, which is why this task covers both sensor calibration and camera focus adjustment."
   },
   "task14": {
     "accomplishes": "This task verifies motor order and spin direction in Mission Planner.",
-    "body": "Before propellers are installed, the motors must prove three things: correct numbering, correct direction, and correct response to commands. This is a critical safety gate. Without spinning blades, the software logic can be checked against the hardware outputs with much less risk. A motor check confirms that the flight controller, ESC outputs, wiring, and frame layout all agree before the aircraft is asked to make thrust."
+    "body": "Before propellers are installed, the motors must prove three things: correct numbering, correct direction, and correct response to commands. This is a critical safety gate. Without spinning blades, the software logic can be checked against the hardware outputs with much less risk. A motor check confirms that the flight controller, ESC outputs, wiring, and frame layout all agree before the vehicle is asked to make thrust."
   },
   "task15": {
     "accomplishes": "This task installs the propellers after the motor check is complete.",
-    "body": "A propeller is a rotating wing. Its airfoil is matched to a specific direction of rotation, which is why clockwise and counterclockwise propellers are not interchangeable. Once the propellers are secured, the aircraft is no longer just a bench assembly. It is a vehicle capable of generating meaningful thrust. At this stage, motor torque finally meets the air."
+    "body": "A propeller is a rotating wing. Its airfoil is matched to a specific direction of rotation, which is why clockwise and counterclockwise propellers are not interchangeable. Once the propellers are secured, the vehicle is no longer just a bench assembly. It is a vehicle capable of generating meaningful thrust. At this stage, motor torque finally meets the air."
   },
   "task16": {
     "accomplishes": "This task completes the HAMR II preflight check, ATAK mission planning, emergency review, and lane OIC release gate before a prop-on run or flight event.",

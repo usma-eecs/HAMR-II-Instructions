@@ -29,7 +29,7 @@ The maintenance goal is:
 
    * Use direct language.
    * Keep part descriptions platform-specific.
-   * State what a part is doing on this aircraft, not just what it is in general.
+   * State what a part is doing on this vehicle, not just what it is in general.
 
 4. **Avoid unintended changes**
 
