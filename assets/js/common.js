@@ -965,7 +965,7 @@ function renderTaskNavigator() {
       </div>
       <div class="task-nav-summary-meta">
         <span class="badge">${summary.completed} of ${summary.total} complete</span>
-        <a class="link-button secondary" href="index.html#jump-ahead">Open full task navigator</a>
+        <!--<a class="link-button secondary" href="index.html#jump-ahead">Open full task navigator</a>-->
       </div>
     </div>
   `;
