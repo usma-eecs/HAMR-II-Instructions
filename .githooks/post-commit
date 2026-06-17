@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+short_hash="$(git rev-parse --short HEAD)"
+commit_time="$(git show -s --format=%cd --date=format:%Y%m%d-%H%M%S HEAD)"
+
+out_dir="$repo_root/source-zips"
+out_zip="$out_dir/source-${commit_time}-${short_hash}.zip"
+
+mkdir -p "$out_dir"
+
+# Archive exactly the tracked files in the committed HEAD.
+git archive \
+  --format=zip \
+  --output="$out_zip" \
+  HEAD
+
+echo "Generated source archive:"
+echo "  $out_zip"
