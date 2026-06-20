@@ -363,8 +363,8 @@ const GLOSSARY = {
     "aliases": [
       "M3 × 10 mm flat-head countersunk screw",
       "M3 × 10 mm countersunk screw",
-      "M3 × 10 mm flat-head screw",
-      "M3 × 10 mm screw"
+      "M3 × 10 mm flat-head screw"//,
+      //"M3 × 10 mm screw"
     ]
   },
   "m3x12socket": {
@@ -473,7 +473,7 @@ const GLOSSARY = {
   },
   "m3x10motor": {
     "title": "M3 × 10 mm socket-head screw",
-    "subtitle": "Motor accessory screw not used for mounting",
+    "subtitle": "Motor-package screw; fire hazard if used for motor mounting",
     "img": "assets/images/fasteners/91290A115.png",
     "aliases": [
       "M3 × 10 mm socket-head screw",
