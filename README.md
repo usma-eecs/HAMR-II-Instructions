@@ -192,6 +192,14 @@ These belong in the task HTML itself:
 
 ### Layout conventions
 
+Use the same numbered-step hierarchy on every task page:
+
+* `Step 1. Prepare ...`
+* `Step 2. Connect ...`
+* action numbers continue across steps rather than restarting
+
+Do not introduce a second heading system on only one task. Consistent numbered steps make classroom references and cross-task navigation easier.
+
 Task pages use inner bubbles/cards for sections such as:
 
 * task intro
@@ -266,7 +274,17 @@ Recommended wording:
 * `Each package contains two GPS/compass sets. Retrieve only one set for your team. Split the package with another team. If you cannot find a partner set, ask an instructor.`
 * `Each package contains two flight controllers. Retrieve only one flight controller for your team. Split the package with another team. If you cannot find a partner set, ask an instructor.`
 
-If the electronic speed controller packaging also changes in the future, add the same kind of note there.
+Package contents currently used in Task 6:
+
+* **ESC package**
+  * electronic speed controller
+  * one 8-wire JST-GH/JST-SH ribbon cable
+  * four silicone rubber vibration dampers
+* **Flight controller package**
+  * flight controller
+  * four silicone rubber vibration dampers
+
+Keep these package contents synchronized among Task 6, the Parts Guide, and the glossary.
 
 ---
 
@@ -281,7 +299,7 @@ Do not rely only on the page-level `Tools required` list.
 * `Use the 1.5 mm Allen key to tighten ...`
 * `Use the 2.0 mm Allen key to tighten ...`
 * `Use the 2.5 mm Allen key to tighten ...`
-* `Use the 5.5 mm nut driver on the lock nuts and the 2.5 mm Allen key on the screw heads.`
+* `Use the 5.5 mm nut driver on the locknuts and the 2.5 mm Allen key on the screw heads.`
 * `Use needle-nose pliers to hold the screw while starting the threads.`
 * `Use the soldering iron set to 750 °F.`
 
@@ -310,6 +328,7 @@ Use these canonical visible terms wherever possible:
 * `Raspberry Pi mount`
 * `lower frame`
 * `lower deck`
+* `nylon-insert locknut`
 * `upper deck`
 * `frame standoff`
 * `flight controller`
@@ -354,7 +373,7 @@ Prefer:
 * `round-head screw`
 * `socket-head screw`
 * `flat-head countersunk screw`
-* `nylon-insert lock nut`
+* `nylon-insert locknut`
 
 Be consistent across:
 
@@ -373,7 +392,12 @@ For the current build, the frame-supplied round-head screws used in the instruct
 
 1. `M3 × 8 mm round-head screws`
 2. `M3 × 12 mm round-head screws`
-3. `M3 × 30 mm round-head screws`
+
+The FC/ESC stack no longer uses the former 30 mm frame-kit screws. Its complete hardware set is supplied in the Fastener Kit under the `FC/ESC Stack` subkit:
+
+1. Four `M3 × 40 mm button-head hex-drive screws` — McMaster `92095A203`
+2. Four `8 mm nylon through-hole spacers` — McMaster `93657A011`
+3. Four `M3 nylon-insert locknuts` — McMaster `90576A102`
 
 The current build also uses two black zip ties from the frame kit.
 
@@ -486,18 +510,48 @@ Task figures are currently extracted from the deck or PDF and stored as image as
 * Do not crop content.
 * Keep a small padding margin.
 
-### Notes/captions
+### Automatic numbering and references
 
-When figures come from the slide deck, the notes section is the source for:
+Task figures are numbered automatically in DOM order by `initFigureNumbering()` in `assets/js/common.js`.
 
-* figure number
-* figure label/caption
+For each figure:
 
-If the PDF is used only for extraction quality, keep the numbering consistent with the deck.
+* wrap the image or placeholder in `.figure-card`
+* assign a stable, semantic `data-figure-id`
+* write the caption text without a manually typed figure number
+
+Example:
+
+```html
+<div class="figure-card" data-figure-id="stack-alignment">
+  <img src="assets/images/tasks/task6/task6-stack-alignment.png" alt="FC/ESC stack aligned over the lower deck">
+  <div class="figure-caption">Correct FC/ESC stack orientation and mounting-hole alignment.</div>
+</div>
+```
+
+Reference a figure by its stable ID rather than by a typed number:
+
+```html
+<a class="figure-ref" data-figure-ref="stack-alignment"></a>
+```
+
+The browser inserts labels such as `Fig. 6f` and updates all matching references. Inserting, deleting, or moving a figure therefore renumbers the page without requiring manual edits.
+
+Rules:
+
+* Every `.figure-card` on a task page is numbered.
+* `data-figure-id` values must be unique within that page.
+* Use descriptive IDs that remain valid even if the figure moves.
+* Do not type `Fig. 6a`, `Fig. 6b`, and similar labels directly into captions or body text.
+* Keep figures in the same order as the procedure that uses them.
+
+Run `python scripts/audit_figures.py` before packaging the site. The audit checks duplicate IDs, unresolved references, and manually typed task-figure labels.
+
+Also run `python scripts/audit_site.py`. It checks task-title consistency, numbered-step structure, deprecated terminology, list nesting, and local asset references.
 
 ### Placeholder figures
 
-If a figure is intentionally incomplete, keep the placeholder in place until a final version is available.
+Use a `.figure-placeholder` inside the numbered `.figure-card` when the final photograph is not yet available. State exactly what the replacement image must show and include a suggested filename. Replace the placeholder as soon as a verified image is available.
 
 ---
 

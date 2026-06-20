@@ -1,88 +1,78 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Task 1: Prepare the Raspberry Pi</title>
-<link rel="stylesheet" href="assets/css/common.css">
-<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+<link href="assets/css/common.css" rel="stylesheet"/>
+<link href="assets/images/branding/rrc.png" rel="icon" type="image/png"/>
 </head>
 <body data-page="task1-prepare-raspberry-pi.html">
 <main class="page">
 <section class="hero"><h1>Task 1: Prepare the Raspberry Pi</h1><p>Install the 4-pin latch header and SIP switch on the Raspberry Pi.</p></section>
-<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
-<div data-task-strip></div>
+<nav aria-label="Page navigation" class="topnav" data-site-nav=""></nav>
+<div data-task-strip=""></div>
 <section class="section annotate-terms" id="task1-prepare-raspberry-pi">
 <div class="parts-tools">
-<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Raspberry Pi Zero 2 W</li><li>Molex 4-pin latch header</li><li>SIP switch</li><li>Solder</li></ul></div>
-<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>Eye protection</li><li>Soldering station</li><li>Soldering iron</li></ul></div>
+<div class="info-card"><h4>Parts required</h4><ul class="item-list"><li>Raspberry Pi Zero 2 W</li><li>Molex 4-pin latch header</li><li>SIP switch</li><li>Solder</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class="item-list"><li>Eye protection</li><li>Soldering station</li><li>Soldering iron</li></ul></div>
 </div>
-
 <div class="instruction-flow">
-  <section class="instruction-block">
-    <div>
-      <h4>Step 1. Prepare the bench and place the parts</h4>
-      <ol class="compact-list">
-        <li>Retrieve the Raspberry Pi Zero 2 W, the Molex 4-pin latch header, and the SIP switch from the supplies shelf.</li>
-        <li>Put on eye protection.</li>
-        <li>Turn on the soldering station and set it to <strong>750 °F</strong>.</li>
-        <li>While the iron is heating, insert the 4-pin header through the small row of holes from the front side and place the SIP switch exactly as shown in Fig. 1a.</li>
-      </ol>
-      <div class="stop-box step-note"><strong>STOP.</strong> Seek instructor validation before soldering. The two parts must match Fig. 1a exactly.</div>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/tasks/task1/task1-fig1a.png" alt="Figure 1a showing Raspberry Pi part orientation"><div class="figure-caption">Fig. 1a. Parts orientation before soldering.</div></div>
-    </div>
-  </section>
-
-  <section class="instruction-block">
-    <div>
-      <h4>Step 2. Flip the board and solder all nine pins</h4>
-      <ol class="compact-list" start="5">
-        <li>With both parts still inserted, carefully flip the Raspberry Pi so its bottom side faces up.</li>
-        <li>Set the board down gently so it rests on the inserted parts and the nine pins point upward.</li>
-        <li>For each pin, touch the iron tip to the pad and pin at the same time.</li>
-        <li>Feed a small amount of solder into the joint until a smooth, shiny fillet forms.</li>
-        <li>Remove the solder first, then remove the iron, and let the joint cool undisturbed.</li>
-        <li>Repeat until all nine pins are soldered.</li>
-      </ol>
-      <div class="callout step-note"><strong>Inspection standard.</strong><br>Inspect all nine joints. Reflow any joint that looks dull, cracked, bridged, or insufficiently wetted.</div>
-      <!--<div class="callout step-note"><strong>Soldering procedure.</strong>
-        <ul class="compact-list">
-          <li>Insert the header through the small row of holes from the front side, as shown in Fig. 1a.</li>
-          <li>Solder the first pin.</li>
-          <li>Recheck alignment before soldering the remaining pins.</li>
-          <li>Inspect the completed row before moving on.</li>
-        </ul>
-      </div>-->
-      <div class="callout step-note"><strong>Helpful tips.</strong>
-        <ul class="compact-list">
-          <li>Heat both the pad and the pin, then feed solder into the joint.</li>
-          <li>Use only enough solder to form a small fillet. More solder is not a better joint.</li>
-          <li>If the header will not stay square, temporarily hold it with a breadboard, tape, or helping hands.</li>
-          <li>If two neighboring pins are bridged, reheat and wick away the excess solder before continuing.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/tasks/task1/task1-fig1b.png" alt="Figure 1b soldering guide"><div class="figure-caption">Fig. 1b. Solder-joint guide.</div></div>
-      <div class="figure-grid-2">
-        <div class="figure-card"><img src="assets/images/tasks/task1/task1-solder-good.png" alt="Example of acceptable solder joints on the Raspberry Pi header"><div class="figure-caption">Good example. Separate pins, small fillets, and no bridging.</div></div>
-        <div class="figure-card"><img src="assets/images/tasks/task1/task1-solder-bad.png" alt="Example of unacceptable solder joints with excess solder across adjacent pins"><div class="figure-caption">Bad example. Excess solder and bridging across adjacent pins.</div></div>
-      </div>
-    </div>
-  </section>
+<section class="instruction-block">
+<div>
+<h4>Step 1. Prepare the bench and place the parts</h4>
+<ol class="compact-list">
+<li>Retrieve the Raspberry Pi Zero 2 W, the Molex 4-pin latch header, and the SIP switch from the supplies shelf.</li>
+<li>Put on eye protection.</li>
+<li>Turn on the soldering station and set it to <strong>750 °F</strong>.</li>
+<li>While the iron is heating, insert the 4-pin header through the small row of holes from the front side and place the SIP switch exactly as shown in <a class="figure-ref" data-figure-ref="parts-orientation" href="#fig-1-parts-orientation"></a>.</li>
+</ol>
+<div class="stop-box step-note"><strong>STOP.</strong> Seek instructor validation before soldering. The two parts must match <a class="figure-ref" data-figure-ref="parts-orientation" href="#fig-1-parts-orientation"></a> exactly.</div>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-card" data-figure-id="parts-orientation" id="fig-1-parts-orientation"><img alt="showing Raspberry Pi part orientation" src="assets/images/tasks/task1/task1-fig1a.png"/><div class="figure-caption">Parts orientation before soldering.</div></div>
+</div>
+</section>
+<section class="instruction-block">
+<div>
+<h4>Step 2. Flip the board and solder all nine pins</h4>
+<ol class="compact-list" start="5">
+<li>With both parts still inserted, carefully flip the Raspberry Pi so its bottom side faces up.</li>
+<li>Set the board down gently so it rests on the inserted parts and the nine pins point upward.</li>
+<li>For each pin, touch the iron tip to the pad and pin at the same time.</li>
+<li>Feed a small amount of solder into the joint until a smooth, shiny fillet forms.</li>
+<li>Remove the solder first, then remove the iron, and let the joint cool undisturbed.</li>
+<li>Repeat until all nine pins are soldered.</li>
+</ol>
+<div class="callout step-note"><strong>Inspection standard.</strong><br/>Inspect all nine joints. Reflow any joint that looks dull, cracked, bridged, or insufficiently wetted.</div>
+<div class="callout step-note"><strong>Helpful tips.</strong>
+<ul class="compact-list">
+<li>Heat both the pad and the pin, then feed solder into the joint.</li>
+<li>Use only enough solder to form a small fillet. More solder is not a better joint.</li>
+<li>If the header will not stay square, temporarily hold it with a breadboard, tape, or helping hands.</li>
+<li>If two neighboring pins are bridged, reheat and wick away the excess solder before continuing.</li>
+</ul>
+</div>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-card" data-figure-id="solder-joint-guide" id="fig-1-solder-joint-guide"><img alt="soldering guide" src="assets/images/tasks/task1/task1-fig1b.png"/><div class="figure-caption">Solder-joint guide.</div></div>
+<div class="figure-grid-2">
+<div class="figure-card" data-figure-id="acceptable-solder-joints" id="fig-1-acceptable-solder-joints"><img alt="Example of acceptable solder joints on the Raspberry Pi header" src="assets/images/tasks/task1/task1-solder-good.png"/><div class="figure-caption">Good example. Separate pins, small fillets, and no bridging.</div></div>
+<div class="figure-card" data-figure-id="unacceptable-solder-joints" id="fig-1-unacceptable-solder-joints"><img alt="Example of unacceptable solder joints with excess solder across adjacent pins" src="assets/images/tasks/task1/task1-solder-bad.png"/><div class="figure-caption">Bad example. Excess solder and bridging across adjacent pins.</div></div>
+</div>
+</div>
+</section>
 </div>
 <h3>Common errors</h3>
 <ul class="error-list">
-  <li>Soldering before an instructor verifies the part orientation.</li>
-  <li>Bridging adjacent pads or pins with excess solder.</li>
-  <li>Heating a pad too long and damaging the board or nearby plastic.</li>
-  <li>Moving the board before the joint cools, which creates a cold joint.</li>
+<li>Soldering before an instructor verifies the part orientation.</li>
+<li>Bridging adjacent pads or pins with excess solder.</li>
+<li>Heating a pad too long and damaging the board or nearby plastic.</li>
+<li>Moving the board before the joint cools, which creates a cold joint.</li>
 </ul>
-
 </section>
-<div class="footer" data-site-footer></div>
+<div class="footer" data-site-footer=""></div>
 </main>
 <script src="assets/js/team-sync-config.js"></script>
 <script src="assets/js/common.js"></script>

@@ -1,102 +1,145 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Task 6: Mount FC/ESC</title>
-<link rel="stylesheet" href="assets/css/common.css">
-<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Task 6: Mount the FC/ESC stack</title>
+<link href="assets/css/common.css" rel="stylesheet"/>
+<link href="assets/images/branding/rrc.png" rel="icon" type="image/png"/>
 </head>
 <body data-page="task6-mount-fc-esc.html">
 <main class="page">
-<section class="hero"><h1>Task 6: Mount FC/ESC</h1><p>Prepare the flight controller, connect it to the electronic speed controller, and install the FC/ESC stack.</p></section>
-<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
-<div data-task-strip></div>
+<section class="hero"><h1>Task 6: Mount the FC/ESC stack</h1><p>Connect the flight controller and electronic speed controller, assemble the separated FC/ESC stack, and secure it to the lower frame.</p></section>
+<nav aria-label="Page navigation" class="topnav" data-site-nav=""></nav>
+<div data-task-strip=""></div>
 <section class="section annotate-terms" id="task6-mount-fc-esc">
 <div class="parts-tools">
-<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Lower frame from Task 4</li><li>ESC package<ul class='kit-list'><li>FC/ESC cable</li><li>Four silicone vibration dampers</li></ul></li><li>Flight-controller package<ul class='kit-list'><li>Flight controller</li><li>Four silicone vibration dampers</li></ul></li><li>Frame kit<ul class='kit-list'><li>Four M3 × 30 mm round-head screws</li></ul></li><li>Fastener kit<ul class='kit-list'><li><strong>FC/ESC Stack</strong> subkit<ul class='kit-list'><li>Four M3 nylon-insert lock nuts</li></ul></li></ul></li></ul></div>
-<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>2.5 mm Allen key</li><li>5.5 mm nut driver</li><li>Needle-nose pliers</li></ul></div>
+<div class="info-card"><h4>Parts required</h4><ul class="item-list"><li>Lower frame from Task 4</li><li>ESC package<ul class="kit-list"><li>Electronic speed controller</li><li>One 8-wire JST-GH/JST-SH ribbon cable that connects to the flight controller</li><li>Four silicone rubber vibration dampers</li></ul></li><li>Flight controller package<ul class="kit-list"><li>Flight controller</li><li>Four silicone rubber vibration dampers</li></ul></li><li>Fastener kit<ul class="kit-list"><li><strong>FC/ESC Stack</strong> subkit<ul class="kit-list"><li>Four M3 × 40 mm button-head hex-drive screws</li><li>Four 8 mm nylon spacers</li><li>Four M3 nylon-insert locknuts</li></ul></li></ul></li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class="item-list"><li>2.5 mm Allen key</li><li>5.5 mm nut driver</li><li>Needle-nose pliers</li></ul></div>
 </div>
-
 <div class="instruction-flow">
-  <section class="instruction-block">
-    <div>
-      <h4>Step 1. Prepare the flight controller and electronic speed controller</h4>
-      <ol class="compact-list">
-        <li>Retrieve an electronic speed controller package, one flight controller, and four silicone vibration dampers from the supplies shelf.</li>
-        <li>Each bubble-wrap package contains two flight controllers and eight dampers. Take only one flight controller and four dampers for your team. Split the bubble-wrap package with another team. If you cannot find a partner set, ask an instructor.</li>
-        <li>The top of the flight controller is the side with the USB-C port. The top of the electronic speed controller is the side with the gold contact pads.</li>
-      </ol>
-      <div class="stop-box step-note"><strong>Shared bubble-wrap package.</strong><br>Each bubble-wrap package contains two flight controllers and eight dampers. Take only one flight controller and four dampers for your team. Split the bubble-wrap package with another team. If you cannot find a partner set, ask an instructor.</div>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="callout"><strong>Identification check.</strong><br>The flight controller top is the side with the USB-C port. The ESC top is the side with the gold contact pads.</div>
-    </div>
-  </section>
-
-  <section class="instruction-block">
-    <div>
-      <h4>Step 2. Install the silicone vibration dampers</h4>
-      <ol class="compact-list" start="4">
-        <li>Install the dampers on the flight controller and electronic speed controller as shown in Figs. 6b and 6c.</li>
-        <li>To install a damper, flatten it by hand, push it through the PCB hole, and then <strong>gently</strong> pull the stem through with the needle-nose pliers.</li>
-      </ol>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="figure-grid-2">
-        <div class="figure-card"><img src="assets/images/tasks/task6/task6-fig6b.png" alt="Figure 6b dampers on flight controller"><div class="figure-caption">Fig. 6b. Dampers on the flight controller.</div></div>
-        <div class="figure-card"><img src="assets/images/tasks/task6/task6-fig6c.png" alt="Figure 6c dampers on ESC"><div class="figure-caption">Fig. 6c. Dampers on the ESC.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="instruction-block">
-    <div>
-      <h4>Step 3. Connect the flight controller to the electronic speed controller</h4>
-      <ol class="compact-list" start="6">
-        <li>Retrieve the FC/ESC cable from the ESC package.</li>
-        <li>Identify the two ends from Fig. 6d. The JST-SH connector does <strong>not</strong> have a retention tab. The JST-GH connector does.</li>
-        <li>Insert the JST-SH connector by hand into the electronic speed controller receptacle at the center of the front edge. The visible metal contacts must face down toward the board.</li>
-        <li>Insert the JST-GH connector by hand into the flight controller receptacle on the right side of the front edge.</li>
-      </ol>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="figure-grid-2">
-        <div class="figure-card"><img src="assets/images/tasks/task6/task6-fig6d.png" alt="Figure 6d FC ESC cable"><div class="figure-caption">Fig. 6d. FC/ESC cable. JST-SH on the left, JST-GH on the right.</div></div>
-        <div class="figure-card"><img src="assets/images/tasks/task6/task6-fig6e.png" alt="Figure 6e connecting the flight controller and electronic speed controller"><div class="figure-caption">Fig. 6e. Connector orientation when inserting the FC/ESC cable.</div></div>
-      </div>
-      <div class="figure-card"><img src="assets/images/tasks/task6/task6-fig6f.png" alt="Figure 6f flight controller and electronic speed controller connected"><div class="figure-caption">Fig. 6f. Flight controller and electronic speed controller connected.</div></div>
-    </div>
-  </section>
-
-  <section class="instruction-block">
-    <div>
-      <h4>Step 4. Install the FC/ESC stack on the frame</h4>
-      <ol class="compact-list" start="10">
-        <li>Stack the electronic speed controller and flight controller as shown in Fig. 6g.</li>
-        <li>Insert the four M3 × 30 mm round-head screws from the frame kit through the silicone dampers, top to bottom, by hand.</li>
-        <li>Start the four M3 nylon-insert lock nuts from the <strong>FC/ESC Stack</strong> subkit on the bottom of the frame. Finger-tighten only.</li>
-        <li>Using the 5.5 mm nut driver on the nuts and the 2.5 mm Allen key on the screw heads, tighten in a crisscross pattern.</li>
-        <li>From the bottom view, stop when exactly two full turns protrude from each lock nut, as shown in Fig. 6h.</li>
-      </ol>
-      <div class="callout step-note"><strong>Why this matters.</strong><br>The dampers are very flexible. Without a fixed stop point, it is easy to overtighten and damage them before you realize it.</div>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/tasks/task6/task6-fig6g.png" alt="Figure 6g FC ESC stack installed"><div class="figure-caption">Fig. 6g. Flight controller and electronic speed controller stack installed on the frame.</div></div>
-      <div class="figure-card"><img src="assets/images/tasks/task6/task6-fig6h.png" alt="Figure 6h bottom view of FC ESC stack screw protrusion"><div class="figure-caption">Fig. 6h. Bottom view. No more than two full turns should protrude from each lock nut.</div></div>
-    </div>
-  </section>
+<section class="instruction-block">
+<div>
+<h4>Step 1. Prepare the flight controller and electronic speed controller</h4>
+<ol class="compact-list">
+<li>Retrieve one ESC package and one flight controller package from the supplies shelf.</li>
+<li>Identify the top of each board. The flight-controller top is the side with the USB-C port. The ESC top is the side with the gold contact pads.</li>
+<li>Install four silicone rubber vibration dampers on the flight controller and four on the ESC, as shown in <a class="figure-ref" data-figure-ref="flight-controller-dampers" href="#fig-6-flight-controller-dampers"></a> and <a class="figure-ref" data-figure-ref="esc-dampers" href="#fig-6-esc-dampers"></a>.</li>
+<li>To install each damper, flatten it by hand, push the stem through the PCB mounting hole, and then <strong>gently</strong> pull the stem through with the needle-nose pliers.</li>
+</ol>
+<div class="callout step-note"><strong>Shared flight controller package.</strong><br/>Each bubble-wrap package contains two flight controllers and eight dampers. Take one flight controller and four dampers for your team. Split the package with another team. If no partner set is available, ask an instructor.</div>
+<div class="callout step-note"><strong>Protect the dampers.</strong><br/>Do not pull directly on the narrow end. Excessive force can tear the rubber.</div>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-grid-2">
+<div class="figure-card" data-figure-id="flight-controller-dampers" id="fig-6-flight-controller-dampers"><img alt="Silicone rubber vibration dampers installed on the flight controller" src="assets/images/tasks/task6/flight-controller-dampers.png"/><div class="figure-caption">Dampers installed on the flight controller.</div></div>
+<div class="figure-card" data-figure-id="esc-dampers" id="fig-6-esc-dampers"><img alt="Silicone rubber vibration dampers installed on the electronic speed controller" src="assets/images/tasks/task6/esc-dampers.png"/><div class="figure-caption">Dampers installed on the electronic speed controller.</div></div>
+</div>
+</div>
+</section>
+<section class="instruction-block">
+<div>
+<h4>Step 2. Connect the flight controller and electronic speed controller</h4>
+<ol class="compact-list" start="5">
+<li>Retrieve the eight-wire FC/ESC ribbon cable from the ESC package.</li>
+<li>Identify the two connectors shown in <a class="figure-ref" data-figure-ref="fc-esc-ribbon-cable" href="#fig-6-fc-esc-ribbon-cable"></a>. The JST-SH connector does <strong>not</strong> have a retention tab. The JST-GH connector does.</li>
+<li>Insert the JST-SH connector into the receptacle at the center of the ESC’s front edge. The visible metal contacts must face down toward the board.</li>
+<li>Insert the JST-GH connector into the receptacle on the right side of the flight controller’s front edge, as shown in <a class="figure-ref" data-figure-ref="connector-orientation" href="#fig-6-connector-orientation"></a>.</li>
+<li>Verify that both connectors are fully seated.</li>
+</ol>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-grid-2">
+<div class="figure-card" data-figure-id="fc-esc-ribbon-cable" id="fig-6-fc-esc-ribbon-cable"><img alt="Eight-wire FC ESC ribbon cable with JST-SH and JST-GH connectors" src="assets/images/tasks/task6/fc-esc-ribbon-cable.png"/><div class="figure-caption">Eight-wire FC/ESC ribbon cable. JST-SH connector on the left; JST-GH connector on the right.</div></div>
+<div class="figure-card" data-figure-id="connector-orientation" id="fig-6-connector-orientation"><img alt="Correct FC ESC ribbon-cable connector orientation" src="assets/images/tasks/task6/connector-orientation.png"/><div class="figure-caption">Correct connector orientation when inserting the FC/ESC ribbon cable.</div></div>
+</div>
+</div>
+</section>
+<section class="instruction-block">
+<div>
+<h4>Step 3. Assemble the FC/ESC stack</h4>
+<ol class="compact-list" start="10">
+<li>Orient the flight controller above the ESC as shown in <a class="figure-ref" data-figure-ref="completed-spaced-stack" href="#fig-6-completed-spaced-stack"></a>.</li>
+<li>Place one 8 mm nylon spacer at each mounting point between the flight controller and ESC.</li>
+<li>Align all four spacers with the silicone rubber dampers on both boards.</li>
+<li>Insert one M3 × 40 mm screw through each mounting point, from top to bottom.</li>
+<li>Verify that the flight controller is above the spacers, the ESC is below the spacers, all four screws point downward, and the ribbon cable is clear of the screws and spacers.</li>
+</ol>
+<div class="callout step-note"><strong>EMI separation.</strong><br/>The four spacers establish an 8 mm gap between the flight controller and ESC to reduce electromagnetic interference from the high-current ESC.</div>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-card" data-figure-id="completed-spaced-stack" id="fig-6-completed-spaced-stack">
+<img alt="Completed FC/ESC stack before installation" src="assets/images/tasks/task6/task6-fig6f.png"/>
+<div class="figure-caption">Completed FC/ESC stack before installation on the lower frame.</div>
+</div>
+</div>
+</section>
+<section class="instruction-block">
+<div>
+<h4>Step 4. Install the stack and set screw protrusion</h4>
+<ol class="compact-list" start="15">
+<li>Position the completed FC/ESC stack over the lower deck as shown in <a class="figure-ref" data-figure-ref="stack-alignment" href="#fig-6-stack-alignment"></a>.</li>
+<li>Align all four screws with the corresponding mounting holes.</li>
+<li>Turn each screw until its tip is flush with the underside of the bottom plate, as shown in <a class="figure-ref" data-figure-ref="flush-reference" href="#fig-6-flush-reference"></a>.</li>
+<li>Confirm that all four screw tips are flush before continuing. This is the reference position for the 13-turn count.</li>
+<li>From the flush reference position, turn each screw clockwise exactly <strong>13 complete turns</strong>.</li>
+<li>Verify that each screw protrudes exactly <strong>6.5 mm</strong> below the bottom plate, as shown in <a class="figure-ref" data-figure-ref="screw-protrusion" href="#fig-6-screw-protrusion"></a>.</li>
+</ol>
+<div class="callout step-note"><strong>Count each screw independently.</strong><br/>One complete turn is one 360-degree rotation. Do not begin counting until that screw is flush with the underside of the bottom plate.</div>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-card" data-figure-id="stack-alignment" id="fig-6-stack-alignment">
+<img alt="Completed FC/ESC stack before installation" src="assets/images/tasks/task6/task6-fig6f.png"/>
+<div class="figure-caption">Correct FC/ESC stack orientation and mounting-hole alignment.</div>
+</div>
+<div class="figure-grid-2">
+<div class="figure-card" data-figure-id="flush-reference" id="fig-6-flush-reference">
+<img alt="Flush reference position before the 13-turn count" src="assets/images/tasks/task6/task6-screw-flush.png"/>
+<div class="figure-caption">Flush reference position before the 13-turn count.</div>
+</div>
+<div class="figure-card" data-figure-id="screw-protrusion" id="fig-6-screw-protrusion">
+<img alt="Required screw protrusion after exactly 13 complete turns" src="assets/images/tasks/task6/task6-fig6h.png"/>
+<div class="figure-caption">Required 6.5 mm screw protrusion after exactly 13 complete turns.</div>
+</div>
+</div>
+</div>
+</section>
+<section class="instruction-block">
+<div>
+<h4>Step 5. Install the nylon-insert locknuts</h4>
+<ol class="compact-list" start="21">
+<li>Place one M3 nylon-insert locknut on each protruding screw below the bottom plate.</li>
+<li>Hold the first screw stationary with the 2.5 mm Allen key, as shown in <a class="figure-ref" data-figure-ref="locknut-installation" href="#fig-6-locknut-installation"></a>.</li>
+<li>While continuing to hold the screw stationary, tighten the locknut with the 5.5 mm nut driver.</li>
+<li>Repeat for the remaining three screws.</li>
+<li>Verify that all four locknuts are tight and that none of the screws rotated while its locknut was installed.</li>
+</ol>
+<div class="callout step-note"><strong>Turn the nut, not the screw.</strong><br/>The Allen key holds the screw stationary. Rotate only the 5.5 mm nut driver. Allowing the screw to rotate changes the calibrated 6.5 mm protrusion.</div>
+<div class="ok-box step-note"><strong>End state.</strong><br/>All four locknuts are tight. The four 8 mm spacers remain between the flight controller and ESC. Both boards are aligned and flat, the ribbon cable is clear of the hardware, and none of the eight silicone rubber dampers is torn or crushed.</div>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-card" data-figure-id="locknut-installation" id="fig-6-locknut-installation">
+<img alt="Hold the screw stationary with the Allen key while tightening the locknut with the nut driver" src="assets/images/tasks/task6/task6-locknut-installation.png"/>
+<div class="figure-caption">Hold the screw stationary with the Allen key while tightening the locknut with the nut driver.</div>
+</div>
+</div>
+</section>
 </div>
 <h3>Common errors</h3>
 <ul class="error-list">
-  <li>Installing a damper upside down or tearing it with the pliers.</li>
-  <li>Mixing up the JST-SH and JST-GH ends of the FC/ESC cable.</li>
-  <li>Inserting the JST-SH connector upside down so the contacts do not face the board.</li>
-  <li>Overtightening the stack and crushing the dampers.</li>
+<li>Installing a damper upside down or tearing it with the pliers.</li>
+<li>Mixing up the JST-SH and JST-GH ends of the FC/ESC ribbon cable.</li>
+<li>Inserting the JST-SH connector with its contacts facing away from the ESC.</li>
+<li>Omitting an 8 mm spacer or placing it anywhere other than between the flight controller and ESC.</li>
+<li>Pinching the ribbon cable between a spacer, circuit board, or screw.</li>
+<li>Using the former 30 mm frame-kit screws instead of the 40 mm screws from the <strong>FC/ESC Stack</strong> subkit.</li>
+<li>Beginning the 13-turn count before the screw tip is flush with the underside of the bottom plate.</li>
+<li>Counting partial rotations as complete turns.</li>
+<li>Allowing a screw to rotate while tightening its locknut.</li>
 </ul>
-
 </section>
-<div class="footer" data-site-footer></div>
+<div class="footer" data-site-footer=""></div>
 </main>
 <script src="assets/js/team-sync-config.js"></script>
 <script src="assets/js/common.js"></script>

@@ -1,92 +1,88 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Task 12: Install firmware and load parameter file</title>
-<link rel="stylesheet" href="assets/css/common.css">
-<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+<link href="assets/css/common.css" rel="stylesheet"/>
+<link href="assets/images/branding/rrc.png" rel="icon" type="image/png"/>
 </head>
 <body data-page="task12-set-up-param-file.html">
 <main class="page">
 <section class="hero"><h1>Task 12: Install firmware and load parameter file</h1><p>Install ArduCopter firmware on the flight controller, then load the faculty-issued parameter file.</p></section>
-<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
-<div data-task-strip></div>
+<nav aria-label="Page navigation" class="topnav" data-site-nav=""></nav>
+<div data-task-strip=""></div>
 <section class="section annotate-terms" id="task12-set-up-param-file">
 <div class="parts-tools">
-<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Vehicle with the FC, ESC, and camera/GPS mount installed</li></ul></div>
-<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>USB-C cable</li><li>PC running Mission Planner</li></ul></div>
+<div class="info-card"><h4>Parts required</h4><ul class="item-list"><li>Vehicle with the FC, ESC, and camera/GPS mount installed</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class="item-list"><li>USB-C cable</li><li>PC running Mission Planner</li></ul></div>
 </div>
-
-<div class="callout"><strong>Short read: firmware vs. parameters.</strong><br>Firmware is the low-level software that runs on the flight controller itself. It tells the board how to behave as an autopilot. The parameter file is a preset list of configuration values loaded after the firmware is installed. In this task, you will first install the correct ArduCopter firmware, then load the faculty-issued HAMR II parameter file.</div>
-
-<div class="callout"><strong>Parameter file.</strong><br>Download the current faculty-issued preset parameter file here: <a href="assets/downloads/20260503%20HAMR%20II%20Rev3.param" download="20260503 HAMR II Rev3.param">20260503 HAMR II Rev3.param</a>.</div>
-
+<div class="callout"><strong>Short read: firmware vs. parameters.</strong><br/>Firmware is the low-level software that runs on the flight controller itself. It tells the board how to behave as an autopilot. The parameter file is a preset list of configuration values loaded after the firmware is installed. In this task, you will first install the correct ArduCopter firmware, then load the faculty-issued HAMR II parameter file.</div>
+<div class="callout"><strong>Parameter file.</strong><br/>Download the current faculty-issued preset parameter file here: <a download="20260503 HAMR II Rev3.param" href="assets/downloads/20260503%20HAMR%20II%20Rev3.param">20260503 HAMR II Rev3.param</a>.</div>
 <div class="instruction-flow">
-  <section class="instruction-block">
-    <div>
-      <h4>Step 1. Install firmware</h4>
-      <ol class="compact-list">
-        <li>Connect the USB-C cable between the PC and the flight controller.</li>
-        <li>Be gentle with the USB-C cable and connector. Do not twist the cable, pry on the connector, or let the cable side-load the board. The USB-C receptacle can be pulled off the flight controller entirely if mishandled.</li>
-        <li>Open Mission Planner.</li>
-        <li>Along the left side of the Mission Planner window, click <strong>SETUP</strong>. In the setup pane, click <strong>Install Firmware</strong>. See Fig. 12a.</li>
-        <li>In the main firmware area, click <strong>Copter V4.6.3 OFFICIAL</strong>. This button is in the center of the screen. See Fig. 12a.</li>
-        <li>When the <strong>Continue</strong> dialog appears in the middle of the screen, click <strong>Yes</strong>.</li>
-        <li>Follow the firmware upload path that Mission Planner presents:
+<section class="instruction-block">
+<div>
+<h4>Step 1. Install firmware</h4>
+<ol class="compact-list">
+<li>Connect the USB-C cable between the PC and the flight controller.</li>
+<li>Be gentle with the USB-C cable and connector. Do not twist the cable, pry on the connector, or let the cable side-load the board. The USB-C receptacle can be pulled off the flight controller entirely if mishandled.</li>
+<li>Open Mission Planner.</li>
+<li>Along the left side of the Mission Planner window, click <strong>SETUP</strong>. In the setup pane, click <strong>Install Firmware</strong>. See <a class="figure-ref" data-figure-ref="install-firmware" href="#fig-12-install-firmware"></a>.</li>
+<li>In the main firmware area, click <strong>Copter V4.6.3 OFFICIAL</strong>. This button is in the center of the screen. See <a class="figure-ref" data-figure-ref="install-firmware" href="#fig-12-install-firmware"></a>.</li>
+<li>When the <strong>Continue</strong> dialog appears in the middle of the screen, click <strong>Yes</strong>.</li>
+<li>Follow the firmware upload path that Mission Planner presents:
           <ol class="substep-list">
-            <li><strong>Normal path:</strong> when the unplug/replug prompt appears in the middle of the screen, click <strong>OK</strong>, unplug the flight controller, and plug it back in promptly. See Fig. 12b. Wait for Mission Planner to begin the upload. Continue waiting until the status window shows activity such as <strong>Downloading from the Internet</strong> and the progress bar starts moving. Then keep waiting until Mission Planner reports <strong>Upload Done</strong>.</li>
-            <li><strong>Retry path:</strong> if Mission Planner instead shows a failed port-detect condition like Fig. 12c, or reports that it found the board type but does not actually start the upload, restart the firmware install by clicking <strong>Copter V4.6.3 OFFICIAL</strong> again from Fig. 12a and repeat the process.</li>
-          </ol>
-        </li>
-        <li>After <strong>Upload Done</strong>, unplug the flight controller and plug it back in again.</li>
-        <li>In the upper-right corner of the Mission Planner window, open the port dropdown and select the COM-port entry that includes <strong>ArduPilot MAVLink</strong>. Then set the adjacent baud-rate dropdown to <strong>921600</strong> and click <strong>CONNECT</strong>. See Fig. 12d.</li>
-      </ol>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/tasks/task12/task12-fig12a.png" alt="Figure 12a Mission Planner Install Firmware screen"><div class="figure-caption">Fig. 12a. In the <strong>SETUP</strong> pane, click <strong>Install Firmware</strong>, then select <strong>Copter V4.6.3 OFFICIAL</strong> from the main firmware area.</div></div>
-      <div class="figure-card"><img src="assets/images/tasks/task12/task12-fig12b.png" alt="Figure 12b Mission Planner unplug and replug prompt"><div class="figure-caption">Fig. 12b. Normal firmware path. Click <strong>OK</strong>, then unplug and replug the flight controller when prompted.</div></div>
-      <div class="figure-card"><img src="assets/images/tasks/task12/task12-fig12c.png" alt="Figure 12c Mission Planner firmware upload retry condition"><div class="figure-caption">Fig. 12c. Retry path. If Mission Planner does not proceed with the upload, restart the firmware install from <strong>Copter V4.6.3 OFFICIAL</strong>.</div></div>
-      <div class="figure-card"><img src="assets/images/tasks/task12/task12-fig12d.png" alt="Figure 12d Mission Planner connection controls"><div class="figure-caption">Fig. 12d. After firmware installation, reconnect through the upper-right connection controls. Select the correct port entry that includes <strong>ArduPilot MAVLink</strong>, set <strong>921600</strong>, and click <strong>CONNECT</strong>.</div></div>
-    </div>
-  </section>
-
-  <section class="instruction-block">
-    <div>
-      <h4>Step 2. Load parameter file</h4>
-      <ol class="compact-list">
-        <li>On the top menu bar, click <strong>CONFIG</strong>.</li>
-        <li>In the left-side configuration menu, click <strong>Full Parameter List</strong>. See Fig. 12e.</li>
-        <li>On the right side of the <strong>Full Parameter List</strong> page, click <strong>Load from file</strong>.</li>
-        <li>Select <a href="assets/downloads/20260503%20HAMR%20II%20Rev3.param" download="20260503 HAMR II Rev3.param"><code>20260503 HAMR II Rev3.param</code></a>.</li>
-        <li>If one or more <strong>Read Only</strong> dialogs appear, click <strong>OK</strong> on each of them.</li>
-        <li>After the file finishes loading, click <strong>Write Params</strong> on the right side of the page.</li>
-        <li>When the <strong>Confirm Parameter Changes</strong> dialog appears, click <strong>Yes</strong>.</li>
-        <li>When the <strong>Saved</strong> dialog appears, click <strong>OK</strong>.</li>
-        <li>When the <strong>Reboot Required</strong> dialog appears, click <strong>OK</strong>.</li>
-        <li>Unplug the flight controller and plug it back in.</li>
-        <li>In the upper-right corner, click <strong>CONNECT</strong> again to reconnect to the flight controller.</li>
-      </ol>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/tasks/task12/task12-fig12e.png" alt="Figure 12e Mission Planner Full Parameter List screen"><div class="figure-caption">Fig. 12e. Parameter-file workflow. Open <strong>CONFIG</strong> → <strong>Full Parameter List</strong>, load the Rev1 parameter file, acknowledge any <strong>Read Only</strong> prompts, click <strong>Write Params</strong>, then acknowledge <strong>Saved</strong> and <strong>Reboot Required</strong> before unplugging/replugging and reconnecting.</div></div>
-    </div>
-  </section>
+<li><strong>Normal path:</strong> when the unplug/replug prompt appears in the middle of the screen, click <strong>OK</strong>, unplug the flight controller, and plug it back in promptly. See <a class="figure-ref" data-figure-ref="firmware-reconnect" href="#fig-12-firmware-reconnect"></a>. Wait for Mission Planner to begin the upload. Continue waiting until the status window shows activity such as <strong>Downloading from the Internet</strong> and the progress bar starts moving. Then keep waiting until Mission Planner reports <strong>Upload Done</strong>.</li>
+<li><strong>Retry path:</strong> if Mission Planner instead shows a failed port-detect condition like <a class="figure-ref" data-figure-ref="firmware-retry" href="#fig-12-firmware-retry"></a>, or reports that it found the board type but does not actually start the upload, restart the firmware install by clicking <strong>Copter V4.6.3 OFFICIAL</strong> again from <a class="figure-ref" data-figure-ref="install-firmware" href="#fig-12-install-firmware"></a> and repeat the process.</li>
+</ol>
+</li>
+<li>After <strong>Upload Done</strong>, unplug the flight controller and plug it back in again.</li>
+<li>In the upper-right corner of the Mission Planner window, open the port dropdown and select the COM-port entry that includes <strong>ArduPilot MAVLink</strong>. Then set the adjacent baud-rate dropdown to <strong>921600</strong> and click <strong>CONNECT</strong>. See <a class="figure-ref" data-figure-ref="reconnect-flight-controller" href="#fig-12-reconnect-flight-controller"></a>.</li>
+</ol>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-card" data-figure-id="install-firmware" id="fig-12-install-firmware"><img alt="Mission Planner Install Firmware screen" src="assets/images/tasks/task12/task12-fig12a.png"/><div class="figure-caption">In the <strong>SETUP</strong> pane, click <strong>Install Firmware</strong>, then select <strong>Copter V4.6.3 OFFICIAL</strong> from the main firmware area.</div></div>
+<div class="figure-card" data-figure-id="firmware-reconnect" id="fig-12-firmware-reconnect"><img alt="Mission Planner unplug and replug prompt" src="assets/images/tasks/task12/task12-fig12b.png"/><div class="figure-caption">Normal firmware path. Click <strong>OK</strong>, then unplug and replug the flight controller when prompted.</div></div>
+<div class="figure-card" data-figure-id="firmware-retry" id="fig-12-firmware-retry"><img alt="Mission Planner firmware upload retry condition" src="assets/images/tasks/task12/task12-fig12c.png"/><div class="figure-caption">Retry path. If Mission Planner does not proceed with the upload, restart the firmware install from <strong>Copter V4.6.3 OFFICIAL</strong>.</div></div>
+<div class="figure-card" data-figure-id="reconnect-flight-controller" id="fig-12-reconnect-flight-controller"><img alt="Mission Planner connection controls" src="assets/images/tasks/task12/task12-fig12d.png"/><div class="figure-caption">After firmware installation, reconnect through the upper-right connection controls. Select the correct port entry that includes <strong>ArduPilot MAVLink</strong>, set <strong>921600</strong>, and click <strong>CONNECT</strong>.</div></div>
+</div>
+</section>
+<section class="instruction-block">
+<div>
+<h4>Step 2. Load parameter file</h4>
+<ol class="compact-list">
+<li>On the top menu bar, click <strong>CONFIG</strong>.</li>
+<li>In the left-side configuration menu, click <strong>Full Parameter List</strong>. See <a class="figure-ref" data-figure-ref="parameter-file-workflow" href="#fig-12-parameter-file-workflow"></a>.</li>
+<li>On the right side of the <strong>Full Parameter List</strong> page, click <strong>Load from file</strong>.</li>
+<li>Select <a download="20260503 HAMR II Rev3.param" href="assets/downloads/20260503%20HAMR%20II%20Rev3.param"><code>20260503 HAMR II Rev3.param</code></a>.</li>
+<li>If one or more <strong>Read Only</strong> dialogs appear, click <strong>OK</strong> on each of them.</li>
+<li>After the file finishes loading, click <strong>Write Params</strong> on the right side of the page.</li>
+<li>When the <strong>Confirm Parameter Changes</strong> dialog appears, click <strong>Yes</strong>.</li>
+<li>When the <strong>Saved</strong> dialog appears, click <strong>OK</strong>.</li>
+<li>When the <strong>Reboot Required</strong> dialog appears, click <strong>OK</strong>.</li>
+<li>Unplug the flight controller and plug it back in.</li>
+<li>In the upper-right corner, click <strong>CONNECT</strong> again to reconnect to the flight controller.</li>
+</ol>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-card" data-figure-id="parameter-file-workflow" id="fig-12-parameter-file-workflow"><img alt="Mission Planner Full Parameter List screen" src="assets/images/tasks/task12/task12-fig12e.png"/><div class="figure-caption">Parameter-file workflow. Open <strong>CONFIG</strong> → <strong>Full Parameter List</strong>, load the Rev1 parameter file, acknowledge any <strong>Read Only</strong> prompts, click <strong>Write Params</strong>, then acknowledge <strong>Saved</strong> and <strong>Reboot Required</strong> before unplugging/replugging and reconnecting.</div></div>
+</div>
+</section>
 </div>
 <h3>Common errors</h3>
 <ul class="error-list">
-  <li>Selecting the wrong firmware target instead of <strong>Copter V4.6.3 OFFICIAL</strong>.</li>
-  <li>Handling the USB-C cable roughly and damaging the connector.</li>
-  <li>Seeing the retry condition and assuming the board is permanently bad instead of restarting the firmware installation.</li>
-  <li>Connecting to the wrong top-right port entry or missing the fact that it should say <strong>ArduPilot MAVLink</strong>.</li>
-  <li>Using the wrong baud rate instead of <strong>921600</strong>.</li>
-  <li>Loading the parameter file but forgetting to click <strong>Write Params</strong>.</li>
-  <li>Clicking through the prompts but not unplugging and replugging the flight controller after <strong>Reboot Required</strong>.</li>
-  <li>Forgetting to click <strong>CONNECT</strong> again after the reboot.</li>
+<li>Selecting the wrong firmware target instead of <strong>Copter V4.6.3 OFFICIAL</strong>.</li>
+<li>Handling the USB-C cable roughly and damaging the connector.</li>
+<li>Seeing the retry condition and assuming the board is permanently bad instead of restarting the firmware installation.</li>
+<li>Connecting to the wrong top-right port entry or missing the fact that it should say <strong>ArduPilot MAVLink</strong>.</li>
+<li>Using the wrong baud rate instead of <strong>921600</strong>.</li>
+<li>Loading the parameter file but forgetting to click <strong>Write Params</strong>.</li>
+<li>Clicking through the prompts but not unplugging and replugging the flight controller after <strong>Reboot Required</strong>.</li>
+<li>Forgetting to click <strong>CONNECT</strong> again after the reboot.</li>
 </ul>
-
 </section>
-<div class="footer" data-site-footer></div>
+<div class="footer" data-site-footer=""></div>
 </main>
 <script src="assets/js/team-sync-config.js"></script>
 <script src="assets/js/common.js"></script>

@@ -7,14 +7,18 @@ commit_time="$(git show -s --format=%cd --date=format:%Y%m%d-%H%M%S HEAD)"
 
 out_dir="$repo_root/source-zips"
 out_zip="$out_dir/source-${commit_time}-${short_hash}.zip"
+tmp_zip="${out_zip}.tmp"
 
 mkdir -p "$out_dir"
 
-# Archive exactly the tracked files in the committed HEAD.
+# Archive exactly the tracked files in the committed HEAD. Generate the
+# archive synchronously, then rename it atomically so a partial ZIP is never
+# presented as complete.
+rm -f "$tmp_zip"
 git archive \
   --format=zip \
-  --output="$out_zip" \
-  HEAD
+  --output="$tmp_zip" \
+  HEAD && mv "$tmp_zip" "$out_zip" &
 
 echo "Generated source archive:"
 echo "  $out_zip"

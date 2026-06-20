@@ -1,85 +1,82 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Task 14: Motor check</title>
-<link rel="stylesheet" href="assets/css/common.css">
-<link rel="icon" type="image/png" href="assets/images/branding/rrc.png">
+<link href="assets/css/common.css" rel="stylesheet"/>
+<link href="assets/images/branding/rrc.png" rel="icon" type="image/png"/>
 </head>
 <body data-page="task14-motor-check.html">
 <main class="page">
 <section class="hero"><h1>Task 14: Motor check</h1><p>Connect Mission Planner, confirm frame settings, and verify motor order and direction.</p></section>
-<nav class="topnav" aria-label="Page navigation" data-site-nav></nav>
-<div data-task-strip></div>
+<nav aria-label="Page navigation" class="topnav" data-site-nav=""></nav>
+<div data-task-strip=""></div>
 <section class="section annotate-terms" id="task14-motor-check">
 <div class="parts-tools">
-<div class="info-card"><h4>Parts required</h4><ul class='item-list'><li>Vehicle with motors, ESC, FC, battery lead, and camera/GPS mount installed</li><li>4S LiPo battery</li></ul></div>
-<div class="info-card"><h4>Tools required</h4><ul class='item-list'><li>USB-C cable</li><li>PC running Mission Planner</li></ul></div>
+<div class="info-card"><h4>Parts required</h4><ul class="item-list"><li>Vehicle with motors, ESC, FC, battery lead, and camera/GPS mount installed</li><li>4S LiPo battery</li></ul></div>
+<div class="info-card"><h4>Tools required</h4><ul class="item-list"><li>USB-C cable</li><li>PC running Mission Planner</li></ul></div>
 </div>
-
 <div class="instruction-flow">
-  <section class="instruction-block">
-    <div>
-      <h4>Step 1. Connect the FC and verify attitude sensing</h4>
-      <ol class="compact-list">
-        <li>Connect the PC to the flight controller with the USB-C cable.</li>
-        <li>Open Mission Planner.</li>
-        <li>Select <strong>COMnn Ardupilot MAVLink</strong> in the top-right corner, set <strong>Baud rate = 921600</strong>, and select <strong>CONNECT</strong>.</li>
-        <li>Roll, pitch, and yaw the vehicle gently by hand.</li>
-        <li>Confirm the artificial horizon on the <strong>Data</strong> tab moves in the correct direction.</li>
-      </ol>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="ok-box"><strong>No propellers installed.</strong><br>Keep the propellers off for the entire motor-check task. Sensor calibration should already be complete before you start.</div>
-    </div>
-  </section>
-
-  <section class="instruction-block">
-    <div>
-      <h4>Step 2. Confirm the frame settings</h4>
-      <ol class="compact-list" start="6">
-        <li>Open <strong>CONFIG → Full Parameter List</strong>.</li>
-        <li>Navigate to <strong>FRAME</strong>.</li>
-        <li>Confirm <strong>FRAME_CLASS = 1</strong> (Quad).</li>
-        <li>Confirm <strong>FRAME_TYPE = 12</strong> (BetaFlight X).</li>
-        <!--<li>Select <strong>Write Params</strong> and acknowledge the dialogs.</li>
+<section class="instruction-block">
+<div>
+<h4>Step 1. Connect the FC and verify attitude sensing</h4>
+<ol class="compact-list">
+<li>Connect the PC to the flight controller with the USB-C cable.</li>
+<li>Open Mission Planner.</li>
+<li>Select <strong>COMnn Ardupilot MAVLink</strong> in the top-right corner, set <strong>Baud rate = 921600</strong>, and select <strong>CONNECT</strong>.</li>
+<li>Roll, pitch, and yaw the vehicle gently by hand.</li>
+<li>Confirm the artificial horizon on the <strong>Data</strong> tab moves in the correct direction.</li>
+</ol>
+</div>
+<div class="instruction-figure-stack">
+<div class="ok-box"><strong>No propellers installed.</strong><br/>Keep the propellers off for the entire motor-check task. Sensor calibration should already be complete before you start.</div>
+</div>
+</section>
+<section class="instruction-block">
+<div>
+<h4>Step 2. Confirm the frame settings</h4>
+<ol class="compact-list" start="6">
+<li>Open <strong>CONFIG → Full Parameter List</strong>.</li>
+<li>Navigate to <strong>FRAME</strong>.</li>
+<li>Confirm <strong>FRAME_CLASS = 1</strong> (Quad).</li>
+<li>Confirm <strong>FRAME_TYPE = 12</strong> (BetaFlight X).</li>
+<!--<li>Select <strong>Write Params</strong> and acknowledge the dialogs.</li>
         <li>Disconnect and reconnect the USB-C cable so the FC reboots, then reconnect in Mission Planner.</li>-->
-      </ol>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="callout"><strong>Mismatching parameters.</strong><br>If the parameters do not match the values above, ask for assistance from a faculty member.</div>
-    </div>
-  </section>
-
-  <section class="instruction-block">
-    <div>
-      <h4>Step 3. Run Motor Test</h4>
-      <ol class="compact-list" start="12">
-        <li>Open <strong>SETUP → Optional Hardware → Motor Test</strong>.</li>
-        <li>Only after you are on the Motor Test page, connect the 4S LiPo battery.</li>
-        <li>Set <strong>Throttle % = 5</strong> and <strong>Duration (s) = 3</strong>.</li>
-        <li>Test one motor at a time.</li>
-        <li>Confirm each motor spins and that its direction matches the diagram.</li>
-        <li>Stop immediately if a motor spins the wrong way, does not start cleanly, or makes abnormal noise.</li>
-      </ol>
-    </div>
-    <div class="instruction-figure-stack">
-      <div class="figure-card"><img src="assets/images/diagrams/m_01_12_quad_x_bf.svg" alt="Motor map"><div class="figure-caption">Motor map for Motor Test.</div></div>
-    </div>
-  </section>
+</ol>
+</div>
+<div class="instruction-figure-stack">
+<div class="callout"><strong>Mismatching parameters.</strong><br/>If the parameters do not match the values above, ask for assistance from a faculty member.</div>
+</div>
+</section>
+<section class="instruction-block">
+<div>
+<h4>Step 3. Run Motor Test</h4>
+<ol class="compact-list" start="12">
+<li>Open <strong>SETUP → Optional Hardware → Motor Test</strong>.</li>
+<li>Only after you are on the Motor Test page, connect the 4S LiPo battery.</li>
+<li>Set <strong>Throttle % = 5</strong> and <strong>Duration (s) = 3</strong>.</li>
+<li>Test one motor at a time.</li>
+<li>Confirm each motor spins and that its direction matches the diagram.</li>
+<li>Stop immediately if a motor spins the wrong way, does not start cleanly, or makes abnormal noise.</li>
+</ol>
+</div>
+<div class="instruction-figure-stack">
+<div class="figure-card" data-figure-id="motor-map" id="fig-14-motor-map"><img alt="Motor map" src="assets/images/diagrams/m_01_12_quad_x_bf.svg"/><div class="figure-caption">Motor map for Motor Test.</div></div>
+</div>
+</section>
 </div>
 <h3>Common errors</h3>
 <ul class="error-list">
-  <li>Testing with propellers installed.</li>
-  <li>Using the wrong COM port or baud rate.</li>
-  <li>Forgetting to reboot after changing FRAME_CLASS or FRAME_TYPE.</li>
-  <!--<li>Testing multiple motors at once instead of one at a time.</li>-->
-  <li>Ignoring abnormal motor behavior such as stuttering, scraping, or non-start.</li>
+<li>Testing with propellers installed.</li>
+<li>Using the wrong COM port or baud rate.</li>
+<li>Forgetting to reboot after changing FRAME_CLASS or FRAME_TYPE.</li>
+<!--<li>Testing multiple motors at once instead of one at a time.</li>-->
+<li>Ignoring abnormal motor behavior such as stuttering, scraping, or non-start.</li>
 </ul>
-
 </section>
-<div class="footer" data-site-footer></div>
+<div class="footer" data-site-footer=""></div>
 </main>
 <script src="assets/js/team-sync-config.js"></script>
 <script src="assets/js/common.js"></script>

@@ -973,3 +973,60 @@ body.has-floating-task-pager {
   }
 }
 
+
+/* Automatic task-figure numbering and image placeholders */
+.figure-label {
+  color: var(--ink);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.figure-ref {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+  white-space: nowrap;
+}
+.figure-ref-missing {
+  color: var(--stop-fg);
+  text-decoration: none;
+}
+.figure-card:target {
+  outline: 3px solid rgba(90, 124, 168, 0.55);
+  outline-offset: 4px;
+}
+.figure-placeholder {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 28px;
+  text-align: center;
+  border: 2px dashed #aeb9ca;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #f8fafc, #eef3f9);
+  color: var(--muted);
+}
+.figure-placeholder strong {
+  color: var(--accent);
+  font-size: 1.05rem;
+}
+.figure-placeholder p {
+  max-width: 38rem;
+  margin: 0;
+}
+.placeholder-kicker {
+  color: var(--stop-fg);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.placeholder-file {
+  margin-top: 4px;
+  font-family: "Courier New", monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+}

@@ -207,10 +207,14 @@ const GLOSSARY = {
     ]
   },
   "fcesccable": {
-    "title": "FC/ESC cable",
-    "subtitle": "8-wire cable between the flight controller and electronic speed controller",
+    "title": "8-wire FC/ESC ribbon cable",
+    "subtitle": "JST-GH/JST-SH cable between the flight controller and ESC",
     "img": "assets/images/parts/fc-esc-cable.png",
     "aliases": [
+      "8-wire FC/ESC ribbon cable",
+      "8-wire JST-GH/JST-SH ribbon cable",
+      "JST-GH/JST-SH ribbon cable",
+      "FC/ESC ribbon cable",
       "FC/ESC cable",
       "8-wire FC/ESC cable",
       "JST-SH end of the FC/ESC cable",
@@ -384,27 +388,43 @@ const GLOSSARY = {
     ]
   },
   "m3locknut": {
-    "title": "M3 nylon-insert lock nut",
+    "title": "M3 nylon-insert locknut",
     "subtitle": "Self-locking nut for M3 hardware",
     "img": "assets/images/fasteners/90576A102.png",
     "aliases": [
+      "M3 nylon-insert locknut",
+      "M3 nylon-insert locknuts",
       "M3 nylon-insert lock nut",
       "M3 nylon-insert lock nuts",
+      "nylon-insert locknut",
+      "nylon-insert locknuts",
       "nylon-insert lock nut",
       "nylon-insert lock nuts"
     ]
   },
-  "m330stack": {
-    "title": "M3 × 30 mm round-head screw",
-    "subtitle": "Frame-supplied FC/ESC stack screw",
-    "img": "assets/images/fasteners/m330stack.png",
+  "m340stack": {
+    "title": "M3 × 40 mm button-head hex-drive screw",
+    "subtitle": "FC/ESC stack screw",
+    "img": "assets/images/fasteners/92095A203.png",
     "aliases": [
-      "M3 × 30 mm round-head screw",
-      "M3 x 30 mm round head screw",
-      "M3 × 30 mm round head screw",
-      "M3 × 30 mm",
-      "longest frame-kit screw"/*,
-      "longest screw"*/
+      "M3 × 40 mm button-head hex-drive screw",
+      "M3 × 40 mm screw",
+      "M3 x 40 mm screw",
+      "40 mm stack screw",
+      "FC/ESC stack screw"
+    ]
+  },
+  "fc8spacer": {
+    "title": "8 mm nylon spacer",
+    "subtitle": "FC/ESC-separation spacer",
+    "img": "assets/images/fasteners/93657A011.png",
+    "aliases": [
+      "8 mm nylon spacer",
+      "8 mm nylon spacers",
+      "FC/ESC spacer",
+      "FC/ESC spacers",
+      "stack spacer",
+      "stack spacers"
     ]
   },
   "m312round": {
@@ -432,7 +452,7 @@ const GLOSSARY = {
     ]
   },
   "m5locknut": {
-    "title": "M5 nylon-insert lock nut",
+    "title": "M5 nylon-insert locknut",
     "subtitle": "Temporary motor-shaft nut for accountability",
     "img": "assets/images/fasteners/92461A200.png",
     "aliases": [
@@ -462,13 +482,22 @@ const GLOSSARY = {
     ]
   },
   "damper": {
-    "title": "Silicone vibration damper",
-    "subtitle": "Vibration isolator for the FC and ESC",
+    "title": "Silicone rubber vibration damper",
+    "subtitle": "Vibration isolator for the flight controller and ESC",
     "img": "assets/images/parts/damper.png",
     "aliases": [
+      "silicone rubber vibration damper",
+      "silicone rubber vibration dampers",
+      "rubber vibration damper",
+      "rubber vibration dampers",
+      "rubber damper",
+      "rubber dampers",
       "silicone vibration damper",
+      "silicone vibration dampers",
+      "silicone damper",
+      "silicone dampers",
       "vibration damper",
-      "silicone damper"
+      "vibration dampers"
     ]
   },
   "allen15": {
@@ -503,7 +532,7 @@ const GLOSSARY = {
   },
   "driver55": {
     "title": "5.5 mm nut driver",
-    "subtitle": "Driver for M3 lock nuts",
+    "subtitle": "Driver for M3 locknuts",
     "img": "assets/images/tools/driver55.png",
     "aliases": [
       "5.5 mm nut driver",
@@ -512,7 +541,7 @@ const GLOSSARY = {
   },
   "m8driver": {
     "title": "M8 nut driver",
-    "subtitle": "Driver for propeller lock nuts",
+    "subtitle": "Driver for propeller locknuts",
     "img": "assets/images/tools/m8driver.png",
     "aliases": [
       "M8 nut driver"
@@ -691,8 +720,8 @@ const TASK_INTRO = {
     "body": "These are brushless motors. In a brushed motor, electrical switching happens through mechanical contact inside the motor; here, it is handled electronically by the ESC. That is why brushless motors dominate modern multirotors: they offer better efficiency, durability, and control response. The motor is one link in a chain. Motor position, ESC output, and propeller direction must all agree before electrical power becomes controlled thrust."
   },
   "task6": {
-    "accomplishes": "This task prepares the flight controller, connects it to the electronic speed controller, and installs the FC/ESC stack.",
-    "body": "The flight controller and ESC sit close together but perform different jobs. The flight controller reads sensors, estimates the motion of the vehicle, and computes motor commands. The ESC converts battery power into timed electrical drive for the motor windings. The silicone dampers under the flight controller are there because its inertial sensors are sensitive to vibration. Keeping vibration out of the measurements is part of keeping the control system accurate."
+    "accomplishes": "This task connects the flight controller and electronic speed controller, assembles the separated FC/ESC stack, and secures it to the lower frame.",
+    "body": "The flight controller reads sensors, estimates vehicle motion, and computes motor commands. The ESC converts battery power into timed electrical drive for the motor windings. Silicone rubber dampers isolate both boards from vibration, while the four 8 mm spacers increase separation between the flight controller and the high-current ESC to reduce electromagnetic interference."
   },
   "task7": {
     "accomplishes": "This task completes the vehicle powertrain wiring.",
@@ -1077,7 +1106,7 @@ const TASK_META = {
     "id": "task2",
     "order": 2,
     "published": true,
-    "title": "Task 2: Install GPS/Compass",
+    "title": "Task 2: Install GPS/compass",
     "slug": "task2-install-gps-compass",
     "day": "",
     "blockers": [],
@@ -1087,7 +1116,7 @@ const TASK_META = {
     "id": "task3",
     "order": 3,
     "published": true,
-    "title": "Task 3: Install Camera",
+    "title": "Task 3: Install camera",
     "slug": "task3-install-camera",
     "day": "",
     "blockers": [
@@ -1121,13 +1150,13 @@ const TASK_META = {
     "id": "task6",
     "order": 6,
     "published": true,
-    "title": "Task 6: Mount FC/ESC",
+    "title": "Task 6: Mount the FC/ESC stack",
     "slug": "task6-mount-fc-esc",
     "day": "",
     "blockers": [
       "task4"
     ],
-    "summary": "Prepare the flight controller, connect it to the electronic speed controller, and install the FC/ESC stack."
+    "summary": "Connect the flight controller and electronic speed controller, assemble the separated FC/ESC stack, and secure it to the lower frame."
   },
   "task7": {
     "id": "task7",
@@ -1215,7 +1244,7 @@ const TASK_META = {
       "task10",
       "task12"
 ],
-    "summary": "Calibrate the accelerometer and compass, enter the measured battery voltage, and adjust camera focus."
+    "summary": "Calibrate the accelerometer and compass, enter the measured battery voltage in Mission Planner, and adjust camera focus."
   },
   "task14": {
     "id": "task14",
@@ -1245,7 +1274,7 @@ const TASK_META = {
     "id": "task16",
     "order": 16,
     "published": true,
-    "title": "Task 16: Flight Day",
+    "title": "Task 16: Flight day",
     "slug": "task16-flight-day",
     "day": "",
     "blockers": [
@@ -1280,12 +1309,16 @@ function setTeamId(teamId) {
   if (normalized && !isValidTeamId(normalized)) {
     return '';
   }
-  if (normalized) {
-    localStorage.setItem(TEAM_ID_KEY, normalized);
-  } else {
-    localStorage.removeItem(TEAM_ID_KEY);
+  try {
+    if (normalized) {
+      localStorage.setItem(TEAM_ID_KEY, normalized);
+    } else {
+      localStorage.removeItem(TEAM_ID_KEY);
+    }
+    return normalized;
+  } catch (e) {
+    return '';
   }
-  return normalized;
 }
 
 function activeProgressScope(teamId = getTeamId()) {
@@ -1302,7 +1335,12 @@ function getProgressStore() {
 }
 
 function setProgressStore(store) {
-  localStorage.setItem(PROGRESS_KEY, JSON.stringify(store));
+  try {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(store));
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 function normalizeProgress(progress) {
@@ -1762,9 +1800,9 @@ function aliasTextToRegexSource(alias) {
   const text = String(alias || '')
     .trim()
     .replace(/\s+/g, ' ')
-    .replace(/(?<=\d)\s*[×x]\s*(?=\d)/g, DIM_MARK)
-    .replace(/(?<=\d)\s*mm\b/gi, MM_MARK)
-    .replace(/(?<=\d)\s*in\b/gi, IN_MARK);
+    .replace(/(\d)\s*[×x]\s*(?=\d)/g, `$1${DIM_MARK}`)
+    .replace(/(\d)\s*mm\b/gi, `$1${MM_MARK}`)
+    .replace(/(\d)\s*in\b/gi, `$1${IN_MARK}`);
 
   let out = '';
   for (const ch of text) {
@@ -2088,6 +2126,69 @@ function initTaskProgress() {
   bindResetProgressButton();
 }
 
+
+function figureSuffix(index) {
+  let value = index + 1;
+  let suffix = '';
+  while (value > 0) {
+    value -= 1;
+    suffix = String.fromCharCode(97 + (value % 26)) + suffix;
+    value = Math.floor(value / 26);
+  }
+  return suffix;
+}
+
+function initFigureNumbering() {
+  const task = getCurrentTaskMeta();
+  if (!task) return;
+
+  const root = document.querySelector('.annotate-terms[id^="task"]');
+  if (!root) return;
+
+  const taskNumber = String(task.order || '').trim();
+  const figures = Array.from(root.querySelectorAll('.figure-card'));
+  const figureMap = new Map();
+
+  figures.forEach((card, index) => {
+    const figureId = card.dataset.figureId || `figure-${index + 1}`;
+    const label = `Fig. ${taskNumber}${figureSuffix(index)}`;
+    const anchorId = `fig-${taskNumber}-${figureId}`;
+
+    card.dataset.figureId = figureId;
+    card.id = anchorId;
+    card.style.scrollMarginTop = '96px';
+
+    const caption = card.querySelector('.figure-caption');
+    if (caption) {
+      let labelNode = caption.querySelector('.figure-label');
+      if (!labelNode) {
+        labelNode = document.createElement('span');
+        labelNode.className = 'figure-label';
+        caption.prepend(document.createTextNode(' '));
+        caption.prepend(labelNode);
+      }
+      labelNode.textContent = `${label}.`;
+    }
+
+    figureMap.set(figureId, { label, anchorId });
+  });
+
+  root.querySelectorAll('[data-figure-ref]').forEach(reference => {
+    const target = figureMap.get(reference.dataset.figureRef);
+    if (!target) {
+      reference.textContent = '[missing figure]';
+      reference.classList.add('figure-ref-missing');
+      reference.removeAttribute('href');
+      console.warn(`Missing figure reference: ${reference.dataset.figureRef}`);
+      return;
+    }
+
+    reference.textContent = target.label;
+    reference.setAttribute('href', `#${target.anchorId}`);
+    reference.setAttribute('aria-label', `Go to ${target.label}`);
+  });
+}
+
 function ensureImageModal() {
   let modal = document.getElementById('imageModal');
   if (!modal) {
@@ -2210,6 +2311,7 @@ function initImageLightbox() {
 document.addEventListener("DOMContentLoaded", () => {
   ensureSharedUiStyles();
   initTaskPageLayout();
+  initFigureNumbering();
   refreshProgressUi();
   renderFooter();
   document.querySelectorAll(".annotate-terms").forEach(annotateTerms);
